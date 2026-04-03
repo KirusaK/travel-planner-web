@@ -7,7 +7,7 @@ export const Header = () => {
     <div className={styles.header}>
       <div className={styles.header_links}>
         <NavLink
-          to="/"
+          to="/FindFlight"
           className={({ isActive }) =>
             isActive
               ? `${styles.header_link} ${styles.active}`
@@ -20,7 +20,7 @@ export const Header = () => {
           <span className={styles.header_link_text}>Find Flight</span>
         </NavLink>
         <NavLink
-          to="/"
+          to="/FindStays"
           className={({ isActive }) =>
             isActive
               ? `${styles.header_link} ${styles.active}`
