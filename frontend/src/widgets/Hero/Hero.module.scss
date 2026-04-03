@@ -1,0 +1,37 @@
+@use "../../app/styles/variables" as *;
+
+.hero {
+  height: 537px;
+  background-image: url("../../shared/assets/image/airplanehero.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &_container {
+    height: 100%;
+
+    padding-top: 80px;
+    padding-left: 126px;
+  }
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 400px;
+    height: 203px;
+  }
+
+  &_title {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 45px;
+    color: $color-text-light;
+  }
+
+  &_text {
+    font-family: "Montserrat" sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: $color-text-light;
+  }
+}
