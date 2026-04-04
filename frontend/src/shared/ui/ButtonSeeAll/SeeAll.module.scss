@@ -1,0 +1,21 @@
+@use "../../../app/styles/variables" as *;
+
+.travelMap {
+  &__buttonLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $color-mint-green;
+    border-radius: 4px;
+    width: auto;
+    height: auto;
+  }
+
+  &__buttonText {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: $color-text-dark;
+    padding: 11px 16px;
+  }
+}
