@@ -129,14 +129,14 @@
     align-items: center;
     justify-content: center;
     margin: 32px 24px 0 0;
-    background-color: $color-mint-green;
-    border-radius: 4px;
   }
 
   &_submit_link {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: $color-mint-green;
+    border-radius: 4px;
     width: 144px;
     height: 48px;
     gap: 0.5px;

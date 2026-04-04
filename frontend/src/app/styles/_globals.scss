@@ -17,3 +17,13 @@ body {
 input {
   outline: none;
 }
+
+a {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

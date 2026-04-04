@@ -1,6 +1,7 @@
 import { Header } from "../../widgets/Header/Header";
 import { Hero } from "../../widgets/Hero/Hero";
 import { BookingForm } from "../../widgets/BookingForm/BookingForm";
+import { TravelMap } from "../../widgets/TravelMap/TravelMap";
 
 export const Main = () => {
   return (
@@ -8,6 +9,7 @@ export const Main = () => {
       <Header />
       <Hero />
       <BookingForm />
+      <TravelMap />
     </>
   );
 };
