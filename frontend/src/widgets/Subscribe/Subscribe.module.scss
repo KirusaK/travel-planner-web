@@ -4,9 +4,10 @@
   margin: 60px auto;
   width: 1232px;
   height: 305px;
-  background-color: $color-mint-green;
+  background-color: $color-subscribe;
   border-radius: 20px;
   position: relative;
+  z-index: 10;
 
   &__container {
     display: flex;
