@@ -6,12 +6,9 @@ export const Hero = () => {
       <div className={styles.hero_container}>
         <div className={styles.hero_content}>
           <h1 className={styles.hero_title}>
-            Stwórz swoją listę marzeń dotyczących podróży, a my zajmiemy się
-            resztą
+            Make your travel whishlist, we`ll do the rest
           </h1>
-          <p className={styles.hero_text}>
-            Oferty specjalne dopasowane do Twojego planu
-          </p>
+          <p className={styles.hero_text}>Special offers to suit your plan</p>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ export const Header = () => {
           <svg width={24} height={24}>
             <use href={sprite + "#icon-airplane"}></use>
           </svg>
-          <span className={styles.header_link_text}>Znajdź lot</span>
+          <span className={styles.header_link_text}>Find Flight</span>
         </NavLink>
         <NavLink
           to="/FindStays"
@@ -30,7 +30,7 @@ export const Header = () => {
           <svg width={24} height={24}>
             <use href={sprite + "#icon-ion_bed"}></use>
           </svg>
-          <span className={styles.header_link_text}>Znajdź noclegi</span>
+          <span className={styles.header_link_text}>Find Stays</span>
         </NavLink>
       </div>
       <div className={styles.header_logo}>

@@ -7,12 +7,10 @@ export const TravelMap = () => {
     <div className={styles.travelMap}>
       <div className={styles.travelMap__content}>
         <div className={styles.travelMap__text}>
-          <h2 className={styles.travelMap__title}>
-            Wybierzmy się gdzieś razem
-          </h2>
+          <h2 className={styles.travelMap__title}>Let's go places together</h2>
           <p className={styles.travelMap__description}>
-            Zapoznaj się z najnowszymi ofertami i aktualnościami i zacznij
-            planować swoją kolejną podróż z nami.
+            Discover the latest offers and news and start planning your next
+            trip with us.
           </p>
         </div>
         <SeeAll />

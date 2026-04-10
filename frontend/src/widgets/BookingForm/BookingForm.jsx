@@ -64,7 +64,7 @@ export const BookingForm = () => {
             <svg width={16} height={16}>
               <use href={sprite + "#icon-Paper-Plane"}></use>
             </svg>
-            <span className={styles.wrapper_submit_text}>Pokaż loty</span>
+            <span className={styles.wrapper_submit_text}>Show Filghts</span>
           </Link>
         </div>
       </div>

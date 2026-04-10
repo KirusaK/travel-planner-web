@@ -39,17 +39,15 @@ export const FallIntoTravel = () => {
   ];
 
   return (
-    <div className={styles.FallIntoTravel__ggg}>
+    <div className={styles.FallIntoTravel__container}>
       <div className={styles.FallIntoTravel}>
         <div className={styles.FallIntoTravel__header}>
           <div className={styles.FallIntoTravel__text}>
-            <h1 className={styles.FallIntoTravel__title}>
-              Daj się ponieść podróżom
-            </h1>
+            <h1 className={styles.FallIntoTravel__title}>Fall into travel</h1>
             <p className={styles.FallIntoTravel__p}>
-              Wybierasz się gdzieś, żeby świętować w tym sezonie? Niezależnie od
-              tego, czy jedziesz do domu, czy wybierasz się na wycieczkę, mamy
-              wszystko, czego potrzebujesz, żeby dotrzeć do celu.
+              Going somewhere to celebrate this season? Whether you’re going
+              home or somewhere to roam, we’ve got the travel tools to get you
+              to your destination.
             </p>
           </div>
           <SeeAll />
