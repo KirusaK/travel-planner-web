@@ -5,6 +5,7 @@ import { TravelMap } from "../../widgets/TravelMap/TravelMap";
 import { FallIntoTravel } from "../../widgets/FallIntoTravel/FallIntoTravel";
 import { AdventureSection } from "../../widgets/AdventureSection/AdventureSection";
 import { Subscribe } from "../../widgets/Subscribe/Subscribe";
+import { Footer } from "../../widgets/Footer/Footer";
 
 export const Main = () => {
   return (
@@ -16,6 +17,7 @@ export const Main = () => {
       <FallIntoTravel />
       <AdventureSection />
       <Subscribe />
+      <Footer />
     </>
   );
 };
