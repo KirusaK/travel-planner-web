@@ -1,0 +1,43 @@
+@use "../../app/styles/variables" as *;
+
+.FallIntoTravel {
+  margin-top: 80px;
+  width: 1232px;
+  height: 552px;
+
+  &__ggg {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 32px;
+  }
+
+  &__p {
+    font-weight: 400;
+    font-size: 16;
+    max-width: 851px;
+  }
+
+  &__grid {
+    display: flex;
+    justify-content: space-between;
+    width: 1232px;
+    height: 552px;
+  }
+}
