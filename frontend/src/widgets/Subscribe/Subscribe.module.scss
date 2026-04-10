@@ -1,0 +1,71 @@
+@use "../../app/styles/variables" as *;
+
+.Subscribe {
+  margin: 60px auto;
+  width: 1232px;
+  height: 305px;
+  background-color: $color-mint-green;
+  border-radius: 20px;
+  position: relative;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px;
+    gap: 191px;
+  }
+
+  &__title {
+    margin: 24px 0;
+    width: 364px;
+    height: 108px;
+    font-family: "Roboto Condensed" sans-serif;
+    font-weight: 700;
+    font-size: 44px;
+  }
+
+  &__text {
+    font-family: "Roboto Condensed" sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: $color-blackish-green;
+  }
+
+  &__par {
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: $color-blackish-green;
+  }
+
+  &__gmail {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__input {
+    width: 473px;
+    height: 56px;
+    border-radius: 4px;
+    border: none;
+    padding: 16px 18px;
+  }
+
+  &__button {
+    width: 104px;
+    height: 56px;
+    background-color: $color-blackish-green;
+    border-radius: 4px;
+    border: none;
+    color: $color-text-light;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  &__mailbox {
+    width: 400px;
+    height: 305px;
+    background-image: url("../../shared/assets/image/mailbox.svg");
+  }
+}

@@ -4,6 +4,7 @@ import { BookingForm } from "../../widgets/BookingForm/BookingForm";
 import { TravelMap } from "../../widgets/TravelMap/TravelMap";
 import { FallIntoTravel } from "../../widgets/FallIntoTravel/FallIntoTravel";
 import { AdventureSection } from "../../widgets/AdventureSection/AdventureSection";
+import { Subscribe } from "../../widgets/Subscribe/Subscribe";
 
 export const Main = () => {
   return (
@@ -14,6 +15,7 @@ export const Main = () => {
       <TravelMap />
       <FallIntoTravel />
       <AdventureSection />
+      <Subscribe />
     </>
   );
 };
