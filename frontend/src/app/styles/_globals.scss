@@ -18,6 +18,14 @@ input {
   outline: none;
 }
 
+button {
+  transition: transform 0.5s ease;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
 a {
   display: inline-block;
   transition: transform 0.3s ease;
