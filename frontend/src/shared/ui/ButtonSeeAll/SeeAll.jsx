@@ -5,7 +5,7 @@ export const SeeAll = () => {
   return (
     <div className={styles.travelMap__button}>
       <Link className={styles.travelMap__buttonLink} to="/">
-        <h3 className={styles.travelMap__buttonText}>Zobacz wszystko</h3>
+        <h3 className={styles.travelMap__buttonText}>See All</h3>
       </Link>
     </div>
   );
