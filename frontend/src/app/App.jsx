@@ -1,10 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import { Main } from "../pages/Main/Main";
+import { FindFlight } from "../pages/FindFlight/FindFlight";
+import { Home } from "../pages/Home/Home";
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Main />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/FindFlight" element={<FindFlight />} />
     </Routes>
   );
 };

@@ -17,6 +17,19 @@
     display: flex;
     align-items: center;
     gap: 1px;
+    position: relative;
+    height: 91px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background-color: $color-mint-green;
+      transform: scaleX(0);
+    }
   }
 
   &_link_text {
@@ -59,7 +72,40 @@
 }
 
 .active {
-  width: 107px;
-  height: 5px;
-  background-color: $color-mint-green;
+  &::after {
+    transform: scaleX(1);
+  }
+}
+
+.transparent {
+  margin-top: 30px;
+  background-color: transparent;
+  position: absolute;
+  z-index: 100;
+
+  .header {
+    &_link_text {
+      color: $color-text-light;
+    }
+
+    &_button_text1 {
+      color: $color-text-light;
+    }
+
+    &_button_text2 {
+      color: $color-text-dark;
+    }
+
+    &_button_decoration {
+      background-color: $color-base;
+    }
+
+    &_links svg {
+      fill: $color-base;
+    }
+
+    &_logo {
+      --color1: #ffffff;
+    }
+  }
 }

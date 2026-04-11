@@ -2,9 +2,11 @@ import { Link, NavLink } from "react-router-dom";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./Header.module.scss";
 
-export const Header = () => {
+export const Header = ({ isTransparent }) => {
   return (
-    <div className={styles.header}>
+    <div
+      className={`${styles.header} ${isTransparent ? styles.transparent : ""}`}
+    >
       <div className={styles.header_links}>
         <NavLink
           to="/FindFlight"
@@ -34,11 +36,11 @@ export const Header = () => {
         </NavLink>
       </div>
       <div className={styles.header_logo}>
-        <a href="/">
+        <Link to="/">
           <svg width={110} height={36}>
             <use href={sprite + "#icon-Logo"}></use>
           </svg>
-        </a>
+        </Link>
       </div>
       <div className={styles.header_button}>
         <Link to="/" className={styles.header_button_text1}>

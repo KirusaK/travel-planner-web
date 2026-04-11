@@ -1,0 +1,48 @@
+@use "../../app/styles/variables" as *;
+
+.Hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+      url("../../shared/assets/image/home.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin: 30px;
+    height: 599px;
+    border-radius: 24px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: $color-text-light;
+  }
+
+  &__text {
+    font-family: "Roboto Condensed" sans-serif;
+    font-weight: 700;
+    font-size: 45px;
+  }
+
+  &__title {
+    font-family: "Roboto Condensed" sans-serif;
+    font-weight: 700;
+    font-size: 80px;
+  }
+
+  &__par {
+    font-weight: 600;
+    font-size: 20px;
+  }
+}
