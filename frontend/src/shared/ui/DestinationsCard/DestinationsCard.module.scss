@@ -1,0 +1,47 @@
+@use "../../../app/styles/variables" as *;
+
+.DestinationsCard {
+  display: flex;
+  align-items: center;
+  width: 389px;
+  height: 122px;
+  margin-top: 40px;
+  background-color: $color-base;
+  border-radius: 16px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 16px;
+  }
+
+  &__img {
+    width: 90px;
+    height: 90px;
+    border-radius: 8px;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  &__par {
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  &__span {
+    display: inline-block;
+    position: relative;
+    top: -4px;
+  }
+}
