@@ -1,0 +1,42 @@
+@use "../../app/styles/variables" as *;
+
+.Services {
+  margin: 0 auto 70px;
+  width: 1232px;
+  height: 559px;
+
+  &__container {
+    display: flex;
+    gap: 24px;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 604px;
+    height: 559px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  &__card:hover {
+    transform: scale(1.025);
+  }
+
+  &__title,
+  &__par {
+    color: $color-text-light;
+  }
+
+  &__title {
+    margin-bottom: 8px;
+  }
+
+  &__par {
+    margin-bottom: 16px;
+  }
+}

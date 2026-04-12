@@ -1,0 +1,22 @@
+@use "../../../app/styles/variables" as *;
+
+.ButtonServices {
+  margin-bottom: 24px;
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 144px;
+    height: 48px;
+    background-color: $color-mint-green;
+    border-radius: 4px;
+    gap: 0.5px;
+  }
+
+  &__par {
+    color: $color-text-dark;
+    font-weight: 500;
+    font-size: 14px;
+  }
+}
