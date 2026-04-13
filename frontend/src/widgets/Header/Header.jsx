@@ -43,7 +43,7 @@ export const Header = ({ isTransparent }) => {
         </Link>
       </div>
       <div className={styles.header_button}>
-        <Link to="/" className={styles.header_button_text1}>
+        <Link to="/LoginForm" className={styles.header_button_text1}>
           Login
         </Link>
         <Link
