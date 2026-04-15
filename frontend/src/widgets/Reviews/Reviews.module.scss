@@ -1,0 +1,35 @@
+@use "../../app/styles/variables" as *;
+
+.Reviews {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 92px;
+
+  &__container {
+    width: 1232px;
+    height: 722px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 32px;
+  }
+
+  &__par {
+    font-weight: 400;
+    font-size: 16px;
+  }
+}
