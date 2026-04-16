@@ -1,0 +1,10 @@
+.Slider {
+  width: 618px;
+  overflow: hidden;
+
+  &__container {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+  }
+}
