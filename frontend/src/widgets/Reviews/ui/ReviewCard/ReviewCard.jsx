@@ -1,5 +1,4 @@
 import sprite from "../../../../shared/assets/icons/symbol-defs.svg";
-
 import styles from "./ReviewCard.module.scss";
 
 export const ReviewCard = (props) => {
