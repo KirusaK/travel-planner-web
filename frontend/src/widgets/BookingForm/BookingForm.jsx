@@ -1,13 +1,22 @@
+import { useState } from "react";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import { Link } from "react-router-dom";
+import { TripSelect } from "./ui/TripSelect/TripSelect";
+import { PassengerSelect } from "./ui/PassengerSelect/PassengerSelect";
 import styles from "./BookingForm.module.scss";
 
 export const BookingForm = () => {
+  const [tripType, setTripType] = useState("");
+  const [passengerType, setPassengerType] = useState({
+    count: 1,
+    class: "Economy",
+  });
+
   return (
     <section className={styles.wrapper}>
       <h2 className={styles.wrapper_title}>Where are you flying? </h2>
 
-      <div className={styles.wrapper_container}>
+      <form className={styles.wrapper_container}>
         {/* Поле From-To */}
         <div className={styles.wrapper_from}>
           <div className={styles.wrapper_from_input}>
@@ -19,17 +28,7 @@ export const BookingForm = () => {
           </div>
         </div>
         {/* Поле Trip */}
-        <div className={styles.wrapper_trip}>
-          <div className={styles.wrapper_trip}>
-            <label className={styles.wrapper_trip_label}>Trip</label>
-            <div className={styles.wrapper_trip_content}>
-              <span className={styles.wrapper_trip_content_one}>Return</span>
-              <svg width={24} height={24} className={styles.wrapper_trip_icon}>
-                <use href={sprite + "#icon-chevron_down"}></use>
-              </svg>
-            </div>
-          </div>
-        </div>
+        <TripSelect value={tripType} onChange={setTripType} />
         {/* Поле Depart-Return */}
         <div className={styles.wrapper_depart}>
           <div className={styles.wrapper_depart_input}>
@@ -40,24 +39,8 @@ export const BookingForm = () => {
           </div>
         </div>
         {/* Поле Passengers - Class */}
-        <div className={styles.wrapper_passengers}>
-          <label className={styles.wrapper_passengers_label}>
-            Passenger - Class
-          </label>
-          <div className={styles.wrapper_passengers_content}>
-            <span className={styles.wrapper_passengers_content_text}>
-              1 Passenger, Economy
-            </span>
-            <svg
-              width={24}
-              height={24}
-              className={styles.wrapper_passengers_icon}
-            >
-              <use href={sprite + "#icon-chevron_down"}></use>
-            </svg>
-          </div>
-        </div>
-      </div>
+        <PassengerSelect value={passengerType} onChange={setPassengerType} />
+      </form>
       <div className={styles.wrapper_submit_container}>
         <div className={styles.wrapper_submit}>
           <Link className={styles.wrapper_submit_link} to="/">
