@@ -1,11 +1,10 @@
 import { useState } from "react";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
-import { Link } from "react-router-dom";
-import { TripSelect } from "./ui/TripSelect/TripSelect";
-import { PassengerSelect } from "./ui/PassengerSelect/PassengerSelect";
-import styles from "./BookingForm.module.scss";
+import { TripSelect } from "../BookingForm/ui/TripSelect/TripSelect";
+import { PassengerSelect } from "../BookingForm/ui/PassengerSelect/PassengerSelect";
+import styles from "./CompactBookingForm.module.scss";
 
-export const BookingForm = () => {
+export const CompactBookingForm = () => {
   const [tripType, setTripType] = useState("");
   const [passengerType, setPassengerType] = useState({
     count: 1,
@@ -14,8 +13,6 @@ export const BookingForm = () => {
 
   return (
     <section className={styles.wrapper}>
-      <h2 className={styles.wrapper_title}>Where are you flying? </h2>
-
       <form className={styles.wrapper_container}>
         {/* Поле From-To */}
         <div className={styles.wrapper_from}>
@@ -39,18 +36,18 @@ export const BookingForm = () => {
           </div>
         </div>
         {/* Поле Passengers - Class */}
-        <PassengerSelect value={passengerType} onChange={setPassengerType} />
+        <PassengerSelect
+          value={passengerType}
+          onChange={setPassengerType}
+          className={styles.wrapper_passengers_compact}
+        />
+
+        <button className={styles.wrapper_submit} type="submit">
+          <svg width={24} height={24}>
+            <use href={sprite + "#icon-Search"}></use>
+          </svg>
+        </button>
       </form>
-      <div className={styles.wrapper_submit_container}>
-        <div className={styles.wrapper_submit}>
-          <button className={styles.wrapper_submit_link} type="submit">
-            <svg width={16} height={16}>
-              <use href={sprite + "#icon-Paper-Plane"}></use>
-            </svg>
-            <span className={styles.wrapper_submit_text}>Show Filghts</span>
-          </button>
-        </div>
-      </div>
     </section>
   );
 };

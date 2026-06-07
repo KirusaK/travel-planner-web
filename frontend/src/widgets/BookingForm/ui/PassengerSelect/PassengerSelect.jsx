@@ -2,7 +2,7 @@ import { useState } from "react";
 import sprite from "../../../../shared/assets/icons/symbol-defs.svg";
 import styles from "../../BookingForm.module.scss";
 
-export const PassengerSelect = ({ value, onChange }) => {
+export const PassengerSelect = ({ value, onChange, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [counter, setCounter] = useState(1);
   const options = ["Economy", "Business", "First"];
@@ -16,7 +16,7 @@ export const PassengerSelect = ({ value, onChange }) => {
 
   return (
     <div
-      className={styles.wrapper_passengers}
+      className={`${styles.wrapper_passengers} ${className || ""}`}
       onClick={() => setIsOpen(!isOpen)}
     >
       <label className={styles.wrapper_passengers_label}>

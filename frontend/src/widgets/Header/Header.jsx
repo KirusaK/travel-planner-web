@@ -1,17 +1,22 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./Header.module.scss";
 
-export const Header = ({ isTransparent }) => {
+export const Header = ({ isTransparent, hasShadow }) => {
+  const location = useLocation();
+
+  const isFlightActive =
+    location.pathname === "/FindFlight" || location.pathname === "/FlightsPage";
+
   return (
     <div
-      className={`${styles.header} ${isTransparent ? styles.transparent : ""}`}
+      className={`${styles.header} ${isTransparent ? styles.transparent : ""} ${hasShadow ? styles.with_shadow : ""}`}
     >
       <div className={styles.header_links}>
         <NavLink
           to="/FindFlight"
-          className={({ isActive }) =>
-            isActive
+          className={
+            isFlightActive
               ? `${styles.header_link} ${styles.active}`
               : styles.header_link
           }
