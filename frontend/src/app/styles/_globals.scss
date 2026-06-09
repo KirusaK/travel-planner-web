@@ -18,6 +18,10 @@ input {
   outline: none;
 }
 
+input[type="checkbox"] {
+  accent-color: $color-mint-green;
+}
+
 button {
   transition: transform 0.5s ease;
   border: none;
