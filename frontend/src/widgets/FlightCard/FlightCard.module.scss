@@ -1,0 +1,215 @@
+@use "../../app/styles/variables" as *;
+
+.sorting {
+  &_results {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 24px auto;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &_results span {
+    color: $color-pink;
+  }
+
+  &_selectWrapper {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.flightCards {
+  width: 100%;
+
+  &_container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+}
+
+.flightCard {
+  display: flex;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  width: 100%;
+  overflow: hidden;
+
+  &_logoBlock {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    padding: 24px 24px 0 16px;
+  }
+
+  &_content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 40px 0 0;
+  }
+
+  &_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+  }
+
+  &_ratingBlock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &_ratingBadge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 32px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid $color-mint-green;
+    border-radius: 4px;
+  }
+
+  &_ratingText {
+    font-size: 13px;
+    font-weight: 500;
+
+    strong {
+      font-weight: 600;
+      margin-right: 4px;
+    }
+  }
+
+  &_priceBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+
+  &_priceLabel {
+    font-size: 12px;
+    font-weight: 500;
+    color: $color-blackish-green;
+  }
+
+  &_priceValue {
+    font-size: 24px;
+    font-weight: 700;
+    color: $color-pink;
+  }
+
+  &_trips {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  &_tripRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &_checkbox {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+
+  &_tripTimeInfo,
+  &_tripTypeBlock,
+  &_tripDurationBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &_tripTimeInfo {
+    width: 170px;
+  }
+
+  &_tripTypeBlock {
+    width: 64px;
+  }
+
+  &_tripDurationBlock {
+    width: 73px;
+  }
+
+  &_tripTime {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &_tripAirline {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  &_tripType {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &_tripDuration {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &_tripRoute {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  &_hr {
+    border: none;
+    background-color: $color-blackish-green;
+    width: 100%;
+    height: 1px;
+    margin-bottom: 16px;
+  }
+
+  &_footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  &_favoriteBtn {
+    width: 48px;
+    height: 48px;
+    background-color: transparent;
+    border: 1px solid $color-mint-green;
+    border-radius: 4px;
+  }
+
+  &_dealsBtn {
+    flex: 1;
+    height: 48px;
+    background-color: $color-mint-green;
+    border-radius: 4px;
+    color: $color-blackish-green;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &_last__btn {
+    width: 840px;
+    height: 48px;
+    margin-top: 24px;
+    background-color: $color-blackish-green;
+    border-radius: 4px;
+    color: $color-base;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
