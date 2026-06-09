@@ -1,6 +1,6 @@
 @use "../../../app/styles/variables" as *;
 
-.Rating {
+.Trips {
   &_block {
     display: flex;
     justify-content: space-between;
@@ -24,22 +24,13 @@
 
   &_buttons {
     display: flex;
-    gap: 16px;
+    flex-direction: column;
+    gap: 8px;
   }
 
-  &_button {
-    width: 40px;
-    height: 32px;
-    background-color: $color-base;
-    border: 1px solid $color-mint-green;
-    border-radius: 4px;
-  }
-
-  &_hr {
-    border: none;
-    background-color: $color-blackish-green;
-    width: 100%;
-    height: 1px;
-    margin: 32px 0;
+  &_checkbox_block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 }

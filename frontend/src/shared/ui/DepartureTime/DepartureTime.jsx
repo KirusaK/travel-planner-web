@@ -7,9 +7,11 @@ export const DepartureTime = () => {
       <section>
         <div className={styles.DepartureTime_block}>
           <h3 className={styles.DepartureTime_title}>Departure Time</h3>
-          <svg width="24" height="24" className={styles.DepartureTime_icon}>
-            <use href={sprite + "#icon-chevron_down"} />
-          </svg>
+          <button className={styles.DepartureTime_button}>
+            <svg width="24" height="24" className={styles.DepartureTime_icon}>
+              <use href={sprite + "#icon-chevron_down"} />
+            </svg>
+          </button>
         </div>
         <input
           type="range"
