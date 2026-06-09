@@ -21,6 +21,7 @@ input {
 button {
   transition: transform 0.5s ease;
   border: none;
+  cursor: pointer;
 }
 
 button:hover {
