@@ -10,13 +10,15 @@ export const FilterPrice = () => {
         <div className={styles.filter_price_block}>
           <div className={styles.filter_price_block_info}>
             <h3 className={styles.filter_price_block_info_title}>Price</h3>
-            <svg
-              width="24"
-              height="24"
-              className={styles.filter_price_block_info_icon}
-            >
-              <use href={sprite + "#icon-chevron_down"} />
-            </svg>
+            <button className={styles.filter_price_block_info_button}>
+              <svg
+                width="24"
+                height="24"
+                className={styles.filter_price_block_info_icon}
+              >
+                <use href={sprite + "#icon-chevron_down"} />
+              </svg>
+            </button>
           </div>
           <input
             type="range"
