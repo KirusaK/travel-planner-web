@@ -8,6 +8,9 @@ export const Header = ({ isTransparent, hasShadow }) => {
   const isFlightActive =
     location.pathname === "/FindFlight" || location.pathname === "/FlightsPage";
 
+  const isHotelActive =
+    location.pathname === "/HotelPage" || location.pathname === "/FindStays";
+
   return (
     <div
       className={`${styles.header} ${isTransparent ? styles.transparent : ""} ${hasShadow ? styles.with_shadow : ""}`}
@@ -28,8 +31,8 @@ export const Header = ({ isTransparent, hasShadow }) => {
         </NavLink>
         <NavLink
           to="/FindStays"
-          className={({ isActive }) =>
-            isActive
+          className={
+            isHotelActive
               ? `${styles.header_link} ${styles.active}`
               : styles.header_link
           }

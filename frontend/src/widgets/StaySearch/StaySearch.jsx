@@ -62,12 +62,12 @@ export const StaySearch = () => {
       </div>
       <div className={styles.wrapper_submit_container}>
         <div className={styles.wrapper_submit}>
-          <Link className={styles.wrapper_submit_link} to="/">
+          <button className={styles.wrapper_submit_link} to="/">
             <svg width={16} height={16}>
               <use href={sprite + "#icon-building"}></use>
             </svg>
             <span className={styles.wrapper_submit_text}>Show Places</span>
-          </Link>
+          </button>
         </div>
       </div>
     </section>

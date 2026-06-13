@@ -1,14 +1,19 @@
+@use "../../app/styles/_variables" as *;
+
 @use "../../app/styles/variables" as *;
 
 .wrapper {
+  display: flex;
+  align-items: center;
   width: 1232px;
-  height: 272px;
-  margin: -45px auto 101px;
+  height: 120px;
+  margin: 48px auto 101px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 16px;
   background-color: $color-base;
   position: relative;
   z-index: 100;
+  padding: 0 24px;
 
   &_title {
     padding: 32px 24px;
@@ -19,7 +24,9 @@
 
   &_container {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     gap: 16px;
   }
 
@@ -36,7 +43,7 @@
   }
 
   &_from_input_field {
-    width: 416px;
+    width: 344px;
     height: 56px;
     padding-left: 16px;
     border: 1px solid $color-border;
@@ -49,9 +56,9 @@
     left: 12px;
   }
 
-  &_trip {
-    position: relative;
-  }
+  //&_trip {
+  //  position: relative;
+  //}
 
   &_trip_label {
     position: absolute;
@@ -145,8 +152,8 @@
     justify-content: center;
     background-color: $color-mint-green;
     border-radius: 4px;
-    width: 144px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     gap: 0.5px;
     color: $color-text-dark;
     font-size: 14px;
