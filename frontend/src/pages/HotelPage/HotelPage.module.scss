@@ -1,1 +1,8 @@
 @use "../../app/styles/_variables" as *;
+
+.main {
+  display: flex;
+  width: 1233px;
+  margin: 0 auto;
+  gap: 25px;
+}
