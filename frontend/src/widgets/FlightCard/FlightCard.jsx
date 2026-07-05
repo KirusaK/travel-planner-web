@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
+import { FavouritesBtn } from "../../shared/ui/FavouritesBtn/FavouritesBtn.jsx";
 import logoEmirate from "../../shared/assets/image/emirates.svg";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./FlightCard.module.scss";
@@ -116,9 +118,7 @@ export const FlightCard = () => {
               <div className={styles.flightCard_content}>
                 <div className={styles.flightCard_header}>
                   <div className={styles.flightCard_ratingBlock}>
-                    <span className={styles.flightCard_ratingBadge}>
-                      {item.rating}
-                    </span>
+                    <RatingCard value={item.rating} />
                     <span className={styles.flightCard_ratingText}>
                       <strong>{item.ratingStatus}</strong>
                       {item.reviewsCount}
@@ -171,15 +171,7 @@ export const FlightCard = () => {
                 <hr className={styles.flightCard_hr} />
 
                 <div className={styles.flightCard_footer}>
-                  <button className={styles.flightCard_favoriteBtn}>
-                    <svg
-                      width="20"
-                      height="20"
-                      className={styles.flightCard_favoriteIcon}
-                    >
-                      <use href={sprite + "#icon-heart"} />
-                    </svg>
-                  </button>
+                  <FavouritesBtn />
                   <button className={styles.flightCard_dealsBtn}>
                     View Deals
                   </button>
