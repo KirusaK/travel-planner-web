@@ -1,35 +1,86 @@
-import sprite from "../../shared/assets/icons/symbol-defs.svg";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import logoEmirate from "../../shared/assets/image/emirates.svg";
+import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./FlightCard.module.scss";
 
+// Временная база данных для проверки работы Redux
+const tickets = [
+  {
+    id: "tickets-1",
+    logo: logoEmirate,
+    airlineName: "Emirates",
+    rating: "4.2",
+    ratingStatus: "Very Good",
+    reviewsCount: "54 reviews",
+    price: "$104",
+    from: "EWR",
+    to: "BNA",
+    flightClass: "Economy",
+    trips: [
+      {
+        id: "trip-1",
+        time: "12:00 pm - 01:28 pm",
+        type: "non stop",
+        duration: "2h 28m",
+        route: "EWR-BNA",
+      },
+      {
+        id: "trip-2",
+        time: "12:00 pm - 01:28 pm",
+        type: "non stop",
+        duration: "2h 28m",
+        route: "EWR-BNA",
+      },
+    ],
+  },
+
+  {
+    id: "tickets-2",
+    logo: logoEmirate,
+    airlineName: "LOT Polish Airlines",
+    rating: "4.7",
+    ratingStatus: "Very Good",
+    reviewsCount: "120 reviews",
+    price: "$20",
+    from: "Mlawa",
+    to: "Warszawa",
+    flightClass: "Business",
+    trips: [
+      {
+        id: "trip-3",
+        time: "08:00 am - 09:30 am",
+        type: "non stop",
+        duration: "1h 30m",
+        route: "MLA-WAW",
+      },
+    ],
+  },
+];
+
 export const FlightCard = () => {
-  const tickets = [
-    {
-      id: "tickets-1",
-      logo: logoEmirate,
-      airlineName: "Emirates",
-      rating: "4.2",
-      ratingStatus: "Very Good",
-      reviewsCount: "54 reviews",
-      price: "$104",
-      trips: [
-        {
-          id: "trip-1",
-          time: "12:00 pm - 01:28 pm",
-          type: "non stop",
-          duration: "2h 28m",
-          route: "EWR-BNA",
-        },
-        {
-          id: "trip-2",
-          time: "12:00 pm - 01:28 pm",
-          type: "non stop",
-          duration: "2h 28m",
-          route: "EWR-BNA",
-        },
-      ],
-    },
-  ];
+  const { from, to, flightClass } = useSelector(
+    (state) => state.flight.searchParams,
+  );
+
+  const [filteredTickets, setFilteredTickets] = useState([]);
+
+  useEffect(() => {
+    if (!from && !to) {
+      setFilteredTickets(tickets);
+      return;
+    }
+
+    const result = tickets.filter((ticket) => {
+      return (
+        ticket.from.toLowerCase() === from.toLowerCase() &&
+        ticket.to.toLowerCase() === to.toLowerCase() &&
+        ticket.flightClass.toLowerCase() === flightClass.toLowerCase()
+      );
+    });
+
+    setFilteredTickets(result);
+  }, [from, to, flightClass]);
 
   return (
     // Главный родительский тег для всей правой контентной области
@@ -37,7 +88,8 @@ export const FlightCard = () => {
       {/* Строка со счетчиком результатов и сортировкой */}
       <div className={styles.sorting_results}>
         <p>
-          <strong>Showing 4 of</strong> <span>257 places</span>
+          <strong>Showing {filteredTickets.length} of</strong>{" "}
+          <span>{tickets.length} places</span>
         </p>
         <div className={styles.sorting_selectWrapper}>
           <p>
@@ -52,7 +104,7 @@ export const FlightCard = () => {
       {/* Список карточек */}
       <div className={styles.flightCards}>
         <section className={styles.flightCards_container}>
-          {tickets.map((item) => (
+          {filteredTickets.map((item) => (
             <article key={item.id} className={styles.flightCard}>
               <div className={styles.flightCard_logoBlock}>
                 <img
@@ -89,26 +141,28 @@ export const FlightCard = () => {
                         type="checkbox"
                         className={styles.flightCard_checkbox}
                       />
-                      <div className={styles.flightCard_tripTimeInfo}>
-                        <span className={styles.flightCard_tripTime}>
-                          <strong>{trip.time}</strong>
-                        </span>
-                        <span className={styles.flightCard_tripAirline}>
-                          {item.airlineName}
-                        </span>
-                      </div>
-                      <div className={styles.flightCard_tripTypeBlock}>
-                        <span className={styles.flightCard_tripType}>
-                          {trip.type}
-                        </span>
-                      </div>
-                      <div className={styles.flightCard_tripDurationBlock}>
-                        <span className={styles.flightCard_tripDuration}>
-                          {trip.duration}
-                        </span>
-                        <span className={styles.flightCard_tripRoute}>
-                          {trip.route}
-                        </span>
+                      <div className={styles.flightCard_tripRow_info}>
+                        <div className={styles.flightCard_tripTimeInfo}>
+                          <span className={styles.flightCard_tripTime}>
+                            <strong>{trip.time}</strong>
+                          </span>
+                          <span className={styles.flightCard_tripAirline}>
+                            {item.airlineName}
+                          </span>
+                        </div>
+                        <div className={styles.flightCard_tripTypeBlock}>
+                          <span className={styles.flightCard_tripType}>
+                            {trip.type}
+                          </span>
+                        </div>
+                        <div className={styles.flightCard_tripDurationBlock}>
+                          <span className={styles.flightCard_tripDuration}>
+                            {trip.duration}
+                          </span>
+                          <span className={styles.flightCard_tripRoute}>
+                            {trip.route}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   ))}
