@@ -1,0 +1,9 @@
+@use "../../../app/styles/variables" as *;
+
+.FavouritesBtn {
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  border: 1px solid $color-mint-green;
+  border-radius: 4px;
+}

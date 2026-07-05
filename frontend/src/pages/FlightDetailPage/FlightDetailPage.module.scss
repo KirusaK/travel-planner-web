@@ -1,0 +1,17 @@
+@use "../../app/styles/variables" as *;
+
+.main {
+  width: 1223px;
+  margin: 48px auto;
+}
+
+.block_img {
+  width: 1223px;
+  height: 395px;
+  margin-top: 32px;
+  background-image: url("../../shared/assets/image/airplanetickets.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+}

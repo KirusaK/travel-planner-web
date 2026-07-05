@@ -1,0 +1,13 @@
+@use "../../../app/styles/variables" as *;
+
+.RatingCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 32px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid $color-mint-green;
+  border-radius: 4px;
+}
