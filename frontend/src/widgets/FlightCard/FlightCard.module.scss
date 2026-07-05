@@ -23,6 +23,7 @@
 .flightCards {
   width: 100%;
 
+
   &_container {
     display: flex;
     flex-direction: column;
@@ -113,8 +114,14 @@
 
   &_tripRow {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 12px;
+
+    &_info {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
   }
 
   &_checkbox {
@@ -132,7 +139,7 @@
   }
 
   &_tripTimeInfo {
-    width: 170px;
+    width: 173px;
   }
 
   &_tripTypeBlock {
@@ -164,6 +171,7 @@
   }
 
   &_tripRoute {
+    width: 200px;
     font-size: 14px;
     font-weight: 400;
   }
