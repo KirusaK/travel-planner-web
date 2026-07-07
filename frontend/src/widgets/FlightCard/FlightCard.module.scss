@@ -23,6 +23,7 @@
 .flightCards {
   width: 100%;
 
+
   &_container {
     display: flex;
     flex-direction: column;
@@ -64,18 +65,6 @@
     gap: 8px;
   }
 
-  &_ratingBadge {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 32px;
-    font-size: 12px;
-    font-weight: 500;
-    border: 1px solid $color-mint-green;
-    border-radius: 4px;
-  }
-
   &_ratingText {
     font-size: 13px;
     font-weight: 500;
@@ -113,8 +102,14 @@
 
   &_tripRow {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 12px;
+
+    &_info {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
   }
 
   &_checkbox {
@@ -132,7 +127,7 @@
   }
 
   &_tripTimeInfo {
-    width: 170px;
+    width: 173px;
   }
 
   &_tripTypeBlock {
@@ -164,6 +159,7 @@
   }
 
   &_tripRoute {
+    width: 200px;
     font-size: 14px;
     font-weight: 400;
   }
@@ -184,13 +180,7 @@
     margin-bottom: 24px;
   }
 
-  &_favoriteBtn {
-    width: 48px;
-    height: 48px;
-    background-color: transparent;
-    border: 1px solid $color-mint-green;
-    border-radius: 4px;
-  }
+
 
   &_dealsBtn {
     flex: 1;

@@ -6,7 +6,9 @@ export const Header = ({ isTransparent, hasShadow }) => {
   const location = useLocation();
 
   const isFlightActive =
-    location.pathname === "/FindFlight" || location.pathname === "/FlightsPage";
+    location.pathname === "/FindFlight" ||
+    location.pathname === "/FlightsPage" ||
+    location.pathname === "/FlightDetailPage";
 
   const isHotelActive =
     location.pathname === "/HotelPage" || location.pathname === "/FindStays";
