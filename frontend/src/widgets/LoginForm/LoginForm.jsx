@@ -7,9 +7,11 @@ export const LoginForm = () => {
     <section className={styles.LoginForm}>
       <div className={styles.LoginForm_container}>
         <div className={styles.LoginForm_logo}>
-          <svg width={110} height={36}>
-            <use href={sprite + "#icon-Logo"}></use>
-          </svg>
+          <Link to="/">
+            <svg width={110} height={36}>
+              <use href={sprite + "#icon-Logo"}></use>
+            </svg>
+          </Link>
         </div>
         <div className={styles.LoginForm_login}>
           <h1 className={styles.LoginForm_title}>Login</h1>
