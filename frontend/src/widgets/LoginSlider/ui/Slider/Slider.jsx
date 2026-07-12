@@ -1,47 +1,34 @@
-import { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
+
 import { SliderCard } from "../SliderCard/SliderCard";
 import styles from "./Slider.module.scss";
 
-export const Slider = (props) => {
-  const { data } = props;
-  const sliderRef = useRef(null);
-
-  const handleMouseDown = (e) => {
-    const slider = sliderRef.current;
-    slider.isDown = true;
-    slider.startX = e.pageX - slider.offsetLeft;
-    slider.scrollLeftStart = slider.scrollLeft;
-  };
-
-  const handleMouseMove = (e) => {
-    const slider = sliderRef.current;
-
-    if (!slider.isDown) return;
-
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = x - slider.startX;
-    slider.scrollLeft = slider.scrollLeftStart - walk;
-  };
-
-  const handleMouseUp = () => {
-    sliderRef.current.isDown = false;
-  };
-
+export const Slider = ({ data }) => {
   return (
     <section className={styles.Slider}>
-      <div
+      <Swiper
+        modules={[Pagination, Autoplay]}
+        pagination={{ clickable: true }}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
+        spaceBetween={20}
+        slidesPerView={1}
+        loop={true}
         className={styles.Slider__container}
-        ref={sliderRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
       >
         {data.map((item) => (
-          <SliderCard key={item.id} image={item.image} />
+          <SwiperSlide key={item.id}>
+            <SliderCard image={item.image} />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </section>
   );
 };
