@@ -1,6 +1,10 @@
 import { Header } from "../../widgets/Header/Header.jsx";
 import { FlightDetailInfo } from "../../widgets/FlightDetailInfo/FlightDetailInfo.jsx";
 import { FlightDetailFeatures } from "../../widgets/FlightDetailFeatures/FlightDetailFeatures.jsx";
+import { FlightPolicies } from "../../widgets/FlightPolicies/FlightPolicies.jsx";
+import { FlightDetailTicket } from "../../widgets/FlightDetailTicket/FlightDetailTicket.jsx";
+import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
+import { Footer } from "../../widgets/Footer/Footer.jsx";
 import styles from "./FlightDetailPage.module.scss";
 
 export const FlightDetailPage = () => {
@@ -12,7 +16,11 @@ export const FlightDetailPage = () => {
           <FlightDetailInfo />
           <div className={styles.block_img}></div>
           <FlightDetailFeatures />
+          <FlightPolicies />
+          <FlightDetailTicket />
         </div>
+        <Subscribe />
+        <Footer />
       </div>
     </div>
   );
