@@ -8,10 +8,12 @@ export const Header = ({ isTransparent, hasShadow }) => {
   const isFlightActive =
     location.pathname === "/FindFlight" ||
     location.pathname === "/FlightsPage" ||
-    location.pathname === "/FlightDetailPage";
+    location.pathname.includes("/flight-detail");
 
   const isHotelActive =
-    location.pathname === "/HotelPage" || location.pathname === "/FindStays";
+    location.pathname === "/HotelPage" ||
+    location.pathname === "/FindStays" ||
+    location.pathname.includes("/hotel-detail");
 
   return (
     <div

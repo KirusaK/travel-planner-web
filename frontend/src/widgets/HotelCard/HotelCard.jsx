@@ -1,23 +1,14 @@
-import logoHotel from "../../shared/assets/image/Hotel.svg";
+import { hotels } from "../../entities/hotel/index.js";
+import { useNavigate } from "react-router-dom";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./HotelCard.module.scss";
 
 export const HotelCard = () => {
-  const hotelCardData = [
-    {
-      id: "otel-1",
-      logo: logoHotel,
-      hotelName: "CVK Park Bophysorus Hotel Istanbul",
-      location: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
-      stars: 5,
-      type: "Hotel",
-      amenities: "20+ Amenities",
-      rating: 4.2,
-      ratingStatus: "Very Good",
-      countReviews: 371,
-      price: 240,
-    },
-  ];
+  const navigate = useNavigate();
+
+  const handleViewDeals = (hotelId) => {
+    navigate(`/hotel-detail/${hotelId}`);
+  };
 
   return (
     <div>
@@ -36,7 +27,7 @@ export const HotelCard = () => {
       </div>
 
       <section className={styles.hotelCard_container}>
-        {hotelCardData.map((item) => (
+        {hotels.map((item) => (
           <article key={item.id} className={styles.hotelCard}>
             <div className={styles.hotelCard_imageWrapper}>
               <img
@@ -117,6 +108,7 @@ export const HotelCard = () => {
                 <button
                   type="button"
                   className={styles.hotelCard_buttonRow__btn}
+                  onClick={() => handleViewDeals(item.id)}
                 >
                   View Place
                 </button>
