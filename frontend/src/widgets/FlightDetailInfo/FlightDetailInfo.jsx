@@ -3,29 +3,30 @@ import { FavouritesBtn } from "../../shared/ui/FavouritesBtn/FavouritesBtn.jsx";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./FlightDetailInfo.module.scss";
 
-export const FlightDetailInfo = () => {
+export const FlightDetailInfo = (props) => {
+  const { airlineName, price, ratingStatus, reviewsCount, airport, rating } =
+    props;
+
   return (
     <div className={styles.FlightDetailInfo}>
       <section className={styles.FlightDetailInfo_container}>
         <div className={styles.FlightDetailInfo_block__info}>
-          <h2 className={styles.FlightDetailInfo_info_title}>
-            Emirates A380 Airbus
-          </h2>
+          <h2 className={styles.FlightDetailInfo_info_title}>{airlineName}</h2>
           <div className={styles.FlightDetailInfo_info_location}>
             <svg width="18" height="18">
               <use href={sprite + "#icon-Location"} />
             </svg>
-            <p>Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437</p>
+            <p>{airport}</p>
           </div>
           <div className={styles.FlightDetailInfo_info_rating}>
-            <RatingCard />
+            <RatingCard value={rating} />
             <p>
-              <b>Very Good</b> 54 reviews
+              <b>{ratingStatus}</b> {reviewsCount}
             </p>
           </div>
         </div>
         <div className={styles.FlightDetailInfo_block__price}>
-          <h2 className={styles.FlightDetailInfo_price_title}>$240</h2>
+          <h2 className={styles.FlightDetailInfo_price_title}>{price}</h2>
           <div className={styles.FlightDetailInfo_price_blockBtn}>
             <FavouritesBtn />
             <button className={styles.FlightDetailInfo_price_btnShare}>
