@@ -5,8 +5,8 @@ import { FlightPolicies } from "../../widgets/FlightPolicies/FlightPolicies.jsx"
 import { FlightDetailTicket } from "../../widgets/FlightDetailTicket/FlightDetailTicket.jsx";
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
-import { tickets } from "../../entities/flight/index.js";
 import { useParams } from "react-router-dom";
+import { tickets } from "../../entities/flight/index.js";
 import styles from "./FlightDetailPage.module.scss";
 
 export const FlightDetailPage = () => {
