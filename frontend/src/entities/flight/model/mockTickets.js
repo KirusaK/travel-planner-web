@@ -1,0 +1,66 @@
+import logoEmirate from "../../../shared/assets/image/emirates.svg";
+
+export const tickets = [
+  {
+    id: "tickets-1",
+    logo: logoEmirate,
+    airlineName: "Emirates",
+    rating: "4.2",
+    ratingStatus: "Very Good",
+    reviewsCount: "54 reviews",
+    airport: "Istanbul 34437",
+    price: "$104",
+    from: "EWR",
+    to: "BNA",
+    flightClass: "Economy",
+    trips: [
+      {
+        id: "trip-1",
+        title: "Return Wed, Dec 8",
+        time: "12:00 pm - 01:28 pm",
+        departureAirport: "Newark(EWR)",
+        arrivalAirport: "Nashville(BNA)",
+        type: "non stop",
+        duration: "1h 28m",
+        route: "EWR-BNA",
+        aircraft: "Airbus A320",
+      },
+      {
+        id: "trip-2",
+        title: "Depart Thu, Dec 9",
+        time: "14:00 pm - 15:28 pm",
+        departureAirport: "Nashville(BNA)",
+        arrivalAirport: "Newark(EWR)",
+        type: "non stop",
+        duration: "1h 28m",
+        route: "EWR-BNA",
+        aircraft: "Boeing 777",
+      },
+    ],
+  },
+
+  {
+    id: "tickets-2",
+    logo: logoEmirate,
+    airlineName: "LOT Polish Airlines",
+    rating: "4.7",
+    ratingStatus: "Very Good",
+    reviewsCount: "120 reviews",
+    airport: "Istanbul 34437",
+    price: "$20",
+    from: "Mlawa",
+    to: "Warszawa",
+    flightClass: "Business",
+    trips: [
+      {
+        id: "trip-3",
+        title: "Depart Thu, Dec 25",
+        time: "08:00 am - 09:30 am",
+        type: "non stop",
+        duration: "1h 30m",
+        route: "MLA-WAW",
+        aircraft: "Airbus A333",
+      },
+    ],
+  },
+];

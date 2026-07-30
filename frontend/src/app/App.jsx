@@ -16,7 +16,7 @@ const App = () => {
       <Route path="/FindStays" element={<FindStays />} />
       <Route path="/FlightsPage" element={<FlightsPage />} />
       <Route path="/HotelPage" element={<HotelPage />} />
-      <Route path="/FlightDetailPage" element={<FlightDetailPage />} />
+      <Route path="/flight-detail/:id" element={<FlightDetailPage />} />
     </Routes>
   );
 };
