@@ -2,6 +2,7 @@ import { Header } from "../../widgets/Header/Header.jsx";
 import { HotelDetailInfo } from "../../widgets/HotelDetailInfo/HotelDetailInfo.jsx";
 import { useParams } from "react-router-dom";
 import { HotelDetailGallery } from "../../widgets/HotelDetailGallery/HotelDetailGallery.jsx";
+import { HotelDetailOverview } from "../../widgets/HotelDetailOverview/HotelDetailOverview.jsx";
 import { hotels } from "../../entities/hotel/index.js";
 import styles from "./HotelDetailPage.module.scss";
 
@@ -29,6 +30,13 @@ export const HotelDetailPage = () => {
           countReviews={hotel.countReviews}
         />
         <HotelDetailGallery />
+        <HotelDetailOverview
+          description={hotel.description}
+          rating={hotel.rating}
+          ratingStatus={hotel.ratingStatus}
+          countReviews={hotel.countReviews}
+          features={hotel.features}
+        />
       </div>
     </>
   );

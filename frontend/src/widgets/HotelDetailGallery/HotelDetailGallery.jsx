@@ -29,6 +29,7 @@ export const HotelDetailGallery = () => {
           </button>
         </div>
       </div>
+      <hr className={styles.hotelDetailGallery_hr} />
     </section>
   );
 };
