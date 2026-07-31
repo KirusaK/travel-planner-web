@@ -1,0 +1,50 @@
+@use "../../app/styles/_variables" as *;
+
+.hotelDetailGallery {
+  &_block {
+    display: flex;
+    gap: 8px;
+
+    &__homePhoto {
+      width: 612px;
+      height: 550px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 12px 0 0 12px;
+    }
+
+    &__morePhoto {
+      display: flex;
+      position: relative;
+      gap: 8px;
+      max-width: 612px;
+      flex-wrap: wrap;
+
+      &__item {
+        width: 302px;
+        height: 271px;
+
+        &:nth-child(2) {
+          border-top-right-radius: 12px;
+        }
+
+        &:nth-child(4) {
+          border-bottom-right-radius: 12px;
+        }
+      }
+
+      &__btn {
+        width: 143px;
+        height: 48px;
+        right: 16px;
+        bottom: 16px;
+        position: absolute;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        background-color: $color-mint-green;
+        z-index: 2;
+      }
+    }
+  }
+}
