@@ -3,6 +3,7 @@ import { HotelDetailInfo } from "../../widgets/HotelDetailInfo/HotelDetailInfo.j
 import { useParams } from "react-router-dom";
 import { HotelDetailGallery } from "../../widgets/HotelDetailGallery/HotelDetailGallery.jsx";
 import { HotelDetailOverview } from "../../widgets/HotelDetailOverview/HotelDetailOverview.jsx";
+import { HotelAvailableRooms } from "../../widgets/HotelAvailableRooms/HotelAvailableRooms.jsx";
 import { hotels } from "../../entities/hotel/index.js";
 import styles from "./HotelDetailPage.module.scss";
 
@@ -37,6 +38,7 @@ export const HotelDetailPage = () => {
           countReviews={hotel.countReviews}
           features={hotel.features}
         />
+        <HotelAvailableRooms rooms={hotel.rooms} />
       </div>
     </>
   );
