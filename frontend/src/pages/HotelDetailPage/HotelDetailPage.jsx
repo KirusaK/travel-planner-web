@@ -6,6 +6,7 @@ import { HotelDetailOverview } from "../../widgets/HotelDetailOverview/HotelDeta
 import { HotelAvailableRooms } from "../../widgets/HotelAvailableRooms/HotelAvailableRooms.jsx";
 import { hotels } from "../../entities/hotel/index.js";
 import styles from "./HotelDetailPage.module.scss";
+import { HotelDetailLocation } from "../../widgets/HotelDetailLocation/HotelDetailLocation.jsx";
 
 export const HotelDetailPage = () => {
   const { id } = useParams();
@@ -39,6 +40,11 @@ export const HotelDetailPage = () => {
           features={hotel.features}
         />
         <HotelAvailableRooms rooms={hotel.rooms} />
+        <HotelDetailLocation
+          location={hotel.location}
+          googleMapsUrl={hotel.googleMapsUrl}
+          mapEmbedUrl={hotel.mapEmbedUrl}
+        />
       </div>
     </>
   );
