@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import { HotelDetailGallery } from "../../widgets/HotelDetailGallery/HotelDetailGallery.jsx";
 import { HotelDetailOverview } from "../../widgets/HotelDetailOverview/HotelDetailOverview.jsx";
 import { HotelAvailableRooms } from "../../widgets/HotelAvailableRooms/HotelAvailableRooms.jsx";
+import { HotelDetailLocation } from "../../widgets/HotelDetailLocation/HotelDetailLocation.jsx";
+import { HotelDetailAmenities } from "../../widgets/HotelDetailAmenities/HotelDetailAmenities.jsx";
 import { hotels } from "../../entities/hotel/index.js";
 import styles from "./HotelDetailPage.module.scss";
-import { HotelDetailLocation } from "../../widgets/HotelDetailLocation/HotelDetailLocation.jsx";
 
 export const HotelDetailPage = () => {
   const { id } = useParams();
@@ -45,6 +46,7 @@ export const HotelDetailPage = () => {
           googleMapsUrl={hotel.googleMapsUrl}
           mapEmbedUrl={hotel.mapEmbedUrl}
         />
+        <HotelDetailAmenities amenitiesList={hotel.amenitiesList} />
       </div>
     </>
   );
