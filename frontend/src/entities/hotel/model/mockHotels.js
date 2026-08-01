@@ -3,6 +3,7 @@ import room1 from "../../../shared/assets/image/Rectangle 5.jpg";
 import room2 from "../../../shared/assets/image/Rectangle 6.jpg";
 import room3 from "../../../shared/assets/image/Rectangle 7.jpg";
 import room4 from "../../../shared/assets/image/Rectangle 8.jpg";
+import people from "../../../shared/assets/image/Ellipse 1.jpg";
 
 export const hotels = [
   {
@@ -126,6 +127,44 @@ export const hotels = [
       },
       { id: "car-hire", name: "Car hire", icon: "car-hire" },
       { id: "golf-course", name: "Golf course", icon: "golf-course" },
+    ],
+
+    reviews: [
+      {
+        id: "1",
+        img: people,
+        assessment: "5.0 Amazing",
+        name: "Omar Siphron",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      },
+      {
+        id: "2",
+        img: people,
+        assessment: "5.0 Amazing",
+        name: "Cristofer Ekstrom Bothman",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      },
+      {
+        id: "3",
+        img: people,
+        assessment: "5.0 Amazing",
+        name: "Kaiya Lubin",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      },
+      {
+        id: "4",
+        img: people,
+        assessment: "5.0 Amazing",
+        name: "Erin Septimus",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      },
+      {
+        id: "5",
+        img: people,
+        assessment: "5.0 Amazing",
+        name: "Terry George",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      },
     ],
   },
 ];

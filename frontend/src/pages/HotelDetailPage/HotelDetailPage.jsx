@@ -6,6 +6,9 @@ import { HotelDetailOverview } from "../../widgets/HotelDetailOverview/HotelDeta
 import { HotelAvailableRooms } from "../../widgets/HotelAvailableRooms/HotelAvailableRooms.jsx";
 import { HotelDetailLocation } from "../../widgets/HotelDetailLocation/HotelDetailLocation.jsx";
 import { HotelDetailAmenities } from "../../widgets/HotelDetailAmenities/HotelDetailAmenities.jsx";
+import { HotelDetailReviews } from "../../widgets/HotelDetailReviews/HotelDetailReviews.jsx";
+import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
+import { Footer } from "../../widgets/Footer/Footer.jsx";
 import { hotels } from "../../entities/hotel/index.js";
 import styles from "./HotelDetailPage.module.scss";
 
@@ -22,6 +25,7 @@ export const HotelDetailPage = () => {
   return (
     <>
       <Header hasShadow={true} />
+
       <div className={styles.main}>
         <HotelDetailInfo
           name={hotel.hotelName}
@@ -47,7 +51,16 @@ export const HotelDetailPage = () => {
           mapEmbedUrl={hotel.mapEmbedUrl}
         />
         <HotelDetailAmenities amenitiesList={hotel.amenitiesList} />
+        <HotelDetailReviews
+          rating={hotel.rating}
+          ratingStatus={hotel.ratingStatus}
+          countReviews={hotel.countReviews}
+          reviews={hotel.reviews}
+        />
       </div>
+
+      <Subscribe />
+      <Footer />
     </>
   );
 };
