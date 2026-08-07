@@ -66,7 +66,7 @@ export const HotelCard = () => {
               <div className={styles.hotelCard_infoRow}>
                 <div className={styles.hotelCard_infoRow__stars}>
                   {Array.from({ length: item.stars }).map((_, index) => (
-                    <svg width={16} height={16}>
+                    <svg key={index} width={16} height={16}>
                       <use href={sprite + "#icon-Star"} />
                     </svg>
                   ))}

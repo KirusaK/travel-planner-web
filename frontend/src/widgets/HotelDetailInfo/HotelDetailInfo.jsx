@@ -2,6 +2,7 @@ import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
 import { FavouritesBtn } from "../../shared/ui/FavouritesBtn/FavouritesBtn.jsx";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./HotelDetailInfo.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export const HotelDetailInfo = (props) => {
   const { name, stars, price, location, rating, ratingStatus, countReviews } =

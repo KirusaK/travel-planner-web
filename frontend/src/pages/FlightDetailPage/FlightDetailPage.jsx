@@ -25,6 +25,7 @@ export const FlightDetailPage = () => {
         <Header hasShadow={true} />
         <div className={styles.main}>
           <FlightDetailInfo
+            id={ticket.id}
             airlineName={ticket.airlineName}
             price={ticket.price}
             ratingStatus={ticket.ratingStatus}
