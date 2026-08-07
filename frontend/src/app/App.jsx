@@ -6,6 +6,7 @@ import { FindStays } from "../pages/FindStays/FindStays";
 import { FlightsPage } from "../pages/FlightsPage/FlightsPage";
 import { HotelPage } from "../pages/HotelPage/HotelPage";
 import { FlightDetailPage } from "../pages/FlightDetailPage/FlightDetailPage";
+import { SignUp } from "../pages/SignUp/SignUp";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <Route path="/FlightsPage" element={<FlightsPage />} />
       <Route path="/HotelPage" element={<HotelPage />} />
       <Route path="/FlightDetailPage" element={<FlightDetailPage />} />
+      <Route path="/SignUp" element={<SignUp />} />
     </Routes>
   );
 };
