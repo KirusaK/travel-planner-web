@@ -55,7 +55,9 @@ export const tickets = [
       {
         id: "trip-3",
         title: "Depart Thu, Dec 25",
-        time: "08:00 am - 09:30 am",
+        time: "08:00 pm - 09:30 pm",
+        departureAirport: "Nashville(BNA)",
+        arrivalAirport: "Newark(EWR)",
         type: "non stop",
         duration: "1h 30m",
         route: "MLA-WAW",
