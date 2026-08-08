@@ -13,6 +13,11 @@ export const tickets = [
     from: "EWR",
     to: "BNA",
     flightClass: "Economy",
+    partPayment: {
+      initialAmount: "52",
+      remainingAmount: "52",
+      dueDate: "Nov 14, 2026",
+    },
     trips: [
       {
         id: "trip-1",
@@ -53,6 +58,11 @@ export const tickets = [
     from: "Mlawa",
     to: "Warszawa",
     flightClass: "Business",
+    partPayment: {
+      initialAmount: "10",
+      remainingAmount: "10",
+      dueDate: "Nov 14, 2026",
+    },
     trips: [
       {
         id: "trip-3",
