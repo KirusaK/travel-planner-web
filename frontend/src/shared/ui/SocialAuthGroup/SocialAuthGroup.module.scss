@@ -1,0 +1,22 @@
+@use "../../../app/styles/variables" as *;
+
+.socialAuthGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+
+  &_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1; // Равномерно растягивает 3 кнопки
+    height: 56px;
+    border-radius: 4px;
+    border: 1px solid $color-mint-green;
+
+    &:hover {
+      transform: scale(1.05); // Чуть более мягкий hover
+    }
+  }
+}

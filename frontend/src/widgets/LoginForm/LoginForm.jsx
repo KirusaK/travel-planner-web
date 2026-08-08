@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SocialAuthGroup } from "../../shared/ui/SocialAuthGroup/index.js";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./LoginForm.module.scss";
 
@@ -71,29 +72,7 @@ export const LoginForm = () => {
             <p className={styles.LoginForm_other_text}>Or login with</p>
             <hr className={styles.LoginForm_other_hr} />
           </div>
-          <div className={styles.LoginForm_other_social}>
-            <div className={styles.LoginForm_other_social_media}>
-              <Link to="/">
-                <svg width={24} height={24}>
-                  <use href={sprite + "#icon-facebook"}></use>
-                </svg>
-              </Link>
-            </div>
-            <div className={styles.LoginForm_other_social_media}>
-              <Link to="/">
-                <svg width={24} height={24}>
-                  <use href={sprite + "#icon-flat-color-icons_google"}></use>
-                </svg>
-              </Link>
-            </div>
-            <div className={styles.LoginForm_other_social_media}>
-              <Link to="/">
-                <svg width={24} height={24}>
-                  <use href={sprite + "#icon-ant-design_apple-filled"}></use>
-                </svg>
-              </Link>
-            </div>
-          </div>
+          <SocialAuthGroup />
         </div>
       </div>
     </section>
