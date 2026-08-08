@@ -3,6 +3,7 @@ import { Header } from "../../widgets/Header/Header.jsx";
 import { tickets } from "../../entities/flight/index.js";
 import { BookingDetailTicket } from "../../widgets/BookingDetailTicket/BookingDetailTicket.jsx";
 import { BookingDetailTotal } from "../../widgets/BookingDetailTotal/BookingDetailTotal.jsx";
+import { BookingDetailPayment } from "../../widgets/BookingDetailPayment/BookingDetailPayment.jsx";
 import styles from "./BookingDetailFlight.module.scss";
 
 export const BookingDetailFlight = () => {
@@ -22,6 +23,7 @@ export const BookingDetailFlight = () => {
       <div className={styles.main}>
         <div>
           <BookingDetailTicket ticket={ticket} />
+          <BookingDetailPayment ticket={ticket} />
         </div>
         <div>
           <BookingDetailTotal ticket={ticket} />
