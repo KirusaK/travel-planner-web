@@ -1,9 +1,19 @@
-import styles from "./BookingDetailPayment.module.scss";
 import { useState } from "react";
+import { BookingDetailModal } from "../../shared/ui/BookingDetailModal/index.js";
+import styles from "./BookingDetailPayment.module.scss";
 
 export const BookingDetailPayment = ({ ticket }) => {
   const { partPayment = {} } = ticket;
   const [paymentType, setPaymentType] = useState("full");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <section className={styles.bookingDetailPayment}>
@@ -54,9 +64,15 @@ export const BookingDetailPayment = ({ ticket }) => {
           />
         </label>
 
-        <button type="button" className={styles.bookingDetailPayment__moreInfo}>
+        <button
+          type="button"
+          className={styles.bookingDetailPayment__moreInfo}
+          onClick={handleOpenModal}
+        >
           More info
         </button>
+
+        <BookingDetailModal isOpen={isModalOpen} onClose={handleCloseModal} />
       </div>
     </section>
   );
