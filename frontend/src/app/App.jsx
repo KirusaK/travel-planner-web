@@ -8,6 +8,7 @@ import { HotelPage } from "../pages/HotelPage/HotelPage";
 import { FlightDetailPage } from "../pages/FlightDetailPage/FlightDetailPage";
 import { HotelDetailPage } from "../pages/HotelDetailPage/HotelDetailPage.jsx";
 import { BookingDetailFlight } from "../pages/BookingDetailFlight/BookingDetailFlight";
+import { BookingDetailHotel } from "../pages/BookingDetailHotel/BookingDetailHotel.jsx";
 
 const App = () => {
   return (
@@ -23,6 +24,10 @@ const App = () => {
       <Route
         path="/booking-detail-flight/:id"
         element={<BookingDetailFlight />}
+      />
+      <Route
+        path={"/booking-detail-hotel/:id"}
+        element={<BookingDetailHotel />}
       />
     </Routes>
   );
