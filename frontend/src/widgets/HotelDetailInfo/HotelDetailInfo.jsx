@@ -1,12 +1,26 @@
 import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
 import { FavouritesBtn } from "../../shared/ui/FavouritesBtn/FavouritesBtn.jsx";
+import { useNavigate } from "react-router-dom";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./HotelDetailInfo.module.scss";
-import { useNavigate } from "react-router-dom";
 
 export const HotelDetailInfo = (props) => {
-  const { name, stars, price, location, rating, ratingStatus, countReviews } =
-    props;
+  const {
+    id,
+    name,
+    stars,
+    price,
+    location,
+    rating,
+    ratingStatus,
+    countReviews,
+  } = props;
+
+  const navigate = useNavigate();
+
+  const handleBookDetailHotel = (hotelId) => {
+    navigate(`/booking-detail-hotel/${hotelId}`);
+  };
 
   return (
     <section className={styles.hotelDetailInfo}>
@@ -55,7 +69,10 @@ export const HotelDetailInfo = (props) => {
                 <use href={sprite + "#icon-Share"} />
               </svg>
             </button>
-            <button className={styles.hotelDetailInfo_footer__btn__btnBook}>
+            <button
+              className={styles.hotelDetailInfo_footer__btn__btnBook}
+              onClick={() => handleBookDetailHotel(id)}
+            >
               Book now
             </button>
           </div>

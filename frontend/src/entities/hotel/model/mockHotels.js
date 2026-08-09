@@ -11,6 +11,7 @@ export const hotels = [
     logo: logoHotel,
     hotelName: "CVK Park Bophysorus Hotel Istanbul",
     location: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
+    roomType: "Superior room - 1 double bed or 2 twin beds",
     googleMapsUrl:
       "https://www.google.com/maps/place/G%C3%BCm%C3%BC%C5%9Fsuyu,+%C4%B0n%C3%B6n%C3%BC+Cd.+No:8,+34437+Beyo%C4%9Flu%2F%C4%B0stanbul,+%D0%A2%D1%83%D1%80%D1%86%D0%B8%D1%8F/@41.0349911,28.9858347,17z/data=!3m1!4b1!4m6!3m5!1s0x14cab77b3040c957:0x3d87cd4f09fccfa8!8m2!3d41.0349871!4d28.9884096!16s%2Fg%2F11yw9x2t8z?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D",
     mapEmbedUrl:

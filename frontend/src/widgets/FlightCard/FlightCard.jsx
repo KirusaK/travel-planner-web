@@ -14,8 +14,8 @@ export const FlightCard = () => {
     (state) => state.flight.searchParams,
   );
 
-  const [filteredTickets, setFilteredTickets] = useState([]);
   const navigate = useNavigate();
+  const [filteredTickets, setFilteredTickets] = useState([]);
 
   useEffect(() => {
     if (!from && !to) {

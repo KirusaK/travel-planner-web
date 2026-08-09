@@ -28,6 +28,7 @@ export const HotelDetailPage = () => {
 
       <div className={styles.main}>
         <HotelDetailInfo
+          id={hotel.id}
           name={hotel.hotelName}
           stars={hotel.stars}
           price={hotel.price}
