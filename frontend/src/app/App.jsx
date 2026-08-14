@@ -7,6 +7,9 @@ import { FindStays } from "../pages/FindStays/FindStays";
 import { FlightsPage } from "../pages/FlightsPage/FlightsPage";
 import { HotelPage } from "../pages/HotelPage/HotelPage";
 import { FlightDetailPage } from "../pages/FlightDetailPage/FlightDetailPage";
+import { HotelDetailPage } from "../pages/HotelDetailPage/HotelDetailPage.jsx";
+import { BookingDetailFlight } from "../pages/BookingDetailFlight/BookingDetailFlight";
+import { BookingDetailHotel } from "../pages/BookingDetailHotel/BookingDetailHotel.jsx";
 
 const App = () => {
   return (
@@ -18,7 +21,16 @@ const App = () => {
       <Route path="/FindStays" element={<FindStays />} />
       <Route path="/FlightsPage" element={<FlightsPage />} />
       <Route path="/HotelPage" element={<HotelPage />} />
-      <Route path="/FlightDetailPage" element={<FlightDetailPage />} />
+      <Route path="/flight-detail/:id" element={<FlightDetailPage />} />
+      <Route path="/hotel-detail/:id" element={<HotelDetailPage />} />
+      <Route
+        path="/booking-detail-flight/:id"
+        element={<BookingDetailFlight />}
+      />
+      <Route
+        path={"/booking-detail-hotel/:id"}
+        element={<BookingDetailHotel />}
+      />
     </Routes>
   );
 };

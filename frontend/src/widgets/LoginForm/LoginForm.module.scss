@@ -125,24 +125,4 @@
     font-weight: 400;
     color: $color-blackish-green;
   }
-
-  &_other_social {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &_other_social_media {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 160px;
-    height: 56px;
-    border-radius: 4px;
-    border: 1px solid $color-mint-green;
-    transition: transform 0.3s ease;
-  }
-
-  &_other_social_media:hover {
-    transform: scale(1.1);
-  }
 }
