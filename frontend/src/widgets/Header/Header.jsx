@@ -59,10 +59,10 @@ export const Header = ({ isTransparent, hasShadow }) => {
           Login
         </Link>
         <Link
-          to="/"
+          to="/SignUp"
           className={`${styles.header_button_text2} ${styles.header_button_decoration}`}
         >
-          Sing Up
+          Sign Up
         </Link>
       </div>
     </div>

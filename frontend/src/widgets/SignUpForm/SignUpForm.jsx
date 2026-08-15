@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SocialAuthGroup } from "../../shared/ui/SocialAuthGroup/index.js";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./SignUpForm.module.scss";
 
@@ -141,7 +142,7 @@ export const SignUpForm = () => {
           <div className={styles.SignUpForm_login}>
             <p className={styles.SignUpForm_login_text}>
               Already have an account?{" "}
-              <Link className={styles.SignUpForm_login_link} to="/">
+              <Link className={styles.SignUpForm_login_link} to="/Login">
                 Login
               </Link>
             </p>
@@ -152,27 +153,7 @@ export const SignUpForm = () => {
             <hr className={styles.SignUpForm_other_hr} />
           </div>
           <div className={styles.SignUpForm_other_social}>
-            <div className={styles.SignUpForm_other_social_media}>
-              <Link to="/">
-                <svg width={24} height={24}>
-                  <use href={sprite + "#icon-facebook"}></use>
-                </svg>
-              </Link>
-            </div>
-            <div className={styles.SignUpForm_other_social_media}>
-              <Link to="/">
-                <svg width={24} height={24}>
-                  <use href={sprite + "#icon-flat-color-icons_google"}></use>
-                </svg>
-              </Link>
-            </div>
-            <div className={styles.SignUpForm_other_social_media}>
-              <Link to="/">
-                <svg width={24} height={24}>
-                  <use href={sprite + "#icon-ant-design_apple-filled"}></use>
-                </svg>
-              </Link>
-            </div>
+            <SocialAuthGroup />
           </div>
         </div>
       </div>
