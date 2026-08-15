@@ -62,7 +62,7 @@ export const LoginForm = () => {
             <p className={styles.LoginForm_signup_text}>
               Don't have an account?
             </p>
-            <Link className={styles.LoginForm_signup_link} to="/">
+            <Link className={styles.LoginForm_signup_link} to="/SignUp">
               Sign up
             </Link>
           </div>
