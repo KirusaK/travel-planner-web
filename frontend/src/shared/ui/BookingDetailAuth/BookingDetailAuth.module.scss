@@ -1,6 +1,7 @@
-@use "../../app/styles/variables" as *;
+@use "../../../app/styles/variables" as *;
 
 .bookingDetailAuth {
+  width: 790px;
   margin-bottom: 60px;
 
   &_container {

@@ -1,4 +1,4 @@
-import imgLogo from "../../shared/assets/image/airplane.jpg";
+import imgLogo from "../../shared/assets/image/Hotel.svg";
 import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
 import styles from "./BookingDetailHotelTotal.module.scss";
 
