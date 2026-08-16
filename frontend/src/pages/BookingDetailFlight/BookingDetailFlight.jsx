@@ -3,7 +3,7 @@ import { Header } from "../../widgets/Header/Header.jsx";
 import { BookingDetailTicket } from "../../widgets/BookingDetailTicket/BookingDetailTicket.jsx";
 import { BookingDetailTotal } from "../../widgets/BookingDetailTotal/BookingDetailTotal.jsx";
 import { BookingDetailPayment } from "../../widgets/BookingDetailPayment/BookingDetailPayment.jsx";
-import { BookingDetailAuth } from "../../widgets/BookingDetailAuth/BookingDetailAuth.jsx";
+import { BookingDetailAuth } from "../../shared/ui/BookingDetailAuth/BookingDetailAuth.jsx";
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
 import { tickets } from "../../entities/flight/index.js";
@@ -27,7 +27,7 @@ export const BookingDetailFlight = () => {
         <div>
           <BookingDetailTicket ticket={ticket} />
           <BookingDetailPayment ticket={ticket} />
-          <BookingDetailAuth ticket={ticket} />
+          <BookingDetailAuth />
         </div>
         <div>
           <BookingDetailTotal ticket={ticket} />

@@ -13,7 +13,6 @@ export const BookingDetailTotal = ({ ticket }) => {
     flightClass = "Economy",
   } = ticket;
 
-  // 👈 Достаем первый рейс из массива
   const firstTrip = trips[0] || {};
 
   return (

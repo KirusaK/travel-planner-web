@@ -1,5 +1,5 @@
-import { SocialAuthGroup } from "../../shared/ui/SocialAuthGroup/index.js";
-import sprite from "../../shared/assets/icons/symbol-defs.svg";
+import { SocialAuthGroup } from "../SocialAuthGroup/index.js";
+import sprite from "../../assets/icons/symbol-defs.svg";
 import styles from "./BookingDetailAuth.module.scss";
 
 export const BookingDetailAuth = () => {
