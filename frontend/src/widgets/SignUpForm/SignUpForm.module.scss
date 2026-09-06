@@ -171,4 +171,12 @@
   &_form_input_password {
     width: 640px;
   }
+
+  &_error_text,
+  &_server_error {
+    display: block;
+    color: $color_error;
+    font-size: 13px;
+    margin-top: 5px;
+  }
 }

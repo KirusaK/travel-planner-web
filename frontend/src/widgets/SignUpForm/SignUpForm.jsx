@@ -30,6 +30,10 @@ export const SignUpForm = () => {
     }));
   };
 
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -40,6 +44,7 @@ export const SignUpForm = () => {
       "email",
       "phone",
       "password",
+      "confirmPassword",
     ];
 
     requiredFields.forEach((field) => {
@@ -48,11 +53,15 @@ export const SignUpForm = () => {
       }
     });
 
+    if (formData.email && !isValidEmail(formData.email)) {
+       newErrors.email = "Please enter a valid email address";
+    }
+
     if (formData.password && formData.password.length < 6) {
       newErrors.password = "Password must be at least 6 characters";
     }
 
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords don't match";
     }
 
@@ -79,7 +88,7 @@ export const SignUpForm = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        alert(data.message);
+        setError({server: data.message});
         return;
       }
 
@@ -124,6 +133,12 @@ export const SignUpForm = () => {
                   value={formData.firstName}
                   onChange={handleChange}
                 />
+
+                {error.firstName && (
+                  <span className={styles.SignUpForm_error_text}>
+                    {error.firstName}
+                  </span>
+                )}
               </div>
 
               <div className={styles.SignUpForm_form_group}>
@@ -142,6 +157,12 @@ export const SignUpForm = () => {
                   value={formData.lastName}
                   onChange={handleChange}
                 />
+
+                {error.lastName && (
+                  <span className={styles.SignUpForm_error_text}>
+                    {error.lastName}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -159,6 +180,12 @@ export const SignUpForm = () => {
                   value={formData.email}
                   onChange={handleChange}
                 />
+
+                {error.email && (
+                  <span className={styles.SignUpForm_error_text}>
+                    {error.email}
+                  </span>
+                )}
               </div>
 
               <div className={styles.SignUpForm_form_group}>
@@ -174,6 +201,12 @@ export const SignUpForm = () => {
                   value={formData.phone}
                   onChange={handleChange}
                 />
+
+                {error.phone && (
+                  <span className={styles.SignUpForm_error_text}>
+                    {error.phone}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -196,6 +229,12 @@ export const SignUpForm = () => {
                 value={formData.password}
                 onChange={handleChange}
               />
+
+              {error.password && (
+                <span className={styles.SignUpForm_error_text}>
+                  {error.password}
+                </span>
+              )}
             </div>
 
             <div
@@ -217,6 +256,12 @@ export const SignUpForm = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
               />
+
+              {error.confirmPassword && (
+                <span className={styles.SignUpForm_error_text}>
+                  {error.confirmPassword}
+                </span>
+              )}
             </div>
 
             <div className={styles.SignUpForm_checkbox}>
@@ -228,6 +273,7 @@ export const SignUpForm = () => {
                   checked={formData.agreeToTerms}
                   onChange={handleChange}
                 />
+
                 <p className={styles.SignUpForm_checkbox_text}>
                   I agree to all the{" "}
                   <Link
@@ -244,8 +290,21 @@ export const SignUpForm = () => {
                     Privacy Policies
                   </Link>
                 </p>
+
+                {error.agreeToTerms && (
+                  <span className={styles.SignUpForm_error_text}>
+                    {error.agreeToTerms}
+                  </span>
+                )}
               </div>
             </div>
+
+            {error.server && (
+              <span className={styles.SignUpForm_server_error}>
+                {error.server}
+              </span>
+            )}
+
             <button className={styles.SignUpForm_button} type="submit">
               Create account
             </button>
