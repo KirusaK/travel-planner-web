@@ -1,0 +1,7 @@
+@use "../../app/styles/variables" as *;
+
+.FlightFilters {
+  width: 343px;
+  border-right: 0.5px solid $color-blackish-green;
+  padding-right: 24px;
+}

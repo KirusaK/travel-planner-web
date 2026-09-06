@@ -1,0 +1,99 @@
+@use "../../app/styles/variables" as *;
+
+.bookingDetailReservations {
+  &_container {
+    width: 790px;
+    height: auto;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 32px 24px;
+  }
+
+  &_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  &_roomType {
+    max-width: 450px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &_price {
+    font-size: 32px;
+    font-weight: 700;
+    color: $color-pink;
+
+    span {
+      font-size: 14px;
+    }
+  }
+
+  &_hotel {
+    display: flex;
+    border: 1px solid $color-mint-green;
+    border-radius: 8px;
+    padding: 16px 32px;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  &_hotelName {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  &_location {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  &_locationText {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &_dates {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &_dateTitle {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  &_dateSubtitle {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &_timeline {
+    display: flex;
+    align-items: center;
+  }
+
+  &_timelineDot {
+    width: 6px;
+    height: 6px;
+    background-color: $color-text-dark;
+    border-radius: 50%;
+  }
+
+  &_timelineLine {
+    width: 36px;
+    height: 1px;
+    background-color: $color-text-dark;
+  }
+
+  &_timelineIcon {
+    margin: 0 24px;
+  }
+}

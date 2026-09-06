@@ -1,0 +1,32 @@
+@use "../../../../app//styles/variables" as *;
+
+.ReviewSlider {
+  &__container {
+    display: flex;
+    margin: -20px -20px -40px -20px;
+    padding: 20px 20px 40px 20px;
+    gap: 50px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    touch-action: pan-x;
+    cursor: grab;
+    user-select: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    scrollbar-width: none;
+
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+$color-mint-green: #8dd3bb;
+
+.Slider {
+  width: 618px;
+  position: relative;
+  margin-top: 104px;
+  margin-bottom: 104px;
+}
+
+.Slider__container {
+  width: 100%;
+}
+
+.Slider :global(.swiper) {
+  width: 618px;
+  height: 816px;
+}
+
+.Slider :global(.swiper-pagination) {
+  bottom: 20px !important;
+}
+
+.Slider :global(.swiper-pagination-bullet) {
+  width: 10px;
+  height: 10px;
+  background: white;
+  opacity: 1;
+}
+
+.Slider :global(.swiper-pagination-bullet-active) {
+  width: 32px;
+  height: 10px;
+  border-radius: 5px;
+  background: $color-mint-green;
+}

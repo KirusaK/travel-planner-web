@@ -1,0 +1,56 @@
+@use "../../app/styles/variables" as *;
+
+.Destinations {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 80px;
+
+  &__container {
+    width: 1232px;
+    height: 542px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 32px;
+  }
+
+  &__p {
+    font-weight: 400;
+    font-size: 16;
+    max-width: 851px;
+  }
+
+  &__link {
+    width: auto;
+    height: auto;
+    border: 1px solid $color-mint-green;
+    border-radius: 4px;
+  }
+
+  &__button {
+    padding: 11px 16px;
+    color: $color-text-dark;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  &__info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 32px;
+  }
+}

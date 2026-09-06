@@ -1,0 +1,248 @@
+@use "../../app/styles/variables" as *;
+
+.wrapper {
+  width: 1232px;
+  height: 272px;
+  margin: -45px auto 101px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  background-color: $color-base;
+  position: relative;
+  z-index: 100;
+
+  &_title {
+    padding: 32px 24px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  &_container {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  &_from_input {
+    position: relative;
+  }
+
+  &_from_label {
+    position: absolute;
+    width: auto;
+    top: -10px;
+    left: 16px;
+    background-color: $color-base;
+  }
+
+  &_from_input_field {
+    width: 324px;
+    height: 56px;
+    padding-left: 16px;
+    border: 1px solid $color-border;
+    border-radius: 4px;
+  }
+
+  &_from_icon {
+    position: absolute;
+    top: 16px;
+    right: 5px;
+  }
+
+  &_trip {
+    position: relative;
+    cursor: pointer;
+  }
+
+  &_trip_label {
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    width: auto;
+    background-color: $color-base;
+  }
+
+  &_trip_content {
+    display: flex;
+    align-items: center;
+    width: 140px;
+    height: 56px;
+    border: 1px solid $color-border;
+    border-radius: 4px;
+    padding-left: 16px;
+  }
+
+  &_trip_icon {
+    position: absolute;
+    right: 12px;
+  }
+
+  &_depart_input {
+    position: relative;
+  }
+
+  &_depart_label {
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    background-color: $color-base;
+  }
+
+  &_depart_input_field {
+    width: 324px;
+    height: 56px;
+    border: 1px solid $color-border;
+    border-radius: 4px;
+    padding: 0 16px;
+  }
+
+  &_passengers {
+    position: relative;
+    cursor: pointer;
+  }
+
+  &_passengers_label {
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    background-color: $color-base;
+  }
+
+  &_passengers_content {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    border: 1px solid $color-border;
+    border-radius: 4px;
+    width: 324px;
+    height: 56px;
+  }
+
+  &_passengers_icon {
+    position: absolute;
+    right: 12px;
+  }
+
+  &_submit_container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &_submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 32px 24px 0 0;
+  }
+
+  &_submit_link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-mint-green;
+    border-radius: 4px;
+    width: 144px;
+    height: 48px;
+    gap: 0.5px;
+    color: $color-text-dark;
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform 0.5s ease;
+    cursor: pointer;
+  }
+
+  &_submit_link:hover {
+    transform: rotateX(360deg);
+  }
+}
+
+.dropdown {
+  &_menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 110%;
+    width: 100%;
+    gap: 10px;
+    padding: 5px;
+    background: $color-base;
+    border: 1px solid $color-border;
+    border-radius: 4px;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+
+  &_item {
+    padding: 10px 16px;
+    transition: background 0.5s;
+
+    &:hover {
+      background: #f5f5f5;
+      border-radius: 5px;
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  background-color: transparent;
+}
+
+.passenger {
+  position: absolute;
+  top: 110%;
+  width: 100%;
+  background: $color-base;
+  border: 1px solid $color-border;
+  border-radius: 4px;
+  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  padding: 20px;
+
+  &_dropdown_span {
+    display: block;
+    padding-bottom: 20px;
+  }
+
+  &_dropdown_controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  &_dropdown_button {
+    width: 25px;
+    height: 25px;
+    background-color: #f5f5f5;
+    border: 1px solid $color-border;
+    border-radius: 15px;
+    transition: background 0.5s;
+
+    &:hover {
+      background: $color-mint-green;
+    }
+  }
+
+  &_class_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &_class_item {
+    padding: 10px 16px;
+    transition: background 0.5s;
+
+    &:hover {
+      background: #f5f5f5;
+      border-radius: 5px;
+    }
+  }
+}

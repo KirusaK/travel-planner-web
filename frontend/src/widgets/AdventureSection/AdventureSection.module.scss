@@ -1,0 +1,137 @@
+@use "../../app/styles/variables" as *;
+
+.AdventureSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 40px 0;
+  width: 1232px;
+  height: 540px;
+
+  &__container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 32px;
+  }
+
+  &__p {
+    font-weight: 400;
+    font-size: 16;
+    max-width: 851px;
+  }
+
+  &__backpacking {
+    display: flex;
+    gap: 24px;
+  }
+
+  &__backpacking__block {
+    width: 552px;
+    height: 424px;
+    background-color: $color-mint-green;
+    border-radius: 20px;
+  }
+
+  &__backpacking__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+  }
+
+  &__backpacking__header {
+    font-family: "Roboto Condensed" sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    width: 363px;
+    height: 102px;
+  }
+
+  &__backpacking__cena {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 68px;
+    height: 62px;
+    background-color: $color-base;
+    border-radius: 8px;
+  }
+
+  &__backpacking__par {
+    font-family: "Roboto Condensed" sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  &__backpacking__span {
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  &__backpacking__more {
+    padding: 0 24px;
+  }
+
+  &__backpacking__text {
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  &__backpacking__button {
+    display: flex;
+    justify-content: center;
+    padding-top: 120px;
+  }
+
+  &__backpacking__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 504px;
+    height: 48px;
+    background-color: $color-base;
+    color: $color-text-dark;
+  }
+
+  &__backpacking__gallery {
+    width: 656px;
+    height: 424px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // 2 колонки
+    grid-template-rows: repeat(2, 1fr); // 2 ряда
+    gap: 20px;
+  }
+
+  &__backpacking__gallery_item {
+    width: 318px;
+    height: 200px;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    transition: transform 0.5s ease;
+  }
+
+  &__backpacking__gallery_item:hover {
+    transform: scale(1.1);
+  }
+}

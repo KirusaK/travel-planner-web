@@ -1,0 +1,49 @@
+@use "../../../app/styles/variables" as *;
+
+.DepartureTime {
+  &_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &_title {
+    color: $color-blackish-green;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &_button {
+    background-color: transparent;
+  }
+
+  &_icon {
+    rotate: 180deg;
+  }
+
+  &_input {
+    width: 100%;
+    height: 2px;
+    margin-bottom: 8px;
+  }
+
+  &_range {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &_time {
+    font-size: 12px;
+    font-weight: 500;
+    color: $color-blackish-green;
+  }
+
+  &_hr {
+    border: none;
+    background-color: $color-blackish-green;
+    width: 100%;
+    height: 1px;
+    margin: 32px 0;
+  }
+}

@@ -1,0 +1,110 @@
+@use "../../app/styles/_variables" as *;
+
+.hotelDetailInfo {
+  &_header {
+    &__block {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    &__blocks {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      &__title {
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      &__stars {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        span {
+          font-size: 12px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    &__price {
+      color: $color-pink;
+      font-size: 32px;
+      font-weight: 700;
+
+      span {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &_location {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    margin-bottom: 9px;
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+
+  &_footer {
+    display: flex;
+    justify-content: space-between;
+
+    &__rating {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    &__btn {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 32px;
+
+      &__btnShare {
+        width: 48px;
+        height: 48px;
+        background-color: transparent;
+        border: 1px solid $color-mint-green;
+        border-radius: 4px;
+      }
+
+      &__btnBook {
+        width: 150px;
+        height: 48px;
+        color: $color-text-dark;
+        font-size: 14px;
+        font-weight: 600;
+        background-color: $color-mint-green;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

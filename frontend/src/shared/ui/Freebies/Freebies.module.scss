@@ -1,0 +1,52 @@
+@use "../../../app/styles/_variables" as *;
+
+.freebies {
+
+  &_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &_header__title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &_header__btn {
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+  }
+
+  &_header__icon {
+    rotate: 180deg;
+  }
+
+  &_info__label {
+    display: flex;
+    gap: 8px;
+  }
+
+  &_info__block {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 8px;
+  }
+
+  &_info__span {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+
+  &_hr {
+    border: none;
+    background-color: $color-blackish-green;
+    width: 100%;
+    height: 0.5px;
+    margin: 32px 0;
+  }
+}

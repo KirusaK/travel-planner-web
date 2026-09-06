@@ -1,15 +1,29 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./Header.module.scss";
 
-export const Header = () => {
+export const Header = ({ isTransparent, hasShadow }) => {
+  const location = useLocation();
+
+  const isFlightActive =
+    location.pathname === "/FindFlight" ||
+    location.pathname === "/FlightsPage" ||
+    location.pathname.includes("/flight-detail");
+
+  const isHotelActive =
+    location.pathname === "/HotelPage" ||
+    location.pathname === "/FindStays" ||
+    location.pathname.includes("/hotel-detail");
+
   return (
-    <div className={styles.header}>
+    <div
+      className={`${styles.header} ${isTransparent ? styles.transparent : ""} ${hasShadow ? styles.with_shadow : ""}`}
+    >
       <div className={styles.header_links}>
         <NavLink
           to="/FindFlight"
-          className={({ isActive }) =>
-            isActive
+          className={
+            isFlightActive
               ? `${styles.header_link} ${styles.active}`
               : styles.header_link
           }
@@ -21,8 +35,8 @@ export const Header = () => {
         </NavLink>
         <NavLink
           to="/FindStays"
-          className={({ isActive }) =>
-            isActive
+          className={
+            isHotelActive
               ? `${styles.header_link} ${styles.active}`
               : styles.header_link
           }
@@ -34,21 +48,21 @@ export const Header = () => {
         </NavLink>
       </div>
       <div className={styles.header_logo}>
-        <a href="/">
+        <Link to="/">
           <svg width={110} height={36}>
             <use href={sprite + "#icon-Logo"}></use>
           </svg>
-        </a>
+        </Link>
       </div>
       <div className={styles.header_button}>
-        <Link to="/" className={styles.header_button_text1}>
+        <Link to="/Login" className={styles.header_button_text1}>
           Login
         </Link>
         <Link
-          to="/"
+          to="/SignUp"
           className={`${styles.header_button_text2} ${styles.header_button_decoration}`}
         >
-          Sing Up
+          Sign Up
         </Link>
       </div>
     </div>

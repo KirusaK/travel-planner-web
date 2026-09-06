@@ -1,0 +1,94 @@
+@use "../../app/styles/variables" as *;
+
+.RecentSearches {
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    width: 1232px;
+    height: 162px;
+  }
+
+  &__title {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+
+  &__card {
+    display: flex;
+    gap: 92px;
+  }
+
+  &__cards {
+    display: flex;
+    align-items: center;
+    width: auto;
+    gap: 16px;
+  }
+
+  &__photo1 {
+    background-image: url("../../shared/assets/image/istanbul2.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8px;
+    width: 90px;
+    height: 90px;
+    transition: transform 0.3s ease;
+  }
+
+  &__photo2 {
+    background-image: url("../../shared/assets/image/Sydney2.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8px;
+    width: 90px;
+    height: 90px;
+    transition: transform 0.3s ease;
+  }
+
+  &__photo3 {
+    background-image: url("../../shared/assets/image/Baku2.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8px;
+    width: 90px;
+    height: 90px;
+    transition: transform 0.3s ease;
+  }
+  &__photo4 {
+    background-image: url("../../shared/assets/image/Malé2.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8px;
+    width: 90px;
+    height: 90px;
+    transition: transform 0.3s ease;
+  }
+
+  &__photo1:hover,
+  &__photo2:hover,
+  &__photo3:hover,
+  &__photo4:hover {
+    transform: scale(1.1);
+  }
+
+  &__grup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__text {
+    font-weight: 600;
+    font-size: 16px;
+    color: $color-blackish-green;
+  }
+
+  &__par {
+    font-weight: 400;
+    font-size: 12px;
+    color: $color-blackish-green;
+  }
+}

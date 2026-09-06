@@ -1,0 +1,44 @@
+@use "../../../app/styles/variables" as *;
+
+.Airlines {
+  &_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &_title {
+    color: $color-blackish-green;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &_group_button {
+    background-color: transparent;
+  }
+
+  &_icon {
+    rotate: 180deg;
+  }
+
+  &_buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &_checkbox_block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &_hr {
+    border: none;
+    background-color: $color-blackish-green;
+    width: 100%;
+    height: 0.5px;
+    margin: 32px 0;
+  }
+}

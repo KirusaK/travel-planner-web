@@ -1,0 +1,75 @@
+@use "../../app/styles/variables" as *;
+
+.FlightDetailInfo {
+  &_container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &_block {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  &_info {
+    &_title {
+      color: $color-blackish-green;
+      margin-bottom: 16px;
+    }
+
+    &_location {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 4px;
+      font-size: 14px;
+      font-weight: 500  ;
+    }
+
+    &_rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+
+  &_block__price {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+
+  &_price {
+    &_title {
+      color: $color-pink;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    &_blockBtn {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    &_btnShare {
+      width: 48px;
+      height: 48px;
+      background-color: transparent;
+      border: 1px solid $color-mint-green;
+      border-radius: 4px;
+    }
+
+    &_btnBook {
+      width: 150px;
+      height: 48px;
+      color: $color-text-dark;
+      font-size: 14px;
+      font-weight: 600;
+      background-color: $color-mint-green;
+      border-radius: 4px;
+    }
+  }
+}
