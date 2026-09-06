@@ -54,7 +54,6 @@
   }
 
   &_checkbox {
-    margin-top: 24px;
     display: flex;
     justify-content: space-between;
   }
@@ -84,7 +83,7 @@
     width: 512px;
     height: 48px;
     background-color: $color-mint-green;
-    margin: 40px 0 16px 0;
+    margin: 0 0 16px 0;
     border-radius: 4px;
     font-size: 14px;
     font-weight: 600;
@@ -124,5 +123,13 @@
     font-size: 14px;
     font-weight: 400;
     color: $color-blackish-green;
+  }
+
+  &_error_text,
+  &_server_error {
+    display: block;
+    font-size: 13px;
+    margin-top: 5px;
+    color: $color-error;
   }
 }

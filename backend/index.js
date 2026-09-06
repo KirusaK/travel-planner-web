@@ -41,6 +41,42 @@ app.post('/api/auth/register', async (req, res) => {
     }
 })
 
+app.post('/api/auth/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const userCheck = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+        if (userCheck.rows.length === 0) {
+            return res
+              .status(400)
+              .json({ message: "Invalid email or password." });
+        }
+
+        const user = userCheck.rows[0];
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res
+              .status(400)
+              .json({ message: "Invalid email or password." });
+        }
+
+        res.status(200).json({
+          message: "Login successful.",
+            user: {
+              id: user.id,
+                firstName: user.first_name,
+                lastName: user.last_name,
+                email: user.email,
+                phone: user.phone_number,
+            }
+        });
+    } catch (err) {
+        console.error('Error during login:', err.message);
+        res.status(500).json({message: 'Server error'})
+    }
+})
+
 app.get('/', (req, res) => {
     res.send('API сервера работает!');
 });
