@@ -10,8 +10,11 @@ import { FlightDetailPage } from "../pages/FlightDetailPage/FlightDetailPage";
 import { HotelDetailPage } from "../pages/HotelDetailPage/HotelDetailPage.jsx";
 import { BookingDetailFlight } from "../pages/BookingDetailFlight/BookingDetailFlight";
 import { BookingDetailHotel } from "../pages/BookingDetailHotel/BookingDetailHotel.jsx";
+import { useState } from "react";
 
 const App = () => {
+  const [user, setUser] = useState(null);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
