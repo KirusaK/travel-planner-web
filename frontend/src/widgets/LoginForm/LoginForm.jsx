@@ -3,6 +3,7 @@ import { SocialAuthGroup } from "../../shared/ui/SocialAuthGroup/index.js";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./LoginForm.module.scss";
 import { useState } from "react";
+import {useAuth} from "../../shared/context/AuthContext.jsx";
 
 export const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ export const LoginForm = () => {
     password: "",
   });
   const [error, setError] = useState({});
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -64,6 +66,8 @@ export const LoginForm = () => {
 
       alert("Successfully logged in!");
       console.log("User data:", data.user);
+
+      login(data.user);
     } catch (err) {
       console.error("Login error:", err);
       setError({ server: "Server error. Please try again later." });
