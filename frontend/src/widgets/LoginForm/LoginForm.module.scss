@@ -54,7 +54,6 @@
   }
 
   &_checkbox {
-    margin-top: 24px;
     display: flex;
     justify-content: space-between;
   }
@@ -84,7 +83,7 @@
     width: 512px;
     height: 48px;
     background-color: $color-mint-green;
-    margin: 40px 0 16px 0;
+    margin: 0 0 16px 0;
     border-radius: 4px;
     font-size: 14px;
     font-weight: 600;
@@ -126,23 +125,11 @@
     color: $color-blackish-green;
   }
 
-  &_other_social {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &_other_social_media {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 160px;
-    height: 56px;
-    border-radius: 4px;
-    border: 1px solid $color-mint-green;
-    transition: transform 0.3s ease;
-  }
-
-  &_other_social_media:hover {
-    transform: scale(1.1);
+  &_error_text,
+  &_server_error {
+    display: block;
+    font-size: 13px;
+    margin-top: 5px;
+    color: $color-error;
   }
 }

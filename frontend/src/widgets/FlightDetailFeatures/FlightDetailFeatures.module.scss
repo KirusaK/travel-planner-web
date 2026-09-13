@@ -1,0 +1,52 @@
+@use "../../app/styles/variables" as *;
+
+.flightDetailFeatures {
+  &_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0 24px 0;
+
+    &__title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    &__type {
+      display: flex;
+      gap: 24px;
+    }
+
+    &__checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      input {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  &_photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 19px;
+    margin-bottom: 40px;
+
+    &__block {
+      transition: transform 0.5s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}

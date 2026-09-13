@@ -1,0 +1,154 @@
+@use "../../app/styles/variables" as *;
+
+.bookingDetailTicket {
+  &_card {
+    width: 790px;
+    height: auto;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 32px 24px;
+  }
+
+  &_header {
+    display: flex;
+    justify-content: space-between;
+
+    &__title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    &__price {
+      font-size: 32px;
+      font-weight: 700;
+      color: $color-pink;
+    }
+  }
+
+  &_subheader {
+    display: flex;
+    justify-content: space-between;
+    margin: 24px 0;
+
+    &__title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    &__duration {
+      font-size: 20px;
+      font-weight: 500;
+      color: $color-blackish-green;
+    }
+  }
+
+  &_block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 121px;
+    margin-bottom: 40px;
+  }
+
+  &_airline {
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 86px;
+    gap: 24px;
+    padding: 16px 32px;
+    border: 1px solid $color-mint-green;
+    border-radius: 8px;
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    &__name {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    &__aircraft {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+
+  &_amenities {
+    display: flex;
+    align-items: center;
+
+    &__item {
+      width: 72px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid $color-grey-light;
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+
+  &_timeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__departure {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    &__time {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    &__airport {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+
+
+
+    &__line {
+      display: flex;
+      align-items: center;
+    }
+
+    svg {
+      margin: 0 24px;
+    }
+
+    &__dot {
+      width: 6px;
+      height: 6px;
+      background-color: $color-text-dark;
+      border-radius: 50%;
+    }
+
+    &__dash {
+      width: 36px;
+      height: 1px;
+      background-color: $color-text-dark;
+    }
+
+
+
+
+
+    &__arrival {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+  }
+}

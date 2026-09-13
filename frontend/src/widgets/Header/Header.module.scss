@@ -39,6 +39,42 @@
     font-size: 14px;
   }
 
+  &_user_menu {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  &_favourites {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    span {
+      color: $color-text-dark;
+      font-size: 14px;
+      font-weight: 600  ;
+    }
+  }
+
+  &_avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+
+  &_profile {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    span {
+      color: $color-text-dark;
+      font-size: 14px;
+      font-weight: 600  ;
+    }
+  }
+
   &_button {
     display: flex;
     align-items: center;
