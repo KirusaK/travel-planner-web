@@ -48,12 +48,25 @@
   &_favourites {
     display: flex;
     align-items: center;
+    position: relative;
+    height: 90px;
     gap: 4px;
 
     span {
       color: $color-text-dark;
       font-size: 14px;
       font-weight: 600  ;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background-color: $color-mint-green;
+      transform: scaleX(0);
     }
   }
 

@@ -18,6 +18,9 @@ export const Header = ({ isTransparent, hasShadow }) => {
     location.pathname === "/FindStays" ||
     location.pathname.includes("/hotel-detail");
 
+  const isFavouriteActive =
+    location.pathname === "/Favourites";
+
   console.log("Current user in Header:", user);
 
   return (
@@ -61,7 +64,14 @@ export const Header = ({ isTransparent, hasShadow }) => {
       </div>
       {user ? (
         <div className={styles.header_user_menu}>
-          <Link to="/" className={styles.header_favourites}>
+          <Link
+            to="/Favourites"
+            className={
+              isFavouriteActive
+                ? `${styles.header_favourites} ${styles.active}`
+                : styles.header_favourites
+            }
+          >
             <svg width={24} height={24}>
               <use href={sprite + "#icon-heart"} />
             </svg>
