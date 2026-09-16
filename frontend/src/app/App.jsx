@@ -10,6 +10,7 @@ import { FlightDetailPage } from "../pages/FlightDetailPage/FlightDetailPage";
 import { HotelDetailPage } from "../pages/HotelDetailPage/HotelDetailPage.jsx";
 import { BookingDetailFlight } from "../pages/BookingDetailFlight/BookingDetailFlight";
 import { BookingDetailHotel } from "../pages/BookingDetailHotel/BookingDetailHotel.jsx";
+import { Favourites } from "../pages/Favourites/Favourites.jsx";
 import { useState } from "react";
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
         path={"/booking-detail-hotel/:id"}
         element={<BookingDetailHotel />}
       />
+      <Route path="/Favourites" element={<Favourites />} />
     </Routes>
   );
 };
