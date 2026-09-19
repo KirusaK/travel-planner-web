@@ -6,3 +6,10 @@
     font-weight: 700;
   }
 }
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* 👈 Расстояние между карточками (можно поставить 24px или 32px) */
+  width: 100%;
+}

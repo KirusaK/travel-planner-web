@@ -1,0 +1,38 @@
+@use "../../app/styles/variables" as *;
+
+.sorting {
+  &_results {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 24px auto;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &_results span {
+    color: $color-pink;
+  }
+
+  &_selectWrapper {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.flightCards_container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.flightCard_last__btn{
+  width: 840px;
+  height: 48px;
+  margin-top: 24px;
+  background-color: $color-blackish-green;
+  border-radius: 4px;
+  color: $color-base;
+  font-size: 14px;
+  font-weight: 600;
+}
