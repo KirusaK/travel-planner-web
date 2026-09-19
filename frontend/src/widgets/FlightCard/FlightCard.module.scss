@@ -1,34 +1,7 @@
 @use "../../app/styles/variables" as *;
 
-.sorting {
-  &_results {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 24px auto;
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  &_results span {
-    color: $color-pink;
-  }
-
-  &_selectWrapper {
-    display: flex;
-    align-items: center;
-  }
-}
-
 .flightCards {
   width: 100%;
-
-
-  &_container {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
 }
 
 .flightCard {
@@ -180,8 +153,6 @@
     margin-bottom: 24px;
   }
 
-
-
   &_dealsBtn {
     flex: 1;
     height: 48px;
@@ -190,16 +161,5 @@
     color: $color-blackish-green;
     font-size: 14px;
     font-weight: 500;
-  }
-
-  &_last__btn {
-    width: 840px;
-    height: 48px;
-    margin-top: 24px;
-    background-color: $color-blackish-green;
-    border-radius: 4px;
-    color: $color-base;
-    font-size: 14px;
-    font-weight: 600;
   }
 }

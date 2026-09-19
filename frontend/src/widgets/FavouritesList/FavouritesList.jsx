@@ -29,7 +29,7 @@ export const FavouritesList = ({activeTab}) => {
 
   return (
     <section>
-      <div>
+      <div className={styles.list}>
         {activeTab === "flights"
           ? currentList.map((flight) => (
               <FlightCard key={flight.id} item={flight} />
