@@ -125,7 +125,7 @@ export const FlightCard = () => {
                 <hr className={styles.flightCard_hr} />
 
                 <div className={styles.flightCard_footer}>
-                  <FavouritesBtn />
+                  <FavouritesBtn item={item}/>
                   <button
                     className={styles.flightCard_dealsBtn}
                     onClick={() => handleViewDeals(item.id)}

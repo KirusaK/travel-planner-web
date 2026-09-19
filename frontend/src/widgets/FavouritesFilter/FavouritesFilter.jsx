@@ -1,8 +1,7 @@
 import styles from "./FavouritesFilter.module.scss";
-import { useState } from "react";
 
-export const FavouritesFilter = () => {
-  const [activeTab, setActiveTab] = useState("flights");
+export const FavouritesFilter = ({activeTab, setActiveTab}) => {
+
 
   const setFlights = () => {
     setActiveTab("flights");
