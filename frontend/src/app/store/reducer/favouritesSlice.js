@@ -1,7 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const loadFavouritesFromStorage = () => {
+  try {
+    const saved = localStorage.getItem("favourites");
+    return saved ? JSON.parse(saved) : [];
+  } catch (err) {
+    console.error("Ошибка при чтении localStorage:", err);
+    return [];
+  }
+};
+
+const saveFavouritesToStorage = (items) => {
+  try {
+    localStorage.setItem("favourites", JSON.stringify(items));
+  } catch (e) {
+    console.error("Ошибка при записи в localStorage:", e);
+  }
+};
+
 const initialState = {
-  items: [], // Исправлено: items вместо item
+  items: loadFavouritesFromStorage(), // Исправлено: items вместо item
 };
 
 const favouritesSlice = createSlice({
@@ -17,11 +35,15 @@ const favouritesSlice = createSlice({
       } else {
         state.items.push(item); // Исправлено: пушим весь объект item, а не только id
       }
+
+      saveFavouritesToStorage(state.items);
     },
 
     removeFavourite: (state, action) => {
       const id = action.payload;
       state.items = state.items.filter((i) => i.id !== id);
+
+      saveFavouritesToStorage(state.items);
     },
   },
 });
