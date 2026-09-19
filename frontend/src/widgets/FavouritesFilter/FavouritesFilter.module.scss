@@ -17,7 +17,7 @@
     justify-content: flex-start;
     align-items: center;
     position: relative;
-    width: 604px;
+    width: 628px;
     height: 77px;
     padding: 16px 24px;
     font-size: 16px;
@@ -40,8 +40,8 @@
       content: "";
       position: absolute;
       bottom: 0;
-      left: 0;
-      width: 100%;
+      left: 14px;
+      width: 586px;
       height: 5px;
       background-color: $color-mint-green;
       transform: scaleX(0);

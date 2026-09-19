@@ -1,34 +1,19 @@
-import { hotels } from "../../entities/hotel/index.js";
 import { useNavigate } from "react-router-dom";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
+import { FavouritesBtn } from "../../shared/ui/FavouritesBtn/FavouritesBtn.jsx";
 import styles from "./HotelCard.module.scss";
 
-export const HotelCard = () => {
+export const HotelCard = ({item}) => {
   const navigate = useNavigate();
+
+  if (!item) return null;
 
   const handleViewDeals = (hotelId) => {
     navigate(`/hotel-detail/${hotelId}`);
   };
 
   return (
-    <div>
-      <div className={styles.sorting_results}>
-        <p>
-          <strong>Showing 4 of</strong> <span>257 places</span>
-        </p>
-        <div className={styles.sorting_selectWrapper}>
-          <p>
-            Sort by <strong> Recommended</strong>
-          </p>
-          <svg width={18} height={18}>
-            <use href={sprite + "#icon-chevron_down"} />
-          </svg>
-        </div>
-      </div>
-
-      <section className={styles.hotelCard_container}>
-        {hotels.map((item) => (
-          <article key={item.id} className={styles.hotelCard}>
+          <article className={styles.hotelCard}>
             <div className={styles.hotelCard_imageWrapper}>
               <img
                 src={item.logo}
@@ -97,14 +82,7 @@ export const HotelCard = () => {
               <hr className={styles.hotelCard_hr} />
 
               <div className={styles.hotelCard_buttonRow}>
-                <button
-                  type="button"
-                  className={styles.hotelCard_buttonRow__heart}
-                >
-                  <svg width={20} height={20}>
-                    <use href={sprite + "#icon-heart"} />
-                  </svg>
-                </button>
+                <FavouritesBtn item={item} />
                 <button
                   type="button"
                   className={styles.hotelCard_buttonRow__btn}
@@ -115,8 +93,5 @@ export const HotelCard = () => {
               </div>
             </div>
           </article>
-        ))}
-      </section>
-    </div>
   );
 };
