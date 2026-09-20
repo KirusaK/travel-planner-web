@@ -1,0 +1,67 @@
+@use "../../app/styles/variables" as *;
+
+.myAccountModal {
+  position: absolute;
+  z-index: 1000;
+
+  &_overlay {
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    top: 77px;
+    right: 44px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+  }
+
+  &_content {
+    position: relative;
+    width: 329px;
+    height: 261px;
+    background-color: $color-base;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 32px;
+  }
+
+  &_user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &_divider {
+    margin: 24px 0;
+  }
+
+  &_item__account {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__user {
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  &_text {
+    color: $color-text-dark;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &_chevron {
+    rotate: 270deg;
+  }
+
+  &_item__logout {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: $color-base;
+  }
+}
