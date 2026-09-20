@@ -1,0 +1,9 @@
+@use "../../app/styles/variables" as *;
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 1280px;
+  gap: 40px;
+  margin: 94px auto;
+}

@@ -1,33 +1,5 @@
 @use "../../app/styles/_variables" as *;
 
-.sorting {
-  &_results {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 24px auto;
-    font-size: 14px;
-    font-weight: 600;
-
-    span {
-      color: $color-pink;
-    }
-  }
-
-  &_selectWrapper {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-}
-
-.hotelCard_container {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  width: 100%;
-}
-
 .hotelCard {
   display: flex;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
@@ -176,6 +148,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
+    width: 100%;
 
     &__heart {
       display: flex;
@@ -192,7 +165,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 428px;
+      width: 100%;
       height: 48px;
       background-color: $color-mint-green;
       border-radius: 4px;
