@@ -2,15 +2,21 @@ import { SocialAuthGroup } from "../SocialAuthGroup/index.js";
 import {useAuth} from "../../context/AuthContext.jsx";
 import sprite from "../../assets/icons/symbol-defs.svg";
 import styles from "./BookingDetailAuth.module.scss";
+import { useState } from "react";
+import { AddCardModal } from "../../../widgets/AddCardModal/AddCardModal.jsx";
 
 export const BookingDetailAuth = () => {
   const {user} = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalOpen = () => setIsModalOpen(true);
+  const handleModalClose = () => setIsModalOpen(false);
 
   return (
     <section className={styles.bookingDetailAuth}>
       {user ? (
         <div className={styles.bookingDetailAuth_container}>
-          <button className={styles.bookingDetailAuth_container__border}>
+          <button className={styles.bookingDetailAuth_container__border} onClick={handleModalOpen}>
             <div className={styles.bookingDetailAuth_container__info}>
               <svg width={64} height={64}>
                 <use href={sprite + "#icon-Add_circle"} />
@@ -73,6 +79,8 @@ export const BookingDetailAuth = () => {
           </div>
         </div>
       )}
+
+      <AddCardModal isOpen={isModalOpen} onClose={handleModalClose} />
     </section>
   );
 };
