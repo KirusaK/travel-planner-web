@@ -8,7 +8,7 @@ import { MyAccountModal } from "../MyAccountModal/MyAccountModal.jsx";
 
 export const Header = ({ isTransparent, hasShadow }) => {
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [isModalOpen, setModalOpen] = useState(false);
 
   const toggleModal = () => setModalOpen((prev) => !prev);
@@ -116,7 +116,7 @@ export const Header = ({ isTransparent, hasShadow }) => {
         )}
       </div>
 
-      <MyAccountModal isOpen={isModalOpen} onClose={handleModalClose} />
+      <MyAccountModal isOpen={isModalOpen} onClose={handleModalClose} onLogout={() => {logout(); handleModalClose();}}/>
     </section>
   );
 };

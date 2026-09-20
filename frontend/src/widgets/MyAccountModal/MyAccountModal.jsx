@@ -5,7 +5,7 @@ import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./MyAccountModal.module.scss";
 
 
-export const MyAccountModal = ({ isOpen, onClose }) => {
+export const MyAccountModal = ({ isOpen, onClose, onLogout }) => {
   const { user } = useAuth();
 
   if (!isOpen) return null;
@@ -56,7 +56,7 @@ export const MyAccountModal = ({ isOpen, onClose }) => {
 
           <hr className={styles.myAccountModal_divider} />
 
-          <button className={styles.myAccountModal_item__logout}>
+          <button className={styles.myAccountModal_item__logout} onClick={onLogout}>
             <svg width={18} height={18} className={styles.myAccountModal_icon}>
               <use href={sprite + "#icon-Logout"} />
             </svg>
