@@ -2,20 +2,93 @@ import { SocialAuthGroup } from "../SocialAuthGroup/index.js";
 import {useAuth} from "../../context/AuthContext.jsx";
 import sprite from "../../assets/icons/symbol-defs.svg";
 import styles from "./BookingDetailAuth.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddCardModal } from "../../../widgets/AddCardModal/AddCardModal.jsx";
 
 export const BookingDetailAuth = () => {
   const {user} = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [cards, setCards] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(null);
   const handleModalOpen = () => setIsModalOpen(true);
   const handleModalClose = () => setIsModalOpen(false);
+
+  useEffect(() => {
+    console.log("Current user in BookingDetailAuth:", user); // 1. Проверяем пользователя
+
+    if (!user?.id) {
+      console.warn("User ID is missing!");
+      return;
+    }
+
+    if (!user?.id) return;
+
+    fetch(`http://localhost:5000/api/cards?userId=${user.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setCards(data);
+          if (data.length > 0) setSelectedCard(data[0].id);
+        }
+      }).catch((err) => console.error("Failed to fetch cards", err));
+  }, [user?.id]);
+
+    const handleCardAdded = (newCard) => {
+      setCards((prev) => [...prev, newCard]);
+      setSelectedCard(newCard.id);
+    }
 
   return (
     <section className={styles.bookingDetailAuth}>
       {user ? (
         <div className={styles.bookingDetailAuth_container}>
+          {cards.length > 0 && (
+            <div className={styles.bookingDetailAuth_cardsList}>
+              {cards.map((card) => {
+                const isSelected = selectedCard === card.id;
+                const rawNumber = card.cardNumber || card.card_number || "";
+                const last4 = rawNumber
+                  ? rawNumber.replace(/\s+/g, "").slice(-4)
+                  : 4321;
+                const expDate = card.expDate || card.exp_date || "";
+
+                  return (
+                    <div
+                      key={card.id}
+                      className={`${styles.bookingDetailAuth_cardItem} ${
+                        isSelected
+                          ? styles.bookingDetailAuth_cardItem__active
+                          : ""
+                      }`}
+                      onClick={() => setSelectedCard(card.id)}
+                    >
+                      <div className={styles.bookingDetailAuth_cardLeft}>
+                        <svg width={32} height={32}>
+                          <use href={sprite + "#icon-Visa"} />
+                        </svg>
+
+                        <div className={styles.bookingDetailAuth_cardInfo}>
+                          <span>
+                            <strong>**** {last4}</strong>
+                          </span>
+                          <span>{expDate}</span>
+                        </div>
+                      </div>
+
+                      <input
+                        type="radio"
+                        name="selectedCard"
+                        checked={isSelected}
+                        onChange={() => setSelectedCard(card.id)}
+                        className={styles.bookingDetailAuth_checkbox}
+                      />
+                    </div>
+                  );
+              })}
+            </div>
+          )}
+
           <button className={styles.bookingDetailAuth_container__border} onClick={handleModalOpen}>
             <div className={styles.bookingDetailAuth_container__info}>
               <svg width={64} height={64}>
@@ -80,7 +153,7 @@ export const BookingDetailAuth = () => {
         </div>
       )}
 
-      <AddCardModal isOpen={isModalOpen} onClose={handleModalClose} />
+      <AddCardModal isOpen={isModalOpen} onClose={handleModalClose} userId={user?.id} onCardAdded={handleCardAdded} />
     </section>
   );
 };
