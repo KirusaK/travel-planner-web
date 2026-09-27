@@ -4,6 +4,40 @@
   width: 790px;
   margin-bottom: 60px;
 
+  &_cardsList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  &_cardItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: $color-grey-light;
+    cursor: pointer;
+
+    &__active {
+      background-color: $color-mint-green;
+    }
+  }
+
+  &_cardLeft {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  &_cardInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   &_container {
     display: flex;
     flex-direction: column;
