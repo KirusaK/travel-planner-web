@@ -1,0 +1,12 @@
+@use "../../../app/styles/variables" as *;
+
+.buttonBuy {
+  &_btn {
+    width: 100%;
+    height: 48px;
+    border-radius: 4px;
+    background-color: $color-mint-green;
+    font-size: 16px;
+    font-weight: 500;
+  }
+}

@@ -5,4 +5,10 @@
   width: 1280px;
   gap: 40px;
   margin: 94px auto;
+
+  &_block {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
 }
