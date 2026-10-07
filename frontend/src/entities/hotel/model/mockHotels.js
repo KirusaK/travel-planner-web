@@ -18,6 +18,10 @@ export const hotels = [
     mapEmbedUrl:
       "https://maps.google.com/maps?q=CVK%20Park%20Bosphorus%20Hotel%20Istanbul&t=&z=15&ie=UTF8&iwloc=&output=embed",
     stars: 5,
+    dataStart: "Thur, Dec 8",
+    timeStart: "12:00pm",
+    dataFinish: "Fri, Dec 9",
+    timeFinish: "11:30pm",
     type: "Hotel",
     amenities: "20+ Amenities",
     rating: 4.2,

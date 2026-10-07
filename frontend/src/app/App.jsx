@@ -11,6 +11,7 @@ import { HotelDetailPage } from "../pages/HotelDetailPage/HotelDetailPage.jsx";
 import { BookingDetailFlight } from "../pages/BookingDetailFlight/BookingDetailFlight";
 import { BookingDetailHotel } from "../pages/BookingDetailHotel/BookingDetailHotel.jsx";
 import { Favourites } from "../pages/Favourites/Favourites.jsx";
+import { BookingSuccess } from "../pages/BookingSuccess/BookingSuccess.jsx";
 import { useState } from "react";
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
         element={<BookingDetailHotel />}
       />
       <Route path="/Favourites" element={<Favourites />} />
+      <Route path="/booking-success/:id" element={<BookingSuccess />} />
     </Routes>
   );
 };

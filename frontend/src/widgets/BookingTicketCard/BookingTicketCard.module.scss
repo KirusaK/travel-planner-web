@@ -1,0 +1,159 @@
+@use "../../app/styles/variables" as *;
+
+.ticketCard {
+  width: 100%;
+
+  &_inner {
+    display: flex;
+    width: 100%;
+  }
+
+  &_schedule {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 246px;
+    flex-shrink: 0;
+    height: auto;
+    padding: 24px;
+    border: 1px solid $color-dekoration;
+    background-color: $color-light-green;
+    border-radius: 16px 0 0 16px;
+  }
+
+  &_timeBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &_time {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  &_location {
+    font-size: 12px;
+    font-weight: 500;
+    color: $color-blackish-green;
+  }
+
+  &_details {
+    border: 1px solid $color-dekoration;
+    border-radius: 0 16px 16px 0;
+    flex: 1;
+  }
+
+  &_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    width: 100%;
+    height: 96px;
+    border-radius: 0 16px 0 0;
+    background-color: $color-mint-green;
+  }
+
+  &_passenger {
+    display: flex;
+    gap: 16px;
+
+    img {
+      width: 48px;
+      height: 48px;
+      border: 1px solid $color-base;
+      border-radius: 50%;
+    }
+  }
+
+  &_passengerName {
+    font-size: 20px;
+    font-weight: 700;
+    color: $color-blackish-green;
+  }
+
+  &_passNumber {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  &_badge {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  &_infoGrid {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px;
+    margin-bottom: 40px;
+  }
+
+  &_infoItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &_iconBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background-color: $color-light-green;
+  }
+
+  &_infoLabel {
+    font-size: 14px;
+    font-weight: 600;
+    color: $color-blackish-green;
+  }
+
+  &_infoValue {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  &_footer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &_code {
+    margin: 0 0 34px 30px;
+  }
+
+  &_codeTitle {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  &_codeSub {
+    font-size: 12px;
+    font-weight: 500;
+    color: $color-blackish-green;
+  }
+
+  &_barcode {
+    margin: 16px;
+  }
+
+  &_photo {
+    display: flex;
+    align-items: center;
+    width: 375px;
+    border-radius: 16px;
+    border: 1px solid $color-dekoration;
+  }
+
+  &_background {
+    width: 100%;
+    height: 247px;
+    background-image: url("../../shared/assets/image/background.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
