@@ -67,6 +67,7 @@ export const tickets = [
       {
         id: "trip-3",
         title: "Depart Thu, Dec 25",
+        start: "12.10.2026",
         time: "08:00 pm - 09:30 pm",
         departureAirport: "Nashville(BNA)",
         arrivalAirport: "Newark(EWR)",
