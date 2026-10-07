@@ -1,0 +1,90 @@
+@use "../../app/styles/variables" as *;
+
+.account {
+  max-width: 1232px;
+  margin: 0 auto;
+  padding-top: 40px;
+  padding-bottom: 120px;
+
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  &__card {
+    background: $color-base;
+    border-radius: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    padding: 8px 24px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__label {
+    font-size: 13px;
+    color: $color-border;
+  }
+
+  &__value {
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-text-dark;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 140px;
+    height: 48px;
+    border: 1px solid $color-mint-green;
+    background: $color-base;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background 0.15s ease,
+      border-color 0.15s ease;
+
+    &:hover {
+      background: $color-base;
+      border-color: $color-mint-green;
+    }
+  }
+
+  &__button--wide {
+    width: 185px;
+    height: 45px;
+  }
+}

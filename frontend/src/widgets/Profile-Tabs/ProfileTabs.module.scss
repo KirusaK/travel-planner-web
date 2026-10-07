@@ -1,0 +1,63 @@
+@use "../../app/styles/variables" as *;
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  max-width: 1232px;
+  height: 80px;
+  margin: 0 auto;
+  margin-top: 32px;
+  background: $color-base;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    font-size: 16px;
+    font-weight: 500;
+    color: $color-grey;
+    text-align: left;
+
+    position: relative;
+    transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-text-dark;
+      transform: none;
+    }
+
+    &:focus,
+    &:active {
+      transform: none;
+      outline: none;
+    }
+  }
+
+  &__itemActive {
+    font-weight: 500;
+    transform: none;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 0;
+      height: 3px;
+      border-radius: 2px 2px 0 0;
+      background: $color-mint-green;
+    }
+  }
+}

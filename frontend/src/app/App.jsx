@@ -3,6 +3,7 @@ import { FindFlight } from "../pages/FindFlight/FindFlight";
 import { Home } from "../pages/Home/Home";
 import { Login } from "../pages/Login/Login";
 import { SignUp } from "../pages/SignUp/SignUp";
+import { Profile } from "../pages/Profile/Profile";
 import { FindStays } from "../pages/FindStays/FindStays";
 import { FlightsPage } from "../pages/FlightsPage/FlightsPage";
 import { HotelPage } from "../pages/HotelPage/HotelPage";
@@ -18,6 +19,7 @@ const App = () => {
       <Route path="/FindFlight" element={<FindFlight />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/SignUp" element={<SignUp />} />
+      <Route path="/Profile" element={<Profile />} />
       <Route path="/FindStays" element={<FindStays />} />
       <Route path="/FlightsPage" element={<FlightsPage />} />
       <Route path="/HotelPage" element={<HotelPage />} />

@@ -1,0 +1,14 @@
+@use "../../app/styles/variables" as *;
+
+.history {
+  max-width: 1232px;
+  margin: 0 auto;
+  margin-bottom: 120px;
+
+  &__title {
+    margin-top: 40px;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+}
