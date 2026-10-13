@@ -1,6 +1,8 @@
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import defaultAvatar from "../../shared/assets/image/Ellipse 1.jpg";
 import Barcode from "react-barcode";
+import flightImage from "../../shared/assets/image/background.jpg";
+import hotelImage from "../../shared/assets/image/background2.jpg";
 import styles from "./BookingTicketCard.module.scss";
 
 export const BookingTicketCard = ({booking, user, itemData, isFlight}) => {
@@ -16,6 +18,7 @@ export const BookingTicketCard = ({booking, user, itemData, isFlight}) => {
   const startSubtitle = isFlight ? firstTrip?.departureAirport : "Check-In";
   const endSubtitle = isFlight ? firstTrip?.arrivalAirport : "Check-Out";
   const typeFlight = isFlight ? itemData.flightClass : itemData.title || "Hotel";
+  const background = isFlight ? flightImage : hotelImage;
 
   const detailsList = isFlight
     ? [
@@ -137,7 +140,12 @@ export const BookingTicketCard = ({booking, user, itemData, isFlight}) => {
         </div>
 
         <div className={styles.ticketCard_photo}>
-          <div className={styles.ticketCard_background}></div>
+          <div
+            style={{
+              backgroundImage: `url(${background})`,
+            }}
+            className={styles.ticketCard_background}
+          ></div>
         </div>
       </div>
     </section>

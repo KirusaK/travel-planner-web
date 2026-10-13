@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SocialAuthGroup } from "../../shared/ui/SocialAuthGroup/index.js";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./LoginForm.module.scss";
@@ -6,6 +6,7 @@ import { useState } from "react";
 import {useAuth} from "../../shared/context/AuthContext.jsx";
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -68,6 +69,7 @@ export const LoginForm = () => {
       console.log("User data:", data.user);
 
       login(data.user);
+      navigate("/Profile");
     } catch (err) {
       console.error("Login error:", err);
       setError({ server: "Server error. Please try again later." });

@@ -32,7 +32,7 @@ export const MyAccountModal = ({ isOpen, onClose, onLogout }) => {
 
           <hr className={styles.myAccountModal_divider} />
 
-          <Link className={styles.myAccountModal_item__account}>
+          <Link to="/Profile" className={styles.myAccountModal_item__account}>
             <div className={styles.myAccountModal_item__account__user}>
               <svg
                 width={18}

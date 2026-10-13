@@ -1,0 +1,77 @@
+@use "../../app/styles/variables" as *;
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 288px;
+  height: 100vh;
+  padding: 22px 16px;
+  background-color: $color-blackish-green;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoText {
+  font-size: 20px;
+  font-weight: 700;
+  color: $color-text-light;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menuTitle {
+  font-size: 11px;
+  font-weight: 600;
+  color: $color-text-light;
+}
+
+.item {
+  display: flex;
+  gap: 12px;
+}
+
+.itemTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: $color-text-light;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 256px;
+  height: 66px;
+  border-radius: 21px;
+  background-color: $color-decoration_dreen;
+}
+
+.signOut {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-light;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 8px;
+  width: 216px;
+  height: 38px;
+  border-radius: 12px;
+  border: 1px solid $color-border;
+  background-color: transparent;
+}
