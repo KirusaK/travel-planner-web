@@ -13,7 +13,7 @@ export const Profile = () => {
 
   return (
     <>
-      <Header />
+      <Header hasShadow={true}/>
 
       <Hero />
 

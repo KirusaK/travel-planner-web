@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SocialAuthGroup } from "../../shared/ui/SocialAuthGroup/index.js";
 import { useState } from "react";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./SignUpForm.module.scss";
 
 export const SignUpForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -94,6 +95,7 @@ export const SignUpForm = () => {
 
       alert("User registered successfully!");
       console.log("Response from server:", data);
+      navigate("/Profile");
     } catch (err) {
       console.error("Network error:", err);
       alert("Server error. Check console.");
