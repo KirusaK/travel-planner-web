@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 288px;
-  height: 100vh;
+  min-height: 100vh;
   padding: 22px 16px;
   background-color: $color-blackish-green;
 }

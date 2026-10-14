@@ -1,6 +1,28 @@
 @use "../../app/styles/variables" as *;
 
 .main {
+  display: flex;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+.info {
+  width: 100%;
+  height: 100%;
+}
+
+.body {
+  width: 100%;
+  padding: 32px;
+  background-color: $color-dekoration-body;
+
+  &_title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &_par {
+    font-size: 14px;
+    font-weight: 400;
+  }
 }

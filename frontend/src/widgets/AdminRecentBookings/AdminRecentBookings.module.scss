@@ -1,0 +1,120 @@
+@use "../../app/styles/variables" as *;
+
+.recentBookings {
+  width: 1088px;
+  height: auto;
+  padding: 24px;
+  margin-top: 33px;
+  background-color: $color-base;
+  border-radius: 21px;
+  border: 1px solid $color-dekoration-grey;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 21px;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    color: $color-dekoration-text;
+  }
+
+  &__viewAllBtn {
+    font-size: 14px;
+    font-weight: 600;
+    background-color: transparent;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 73px;
+    border-top: 1px solid $color-dekoration-grey;
+  }
+
+  &__userInfo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__userName {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &__userMeta {
+    font-size: 12px;
+    font-weight: 400;
+    color: $color-dekoration-text;
+  }
+
+  &__rightSide {
+    display: flex;
+    align-items: center;
+    width: 285px;
+    justify-content: space-between;
+  }
+
+  &__statusWrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__date {
+    font-size: 12px;
+    font-weight: 400;
+    color: $color-dekoration-text;
+  }
+
+  &__statusBadge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 86px;
+    height: 24px;
+    border-radius: 30px;
+    background-color: $color-light-green;
+
+    &--confirmed {
+      color: $color-green-text;
+      background-color: $color-light-green;
+    }
+
+    &--pending {
+      color: $color-yellow-text;
+      background-color: $color-yellow;
+    }
+
+    &--completed {
+      color: $color-text-light;
+      background-color: $color-text-dark;
+    }
+
+    &--cancelled {
+      color: $color-red-text;
+      background-color: $color-red;
+    }
+  }
+
+  &__statusText {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  &__price {
+    font-size: 14px;
+    font-weight: 700;
+    color: $color-pink;
+  }
+}
