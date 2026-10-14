@@ -1,0 +1,161 @@
+@use "../../app/styles/variables" as *;
+
+$table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
+
+.flightsTable {
+  border: 1px solid $color-dekoration-grey;
+  border-radius: 21px;
+  background-color: $color-base;
+  overflow: hidden; // чтобы фон шапки не вылезал за скругления
+
+  &__header,
+  &__row {
+    display: grid;
+    grid-template-columns: $table-columns;
+    align-items: center;
+    column-gap: 16px;
+    padding: 0 20px;
+  }
+
+  &__header {
+    height: 45px;
+    background-color: $color-dekoration-header;
+  }
+
+  &__headerCol {
+    font-size: 12px;
+    font-weight: 600;
+    color: $color-dekoration-text;
+  }
+
+  &__headerColRight {
+    text-align: right;
+  }
+
+  &__row {
+    height: 77px;
+    border-top: 1px solid $color-dekoration-grey;
+  }
+
+  &__airline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  &__logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__airlineName {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &__airlineReviews {
+    font-size: 12px;
+    font-weight: 400;
+    color: $color-dekoration-text;
+  }
+
+  &__ratingGroup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__ratingStatus {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  &__price {
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-pink;
+  }
+
+  &__routePoint {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &__routeCodes {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    &__block {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+
+  &__arrow {
+    rotate: 45deg;
+  }
+
+  &__routeAirport {
+    font-size: 12px;
+    font-weight: 400;
+    color: $color-dekoration-text;
+  }
+
+  &__classCell {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+
+    &--economy {
+      color: $color-dekoration-text;
+      background-color: $color-dekoration_btn__grey;
+    }
+
+    &--business {
+      color: $color-green-text;
+      background-color: $color-light-green;
+    }
+
+    &--first {
+      color: $color-text-light;
+      background-color: $color-text-dark;
+    }
+
+    &--premium {
+      color: $color-green-text;
+      background-color: $color-light-green;
+    }
+  }
+
+  &__trips {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  &__btnGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  &__btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background-color: transparent;
+  }
+
+  &__color__green {
+    border: 1px solid $color-mint-green;
+  }
+
+  &__color__red {
+    border: 1px solid $color-pink;
+  }
+}

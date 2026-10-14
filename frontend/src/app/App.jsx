@@ -15,6 +15,7 @@ import { Favourites } from "../pages/Favourites/Favourites.jsx";
 import { BookingSuccess } from "../pages/BookingSuccess/BookingSuccess.jsx";
 import { useState } from "react";
 import { AdminHome } from "../pages/AdminHome/AdminHome.jsx";
+import { AdminFlight } from "../pages/AdminFlight/AdminFlight.jsx";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -41,7 +42,8 @@ const App = () => {
       />
       <Route path="/Favourites" element={<Favourites />} />
       <Route path="/booking-success/:id" element={<BookingSuccess />} />
-      <Route path="AdminHome" element={<AdminHome />} />
+      <Route path="/AdminHome" element={<AdminHome />} />
+      <Route path="/AdminFlight" element={<AdminFlight />} />
     </Routes>
   );
 };
