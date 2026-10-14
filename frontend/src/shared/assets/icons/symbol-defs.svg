@@ -307,5 +307,9 @@
             <path fill="none" stroke="#fff" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color1, #fff)" d="M28 16h-16"></path>
             <path fill="none" stroke="#fff" stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--color1, #fff)" d="M12 28h-5.333c-0.707 0-1.386-0.281-1.886-0.781s-0.781-1.178-0.781-1.886v-18.667c0-0.707 0.281-1.386 0.781-1.886s1.178-0.781 1.886-0.781h5.333"></path>
         </symbol>
+        <symbol id="icon-Frame6" viewBox="0 0 32 32">
+            <path stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M9.333 9.333h13.333v13.333"></path>
+            <path stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M9.333 22.667l13.333-13.333"></path>
+        </symbol>
     </defs>
 </svg>

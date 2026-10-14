@@ -1,0 +1,53 @@
+@use "../../app/styles/variables" as *;
+
+.statsGroup {
+  display: flex;
+  gap: 16px;
+  margin: 32px 0;
+
+  &_card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 205px;
+    height: 158px;
+    padding: 20px;
+    border-radius: 21px;
+    border: 1px solid $color-dekoration-grey;
+    background-color: $color-base;
+  }
+
+  &_top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &_iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 16px;
+    background-color: $color-light-green;
+  }
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &_title {
+    font-size: 14px;
+    font-weight: 400;
+    color: $color-blackish-green;
+  }
+
+  &_count {
+    font-size: 24px;
+    font-weight: 700;
+    color: $color-blackish-green;
+  }
+}
