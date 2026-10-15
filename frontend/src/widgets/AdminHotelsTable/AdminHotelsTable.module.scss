@@ -1,0 +1,80 @@
+@use "../../app/styles/variables" as *;
+
+$table-columns: 4.5fr 3.3fr 1.4fr 1fr 1.4fr 80px;
+
+.hotelsTable {
+  border: 1px solid $color-dekoration-grey;
+  border-radius: 21px;
+  background-color: $color-base;
+  overflow: hidden;
+
+  &__header,
+  &__row{
+    display: grid;
+    grid-template-columns: $table-columns;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  &__header {
+    height: 45px;
+    background-color: $color-dekoration-header;
+  }
+
+  &__row {
+    height: 77px;
+    border-top: 1px solid $color-dekoration-grey;
+  }
+
+  &__hotelInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+
+  &__hotelName {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &__meta {
+    font-size: 12px;
+    font-weight: 400;
+    color: $color-dekoration-text;
+  }
+
+  &__location {
+    display: flex;
+    gap: 6px;
+  }
+
+  &__locationText {
+    max-width: 224px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  &__price {
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-pink;
+  }
+
+  &__pricePeriod {
+    font-size: 12px;
+    font-weight: 400;
+    color: $color-dekoration-text;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
