@@ -2,6 +2,8 @@ import image from "../../shared/assets/image/Ellipse 1.jpg";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./AdminFlightsTable.module.scss";
 import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
+import { ButtonEdit } from "../../shared/ui/ButtonEdit/ButtonEdit.jsx";
+import { ButtonDelete } from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
 
 export const AdminFlightsTable = () => {
   const flights = [
@@ -160,22 +162,8 @@ export const AdminFlightsTable = () => {
 
             {/* 7. Actions */}
             <div className={styles.flightsTable__btnGroup}>
-              <button
-                type="button"
-                className={`${styles.flightsTable__btn} ${styles.flightsTable__color__green}`}
-              >
-                <svg width={16} height={16}>
-                  <use href={sprite + "#icon-Frame8"} />
-                </svg>
-              </button>
-              <button
-                type="button"
-                className={`${styles.flightsTable__btn} ${styles.flightsTable__color__red}`}
-              >
-                <svg width={16} height={16}>
-                  <use href={sprite + "#icon-Frame9"} />
-                </svg>
-              </button>
+              <ButtonEdit />
+              <ButtonDelete />
             </div>
           </div>
         ))}

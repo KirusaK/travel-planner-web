@@ -14,10 +14,11 @@ export const AdminNav = () => {
     {
       id: 3,
       image: "icon-Frame2",
-      title: "Hotel Management"
+      title: "Hotel Management",
+      to: "/AdminHotel",
     },
-    { id: 4, image: "icon-Frame3", title: "Users"  },
-    { id: 5, image: "icon-Frame4", title: "Bookings" },
+    { id: 4, image: "icon-Frame3", title: "Users", to: "/AdminUsers"  },
+    { id: 5, image: "icon-Frame4", title: "Bookings", to: "/AdminBookings" },
   ];
 
   return (

@@ -1,0 +1,9 @@
+@use "../../../app/styles/variables" as *;
+
+.btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background-color: transparent;
+  border: 1px solid $color-pink;
+}

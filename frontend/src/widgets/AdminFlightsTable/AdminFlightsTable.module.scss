@@ -143,19 +143,4 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
     justify-content: flex-end;
     gap: 8px;
   }
-
-  &__btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 12px;
-    background-color: transparent;
-  }
-
-  &__color__green {
-    border: 1px solid $color-mint-green;
-  }
-
-  &__color__red {
-    border: 1px solid $color-pink;
-  }
 }

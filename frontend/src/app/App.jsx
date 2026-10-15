@@ -16,6 +16,9 @@ import { BookingSuccess } from "../pages/BookingSuccess/BookingSuccess.jsx";
 import { useState } from "react";
 import { AdminHome } from "../pages/AdminHome/AdminHome.jsx";
 import { AdminFlight } from "../pages/AdminFlight/AdminFlight.jsx";
+import { AdminHotel } from "../pages/AdminHotel/AdminHotel.jsx";
+import { AdminUsers } from "../pages/AdminUsers/AdminUsers.jsx";
+import { AdminBookings } from "../pages/AdminBookings/AdminBookings.jsx";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -44,6 +47,9 @@ const App = () => {
       <Route path="/booking-success/:id" element={<BookingSuccess />} />
       <Route path="/AdminHome" element={<AdminHome />} />
       <Route path="/AdminFlight" element={<AdminFlight />} />
+      <Route path="/AdminHotel" element={<AdminHotel />} />
+      <Route path="/AdminUsers" element={<AdminUsers />} />
+      <Route path="/AdminBookings" element={<AdminBookings />} />
     </Routes>
   );
 };
