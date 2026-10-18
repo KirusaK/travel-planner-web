@@ -1,25 +1,18 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
 
 .flightsTable {
-  border: 1px solid $color-dekoration-grey;
-  border-radius: 21px;
-  background-color: $color-base;
-  overflow: hidden;
+  @include t.card;
 
   &__header,
   &__row {
-    display: grid;
-    grid-template-columns: $table-columns;
-    align-items: center;
-    column-gap: 16px;
-    padding: 0 20px;
+    @include t.grid($table-columns);
   }
 
   &__header {
-    height: 45px;
-    background-color: $color-dekoration-header;
+    @include t.header;
   }
 
   &__headerCol {
@@ -31,8 +24,7 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
   }
 
   &__row {
-    height: 77px;
-    border-top: 1px solid $color-dekoration-grey;
+    @include t.row;
   }
 
   &__airline {
@@ -43,45 +35,31 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
   }
 
   &__logo {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    object-fit: cover;
+    @include t.avatar(44);
   }
 
-  &__airlineName {
-    font-size: 14px;
-    font-weight: 600;
+  &__airlineName,
+  &__routePoint {
+    @include t.title;
   }
 
-  &__airlineReviews {
-    font-size: 12px;
-    font-weight: 400;
-    color: $color-dekoration-text;
+  &__airlineReviews,
+  &__routeAirport {
+    @include t.subtitle;
   }
 
   &__ratingGroup {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    @include t.item;
   }
 
   &__ratingStatus,
   &__headerCol,
   &__classCell {
-    font-size: 12px;
-    font-weight: 600;
+    @include t.status;
   }
 
   &__price {
-    font-size: 16px;
-    font-weight: 700;
-    color: $color-pink;
-  }
-
-  &__routePoint {
-    font-size: 14px;
-    font-weight: 600;
+    @include t.price(16px, 700);
   }
 
   &__routeCodes {
@@ -100,40 +78,12 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
     rotate: 45deg;
   }
 
-  &__routeAirport {
-    font-size: 12px;
-    font-weight: 400;
-    color: $color-dekoration-text;
-  }
-
   &__classCell {
-    padding: 4px 10px;
-    border-radius: 20px;
-
-    &--economy {
-      color: $color-dekoration-text;
-      background-color: $color-dekoration_btn__grey;
-    }
-
-    &--business {
-      color: $color-green-text;
-      background-color: $color-light-green;
-    }
-
-    &--first {
-      color: $color-text-light;
-      background-color: $color-text-dark;
-    }
-
-    &--premium {
-      color: $color-green-text;
-      background-color: $color-light-green;
-    }
+    @include t.badge;
   }
 
   &__trips {
-    font-size: 14px;
-    font-weight: 400;
+    @include t.itemTitle;
   }
 
   &__btnGroup {

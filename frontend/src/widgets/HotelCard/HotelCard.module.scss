@@ -1,4 +1,5 @@
 @use "../../app/styles/_variables" as *;
+@use "../../shared/styles/table" as t;
 
 .hotelCard {
   display: flex;
@@ -58,9 +59,7 @@
   }
 
   &_priceValue {
-    font-size: 24px;
-    font-weight: 700;
-    color: $color-pink;
+    @include t.price(24px, 700);
     display: block;
     margin: 4px 0;
   }

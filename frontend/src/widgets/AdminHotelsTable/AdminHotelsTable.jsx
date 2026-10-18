@@ -93,7 +93,7 @@ export const AdminHotelsTable = () => {
             <RatingCard value={item.rating} />
 
             <p className={styles.hotelsTable__price}>
-              {item.price}
+              ${item.price}
               <span className={styles.hotelsTable__pricePeriod}>/night</span>
             </p>
 

@@ -1,6 +1,7 @@
 import styles from "./AdminUsersTable.module.scss";
 import image from "../../shared/assets/image/Ellipse 1.jpg";
 import { ButtonDelete } from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
+import { Badge } from "../../shared/ui/Badge/Badge.jsx";
 
 export const AdminUsersTable = () => {
   const users = [
@@ -84,9 +85,9 @@ export const AdminUsersTable = () => {
   ];
 
   const status = {
-    Active: "usersTable__status--active",
-    Inactive: "usersTable__status--inactive",
-    Suspended: "usersTable__status--suspended",
+    Active: "success",
+    Inactive: "neutral",
+    Suspended: "danger",
   };
 
   return (
@@ -126,7 +127,7 @@ export const AdminUsersTable = () => {
               <b>{item.bookingsCount}</b>
             </span>
 
-            <span className={`${styles.usersTable__status} ${styles[status[item.status]]}`}>{item.status}</span>
+            <Badge variant={status[item.status]}>{item.status}</Badge>
 
             <ButtonDelete />
           </div>

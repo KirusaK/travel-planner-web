@@ -4,6 +4,7 @@ import styles from "./AdminFlightsTable.module.scss";
 import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
 import { ButtonEdit } from "../../shared/ui/ButtonEdit/ButtonEdit.jsx";
 import { ButtonDelete } from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
+import { Badge } from "../../shared/ui/Badge/Badge.jsx";
 
 export const AdminFlightsTable = () => {
   const flights = [
@@ -74,11 +75,11 @@ export const AdminFlightsTable = () => {
     },
   ];
 
-  const statusClass = {
-    Economy: "flightsTable__classCell--economy",
-    Business: "flightsTable__classCell--business",
-    First: "flightsTable__classCell--first",
-    Premium: "flightsTable__classCell--premium",
+  const classVariant  = {
+    Economy: "neutral",
+    Business: "success",
+    First: "dark",
+    Premium: "success",
   };
 
   return (
@@ -148,11 +149,7 @@ export const AdminFlightsTable = () => {
 
             {/* 5. Class */}
             <div>
-              <span
-                className={`${styles.flightsTable__classCell} ${styles[statusClass[item.flightClass]]}`}
-              >
-                {item.flightClass}
-              </span>
+              <Badge variant={classVariant[item.flightClass]}>{item.flightClass}</Badge>
             </div>
 
             {/* 6. Trips */}

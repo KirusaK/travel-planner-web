@@ -1,30 +1,23 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 $table-columns: minmax(0, 2.4fr) minmax(0, 1.6fr) minmax(0, 1.5fr)
 minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1.3fr) 70px;
 
 .usersTable {
-  border: 1px solid $color-dekoration-grey;
-  border-radius: 21px;
-  background-color: $color-base;
-  overflow: hidden;
+  @include t.card;
 
   &__header,
   &__row{
-    display: grid;
-    grid-template-columns: $table-columns;
-    align-items: center;
-    padding: 0 20px;
+    @include t.grid($table-columns);
   }
 
   &__header {
-    height: 45px;
-    background-color: $color-dekoration-header;
+    @include t.header;
   }
 
   &__row {
-    height: 77px;
-    border-top: 1px solid $color-dekoration-grey;
+    @include t.row;
   }
 
   &__userInfo {
@@ -34,27 +27,21 @@ minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1.3fr) 70px;
   }
 
   &__avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
+    @include t.avatar(48px)
   }
 
   &__userName {
-    font-size: 14px;
-    font-weight: 600;
+    @include t.title;
   }
 
   &__userEmail {
-    font-size: 12px;
-    font-weight: 400;
-    color: $color-dekoration-text;
+    @include t.subtitle;
   }
 
   &__item,
   &__number,
   &__joined {
-    font-size: 14px;
-    font-weight: 400;
+    @include t.itemTitle;
   }
 
   &__number,
@@ -71,25 +58,6 @@ minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1.3fr) 70px;
   }
 
   &__status {
-    justify-self: start;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-
-    &--active {
-      color: $color-green-text;
-      background-color: $color-light-green;
-    }
-
-    &--inactive {
-      color: $color-dekoration-text;
-      background-color: $color-dekoration_btn__grey;
-    }
-
-    &--suspended {
-      color: $color-red-text;
-      background-color: $color-red;
-    }
+    @include t.badge;
   }
 }

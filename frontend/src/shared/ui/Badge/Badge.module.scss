@@ -1,0 +1,33 @@
+@use "../../../app/styles/variables" as *;
+@use "../../styles/table" as t;
+
+.badge {
+  @include t.badge;
+  justify-self: start;
+  text-align: center;
+}
+
+.success  {
+  color: $color-green-text;
+  background-color: $color-light-green;
+}
+
+.warning  {
+  color: $color-yellow-text;
+  background-color: $color-yellow;
+}
+
+.danger  {
+  color: $color-red-text;
+  background-color: $color-red;
+}
+
+.neutral  {
+  color: $color-dekoration-text;
+  background-color: $color-dekoration_btn__grey;
+}
+
+.dark  {
+  color: $color-text-light;
+  background-color: $color-text-dark;
+}

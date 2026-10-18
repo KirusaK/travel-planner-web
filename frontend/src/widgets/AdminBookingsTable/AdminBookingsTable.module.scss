@@ -1,48 +1,36 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 $table-columns: minmax(0, 1.1fr) minmax(0, 2.1fr) minmax(0, 3.4fr)
 minmax(0, 1.3fr) minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.6fr);
 
 .bookingsTable {
-  border: 1px solid $color-dekoration-grey;
-  border-radius: 21px;
-  background-color: $color-base;
-  overflow: hidden;
+  @include t.card;
 
   &__header,
   &__row{
-    display: grid;
-    grid-template-columns: $table-columns;
-    align-items: center;
-    padding: 0 20px;
+    @include t.grid($table-columns);
   }
 
   &__header {
-    height: 45px;
-    background-color: $color-dekoration-header;
+    @include t.header;
   }
 
   &__row {
-    height: 77px;
-    border-top: 1px solid $color-dekoration-grey;
+    @include t.row;
   }
 
   &__id,
   &__customerName {
-    font-size: 14px;
-    font-weight: 600;
+    @include t.title;
   }
 
   &__customerEmail {
-    font-size: 12px;
-    font-weight: 400;
-    color: $color-dekoration-text;
+    @include t.subtitle;
   }
 
   &__item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    @include t.item;
   }
 
   &__iconWrapper {
@@ -61,8 +49,7 @@ minmax(0, 1.3fr) minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.6fr);
 
   &__itemTitle,
   &__date {
-    font-size: 14px;
-    font-weight: 400;
+    @include t.itemTitle;
   }
 
   &__date {
@@ -71,39 +58,10 @@ minmax(0, 1.3fr) minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.6fr);
 
   &__payment,
   &__status{
-    justify-self: start;
-    padding: 4px 10px;
-    background-color: green;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-
-    &--full,
-    &--confirmed {
-      color: $color-green-text;
-      background-color: $color-light-green;
-    }
-
-    &--partial,
-    &--pending {
-      color: $color-yellow-text;
-      background-color: $color-yellow;
-    }
-
-    &--completed {
-      color: $color-text-light;
-      background-color: $color-text-dark;
-    }
-
-    &--cancelled {
-      color: $color-red-text;
-      background-color: $color-red;
-    }
+    @include t.badge;
   }
 
   &__amount {
-    font-size: 14px;
-    font-weight: 700;
-    color: $color-pink;
+    @include t.price(14px, 700);
   }
 }
