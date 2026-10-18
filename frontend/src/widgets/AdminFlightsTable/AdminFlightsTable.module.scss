@@ -6,7 +6,7 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
   border: 1px solid $color-dekoration-grey;
   border-radius: 21px;
   background-color: $color-base;
-  overflow: hidden; // чтобы фон шапки не вылезал за скругления
+  overflow: hidden;
 
   &__header,
   &__row {
@@ -23,8 +23,6 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
   }
 
   &__headerCol {
-    font-size: 12px;
-    font-weight: 600;
     color: $color-dekoration-text;
   }
 
@@ -68,7 +66,9 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
     gap: 8px;
   }
 
-  &__ratingStatus {
+  &__ratingStatus,
+  &__headerCol,
+  &__classCell {
     font-size: 12px;
     font-weight: 600;
   }
@@ -109,8 +109,6 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
   &__classCell {
     padding: 4px 10px;
     border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
 
     &--economy {
       color: $color-dekoration-text;
