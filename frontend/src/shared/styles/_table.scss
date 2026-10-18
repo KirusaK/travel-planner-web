@@ -1,0 +1,72 @@
+@use "../../app/styles/variables" as *;
+
+@mixin card {
+  border: 1px solid $color-dekoration-grey;
+  border-radius: 21px;
+  background-color: $color-base;
+  overflow: hidden;
+}
+
+@mixin grid($columns) {
+  display: grid;
+  grid-template-columns: $columns;
+  align-items: center;
+  column-gap: 16px;
+  padding: 0 20px;
+}
+
+@mixin header {
+  height: 45px;
+  background-color: $color-dekoration-header;
+}
+
+@mixin row {
+  height: 77px;
+  border-top: 1px solid $color-dekoration-grey;
+}
+
+@mixin avatar($size) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+}
+
+@mixin title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@mixin subtitle {
+  font-size: 12px;
+  font-weight: 400;
+  color: $color-dekoration-text;
+}
+
+@mixin item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@mixin status {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@mixin price($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color-pink;
+}
+
+@mixin itemTitle {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+@mixin badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}

@@ -1,29 +1,22 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 $table-columns: 4.5fr 3.3fr 1.4fr 1fr 1.4fr 80px;
 
 .hotelsTable {
-  border: 1px solid $color-dekoration-grey;
-  border-radius: 21px;
-  background-color: $color-base;
-  overflow: hidden;
+  @include t.card;
 
   &__header,
   &__row{
-    display: grid;
-    grid-template-columns: $table-columns;
-    align-items: center;
-    padding: 0 20px;
+    @include t.grid($table-columns);
   }
 
   &__header {
-    height: 45px;
-    background-color: $color-dekoration-header;
+    @include t.header;
   }
 
   &__row {
-    height: 77px;
-    border-top: 1px solid $color-dekoration-grey;
+    @include t.row;
   }
 
   &__hotelInfo {
@@ -33,21 +26,16 @@ $table-columns: 4.5fr 3.3fr 1.4fr 1fr 1.4fr 80px;
   }
 
   &__avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
+    @include t.avatar(48);
   }
 
   &__hotelName {
-    font-size: 14px;
-    font-weight: 600;
+    @include t.title;
   }
 
   &__meta,
   &__pricePeriod {
-    font-size: 12px;
-    font-weight: 400;
-    color: $color-dekoration-text;
+    @include t.subtitle;
   }
 
   &__location {
@@ -62,14 +50,10 @@ $table-columns: 4.5fr 3.3fr 1.4fr 1fr 1.4fr 80px;
   }
 
   &__price {
-    font-size: 16px;
-    font-weight: 700;
-    color: $color-pink;
+    @include t.price(16px, 700);
   }
 
   &__actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    @include t.item;
   }
 }

@@ -1,4 +1,5 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .FlightDetailInfo {
   &_container {
@@ -42,9 +43,7 @@
 
   &_price {
     &_title {
-      color: $color-pink;
-      font-size: 32px;
-      font-weight: 700;
+      @include t.price(32px, 700);
       margin-bottom: 16px;
     }
 

@@ -1,5 +1,6 @@
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./AdminBookingsTable.module.scss";
+import { Badge } from "../../shared/ui/Badge/Badge.jsx";
 
 const AdminBookingsTable = () => {
   const bookings = [
@@ -98,13 +99,13 @@ const AdminBookingsTable = () => {
     hotel: "#icon-Frame2",
   };
 
-  const status = {
-    Full: "bookingsTable__payment--full",
-    Partial: "bookingsTable__payment--partial",
-    Confirmed: "bookingsTable__payment--confirmed",
-    Pending: "bookingsTable__payment--pending",
-    Completed: "bookingsTable__payment--completed",
-    Cancelled: "bookingsTable__payment--cancelled",
+  const variants  = {
+    Full: "success",
+    Partial: "warning",
+    Confirmed: "success",
+    Pending: "warning",
+    Completed: "dark",
+    Cancelled: "danger",
   };
 
   return (
@@ -151,15 +152,11 @@ const AdminBookingsTable = () => {
 
             <span className={styles.bookingsTable__date}>{item.date}</span>
 
-            <span className={`${styles.bookingsTable__payment} ${styles[status[item.payment]]}`}>
-              {item.payment}
-            </span>
+            <Badge variant={variants[item.payment]}>{item.payment}</Badge>
 
             <span className={styles.bookingsTable__amount}>${item.amount}</span>
 
-            <span className={`${styles.bookingsTable__status} ${styles[status[item.status]]}`}>
-              {item.status}
-            </span>
+            <Badge variant={variants[item.status]}>{item.status}</Badge>
 
           </div>
         ))}
