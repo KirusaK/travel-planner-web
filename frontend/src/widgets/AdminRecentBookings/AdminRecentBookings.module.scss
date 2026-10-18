@@ -27,7 +27,8 @@
     color: $color-dekoration-text;
   }
 
-  &__viewAllBtn {
+  &__viewAllBtn,
+  &__userName {
     font-size: 14px;
     font-weight: 600;
     background-color: transparent;
@@ -47,12 +48,8 @@
     gap: 16px;
   }
 
-  &__userName {
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  &__userMeta {
+  &__userMeta,
+  &__date {
     font-size: 12px;
     font-weight: 400;
     color: $color-dekoration-text;
@@ -69,12 +66,6 @@
     display: flex;
     align-items: center;
     gap: 16px;
-  }
-
-  &__date {
-    font-size: 12px;
-    font-weight: 400;
-    color: $color-dekoration-text;
   }
 
   &__statusBadge {

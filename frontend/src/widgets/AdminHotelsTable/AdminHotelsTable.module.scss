@@ -43,7 +43,8 @@ $table-columns: 4.5fr 3.3fr 1.4fr 1fr 1.4fr 80px;
     font-weight: 600;
   }
 
-  &__meta {
+  &__meta,
+  &__pricePeriod {
     font-size: 12px;
     font-weight: 400;
     color: $color-dekoration-text;
@@ -64,12 +65,6 @@ $table-columns: 4.5fr 3.3fr 1.4fr 1fr 1.4fr 80px;
     font-size: 16px;
     font-weight: 700;
     color: $color-pink;
-  }
-
-  &__pricePeriod {
-    font-size: 12px;
-    font-weight: 400;
-    color: $color-dekoration-text;
   }
 
   &__actions {

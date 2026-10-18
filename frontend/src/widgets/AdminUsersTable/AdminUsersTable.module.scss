@@ -50,20 +50,15 @@ minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1.3fr) 70px;
     color: $color-dekoration-text;
   }
 
-  &__number {
-    font-size: 14px;
-    font-weight: 400;
-    color: $color-dekoration-text;
-  }
-
-  &__item {
-    font-size: 14px;
-    font-weight: 400;
-  }
-
+  &__item,
+  &__number,
   &__joined {
     font-size: 14px;
     font-weight: 400;
+  }
+
+  &__number,
+  &__joined {
     color: $color-dekoration-text;
   }
 

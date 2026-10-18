@@ -1,0 +1,109 @@
+@use "../../app/styles/variables" as *;
+
+$table-columns: minmax(0, 1.1fr) minmax(0, 2.1fr) minmax(0, 3.4fr)
+minmax(0, 1.3fr) minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.6fr);
+
+.bookingsTable {
+  border: 1px solid $color-dekoration-grey;
+  border-radius: 21px;
+  background-color: $color-base;
+  overflow: hidden;
+
+  &__header,
+  &__row{
+    display: grid;
+    grid-template-columns: $table-columns;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  &__header {
+    height: 45px;
+    background-color: $color-dekoration-header;
+  }
+
+  &__row {
+    height: 77px;
+    border-top: 1px solid $color-dekoration-grey;
+  }
+
+  &__id,
+  &__customerName {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &__customerEmail {
+    font-size: 12px;
+    font-weight: 400;
+    color: $color-dekoration-text;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 12px;
+    background-color: $color-light-green;
+  }
+
+  &__icon {
+    --color1: #{$color-text-dark};
+  }
+
+  &__itemTitle,
+  &__date {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  &__date {
+    color: $color-dekoration-text;
+  }
+
+  &__payment,
+  &__status{
+    justify-self: start;
+    padding: 4px 10px;
+    background-color: green;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+
+    &--full,
+    &--confirmed {
+      color: $color-green-text;
+      background-color: $color-light-green;
+    }
+
+    &--partial,
+    &--pending {
+      color: $color-yellow-text;
+      background-color: $color-yellow;
+    }
+
+    &--completed {
+      color: $color-text-light;
+      background-color: $color-text-dark;
+    }
+
+    &--cancelled {
+      color: $color-red-text;
+      background-color: $color-red;
+    }
+  }
+
+  &__amount {
+    font-size: 14px;
+    font-weight: 700;
+    color: $color-pink;
+  }
+}

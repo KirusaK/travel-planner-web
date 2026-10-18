@@ -1,1 +1,48 @@
 @use "../../app/styles/variables" as *;
+
+.main {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.body {
+  flex: 1;
+  padding: 32px;
+  background-color: $color-dekoration-body;
+
+  &_headerBlock {
+    margin-bottom: 24px;
+
+    &_title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    &_subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      color: $color-dekoration-text;
+    }
+
+    &_btnBlock {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 23px;
+    }
+
+    &_btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid $color-dekoration-grey;
+      background-color: $color-base;
+    }
+  }
+}
