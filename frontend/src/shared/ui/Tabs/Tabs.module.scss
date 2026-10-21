@@ -1,0 +1,14 @@
+@use "../../../app/styles/variables" as *;
+@use "../../styles/table" as t;
+
+.tabs {
+  display: flex;
+  border-top: 1px solid $color-dekoration-grey;
+  border-bottom: 1px solid $color-dekoration-grey;
+}
+
+.tab {
+  padding: 12px;
+  background-color: transparent;
+  @include t.title;
+}

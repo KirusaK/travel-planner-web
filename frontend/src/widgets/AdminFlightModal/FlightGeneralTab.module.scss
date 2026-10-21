@@ -1,0 +1,96 @@
+@use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
+
+.generalTab {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 0;
+
+  &__sectionTitle {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  &__sectionHint {
+    @include t.subtitle;
+  }
+
+  &__row {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+
+    &__three {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); // Ровно три одинаковые колонки
+      gap: 20px;
+      align-items: end;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__label {
+    @include t.status;
+  }
+
+  &__input {
+    width: 100%;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid $color-dekoration-grey;
+    padding: 13px;
+    background-color: transparent;
+
+    &:focus {
+      @include t.focusInput;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  &__logoPreview {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    &__title {
+      @include t.status;
+    }
+
+    &__btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 17px;
+    }
+  }
+
+  &__logoControls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  &__uploadBtn {
+    width: 112px;
+    height: 36px;
+    border-radius: 12px;
+    border: 1px solid $color-mint-green;
+    background-color: transparent;
+  }
+
+  &__sectionHead {
+    margin-bottom: 20px;
+  }
+}

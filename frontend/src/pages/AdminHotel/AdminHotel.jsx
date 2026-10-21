@@ -3,8 +3,12 @@ import { AdminNav } from "../../widgets/AdminNav/AdminNav.jsx";
 import { AdminHeader } from "../../widgets/AdminHeader/AdminHeader.jsx";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import { AdminHotelsTable } from "../../widgets/AdminHotelsTable/AdminHotelsTable.jsx";
+import {AdminModalHotel} from "../../widgets/AdminModalHotel/AdminModalHotel.jsx";
+import { useState } from "react";
 
 export const AdminHotel = () => {
+  const [isMoadalOpen, setIsMoadalOpen] = useState(false);
+
   return (
     <section>
       <div className={styles.main}>
@@ -23,7 +27,10 @@ export const AdminHotel = () => {
                 </p>
               </div>
 
-              <button className={styles.body_headerBlock_btn}>
+              <button
+                className={styles.body_headerBlock_btn}
+                onClick={() => setIsMoadalOpen(true)}
+              >
                 <svg width={16} height={16}>
                   <use href={sprite + "#icon-Frame7"} />
                 </svg>
@@ -32,6 +39,11 @@ export const AdminHotel = () => {
             </div>
 
             <AdminHotelsTable />
+
+            <AdminModalHotel
+              isOpen={isMoadalOpen}
+              isClose={() => setIsMoadalOpen(false)}
+            />
           </div>
         </div>
       </div>
