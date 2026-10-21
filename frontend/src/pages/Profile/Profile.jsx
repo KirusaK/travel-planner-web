@@ -7,13 +7,18 @@ import { Footer } from "../../widgets/Footer/Footer";
 import { Hero } from "../../widgets/Hero-Profile/Hero";
 import { ProfileTabs } from "../../widgets/Profile-Tabs/ProfileTabs";
 import { Account } from "../../widgets/Account/Account";
+import { UserProvider } from "../../shared/context/UserContext";
+import { useAuth } from "../../shared/context/AuthContext.jsx";
+import { Navigate } from "react-router-dom";
 
 export const Profile = () => {
   const [activeTab, setActiveTab] = useState("account");
+  const { user: authUser } = useAuth();
 
+  if (!authUser?.id) return <Navigate to="/Login" replace />;
   return (
-    <>
-      <Header hasShadow={true}/>
+    <UserProvider userId={authUser.id}>
+      <Header hasShadow={true} />
 
       <Hero />
 
@@ -26,6 +31,6 @@ export const Profile = () => {
       <Subscribe />
 
       <Footer />
-    </>
+    </UserProvider>
   );
 };
