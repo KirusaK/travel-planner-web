@@ -221,6 +221,30 @@ app.get("/api/cards", async (req, res) => {
   }
 });
 
+// Удаление карты
+app.delete("/api/cards/:id", async (req, res) => {
+  try {
+    const result = await pool.query("DELETE FROM cards WHERE id = $1", [
+      req.params.id,
+    ]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Card not found" });
+    }
+
+    res.sendStatus(204);
+  } catch (err) {
+    // 23503 = картка прив'язана до бронювань (foreign key)
+    if (err.code === "23503") {
+      return res
+        .status(409)
+        .json({ error: "Card is used in bookings and cannot be deleted" });
+    }
+    console.error("Error deleting card:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 // Создание бронирования
 app.post("/api/bookings", async (req, res) => {
   const { userId, cardId, itemType, itemId, title, totalPrice } = req.body;
