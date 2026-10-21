@@ -3,7 +3,7 @@ import { SocialAuthGroup } from "../../shared/ui/SocialAuthGroup/index.js";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./LoginForm.module.scss";
 import { useState } from "react";
-import {useAuth} from "../../shared/context/AuthContext.jsx";
+import { useAuth } from "../../shared/context/AuthContext.jsx";
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export const LoginForm = () => {
   const { login } = useAuth();
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
 
     setFormData((prevData) => ({
       ...prevData,
@@ -29,8 +29,8 @@ export const LoginForm = () => {
         return newErrors;
       });
     }
-  }
-  
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -56,12 +56,12 @@ export const LoginForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
+      });
 
       const data = await respons.json();
 
       if (!respons.ok) {
-        setError({server: data.message});
+        setError({ server: data.message });
         return;
       }
 

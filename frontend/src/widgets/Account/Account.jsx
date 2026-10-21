@@ -6,7 +6,6 @@ import { useUser } from "../../shared/context/UserContext";
 
 const API = "http://localhost:5000/api";
 
-// "1992-01-01" -> "01-01-1992"
 const formatDate = (iso) => (iso ? iso.split("-").reverse().join("-") : "—");
 
 export const Account = () => {
