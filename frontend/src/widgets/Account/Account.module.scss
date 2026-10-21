@@ -87,4 +87,21 @@
     width: 185px;
     height: 45px;
   }
+
+  &__input {
+    display: block;
+    margin-top: 4px;
+    padding: 6px 10px;
+    font: inherit;
+    border: 1px solid $color-mint-green;
+    border-radius: 6px;
+    outline: none;
+  }
+
+  &__error {
+    display: block;
+    margin-top: 4px;
+    font-size: 14px;
+    color: $color-error;
+  }
 }

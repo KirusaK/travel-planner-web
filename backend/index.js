@@ -1,7 +1,7 @@
-import express from 'express';
-import cors from 'cors';
+import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
-import { pool } from "./db/db.js"
+import { pool } from "./db/db.js";
 import bcrypt from "bcrypt";
 
 dotenv.config();
@@ -12,72 +12,74 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-app.post('/api/auth/register', async (req, res) => {
-    try {
-        const { firstName, lastName, email, phone, password } = req.body;
+app.post("/api/auth/register", async (req, res) => {
+  try {
+    const { firstName, lastName, email, phone, password } = req.body;
 
-        const userCheck = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-        if (userCheck.rows.length > 0) {
-            return res.status(400).json({message: 'A user with this email already exists.'})
-        }
+    const userCheck = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+    if (userCheck.rows.length > 0) {
+      return res
+        .status(400)
+        .json({ message: "A user with this email already exists." });
+    }
 
-        const saltRounds = 10;
-        const passwordHash = await bcrypt.hash(password, saltRounds);
+    const saltRounds = 10;
+    const passwordHash = await bcrypt.hash(password, saltRounds);
 
-        const newUser = await pool.query(
-            `INSERT INTO users (first_name, last_name, email, phone_number, password) 
+    const newUser = await pool.query(
+      `INSERT INTO users (first_name, last_name, email, phone_number, password) 
             VALUES ($1, $2, $3, $4, $5)
             RETURNING id, first_name, last_name, email, phone_number`,
-            [firstName, lastName, email, phone, passwordHash]
-        )
+      [firstName, lastName, email, phone, passwordHash],
+    );
 
-        res.status(201).json ({
-            message: 'User registered successfully.',
-            user: newUser.rows[0]
-        })
-    } catch (err) {
-        console.error('Error during registration:', err.message);
-        res.status(500).json({message: 'Server error'})
+    res.status(201).json({
+      message: "User registered successfully.",
+      user: newUser.rows[0],
+    });
+  } catch (err) {
+    console.error("Error during registration:", err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+app.post("/api/auth/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const userCheck = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+    if (userCheck.rows.length === 0) {
+      return res.status(400).json({ message: "Invalid email or password." });
     }
-})
 
-app.post('/api/auth/login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
+    const user = userCheck.rows[0];
 
-        const userCheck = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-        if (userCheck.rows.length === 0) {
-            return res
-              .status(400)
-              .json({ message: "Invalid email or password." });
-        }
-
-        const user = userCheck.rows[0];
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res
-              .status(400)
-              .json({ message: "Invalid email or password." });
-        }
-
-        res.status(200).json({
-          message: "Login successful.",
-            user: {
-              id: user.id,
-                firstName: user.first_name,
-                lastName: user.last_name,
-                email: user.email,
-                phone: user.phone_number,
-            }
-        });
-    } catch (err) {
-        console.error('Error during login:', err.message);
-        res.status(500).json({message: 'Server error'})
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid email or password." });
     }
-})
 
-app.post('/api/cards', async (req, res) => {
+    res.status(200).json({
+      message: "Login successful.",
+      user: {
+        id: user.id,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        email: user.email,
+        phone: user.phone_number,
+      },
+    });
+  } catch (err) {
+    console.error("Error during login:", err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+app.post("/api/cards", async (req, res) => {
   try {
     const { userId, cardNumber, expDate, nameOnCard, country, isSaved } =
       req.body;
@@ -100,7 +102,103 @@ app.post('/api/cards', async (req, res) => {
     console.error("Error adding card:", err);
     res.status(500).json({ message: "Ошибка сервера при добавлении карты" });
   }
-})
+});
+
+const PROFILE_SELECT = `
+  SELECT id,
+         TRIM(first_name || ' ' || last_name) AS name,
+         email,
+         phone_number AS "phoneNumber",
+         to_char(date_of_birth, 'YYYY-MM-DD') AS "dateOfBirth"
+  FROM users`;
+
+app.get("/api/users/:id", async (req, res) => {
+  try {
+    const { rows } = await pool.query(`${PROFILE_SELECT} WHERE id = $1`, [
+      req.params.id,
+    ]);
+    if (rows.length === 0)
+      return res.status(404).json({ error: "User not found" });
+    res.json(rows[0]);
+  } catch (err) {
+    console.error("Error fetching user:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.patch("/api/users/:id", async (req, res) => {
+  const { field, value } = req.body;
+  const { id } = req.params;
+  let sql, params;
+
+  switch (field) {
+    case "name": {
+      const [first, ...rest] = String(value).trim().split(/\s+/);
+      if (!first) return res.status(400).json({ error: "Name is required" });
+      sql = "UPDATE users SET first_name = $1, last_name = $2 WHERE id = $3";
+      params = [first, rest.join(" "), id];
+      break;
+    }
+    case "email":
+      if (!value || !String(value).includes("@"))
+        return res.status(400).json({ error: "Invalid email" });
+      sql = "UPDATE users SET email = $1 WHERE id = $2";
+      params = [String(value).trim(), id];
+      break;
+    case "phoneNumber":
+      sql = "UPDATE users SET phone_number = $1 WHERE id = $2";
+      params = [value || null, id];
+      break;
+    case "dateOfBirth":
+      sql = "UPDATE users SET date_of_birth = $1 WHERE id = $2";
+      params = [value || null, id];
+      break;
+    default:
+      return res.status(400).json({ error: "Field not allowed" });
+  }
+
+  try {
+    await pool.query(sql, params);
+    const { rows } = await pool.query(`${PROFILE_SELECT} WHERE id = $1`, [id]);
+    res.json(rows[0]);
+  } catch (err) {
+    if (err.code === "23505")
+      return res.status(409).json({ error: "Email already in use" });
+    console.error("Error updating user:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.patch("/api/users/:id/password", async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  if (!oldPassword || !newPassword || newPassword.length < 6) {
+    return res
+      .status(400)
+      .json({ error: "New password must be at least 6 characters" });
+  }
+  try {
+    const { rows } = await pool.query(
+      "SELECT password FROM users WHERE id = $1",
+      [req.params.id],
+    );
+    if (rows.length === 0)
+      return res.status(404).json({ error: "User not found" });
+
+    const isMatch = await bcrypt.compare(oldPassword, rows[0].password);
+    if (!isMatch)
+      return res.status(403).json({ error: "Wrong current password" });
+
+    const hash = await bcrypt.hash(newPassword, 10);
+    await pool.query("UPDATE users SET password = $1 WHERE id = $2", [
+      hash,
+      req.params.id,
+    ]);
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("Error changing password:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
 app.get("/api/cards", async (req, res) => {
   const { userId } = req.query;
@@ -123,13 +221,12 @@ app.get("/api/cards", async (req, res) => {
   }
 });
 
-
 // Создание бронирования
 app.post("/api/bookings", async (req, res) => {
-  const {userId, cardId, itemType, itemId, title, totalPrice} = req.body;
+  const { userId, cardId, itemType, itemId, title, totalPrice } = req.body;
 
   if (!userId || !cardId || !itemId || !totalPrice) {
-    return res.status(400).json({error: "Missing required field"});
+    return res.status(400).json({ error: "Missing required field" });
   }
 
   try {
@@ -145,17 +242,19 @@ app.post("/api/bookings", async (req, res) => {
     console.error("Error creating bookings:", err);
     res.status(500).json({ message: "Failed to create booking" });
   }
-})
+});
 
 // Получение информации о бронировании по id
 app.get("/api/bookings/:id", async (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
 
   try {
-    const result = await pool.query("SELECT * FROM bookings WHERE id = $1", [id]);
+    const result = await pool.query("SELECT * FROM bookings WHERE id = $1", [
+      id,
+    ]);
 
     if (result.rows.length === 0) {
-      return res.status(404).json({error: "Booking not found."});
+      return res.status(404).json({ error: "Booking not found." });
     }
 
     res.json(result.rows[0]);
@@ -163,12 +262,12 @@ app.get("/api/bookings/:id", async (req, res) => {
     console.error("Error fetching bookings:", err);
     res.status(500).json({ message: "Server error" });
   }
-})
+});
 
-app.get('/', (req, res) => {
-    res.send('API сервера работает!');
+app.get("/", (req, res) => {
+  res.send("API сервера работает!");
 });
 
 app.listen(port, () => {
-    console.log(`Сервер запущен на порту ${port}`);
+  console.log(`Сервер запущен на порту ${port}`);
 });

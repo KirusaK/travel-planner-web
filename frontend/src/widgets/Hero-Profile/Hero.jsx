@@ -3,8 +3,11 @@ import uploadIcon from "../../shared/assets/image/Upload.svg";
 import avatar from "../../shared/assets/image/avatar.png";
 import uploadIcon2 from "../../shared/assets/image/Pen.svg";
 import Cover from "../../shared/assets/image/cover.svg";
+import { useUser } from "../../shared/context/UserContext";
 
 export const Hero = () => {
+  const { user } = useUser();
+
   return (
     <section className={styles.hero}>
       <div className={styles.hero_cover}>
@@ -22,9 +25,9 @@ export const Hero = () => {
             <img src={uploadIcon2} alt="Edit Profile" />
           </button>
         </div>
-        <h1>John Doe</h1>
+        <h1>{user?.name}</h1>
 
-        <p>john.doe@gmail.com</p>
+        <p>{user?.email}</p>
       </div>
     </section>
   );
