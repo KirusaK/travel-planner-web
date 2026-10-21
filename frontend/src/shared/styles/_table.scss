@@ -70,3 +70,13 @@
   font-size: 12px;
   font-weight: 600;
 }
+
+@mixin positionInput {
+  display: grid;
+  width: 100%;
+  gap: 20px;
+}
+
+@mixin focusInput {
+  box-shadow: 0 0 0 2px $color-mint-green;
+}

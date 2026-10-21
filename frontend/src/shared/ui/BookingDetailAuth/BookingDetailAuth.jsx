@@ -69,7 +69,7 @@ export const BookingDetailAuth = ({ onSelectCard }) => {
                         ? styles.bookingDetailAuth_cardItem__active
                         : ""
                     }`}
-                    onClick={() => handleCardSelect(card.id)} // ✅ Вызываем handleCardSelect
+                    onClick={() => handleCardSelect(card.id)} //
                   >
                     <div className={styles.bookingDetailAuth_cardLeft}>
                       <svg width={32} height={32}>
@@ -88,7 +88,7 @@ export const BookingDetailAuth = ({ onSelectCard }) => {
                       type="radio"
                       name="selectedCard"
                       checked={isSelected}
-                      onChange={() => handleCardSelect(card.id)} // ✅ Вызываем handleCardSelect
+                      onChange={() => handleCardSelect(card.id)} //
                       className={styles.bookingDetailAuth_checkbox}
                     />
                   </div>

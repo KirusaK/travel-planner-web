@@ -1,0 +1,77 @@
+@use "../../../app/styles/variables" as *;
+@use "../../styles/table" as t;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(17, 34, 17, 0.55);
+  z-index: 100;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 897px;
+  max-height: 95vh;
+  border-radius: 20px;
+  background-color: $color-base;
+  border: 1px solid $color-dekoration-grey;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  &__subtitle {
+    @include t.itemTitle;
+    color: $color-dekoration-text;
+  }
+
+  &__close {
+    background-color: transparent;
+  }
+
+  &__body {
+    flex: 1;
+    overflow: auto;
+    padding: 4px 12px 4px 4px;
+  }
+
+  &__footer {
+    display: flex;
+    padding-top: 16px;
+    gap: 12px;
+    margin-top: 16px;
+    justify-content: flex-end;
+    border-top: 1px solid $color-dekoration-grey;
+
+    &__close {
+      @include t.title;
+      padding: 11px 20px;
+      border-radius: 12px;
+      background-color: transparent;
+      border: 1px solid $color-mint-green;
+    }
+
+    &__add {
+      @include t.title;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background-color: $color-mint-green;
+    }
+  }
+}

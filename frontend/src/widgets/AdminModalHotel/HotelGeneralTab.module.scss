@@ -1,0 +1,93 @@
+@use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
+
+.hotelGeneral {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 0;
+
+  &__hotekName {
+    @include t.positionInput;
+    grid-template-columns: 2fr 1fr;
+  }
+
+  &__maps {
+    @include t.positionInput;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  &__mainTitle {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  &__section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__fieldGroup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+  }
+
+  &__label {
+    @include t.status;
+  }
+
+  &__input {
+    width: 100%;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid $color-dekoration-grey;
+    padding: 13px;
+    background-color: transparent;
+
+    &:focus {
+      @include t.focusInput;
+    }
+
+    &__price {
+      max-width: 264px;
+    }
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  &__subTitle {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  &__subDescription {
+    @include t.subtitle;
+  }
+
+  &__row {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__textarea {
+    width: 100%;
+    height: 140px;
+    border-radius: 12px;
+    border: 1px solid $color-dekoration-grey;
+    padding: 13px;
+    background-color: transparent;
+    outline: none;
+
+    &:focus {
+      @include t.focusInput;
+    }
+  }
+}
