@@ -77,6 +77,17 @@
   gap: 20px;
 }
 
-@mixin focusInput {
-  box-shadow: 0 0 0 2px $color-mint-green;
+@mixin modalInput {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+@mixin stylesInput {
+  background-color: transparent;
+  border: 1px solid $color-dekoration-grey;
+
+
+  &:focus {
+    box-shadow: 0 0 0 2px $color-mint-green;
+  }
 }

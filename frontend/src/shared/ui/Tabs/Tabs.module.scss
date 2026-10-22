@@ -12,3 +12,7 @@
   background-color: transparent;
   @include t.title;
 }
+
+.active {
+  border-bottom: 1px solid $color-mint-green;
+}

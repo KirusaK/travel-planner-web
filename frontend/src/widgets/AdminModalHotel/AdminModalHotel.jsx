@@ -2,15 +2,19 @@ import styles from "./AdminModalHotel.module.scss";
 import { AdminModal } from "../../shared/ui/AdminModal/AdminModal.jsx";
 import { Tabs } from "../../shared/ui/Tabs/Tabs.jsx";
 import { HotelGeneralTab } from "./HotelGeneralTab.jsx";
+import { useState } from "react";
+import {HotelRoomsTab} from "./HotelRoomsTab.jsx";
 
 const tabs = [
-  { id: 1, title: "General info" },
-  { id: 2, title: "Rooms" },
-  { id: 3, title: "Amenities" },
-  { id: 4, title: "Reviews" },
+  { id: "general", title: "General info" },
+  { id: "rooms", title: "Rooms" },
+  { id: "amenities", title: "Amenities" },
+  { id: "reviews", title: "Reviews" },
 ];
 
 export const AdminModalHotel = ({isOpen, isClose}) => {
+  const [activeTab, setActiveTab] = useState("general");
+
   
   return (
     <section>
@@ -20,9 +24,10 @@ export const AdminModalHotel = ({isOpen, isClose}) => {
         isOpen={isOpen}
         isClose={isClose}
       >
-        <Tabs tabs={tabs} />
+        <Tabs tabs={tabs} active={activeTab} onChange={setActiveTab} />
 
-        <HotelGeneralTab />
+        {activeTab === "general" && <HotelGeneralTab />}
+          {activeTab === "rooms" && <HotelRoomsTab />}
       </AdminModal>
     </section>
   );
