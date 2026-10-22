@@ -9,31 +9,35 @@ export const AdminStatsGroup = () => {
       title: "Bookings",
       count: 8,
       icon: "#icon-Frame4",
+      link: "/AdminBookings",
     },
     {
       id: "flights",
       title: "Active Flights",
       count: 5,
       icon: "#icon-Frame1",
+      link: "/AdminFlight",
     },
     {
       id: "hotels",
       title: "Listed Hotels",
       count: 4,
       icon: "#icon-Frame2",
+      link: "/AdminHotel",
     },
     {
       id: "users",
       title: "Registered Users",
       count: 7,
       icon: "#icon-Frame3",
+      link: "/AdminUsers",
     },
   ];
 
   return (
     <section className={styles.statsGroup}>
       {statsData.map((item) => (
-        <Link key={item.id} className={styles.statsGroup_card}>
+        <Link key={item.id} to={item.link} className={styles.statsGroup_card}>
           <div className={styles.statsGroup_top}>
             <div className={styles.statsGroup_iconWrapper}>
               <svg

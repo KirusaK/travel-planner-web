@@ -83,11 +83,24 @@
 }
 
 @mixin stylesInput {
+  border-radius: 12px;
   background-color: transparent;
   border: 1px solid $color-dekoration-grey;
 
 
   &:focus {
     box-shadow: 0 0 0 2px $color-mint-green;
+  }
+}
+
+@mixin stylesAddBtn {
+  width: 100%;
+  height: 48px;
+  border-radius: 21px;
+  border: 1px dashed $color-mint-green;
+  background-color: transparent;
+
+  &:hover {
+    background-color: transparentize($color-mint-green, 0.85);
   }
 }
