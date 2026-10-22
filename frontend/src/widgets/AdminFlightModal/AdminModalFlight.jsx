@@ -4,6 +4,7 @@ import { Tabs } from "../../shared/ui/Tabs/Tabs.jsx";
 import { FlightGeneralTab } from "./FlightGeneralTab.jsx";
 import { useState } from "react";
 import { FlightPricingTab } from "./FlightPricingTab.jsx";
+import {FlightTripsTab} from "./FlightTripsTab.jsx";
 
 const tabs = [
   { id: "general", title: "General info" },
@@ -25,6 +26,7 @@ export const AdminModalFlight = ({isOpen, isClose}) => {
         <Tabs tabs={tabs} active={activeTab} onChange={setActiveTab}/>
         {activeTab === "general" && <FlightGeneralTab />}
         {activeTab === "pricing" && <FlightPricingTab />}
+          {activeTab === "trips" && <FlightTripsTab />}
       </AdminModal>
     </section>
   );

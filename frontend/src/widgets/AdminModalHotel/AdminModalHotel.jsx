@@ -4,12 +4,12 @@ import { Tabs } from "../../shared/ui/Tabs/Tabs.jsx";
 import { HotelGeneralTab } from "./HotelGeneralTab.jsx";
 import { useState } from "react";
 import {HotelRoomsTab} from "./HotelRoomsTab.jsx";
+import { HotelAmenitiesTab } from "./HotelAmenitiesTab.jsx";
 
 const tabs = [
   { id: "general", title: "General info" },
   { id: "rooms", title: "Rooms" },
   { id: "amenities", title: "Amenities" },
-  { id: "reviews", title: "Reviews" },
 ];
 
 export const AdminModalHotel = ({isOpen, isClose}) => {
@@ -27,7 +27,8 @@ export const AdminModalHotel = ({isOpen, isClose}) => {
         <Tabs tabs={tabs} active={activeTab} onChange={setActiveTab} />
 
         {activeTab === "general" && <HotelGeneralTab />}
-          {activeTab === "rooms" && <HotelRoomsTab />}
+        {activeTab === "rooms" && <HotelRoomsTab />}
+        {activeTab === "amenities" && <HotelAmenitiesTab />}
       </AdminModal>
     </section>
   );

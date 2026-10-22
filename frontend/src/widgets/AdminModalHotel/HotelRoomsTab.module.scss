@@ -55,10 +55,6 @@
   }
 
   &__addBtn {
-    width: 100%;
-    height: 48px;
-    border-radius: 21px;
-    border: 1px dashed $color-mint-green;
-    background-color: transparent;
+    @include t.stylesAddBtn;
   }
 }
