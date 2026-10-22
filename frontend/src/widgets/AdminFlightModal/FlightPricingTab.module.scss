@@ -1,0 +1,81 @@
+@use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
+
+.pricingTab {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 0;
+
+  &__sectionHead {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 20px;
+  }
+
+  &__sectionTitle,
+  &__sectionTitle{
+    @include t.modalInput;
+  }
+
+  &__sectionHint,
+  &__sectionHint{
+    @include t.subtitle;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__label {
+    @include t.status;
+  }
+
+  &__input {
+    width: 268px;
+    height: 44px;
+    padding: 14px;
+    border-radius: 12px;
+    @include t.stylesInput;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  &__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-radius: 17px;
+    background-color: transparentize($color-mint-green, 0.7);
+  }
+
+  &__summaryLabel {
+    @include t.title;
+  }
+
+  &__summaryValue {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  &__summaryPrice {
+    font-size: 18px;
+    font-weight: 700;
+    color: $color-pink;
+  }
+
+  &__summaryLater {
+    @include t.itemTitle;
+    color: $color-dekoration-text;
+  }
+}
