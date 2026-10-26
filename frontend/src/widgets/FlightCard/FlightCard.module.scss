@@ -19,6 +19,10 @@
     padding: 24px 24px 0 16px;
   }
 
+  &_logoPlaceholder {
+    @include t.logoPlaceholder;
+  }
+
   &_content {
     flex: 1;
     display: flex;

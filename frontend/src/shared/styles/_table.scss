@@ -104,3 +104,24 @@
     background-color: transparentize($color-mint-green, 0.85);
   }
 }
+
+@mixin logoPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: $color-light-green;
+  color: $color-green-text;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+@mixin logoStyle {
+  width: 64px;
+  height: 44px;
+  backgroundSize: "cover";
+  backgroundRepeat: "no-repeat";
+  backgroundPosition: "center";
+}

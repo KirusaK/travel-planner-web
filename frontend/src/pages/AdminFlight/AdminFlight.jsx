@@ -6,7 +6,6 @@ import {AdminFlightsTable} from "../../widgets/AdminFlightsTable/AdminFlightsTab
 import { useState } from "react";
 import { AdminModalFlight } from "../../widgets/AdminFlightModal/AdminModalFlight.jsx";
 
-
 export const AdminFlight = () => {
   const [isMoadalOpen, setIsMoadalOpen] = useState(false);
 

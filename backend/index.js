@@ -288,6 +288,90 @@ app.get("/api/bookings/:id", async (req, res) => {
   }
 });
 
+const FLIGHT_COLUMNS = `
+  f.id, 
+  f.airline_name as "airlineName", 
+  f.logo, 
+  f.flight_class as "flightClass", 
+  f.rating::float as rating, 
+  f.reviews_count as "reviewsCount", 
+  f.airport, 
+  f.from_code as"from", 
+  f.to_code as "to", 
+  f.base_price::float as price, 
+  to_char(f.part_due_date, 'YYYY-MM-DD') AS "partDueDate"`;
+
+
+// Короче тут выводятся все поля таблици и заодно подсчитывается количество полетов (segments) для админки и достаем информацию для страници листига
+app.get("/api/flights", async (req, res) => {
+  try {
+    const { rows } = await pool.query(`
+    SELECT ${FLIGHT_COLUMNS},
+    (SELECT COUNT(*) FROM flight_trips t
+                     WHERE t.flight_id = f.id)::int as "tripsCount",
+                    COALESCE((
+                        SELECT json_agg(json_build_object(
+                                        'departureTime', to_char(t.departure_time, 'HH24:MI'),
+                                        'arrivalTime', to_char(t.arrival_time, 'HH24:MI'),
+                                        'durationMinutes', t.duration_minutes,
+                                        'stops', t.stops,
+                                        'departureCode', t.departure_code,
+                                        'arrivalCode', t.arrival_code
+                                        ) ORDER BY t.sort_order)
+                        FROM flight_trips t
+                        WHERE t.flight_id = f.id
+                      ), '[]'::json) AS trips
+    FROM flights f
+    ORDER BY f.id`);
+
+    res.json(rows);
+  } catch (err) {
+    console.error("Error fetching  flights:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+})
+
+app.get("/api/flights/:id", async (req, res) => {
+  const { id } = req.params;
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(400).json({ error: "Invalid id" });
+  }
+
+  try {
+    const flight = await pool.query(`
+    SELECT ${FLIGHT_COLUMNS} FROM flights f WHERE f.id = $1`,[id]);
+
+    if (flight.rows.length === 0) {
+      return res.status(404).json({ error: "Flight not found" });
+    }
+
+    const trips = await pool.query(`
+    select id,
+           direction,
+           to_char(trip_date, 'YYYY-MM-DD') as date,
+           to_char(departure_time, 'HH24:MI') as "departureTime",
+           to_char(arrival_time, 'HH24:MI') as "arrivalTime",
+           duration_minutes as "durationMinutes",
+           departure_airport as "departureAirport",
+           departure_code as "departureCode",
+           arrival_airport as "arrivalAirport",
+           arrival_code as "arrivalCode",
+           stops,
+           status,
+           aircraft
+    from flight_trips t
+    where flight_id = $1
+    order by sort_order`, [id],
+    );
+
+    res.json({...flight.rows[0], trips: trips.rows});
+  } catch (err) {
+    console.error("Error fetching  flights:", err);
+    res.status(500).json({error: "Server error"});
+  }
+})
+
 app.get("/", (req, res) => {
   res.send("API сервера работает!");
 });

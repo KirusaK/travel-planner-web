@@ -76,6 +76,14 @@
     }
   }
 
+  &__logo {
+    @include t.logoStyle;
+  }
+
+  &__logoPlaceholder {
+    @include t.logoPlaceholder;
+  }
+
   &_amenities {
     display: flex;
     align-items: center;
