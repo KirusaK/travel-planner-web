@@ -6,16 +6,34 @@ import { BookingDetailPayment } from "../../widgets/BookingDetailPayment/Booking
 import { BookingDetailAuth } from "../../shared/ui/BookingDetailAuth/BookingDetailAuth.jsx";
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
-import { tickets } from "../../entities/flight/index.js";
 import { ButtonBuy } from "../../shared/ui/ButtonBuy/ButtonBuy.jsx";
-import {useState} from "react";
+import { useEffect, useState } from "react";
 import styles from "./BookingDetailFlight.module.scss";
+import { getFlightById } from "../../shared/api/flights.js";
 
 export const BookingDetailFlight = () => {
   const { id } = useParams();
   const [selectedCardId, setSelectedCardId] = useState(null);
 
-  const ticket = tickets.find((item) => String(item.id) === String(id));
+  const [ticket, setTicket] = useState(null); // State для хранения рейса
+  const [loading, setLoading] = useState(true); // State для показания загрузки
+  const [error, setError] = useState(null); // State для хранения текста ошибки
+
+  useEffect(() => {
+    console.log("загружаю рейс с id =", id);
+
+    setLoading(true);
+    setError(null);
+
+    getFlightById(id)
+      .then((data) => setTicket(data))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) return <p>Loadin...</p>;
+  if (error) return <p>{error}</p>;
+  if (!ticket) return null;
 
   if (!ticket) {
     console.log("No ticket found");

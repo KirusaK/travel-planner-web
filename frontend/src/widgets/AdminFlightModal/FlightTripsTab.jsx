@@ -52,28 +52,28 @@ export const FlightTripsTab = () => {
             </select>
           </div>
           <div className={styles.tripsTab__field}>
-            <label htmlFor="timeRange" className={styles.tripsTab__label}>
+            <label htmlFor="departureTime" className={styles.tripsTab__label}>
               {" "}
-              Time Range
+              Departure Time
             </label>
             <input
-              id="timeRange"
-              name="timeRange"
-              type="text"
-              placeholder="12:00 pm - 01:28 pm"
+              id="departureTime"
+              name="departureTime"
+              type="time"
+              placeholder="12:00 pm"
               className={styles.tripsTab__input}
             />
           </div>
           <div className={styles.tripsTab__field}>
-            <label htmlFor="duration" className={styles.tripsTab__label}>
+            <label htmlFor="arrivalTime" className={styles.tripsTab__label}>
               {" "}
-              Duration
+              Arrival Time
             </label>
             <input
-              id="duration"
-              name="duration"
-              type="text"
-              placeholder="2h 28m"
+              id="arrivalTime"
+              name="arrivalTime"
+              type="time"
+              placeholder="01:28 pm"
               className={styles.tripsTab__input}
             />
           </div>
@@ -112,12 +112,12 @@ export const FlightTripsTab = () => {
           <div className={styles.tripsTab__field}>
             <label htmlFor="route" className={styles.tripsTab__label}>
               {" "}
-              Route
+              Date
             </label>
             <input
               id="route"
               name="route"
-              type="text"
+              type="date"
               placeholder="EZE-IST"
               className={styles.tripsTab__input}
             />

@@ -40,3 +40,38 @@ CREATE TABLE bookings (
     status VARCHAR(50) DEFAULT 'confirmed',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
+
+CREATE TABLE flights (
+	id SERIAL PRIMARY KEY,
+	airline_name VARCHAR(100) NOT NULL,
+	logo TEXT,
+	flight_class VARCHAR(20) NOT NULL default 'Economy' CHECK(flight_class IN ('Economy', 'Business', 'First', 'Premium ')),
+	rating NUMERIC(2, 1) CHECK(rating BETWEEN 0 AND 5),
+	reviews_count INT NOT NULL DEFAULT 0 CHECK (reviews_count >= 0),
+	airport VARCHAR(150) NOT NULL,
+	from_code VARCHAR(10) NOT NULL,
+	to_code VARCHAR(10) NOT NULL,
+	base_price NUMERIC(10, 2) NOT NULL CHECK (base_price > 0),
+	part_due_date DATE,
+	created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+create table flight_trips (
+	id serial primary key,
+	flight_id int not null references flights(id) on delete cascade,
+	sort_order smallint not null default 0,
+	direction varchar(10) not null check (direction in ('Depart', 'Return')),
+	trip_date date not null,
+	departure_time time not null,
+	arrival_time time not null,
+	duration_minutes int not null check(duration_minutes > 0),
+	departure_airport varchar(100) not null,
+	departure_code varchar(10) not null,
+	arrival_airport varchar(100) not null,
+	arrival_code varchar(10) not null,
+	stops varchar(20) not null default 'non stop' check(stops in ('non stop', '1 stop', '2+ stops')),
+	status varchar(20) not null default 'Scheduled' check (status in ('Scheduled', 'On time', 'Delayed', 'Boarding', 'Cancelled')),
+	aircraft varchar(50)
+);
+
+create index idx_flight_trips_flight_id on flight_trips(flight_id);

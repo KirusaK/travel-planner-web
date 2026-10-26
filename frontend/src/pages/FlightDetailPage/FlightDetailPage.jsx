@@ -6,18 +6,31 @@ import { FlightDetailTicket } from "../../widgets/FlightDetailTicket/FlightDetai
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
 import { useParams } from "react-router-dom";
-import { tickets } from "../../entities/flight/index.js";
 import styles from "./FlightDetailPage.module.scss";
+import { useEffect, useState } from "react";
+import { getFlightById } from "../../shared/api/flights.js";
+import { getRatingStatus } from "../../shared/lib/format.js";
 
 export const FlightDetailPage = () => {
   const { id } = useParams();
 
-  const ticket = tickets.find((item) => item.id === id);
+  const [ticket, setTickets] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!ticket) {
-    console.log("No ticket found");
-    return null;
-  }
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+
+    getFlightById(id)
+      .then((data) => setTickets(data))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+  if (!ticket) return null;
 
   return (
     <div>
@@ -28,16 +41,15 @@ export const FlightDetailPage = () => {
             id={ticket.id}
             airlineName={ticket.airlineName}
             price={ticket.price}
-            ratingStatus={ticket.ratingStatus}
+            ratingStatus={getRatingStatus(ticket.rating)}
             reviewsCount={ticket.reviewsCount}
             airport={ticket.airport}
             rating={ticket.rating}
           />
           <div className={styles.block_img}></div>
           <FlightDetailFeatures />
-          <FlightPolicies />
+          <FlightPolicies airlineName={ticket.airlineName} />
           <FlightDetailTicket
-            flightTime={ticket.flightTime}
             airlineName={ticket.airlineName}
             logo={ticket.logo}
             trips={ticket.trips}
