@@ -33,20 +33,27 @@
     top: -10px;
     left: 16px;
     background-color: $color-base;
+    pointer-events: none;
   }
 
   &_from_input_field {
     width: 416px;
     height: 56px;
-    padding-left: 16px;
+    padding-left: 48px;
     border: 1px solid $color-border;
     border-radius: 4px;
+    font-size: 16px;
+
+    &:focus {
+      border-color: $color-mint-green;
+    }
   }
 
   &_from_icon {
     position: absolute;
     top: 16px;
     left: 12px;
+    pointer-events: none;
   }
 
   &_trip {
