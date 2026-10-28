@@ -4,50 +4,15 @@ import styles from "./AdminHotelsTable.module.scss";
 import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
 import { ButtonEdit } from "../../shared/ui/ButtonEdit/ButtonEdit.jsx";
 import { ButtonDelete } from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
+import { useFetchData } from "../../shared/hooks/useFetchData.js";
+import {getHotels} from "../../shared/api/hotels.js";
+import { getStars } from "../../shared/lib/format.js";
 
 export const AdminHotelsTable = () => {
-  const hotels = [
-    {
-      id: 1,
-      hotelName: "CVK Park Bosphorus Hotel Istanbul",
-      roomsCount: 3,
-      amenitiesCount: 9,
-      location: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
-      stars: 5,
-      rating: 4.2,
-      price: 240,
-    },
-    {
-      id: 2,
-      hotelName: "Eresin Hotels Sultanahmet - Boutique",
-      roomsCount: 1,
-      amenitiesCount: 5,
-      location: "Kucukayasofya No. 40 Sultanahmet, Istanbul 34022",
-      stars: 4,
-      rating: 4.6,
-      price: 104,
-    },
-    {
-      id: 3,
-      hotelName: "Atlantis The Palm Dubai",
-      roomsCount: 1,
-      amenitiesCount: 7,
-      location: "Crescent Rd, The Palm Jumeirah, Dubai",
-      stars: 5,
-      rating: 4.8,
-      price: 520,
-    },
-    {
-      id: 4,
-      hotelName: "Hotel Artemide Rome",
-      roomsCount: 1,
-      amenitiesCount: 5,
-      location: "Via Nazionale 22, Rome 00184",
-      stars: 4,
-      rating: 4.4,
-      price: 189,
-    },
-  ];
+  const { data: hotels, loading, error } = useFetchData(getHotels);
+
+  if (loading) return <p>Loading hotels...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <section className={styles.hotelsTable}>
@@ -67,9 +32,7 @@ export const AdminHotelsTable = () => {
               <img src={image} alt="" className={styles.hotelsTable__avatar} />
 
               <div className={styles.hotelsTable__textGroup}>
-                <h3 className={styles.hotelsTable__hotelName}>
-                  {item.hotelName}
-                </h3>
+                <h3 className={styles.hotelsTable__hotelName}>{item.name}</h3>
                 <span className={styles.hotelsTable__meta}>
                   {item.roomsCount} rooms{" "}
                   <span className={styles.hotelsTable__dot}>.</span>{" "}
@@ -84,16 +47,22 @@ export const AdminHotelsTable = () => {
               </svg>
 
               <span className={styles.hotelsTable__locationText}>
-                {item.location}
+                {item.address}
               </span>
             </div>
 
-            <div className={styles.hotelsTable__stars}>{item.stars}</div>
+            <div className={styles.hotelsTable__stars}>
+              {Array.from({ length: getStars(item.rating) }).map((_, index) => (
+                <svg key={index} width={16} height={16}>
+                  <use href={sprite + "#icon-Star"} />
+                </svg>
+              ))}
+            </div>
 
             <RatingCard value={item.rating} />
 
             <p className={styles.hotelsTable__price}>
-              ${item.price}
+              ${item.pricePerNight}
               <span className={styles.hotelsTable__pricePeriod}>/night</span>
             </p>
 

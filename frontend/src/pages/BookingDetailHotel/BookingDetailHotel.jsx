@@ -7,27 +7,16 @@ import { BookingDetailAuth } from "../../shared/ui/BookingDetailAuth/BookingDeta
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
 import { ButtonBuy } from "../../shared/ui/ButtonBuy/ButtonBuy.jsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./BookingDetailHotel.module.scss";
 import { getHotelById } from "../../shared/api/hotels.js";
+import { useFetch } from "../../shared/hooks/useFetch.js";
 
 export const BookingDetailHotel = () => {
   const { id } = useParams();
   const [selectedCardId, setSelectedCardId] = useState(null);
 
-  const [hotel, setHotels] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    setLoading(true);
-    setError(null);
-
-    getHotelById(id)
-      .then((data) => setHotels(data))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, [id]);
+  const { data: hotel, loading, error } = useFetch(getHotelById, id);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;

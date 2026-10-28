@@ -5,75 +5,15 @@ import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
 import { ButtonEdit } from "../../shared/ui/ButtonEdit/ButtonEdit.jsx";
 import { ButtonDelete } from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
 import { Badge } from "../../shared/ui/Badge/Badge.jsx";
+import { getFlights } from "../../shared/api/flights.js";
+import {getRatingStatus} from "../../shared/lib/format.js";
+import {useFetchData} from "../../shared/hooks/useFetchData.js";
 
 export const AdminFlightsTable = () => {
-  const flights = [
-    {
-      id: 1,
-      airlineName: "Emirates",
-      reviewsCount: 54,
-      rating: 4.2,
-      ratingStatus: "Very Good",
-      price: 104,
-      from: "EZE",
-      to: "IST",
-      airport: "Istanbul Airport, Turkey",
-      flightClass: "Economy",
-      tripsCount: 2,
-    },
-    {
-      id: 2,
-      airlineName: "Flydubai",
-      reviewsCount: 128,
-      rating: 4.6,
-      ratingStatus: "Excellent",
-      price: 186,
-      from: "DXB",
-      to: "LHR",
-      airport: "Dubai International, UAE",
-      flightClass: "Business",
-      tripsCount: 1,
-    },
-    {
-      id: 3,
-      airlineName: "Qatar Airways",
-      reviewsCount: 312,
-      rating: 4.8,
-      ratingStatus: "Excellent",
-      price: 240,
-      from: "DOH",
-      to: "JFK",
-      airport: "Hamad International, Qatar",
-      flightClass: "First",
-      tripsCount: 1,
-    },
-    {
-      id: 4,
-      airlineName: "Etihad",
-      reviewsCount: 87,
-      rating: 3.9,
-      ratingStatus: "Good",
-      price: 132,
-      from: "AUH",
-      to: "CDG",
-      airport: "Abu Dhabi International, UAE",
-      flightClass: "Economy",
-      tripsCount: 1,
-    },
-    {
-      id: 5,
-      airlineName: "Turkish Airlines",
-      reviewsCount: 201,
-      rating: 4.3,
-      ratingStatus: "Very Good",
-      price: 98,
-      from: "IST",
-      to: "FCO",
-      airport: "Istanbul Airport, Turkey",
-      flightClass: "Premium",
-      tripsCount: 1,
-    },
-  ];
+  const {data: flights, loading, error} = useFetchData(getFlights);
+
+  if (loading) return <p>Loading flights...</p>;
+  if (error) return <p>{error}</p>;
 
   const classVariant  = {
     Economy: "neutral",
@@ -118,7 +58,7 @@ export const AdminFlightsTable = () => {
             <div className={styles.flightsTable__ratingGroup}>
               <RatingCard value={item.rating} />
               <span className={styles.flightsTable__ratingStatus}>
-                {item.ratingStatus}
+                {getRatingStatus(item.rating)}
               </span>
             </div>
 
@@ -149,7 +89,9 @@ export const AdminFlightsTable = () => {
 
             {/* 5. Class */}
             <div>
-              <Badge variant={classVariant[item.flightClass]}>{item.flightClass}</Badge>
+              <Badge variant={classVariant[item.flightClass]}>
+                {item.flightClass}
+              </Badge>
             </div>
 
             {/* 6. Trips */}
