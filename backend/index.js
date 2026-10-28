@@ -346,7 +346,8 @@ app.get("/api/flights/:id", async (req, res) => {
       return res.status(404).json({ error: "Flight not found" });
     }
 
-    const trips = await pool.query(`
+    const trips = await pool.query(
+      `
     select id,
            direction,
            to_char(trip_date, 'YYYY-MM-DD') as date,
@@ -362,12 +363,116 @@ app.get("/api/flights/:id", async (req, res) => {
            aircraft
     from flight_trips t
     where flight_id = $1
-    order by sort_order`, [id],
+    order by sort_order`,
+      [id],
     );
 
     res.json({...flight.rows[0], trips: trips.rows});
   } catch (err) {
     console.error("Error fetching  flights:", err);
+    res.status(500).json({error: "Server error"});
+  }
+})
+
+const HOTEL_COLUMNS = `
+  h.id,
+  h.name,
+  h.logo_url as "logoUrl",
+  h.country,
+  h.city,
+  h.address,
+  h.google_maps_url as "googleMapsUrl",
+  h.map_embed_url as "mapEmbedUrl",
+  h.description,
+  h.features,
+  h.price_per_night::float as "pricePerNight",
+  h.rating::float as rating,
+  h.reviews_count as "reviewsCount",
+  to_char(h.part_due_date, 'YYYY-MM-DD') as "partDueDate"
+`;
+
+app.get("/api/hotels", async (req, res) => {
+  try {
+    const { rows } = await pool.query(`
+      select ${HOTEL_COLUMNS},
+        (select count(*) from hotel_rooms r 
+            where r.hotel_id = h.id)::int as "roomsCount",
+        (select count(*) from hotel_amenities a
+            where a.hotel_id = h.id)::int as "amenitiesCount",
+        (select image_url from hotel_rooms r
+            where r.hotel_id = h.id
+            order by r.sort_order LIMIT 1) as cover
+      from hotels h
+      order by h.id
+    `);
+
+    res.json(rows);
+  } catch (err) {
+    console.error("Error fetching  hotels:", err);
+    res.status(500).json({error: "Server error"});
+  }
+})
+
+app.get("/api/hotels/:id", async (req, res) => {
+  const { id } = req.params;
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(400).json({ error: "Invalid id" });
+  }
+
+  try {
+    const hotel = await pool.query(`
+      select ${HOTEL_COLUMNS} from hotels h where h.id = $1`,
+      [id],
+    );
+
+    if (hotel.rows.length === 0) {
+      return res.status(404).json({ error: "Hotel not found" });
+    }
+
+    const rooms = await pool.query(`
+      select id, 
+             title, 
+             price::float as price, 
+             image_url as "imageUrl"
+      from hotel_rooms r
+      where r.hotel_id = $1
+      order by sort_order`,
+      [id],
+    )
+
+    const amenities = await pool.query(
+      `
+      select a.id,
+             a.name,
+             a.icon
+      from hotel_amenities ha
+      join amenities a on a.id = ha.amenity_id
+      where ha.hotel_id = $1
+      ORDER BY a.id`,
+      [id],
+    );
+
+    const reviews = await pool.query(`
+      select id,
+             author_name as "authorName",
+             avatar_url as "avatarUrl" ,
+             rating::float as rating,
+             text
+      from hotel_reviews 
+      where hotel_id = $1
+      ORDER BY created_at DESC, id DESC`,
+      [id],
+    );
+
+    res.json({
+      ...hotel.rows[0],
+      rooms: rooms.rows,
+      amenities: amenities.rows,
+      reviews: reviews.rows,
+    });
+  } catch (err) {
+    console.error("Error fetching  hotels:", err);
     res.status(500).json({error: "Server error"});
   }
 })

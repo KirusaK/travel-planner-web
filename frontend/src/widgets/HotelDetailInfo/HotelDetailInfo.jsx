@@ -3,12 +3,12 @@ import { FavouritesBtn } from "../../shared/ui/FavouritesBtn/FavouritesBtn.jsx";
 import { useNavigate } from "react-router-dom";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./HotelDetailInfo.module.scss";
+import { getStars } from "../../shared/lib/format.js";
 
 export const HotelDetailInfo = (props) => {
   const {
     id,
     name,
-    stars,
     price,
     location,
     rating,
@@ -17,6 +17,8 @@ export const HotelDetailInfo = (props) => {
   } = props;
 
   const navigate = useNavigate();
+
+  const stars = getStars(props.rating)
 
   const handleBookDetailHotel = (hotelId) => {
     navigate(`/booking-detail-hotel/${hotelId}`);
@@ -31,12 +33,12 @@ export const HotelDetailInfo = (props) => {
               {name}
             </h2>
             <div className={styles.hotelDetailInfo_header__blocks__stars}>
-              {Array.from({ length: Number(stars) || 0 }).map((_, index) => (
+              {Array.from({ length: stars || 0 }).map((_, index) => (
                 <svg key={index} width={16} height={16}>
                   <use href={sprite + "#icon-Star"} />
                 </svg>
               ))}
-              <span>{stars} Star Hotel</span>
+              {stars > 0 && <span>{stars} Star Hotel</span>}
             </div>
           </div>
           <h2 className={styles.hotelDetailInfo_header__price}>

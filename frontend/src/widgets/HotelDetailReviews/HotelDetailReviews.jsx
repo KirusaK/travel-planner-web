@@ -1,4 +1,5 @@
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
+import logo from "../../shared/assets/image/Ellipse 1.jpg";
 import styles from "./HotelDetailReviews.module.scss";
 
 export const HotelDetailReviews = (props) => {
@@ -40,13 +41,16 @@ export const HotelDetailReviews = (props) => {
 
         <div className={styles.hotelDetailReviews_block__info}>
           {reviews.map((item) => (
-            <div className={styles.hotelDetailReviews_block__info__full}>
+            <div
+              key={item.id}
+              className={styles.hotelDetailReviews_block__info__full}
+            >
               <div
                 className={styles.hotelDetailReviews_block__info__full__reviews}
               >
                 <img
-                  src={item.img}
-                  alt={item.name}
+                  src={item.avatarUrl || logo}
+                  alt={item.authorName}
                   className={
                     styles.hotelDetailReviews_block__info__full__reviews__img
                   }
@@ -62,7 +66,7 @@ export const HotelDetailReviews = (props) => {
                       styles.hotelDetailReviews_block__info__full__reviews__text__header
                     }
                   >
-                    <b>{item.assessment}</b> | {item.name}
+                    <b>{item.rating}</b> | {item.authorName}
                   </div>
                   <p
                     className={

@@ -12,6 +12,12 @@
       margin-bottom: 64px;
 
       &__other {
+        padding: 16px 0;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $color-blackish-green;
+        }
+
         &__ful {
           display: flex;
           justify-content: space-between;

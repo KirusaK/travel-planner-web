@@ -20,8 +20,6 @@ export const BookingDetailFlight = () => {
   const [error, setError] = useState(null); // State для хранения текста ошибки
 
   useEffect(() => {
-    console.log("загружаю рейс с id =", id);
-
     setLoading(true);
     setError(null);
 
@@ -34,11 +32,6 @@ export const BookingDetailFlight = () => {
   if (loading) return <p>Loadin...</p>;
   if (error) return <p>{error}</p>;
   if (!ticket) return null;
-
-  if (!ticket) {
-    console.log("No ticket found");
-    return null;
-  }
 
   return (
     <section>

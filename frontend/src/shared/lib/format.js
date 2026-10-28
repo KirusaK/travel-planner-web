@@ -35,3 +35,7 @@ export const formatFullDate = (iso) =>
     day: "numeric",
     year: "numeric",
   });
+
+export const getStars = (rating) => {
+  return rating === null || rating === undefined ? 0 : Math.round(rating);
+}
