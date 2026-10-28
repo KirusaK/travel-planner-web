@@ -104,6 +104,29 @@ app.post("/api/cards", async (req, res) => {
   }
 });
 
+app.get("/api/users", async (req, res) => {
+  try {
+    const { rows } = await pool.query(`
+    select 
+      u.id,
+      u.first_name as "firstName",
+      u.last_name as "lastName",
+      u.email,
+      u.phone_number as "phoneNumber",
+      'Not specified' as country,
+      to_char(u.created_at, 'DD.MM.YYYY') as joined,
+      (select count(*) from bookings b where b.user_id = u.id)::int as "bookingsCount",
+      'Active' as status
+    from users u
+    order by u.id desc`);
+
+    res.json(rows);
+  } catch (err) {
+    console.error("Error fetching users for admin:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+})
+
 const PROFILE_SELECT = `
   SELECT id,
          TRIM(first_name || ' ' || last_name) AS name,
@@ -241,6 +264,37 @@ app.delete("/api/cards/:id", async (req, res) => {
         .json({ error: "Card is used in bookings and cannot be deleted" });
     }
     console.error("Error deleting card:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.get("/api/bookings", async (req, res) => {
+  const { userId } = req.query;
+
+  if (!userId || userId === "undefined" || userId === "null") {
+    return res.status(400).json({ error: "userId is required" });
+  }
+
+  try {
+    const result = await pool.query(
+      `select 
+        b.id,
+        trim(u.first_name || ' ' || last_name) as "customerName",
+        u.email as "customerEmail",
+        b.item_type as "itemType",
+        b.title as "title",
+        to_char(b.created_at, 'DD.MM.YYYY') as date,
+        'Full' AS payment,
+        b.total_price::float as amount,
+        b.status
+      from bookings b
+      join users u on u.id = b.user_id
+      order by b.id desc`,
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching bookings list:", err);
     res.status(500).json({ error: "Server error" });
   }
 });

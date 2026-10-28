@@ -10,26 +10,14 @@ import { HotelDetailReviews } from "../../widgets/HotelDetailReviews/HotelDetail
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
 import styles from "./HotelDetailPage.module.scss";
-import { useEffect, useState } from "react";
 import { getHotelById } from "../../shared/api/hotels.js";
 import { getRatingStatus, getStars } from "../../shared/lib/format.js";
+import { useFetch } from "../../shared/hooks/useFetch.js";
 
 export const HotelDetailPage = () => {
   const { id } = useParams();
 
-  const [hotel, setHotel] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    setLoading(true);
-    setError(null);
-
-    getHotelById(id)
-      .then((data) => setHotel(data))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, [id]);
+  const { data: hotel, loading, error } = useFetch(getHotelById, id);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;

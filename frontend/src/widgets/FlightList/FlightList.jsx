@@ -1,34 +1,26 @@
-import { useState, useEffect } from "react";
+  import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FlightCard } from "../FlightCard/FlightCard.jsx";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./FlightList.module.scss";
 import {getFlights} from "../../shared/api/flights.js";
+import { useFetchData } from "../../shared/hooks/useFetchData.js";
 
 export const FlightList = () => {
   const { from, to, flightClass } = useSelector(
     (state) => state.flight.searchParams,
   );
 
-  const [allFlights, setAllFlights] = useState([]);
+  const {data: flights, loading, error} = useFetchData(getFlights);
   const [filteredTickets, setFilteredTickets] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-   getFlights()
-       .then((data) => setAllFlights(data))
-       .catch((err) => setError(err.message))
-       .finally(() => setLoading(false));
-  }, []);
 
   useEffect(() => {
     if (!from && !to) {
-      setFilteredTickets(allFlights);
+      setFilteredTickets(flights);
       return;
     }
 
-    const result = allFlights.filter((ticket) => {
+    const result = flights.filter((ticket) => {
       return (
         ticket.from.toLowerCase() === from.toLowerCase() &&
         ticket.to.toLowerCase() === to.toLowerCase() &&
@@ -37,7 +29,7 @@ export const FlightList = () => {
     });
 
     setFilteredTickets(result);
-  }, [from, to, flightClass, allFlights]);
+  }, [from, to, flightClass, flights]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -47,7 +39,7 @@ export const FlightList = () => {
       <div className={styles.sorting_results}>
         <p>
           <strong>Showing {filteredTickets.length} of</strong>{" "}
-          <span>{allFlights.length} places</span>
+          <span>{flights.length} places</span>
         </p>
         <div className={styles.sorting_selectWrapper}>
           <p>

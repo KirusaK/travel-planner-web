@@ -2,8 +2,20 @@ import styles from "./AdminBookings.module.scss";
 import { AdminNav } from "../../widgets/AdminNav/AdminNav.jsx";
 import { AdminHeader } from "../../widgets/AdminHeader/AdminHeader.jsx";
 import AdminBookingsTable from "../../widgets/AdminBookingsTable/AdminBookingsTable.jsx";
+import { useFetchData } from "../../shared/hooks/useFetchData.js";
+import { getUserBookings } from "../../shared/api/users.js";
 
 export const AdminBookings = () => {
+  const savedData = JSON.parse(localStorage.getItem("user"));
+  const userId = savedData?.user?.id;
+  const {
+    data: bookings,
+    loading,
+    error,
+  } = useFetchData(() => getUserBookings(userId), [userId]);
+  const countBookings = bookings.length;
+
+
   const btn = [
     { id: 1, name: "All", count: 8 },
     { id: 2, name: "Confirmed", count: 3 },
@@ -23,7 +35,7 @@ export const AdminBookings = () => {
             <div className={styles.body_headerBlock}>
               <h1 className={styles.body_headerBlock_title}>Bookings</h1>
               <p className={styles.body_headerBlock_subtitle}>
-                8 bookings across flights and hotels
+                {countBookings} bookings across flights and hotels
               </p>
             </div>
 
@@ -37,7 +49,7 @@ export const AdminBookings = () => {
               ))}
             </div>
 
-            <AdminBookingsTable />
+            <AdminBookingsTable bookings={bookings} loading={loading} error={error} />
           </div>
         </div>
       </div>

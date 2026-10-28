@@ -2,97 +2,9 @@ import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./AdminBookingsTable.module.scss";
 import { Badge } from "../../shared/ui/Badge/Badge.jsx";
 
-const AdminBookingsTable = () => {
-  const bookings = [
-    {
-      id: "BK-10284",
-      customerName: "Tomhoon Lee",
-      customerEmail: "tomhoon@gmail.com",
-      itemType: "flight",
-      title: "Emirates · EZE → IST",
-      date: "2026-10-12",
-      payment: "Full",
-      amount: 104,
-      status: "Confirmed",
-    },
-    {
-      id: "BK-10283",
-      customerName: "Mehmet Yılmaz",
-      customerEmail: "mehmet.y@gmail.com",
-      itemType: "hotel",
-      title: "CVK Park Bosphorus · 3 nights",
-      date: "2026-10-11",
-      payment: "Partial",
-      amount: 720,
-      status: "Pending",
-    },
-    {
-      id: "BK-10282",
-      customerName: "Amelia Watson",
-      customerEmail: "amelia.w@outlook.com",
-      itemType: "flight",
-      title: "Flydubai · DXB → LHR",
-      date: "2026-10-10",
-      payment: "Full",
-      amount: 186,
-      status: "Confirmed",
-    },
-    {
-      id: "BK-10281",
-      customerName: "Ahmed Al Mansoori",
-      customerEmail: "ahmed.m@etisalat.ae",
-      itemType: "hotel",
-      title: "Atlantis The Palm · 2 nights",
-      date: "2026-10-09",
-      payment: "Partial",
-      amount: 1040,
-      status: "Confirmed",
-    },
-    {
-      id: "BK-10280",
-      customerName: "Hana Suzuki",
-      customerEmail: "hana.s@yahoo.co.jp",
-      itemType: "flight",
-      title: "Qatar Airways · DOH → JFK",
-      date: "2026-10-08",
-      payment: "Full",
-      amount: 240,
-      status: "Completed",
-    },
-    {
-      id: "BK-10279",
-      customerName: "Sofia Rossi",
-      customerEmail: "sofia.rossi@libero.it",
-      itemType: "hotel",
-      title: "Hotel Artemide · 4 nights",
-      date: "2026-10-06",
-      payment: "Full",
-      amount: 756,
-      status: "Cancelled",
-    },
-    {
-      id: "BK-10278",
-      customerName: "Lucas Martín",
-      customerEmail: "lucas.martin@gmail.com",
-      itemType: "flight",
-      title: "Turkish Airlines · IST → FCO",
-      date: "2026-10-05",
-      payment: "Partial",
-      amount: 98,
-      status: "Pending",
-    },
-    {
-      id: "BK-10277",
-      customerName: "Tomhoon Lee",
-      customerEmail: "tomhoon@gmail.com",
-      itemType: "hotel",
-      title: "Eresin Sultanahmet · 2 nights",
-      date: "2026-10-03",
-      payment: "Full",
-      amount: 208,
-      status: "Completed",
-    },
-  ];
+const AdminBookingsTable = ({bookings, loading, error}) => {
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>{error}</p>;
 
   const icons = {
     flight: "#icon-Frame1",
@@ -150,14 +62,15 @@ const AdminBookingsTable = () => {
               </span>
             </div>
 
-            <span className={styles.bookingsTable__date}>{item.date}</span>
+            <span className={styles.bookingsTable__date}>
+              {item.date}
+            </span>
 
             <Badge variant={variants[item.payment]}>{item.payment}</Badge>
 
             <span className={styles.bookingsTable__amount}>${item.amount}</span>
 
             <Badge variant={variants[item.status]}>{item.status}</Badge>
-
           </div>
         ))}
       </div>

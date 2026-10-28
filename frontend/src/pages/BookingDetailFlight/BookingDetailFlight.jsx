@@ -7,31 +7,20 @@ import { BookingDetailAuth } from "../../shared/ui/BookingDetailAuth/BookingDeta
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
 import { ButtonBuy } from "../../shared/ui/ButtonBuy/ButtonBuy.jsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./BookingDetailFlight.module.scss";
 import { getFlightById } from "../../shared/api/flights.js";
+import { useFetch } from "../../shared/hooks/useFetch.js";
 
 export const BookingDetailFlight = () => {
   const { id } = useParams();
   const [selectedCardId, setSelectedCardId] = useState(null);
 
-  const [ticket, setTicket] = useState(null); // State для хранения рейса
-  const [loading, setLoading] = useState(true); // State для показания загрузки
-  const [error, setError] = useState(null); // State для хранения текста ошибки
+  const { data: flight, loading, error } = useFetch(getFlightById, id);
 
-  useEffect(() => {
-    setLoading(true);
-    setError(null);
-
-    getFlightById(id)
-      .then((data) => setTicket(data))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, [id]);
-
-  if (loading) return <p>Loadin...</p>;
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
-  if (!ticket) return null;
+  if (!flight) return null;
 
   return (
     <section>
@@ -39,19 +28,19 @@ export const BookingDetailFlight = () => {
 
       <div className={styles.main}>
         <div>
-          <BookingDetailTicket ticket={ticket} />
-          <BookingDetailPayment ticket={ticket} />
+          <BookingDetailTicket ticket={flight} />
+          <BookingDetailPayment ticket={flight} />
           <BookingDetailAuth
             onSelectCard={(cardId) => setSelectedCardId(cardId)}
           />
         </div>
         <div className={styles.main_block}>
-          <BookingDetailTotal ticket={ticket} />
+          <BookingDetailTotal ticket={flight} />
           <ButtonBuy
             itemType="flight"
-            itemId={ticket.id}
-            title={ticket.airlineName}
-            price={ticket.price}
+            itemId={flight.id}
+            title={flight.airlineName}
+            price={flight.price}
             selectedCardId={selectedCardId}
           />
         </div>

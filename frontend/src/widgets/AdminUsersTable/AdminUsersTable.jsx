@@ -3,86 +3,11 @@ import image from "../../shared/assets/image/Ellipse 1.jpg";
 import { ButtonDelete } from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
 import { Badge } from "../../shared/ui/Badge/Badge.jsx";
 
-export const AdminUsersTable = () => {
-  const users = [
-    {
-      id: 1,
-      firstName: "Tomhoon",
-      lastName: "Lee",
-      email: "tomhoon@gmail.com",
-      phone: "+1 202 555 0143",
-      country: "United States",
-      joined: "2026-02-14",
-      bookingsCount: 8,
-      status: "Active",
-    },
-    {
-      id: 2,
-      firstName: "Amelia",
-      lastName: "Watson",
-      email: "amelia.w@outlook.com",
-      phone: "+44 20 7946 0958",
-      country: "United Kingdom",
-      joined: "2026-03-02",
-      bookingsCount: 5,
-      status: "Active",
-    },
-    {
-      id: 3,
-      firstName: "Mehmet",
-      lastName: "Yılmaz",
-      email: "mehmet.y@gmail.com",
-      phone: "+90 212 555 0199",
-      country: "Turkey",
-      joined: "2026-04-21",
-      bookingsCount: 12,
-      status: "Active",
-    },
-    {
-      id: 4,
-      firstName: "Sofia",
-      lastName: "Rossi",
-      email: "sofia.rossi@libero.it",
-      phone: "+39 06 555 0123",
-      country: "Italy",
-      joined: "2026-05-09",
-      bookingsCount: 2,
-      status: "Inactive",
-    },
-    {
-      id: 5,
-      firstName: "Ahmed",
-      lastName: "Al Mansoori",
-      email: "ahmed.m@etisalat.ae",
-      phone: "+971 4 555 0177",
-      country: "UAE",
-      joined: "2026-06-17",
-      bookingsCount: 7,
-      status: "Active",
-    },
-    {
-      id: 6,
-      firstName: "Lucas",
-      lastName: "Martín",
-      email: "lucas.martin@gmail.com",
-      phone: "+54 11 5555 0101",
-      country: "Argentina",
-      joined: "2026-07-03",
-      bookingsCount: 1,
-      status: "Suspended",
-    },
-    {
-      id: 7,
-      firstName: "Hana",
-      lastName: "Suzuki",
-      email: "hana.s@yahoo.co.jp",
-      phone: "+81 3 5555 0188",
-      country: "Japan",
-      joined: "2026-08-25",
-      bookingsCount: 4,
-      status: "Active",
-    },
-  ];
+export const AdminUsersTable = ({users, loading, error}) => {
+
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>{error}</p>;
 
   const status = {
     Active: "success",
@@ -117,7 +42,9 @@ export const AdminUsersTable = () => {
                 </span>
               </div>
             </div>
-            <span className={styles.usersTable__number}>{item.phone}</span>
+            <span className={styles.usersTable__number}>
+              {item.phoneNumber}
+            </span>
 
             <span className={styles.usersTable__item}>{item.country}</span>
 

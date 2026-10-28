@@ -2,6 +2,8 @@
 @use "../../shared/styles/table" as t;
 
 .bookingDetailTicket {
+  margin-bottom: 40px;
+
   &_card {
     width: 790px;
     height: auto;
