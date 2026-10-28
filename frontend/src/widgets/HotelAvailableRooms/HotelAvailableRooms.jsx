@@ -28,7 +28,7 @@ export const HotelAvailableRooms = (props) => {
                     className={
                       styles.hotelAvailableRooms_block__info__other__ful__img
                     }
-                    style={{ backgroundImage: `url(${item.image})` }}
+                    style={{ backgroundImage: `url(${item.imageUrl})` }}
                   ></div>
                   <p
                     className={
@@ -66,9 +66,9 @@ export const HotelAvailableRooms = (props) => {
                   </button>
                 </div>
               </div>
-              <hr
-                className={styles.hotelAvailableRooms_block__info__other__hr}
-              />
+              {/*<hr*/}
+              {/*  className={styles.hotelAvailableRooms_block__info__other__hr}*/}
+              {/*/>*/}
             </div>
           ))}
         </div>

@@ -1,9 +1,10 @@
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import defaultAvatar from "../../shared/assets/image/Ellipse 1.jpg";
 import Barcode from "react-barcode";
+import styles from "./BookingTicketCard.module.scss";
+import { formatTime, formatDate } from "../../shared/lib/format.js";
 import flightImage from "../../shared/assets/image/background.jpg";
 import hotelImage from "../../shared/assets/image/background2.jpg";
-import styles from "./BookingTicketCard.module.scss";
 
 export const BookingTicketCard = ({booking, user, itemData, isFlight}) => {
   const passengerName = user
@@ -11,14 +12,15 @@ export const BookingTicketCard = ({booking, user, itemData, isFlight}) => {
     : "...";
 
   const firstTrip = isFlight ? itemData.trips[0] : null;
-  const timeString = firstTrip?.time || "";
-  const [departTime, arrivalTime] = timeString.includes("-") ? timeString.split("-").map((t) => t.trim()) : ["", ""];
-  const startTitle = isFlight ? departTime : itemData?.dataStart;
-  const endTitle = isFlight ? arrivalTime : itemData?.dataFinish ;
-  const startSubtitle = isFlight ? firstTrip?.departureAirport : "Check-In";
-  const endSubtitle = isFlight ? firstTrip?.arrivalAirport : "Check-Out";
-  const typeFlight = isFlight ? itemData.flightClass : itemData.title || "Hotel";
+  const startTitle = isFlight
+    ? firstTrip && formatTime(firstTrip.departureTime)
+    : "error";
+  const endTitle = isFlight ? firstTrip && formatTime(firstTrip.arrivalTime) : "error";
+  const startSubtitle = isFlight ? firstTrip && `${firstTrip.departureAirport} (${firstTrip.departureCode})` : "Check-In";
+  const endSubtitle = isFlight ? firstTrip && `${firstTrip.arrivalAirport} (${firstTrip.arrivalCode})` : "Check-Out";
+  const badgeText = isFlight ? `${itemData.flightClass} Class` : itemData.rooms?.[0]?.title || "Hotel";
   const background = isFlight ? flightImage : hotelImage;
+
 
   const detailsList = isFlight
     ? [
@@ -26,14 +28,16 @@ export const BookingTicketCard = ({booking, user, itemData, isFlight}) => {
           id: "date",
           icon: "#icon-calendar",
           label: "Date",
-          value: firstTrip.start,
+          // "2026-12-24" -> "Thu, Dec 24"
+          value: firstTrip && formatDate(firstTrip.date),
         },
         {
           id: "time",
           icon: "#icon-timmer",
           label: "Flight time",
-          value: departTime,
+          value: firstTrip && formatTime(firstTrip.departureTime),
         },
+        // Gate и Seat пока заглушки: в базе их нет
         {
           id: "gate",
           icon: "#icon-bi_door-closed-fill",
@@ -43,20 +47,28 @@ export const BookingTicketCard = ({booking, user, itemData, isFlight}) => {
         { id: "seat", icon: "#icon-down", label: "Seat", value: 128 },
       ]
     : [
+        // Время заезда и выезда мы в базу не клали, поэтому заглушки
         {
           id: "check-in",
           icon: "#icon-timmer",
           label: "Check-In time",
-          value: itemData.timeStart,
+          value: "12:00pm",
         },
         {
           id: "check-out",
           icon: "#icon-timmer",
           label: "Check-Out time",
-          value: itemData.timeFinish,
+          value: "11:30pm",
         },
-        { id: "room", icon: "#icon-bi_door-closed-fill", label: "Room no.", value: "On arival" },
+        {
+          id: "room",
+          icon: "#icon-bi_door-closed-fill",
+          label: "Room no.",
+          value: "On arival",
+        },
       ];
+
+  const bookingCode = `BK-${booking.id}`;
 
   return (
     <section className={styles.ticketCard}>
@@ -87,12 +99,12 @@ export const BookingTicketCard = ({booking, user, itemData, isFlight}) => {
                   {passengerName}
                 </h3>
                 <p className={styles.ticketCard_passNumber}>
-                  Boarding Pass N’123
+                  Boarding Pass N’{booking.id}
                 </p>
               </div>
             </div>
 
-            <span className={styles.ticketCard_badge}>{typeFlight} Class</span>
+            <span className={styles.ticketCard_badge}>{badgeText}</span>
           </div>
 
           <div>
@@ -118,16 +130,14 @@ export const BookingTicketCard = ({booking, user, itemData, isFlight}) => {
             <div className={styles.ticketCard_footer}>
               <div className={styles.ticketCard_code}>
                 <h2 className={styles.ticketCard_codeTitle}>
-                  {booking?.code || itemData?.airlineCode || "EK"}
+                  {isFlight ? "EK" : itemData.name?.slice(0, 3).toUpperCase()}
                 </h2>
-                <p className={styles.ticketCard_codeSub}>
-                  {booking?.id || booking?.bookingCode}
-                </p>
+                <p className={styles.ticketCard_codeSub}>{bookingCode}</p>
               </div>
 
               <div className={styles.ticketCard_barcode}>
                 <Barcode
-                  value={booking?.bookingCode || "ABC12345"}
+                  value={bookingCode}
                   height={49}
                   width={1.5}
                   displayValue={false}

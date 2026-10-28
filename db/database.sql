@@ -1,3 +1,4 @@
+
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	first_name VARCHAR(50) NOT NULL,
@@ -75,3 +76,59 @@ create table flight_trips (
 );
 
 create index idx_flight_trips_flight_id on flight_trips(flight_id);
+
+create table hotels (
+	id serial primary key,
+	name varchar(150) not null,
+	logo_url text,
+	country varchar(100) not null,
+	city varchar(100) not null,
+	address varchar(255) not null,
+	google_maps_url text,
+	map_embed_url text,
+	description text,
+	feature text[] not null default '{}',
+	price_per_night numeric(10, 2) not null check(price_per_night > 0),
+	rating numeric(2, 1) not null check(rating between 0 and 5),
+	reviews_count int not null default 0 check (reviews_count >= 0),
+	part_due_date date,
+	created_at timestamptz default current_timestamp
+);
+
+create table hotel_rooms (
+	id serial primary key,
+	hotel_id int not null references hotels(id) on delete cascade,
+	sort_order smallint not null default 0,
+	title varchar(255) not null,
+	price numeric(10, 2) not null check(price > 0),
+	image_url text
+);
+
+create table amenities (
+	id serial primary key,
+	name varchar(100) unique not null,
+	icon varchar(100)
+);
+
+create table hotel_amenities (
+	hotel_id int not null references hotels(id) on delete cascade,
+	amenities_id int not null references amenities(id) on delete cascade,
+	primary key (hotel_id, amenities_id)
+);
+
+create table hotel_reviews (
+	id serial primary key,
+	hotel_id int not null references hotels(id) on delete cascade,
+	user_id int not null references users(id) on delete set null,
+	authot_name varchar(100) not null,
+	avatar_url text,
+	rating numeric(2, 1) not null check(rating between 0 and 5),
+	text text not null,
+	created_at  TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_hotel_rooms_hotel_id    ON hotel_rooms(hotel_id);
+CREATE INDEX idx_hotel_reviews_hotel_id  ON hotel_reviews(hotel_id);
+CREATE INDEX idx_hotels_city             ON hotels(city);
+
+select * from hotel_rooms;

@@ -9,18 +9,31 @@ import { HotelDetailAmenities } from "../../widgets/HotelDetailAmenities/HotelDe
 import { HotelDetailReviews } from "../../widgets/HotelDetailReviews/HotelDetailReviews.jsx";
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
-import { hotels } from "../../entities/hotel/index.js";
 import styles from "./HotelDetailPage.module.scss";
+import { useEffect, useState } from "react";
+import { getHotelById } from "../../shared/api/hotels.js";
+import { getRatingStatus, getStars } from "../../shared/lib/format.js";
 
 export const HotelDetailPage = () => {
   const { id } = useParams();
 
-  const hotel = hotels.find((hotel) => hotel.id === id);
+  const [hotel, setHotel] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!hotel) {
-    console.log("hotel not found!");
-    return null;
-  }
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+
+    getHotelById(id)
+      .then((data) => setHotel(data))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+  if (!hotel) return null;
 
   return (
     <>
@@ -29,33 +42,35 @@ export const HotelDetailPage = () => {
       <div className={styles.main}>
         <HotelDetailInfo
           id={hotel.id}
-          name={hotel.hotelName}
-          stars={hotel.stars}
-          price={hotel.price}
-          location={hotel.location}
+          name={hotel.name}
+          stars={getStars(hotel.rating)}
+          price={hotel.pricePerNight}
+          location={hotel.address}
           rating={hotel.rating}
-          ratingStatus={hotel.ratingStatus}
-          countReviews={hotel.countReviews}
+          ratingStatus={getRatingStatus(hotel.rating)}
+          countReviews={hotel.reviewsCount}
         />
-        <HotelDetailGallery />
+        <HotelDetailGallery
+          photos={hotel.rooms.map((room) => room.imageUrl).filter(Boolean)}
+        />
         <HotelDetailOverview
           description={hotel.description}
           rating={hotel.rating}
-          ratingStatus={hotel.ratingStatus}
-          countReviews={hotel.countReviews}
+          ratingStatus={getRatingStatus(hotel.rating)}
+          countReviews={hotel.reviewsCount}
           features={hotel.features}
         />
         <HotelAvailableRooms rooms={hotel.rooms} />
         <HotelDetailLocation
-          location={hotel.location}
+          location={hotel.address}
           googleMapsUrl={hotel.googleMapsUrl}
           mapEmbedUrl={hotel.mapEmbedUrl}
         />
-        <HotelDetailAmenities amenitiesList={hotel.amenitiesList} />
+        <HotelDetailAmenities amenitiesList={hotel.amenities} />
         <HotelDetailReviews
           rating={hotel.rating}
-          ratingStatus={hotel.ratingStatus}
-          countReviews={hotel.countReviews}
+          ratingStatus={getRatingStatus(hotel.rating)}
+          countReviews={hotel.reviewsCount}
           reviews={hotel.reviews}
         />
       </div>
