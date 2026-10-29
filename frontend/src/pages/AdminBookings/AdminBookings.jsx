@@ -3,21 +3,19 @@ import { AdminNav } from "../../widgets/AdminNav/AdminNav.jsx";
 import { AdminHeader } from "../../widgets/AdminHeader/AdminHeader.jsx";
 import AdminBookingsTable from "../../widgets/AdminBookingsTable/AdminBookingsTable.jsx";
 import { useFetchData } from "../../shared/hooks/useFetchData.js";
-import { getUserBookings } from "../../shared/api/users.js";
+import { getBookings } from "../../shared/api/users.js";
 
 export const AdminBookings = () => {
-  const savedData = JSON.parse(localStorage.getItem("user"));
-  const userId = savedData?.user?.id;
   const {
     data: bookings,
     loading,
     error,
-  } = useFetchData(() => getUserBookings(userId), [userId]);
+  } = useFetchData(getBookings);
   const countBookings = bookings.length;
 
 
   const btn = [
-    { id: 1, name: "All", count: 8 },
+    { id: 1, name: "All", count: countBookings },
     { id: 2, name: "Confirmed", count: 3 },
     { id: 3, name: "Pending", count: 2 },
     { id: 4, name: "Completed", count: 2 },

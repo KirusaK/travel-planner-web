@@ -5,9 +5,17 @@ import { AdminHeader } from "../../widgets/AdminHeader/AdminHeader.jsx";
 import {AdminFlightsTable} from "../../widgets/AdminFlightsTable/AdminFlightsTable.jsx";
 import { useState } from "react";
 import { AdminModalFlight } from "../../widgets/AdminFlightModal/AdminModalFlight.jsx";
+import { useFetchData } from "../../shared/hooks/useFetchData.js";
+import { getFlights } from "../../shared/api/flights.js";
 
 export const AdminFlight = () => {
   const [isMoadalOpen, setIsMoadalOpen] = useState(false);
+  const { data: flights = [], loading, error } = useFetchData(getFlights);
+
+  const flightsCount = flights.length;
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <section>
@@ -23,7 +31,7 @@ export const AdminFlight = () => {
                   Flight Management
                 </h1>
                 <p className={styles.body_headerBlock_subtitle}>
-                  5 flights listed on Golobe
+                  {flightsCount} flights listed on Golobe
                 </p>
               </div>
 

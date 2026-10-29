@@ -5,9 +5,21 @@ import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import { AdminHotelsTable } from "../../widgets/AdminHotelsTable/AdminHotelsTable.jsx";
 import {AdminModalHotel} from "../../widgets/AdminModalHotel/AdminModalHotel.jsx";
 import { useState } from "react";
+import { useFetchData } from "../../shared/hooks/useFetchData.js";
+import { getHotels } from "../../shared/api/hotels.js";
 
 export const AdminHotel = () => {
   const [isMoadalOpen, setIsMoadalOpen] = useState(false);
+  const {
+    data: hotels = [],
+    loading,
+    error
+  } = useFetchData(getHotels);
+
+  const hotelsCount = hotels.length;
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <section>
@@ -23,7 +35,7 @@ export const AdminHotel = () => {
                   Hotel Management
                 </h1>
                 <p className={styles.body_headerBlock_subtitle}>
-                  4 properties listed on Golobe
+                  {hotelsCount} properties listed on Golobe
                 </p>
               </div>
 

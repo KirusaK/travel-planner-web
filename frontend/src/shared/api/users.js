@@ -8,8 +8,9 @@ export const getUsers = async () => {
   return response.json();
 }
 
-export const getUserBookings = async (id) => {
-  const response = await fetch(`${API_URL}/bookings?userId=${id}`);
+export const getBookings = async (limit) => {
+  const url = limit ? `${API_URL}/bookings?limit=${limit}` : `${API_URL}/bookings`;
+  const response = await fetch(url);
 
   if (!response.ok) throw new Error("Failed to load bookings");
 
