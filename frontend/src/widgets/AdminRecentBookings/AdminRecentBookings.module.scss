@@ -29,9 +29,21 @@
 
   &__viewAllBtn,
   &__userName {
+    color: $color-text-dark;
     font-size: 14px;
     font-weight: 600;
     background-color: transparent;
+  }
+
+  &__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: $color-light-green;
+    color: $color-green-text;
+    width: 40px;
+    height: 40px;
   }
 
   &__item {

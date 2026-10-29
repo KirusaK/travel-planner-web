@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+import dotenv, {parse} from "dotenv";
 import { pool } from "./db/db.js";
 import bcrypt from "bcrypt";
 
@@ -269,17 +269,14 @@ app.delete("/api/cards/:id", async (req, res) => {
 });
 
 app.get("/api/bookings", async (req, res) => {
-  const { userId } = req.query;
-
-  if (!userId || userId === "undefined" || userId === "null") {
-    return res.status(400).json({ error: "userId is required" });
-  }
-
   try {
-    const result = await pool.query(
+    const {limit} = req.query;
+
+    let query =
       `select 
         b.id,
         trim(u.first_name || ' ' || last_name) as "customerName",
+        upper(substring(u.first_name from 1 for 1) || substring(u.last_name from 1 for 1)) as initials,
         u.email as "customerEmail",
         b.item_type as "itemType",
         b.title as "title",
@@ -289,10 +286,16 @@ app.get("/api/bookings", async (req, res) => {
         b.status
       from bookings b
       join users u on u.id = b.user_id
-      order by b.id desc`,
-    );
+      order by b.id desc`;
 
-    res.json(result.rows);
+    const params = [];
+    if (limit) {
+      query += ` LIMIT $1`;
+      params.push((parseInt(limit, 10)))
+    }
+
+    const {rows} = await pool.query(query, params);
+    res.json(rows);
   } catch (err) {
     console.error("Error fetching bookings list:", err);
     res.status(500).json({ error: "Server error" });

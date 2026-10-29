@@ -2,33 +2,41 @@ import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./AdminStatsGroup.module.scss";
 import { Link } from "react-router-dom";
 
-export const AdminStatsGroup = () => {
+export const AdminStatsGroup = ({users, flights, hotels, bookings, loading, error}) => {
+  const usersCount = users.length;
+  const flightsCount = flights.length;
+  const hotelsCount = hotels.length;
+  const bookingsCount = bookings.length;
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>{error}</p>;
+
   const statsData = [
     {
       id: "bookings",
       title: "Bookings",
-      count: 8,
+      count: bookingsCount,
       icon: "#icon-Frame4",
       link: "/AdminBookings",
     },
     {
       id: "flights",
       title: "Active Flights",
-      count: 5,
+      count: flightsCount,
       icon: "#icon-Frame1",
       link: "/AdminFlight",
     },
     {
       id: "hotels",
       title: "Listed Hotels",
-      count: 4,
+      count: hotelsCount,
       icon: "#icon-Frame2",
       link: "/AdminHotel",
     },
     {
       id: "users",
       title: "Registered Users",
-      count: 7,
+      count: usersCount,
       icon: "#icon-Frame3",
       link: "/AdminUsers",
     },

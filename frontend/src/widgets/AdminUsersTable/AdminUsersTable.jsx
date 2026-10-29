@@ -5,7 +5,6 @@ import { Badge } from "../../shared/ui/Badge/Badge.jsx";
 
 export const AdminUsersTable = ({users, loading, error}) => {
 
-
   if (loading) return <p>Loading...</p>
   if (error) return <p>{error}</p>;
 
