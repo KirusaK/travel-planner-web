@@ -1,4 +1,3 @@
-
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	first_name VARCHAR(50) NOT NULL,
@@ -131,4 +130,4 @@ CREATE INDEX idx_hotel_rooms_hotel_id    ON hotel_rooms(hotel_id);
 CREATE INDEX idx_hotel_reviews_hotel_id  ON hotel_reviews(hotel_id);
 CREATE INDEX idx_hotels_city             ON hotels(city);
 
-select * from hotel_rooms;
+select * from flights;

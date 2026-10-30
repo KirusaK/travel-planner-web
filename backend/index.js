@@ -427,7 +427,133 @@ app.get("/api/flights/:id", async (req, res) => {
     res.json({...flight.rows[0], trips: trips.rows});
   } catch (err) {
     console.error("Error fetching  flights:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+})
+
+app.post("/api/flights", async (req, res) => {
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN');
+
+    const {
+      airlineName,
+      airlineLogo,
+      flightClass,
+      airportLocation,
+      fromAirport,
+      toAirport,
+      basePrice,
+      initialAmount,
+      remainingAmount,
+      dueDate,
+      segments
+    } = req.body;
+
+    const flightQuery = `
+      insert into flights (
+                           airline_name, 
+                           logo, 
+                           flight_class,  
+                           airport, 
+                           from_code, 
+                           to_code, 
+                           base_price,
+                           initial_amount,
+                           remaining_amount,
+                           part_due_date 
+      )
+      values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      returning id;
+    `;
+
+    const flightValue = [
+      airlineName,
+      airlineLogo,
+      flightClass || 'Economy',
+      airportLocation,
+      fromAirport,
+      toAirport,
+      basePrice,
+      initialAmount || null,
+      remainingAmount || null,
+      dueDate || null,
+    ];
+
+    const flightResult = await client.query(flightQuery, flightValue);
+    const newFlightId = flightResult.rows[0].id;
+
+    if (segments && segments.length > 0) {
+      for (let i = 0; i < segments.length; i++) {
+        const seg = segments[i];
+
+        const tripQuery = `
+          insert into flight_trips (
+            flight_id,
+            sort_order,
+            direction,
+            trip_date,
+            departure_time,
+            arrival_time,
+            duration_minutes,
+            departure_airport,
+            departure_code,
+            arrival_airport,
+            arrival_code,
+            stops,
+            status,
+            aircraft
+          )
+          values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);
+        `;
+
+        const tripValues = [
+          newFlightId,
+          i,
+          seg.segmentLabel,
+          seg.date,
+          seg.departureTime,
+          seg.arrivalTime,
+          120,
+          seg.departureAirport,
+          'EZE',
+          seg.arrivalAirport,
+          'IST',
+          seg.flightType,
+          seg.status,
+          seg.aircraftType,
+        ];
+
+        await client.query(tripQuery, tripValues);
+      }
+    }
+
+    await client.query('COMMIT');
+    res.status(201).json({message: "Flight created successfully", flightId: newFlightId});
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error("Error adding flights", err);
     res.status(500).json({error: "Server error"});
+  } finally {
+    client.release();
+  }
+})
+
+app.delete("/api/flights/:id", async (req, res) => {
+  const {id} = req.params;
+
+  try {
+    const result = await  pool.query("delete from flights where id = $1", [id]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Flight not found" });
+    }
+
+    res.json({ message: "Flight deleted successfully", id });
+  } catch (err) {
+    console.error("Error deleting flight", err);
+    res.status(500).json({ error: "Server error" });
   }
 })
 
