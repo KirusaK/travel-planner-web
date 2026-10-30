@@ -2,7 +2,7 @@ import sprite from "../../assets/icons/symbol-defs.svg";
 import styles from "./AdminModal.module.scss";
 import { useEffect } from "react";
 
-export const AdminModal = ({isOpen, isClose, children, title, subtitle}) => {
+export const AdminModal = ({isOpen, isClose, children, title, subtitle, onSave}) => {
   useEffect(() => {
     if (!isOpen) {
       return;
@@ -55,7 +55,7 @@ export const AdminModal = ({isOpen, isClose, children, title, subtitle}) => {
             >
               Cancel
             </button>
-            <button type="button" className={styles.modal__footer__add}>
+            <button type="button" className={styles.modal__footer__add} onClick={onSave}>
               Add Flight
             </button>
           </div>

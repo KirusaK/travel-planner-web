@@ -10,9 +10,26 @@ import { getFlights } from "../../shared/api/flights.js";
 
 export const AdminFlight = () => {
   const [isMoadalOpen, setIsMoadalOpen] = useState(false);
-  const { data: flights = [], loading, error } = useFetchData(getFlights);
+  const { data: flights = [], setData: setFlights, loading, error } = useFetchData(getFlights);
 
   const flightsCount = flights.length;
+
+  const handleDeleteFlight = async (flightId) => {
+    if (!window.confirm("Are you sure you want to delete flight?")) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/flights/${flightId}`, {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to delete flight");
+      setFlights((prevFlights) => prevFlights.filter((flight) => flight.id !== flightId));
+    } catch (err) {
+      console.error("Error deleting flight:", err);
+    }
+  }
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -46,7 +63,7 @@ export const AdminFlight = () => {
               </button>
             </div>
 
-            <AdminFlightsTable />
+            <AdminFlightsTable flights={flights} onDelete={handleDeleteFlight} />
 
             <AdminModalFlight
               isOpen={isMoadalOpen}
