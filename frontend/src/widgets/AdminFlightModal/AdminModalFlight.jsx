@@ -14,7 +14,6 @@ const tabs = [
 
 export const AdminModalFlight = ({isOpen, isClose}) => {
   const [activeTab, setActiveTab] = useState("general");
-
   const [formData, setFormData] = useState({
     airlineName: "",
     airlineLogo: "",

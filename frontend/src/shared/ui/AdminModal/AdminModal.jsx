@@ -56,7 +56,7 @@ export const AdminModal = ({isOpen, isClose, children, title, subtitle, onSave})
               Cancel
             </button>
             <button type="button" className={styles.modal__footer__add} onClick={onSave}>
-              Add Flight
+              {title}
             </button>
           </div>
         </div>

@@ -13,10 +13,30 @@ export const AdminHotel = () => {
   const {
     data: hotels = [],
     loading,
-    error
+    error,
+    refetch
   } = useFetchData(getHotels);
 
   const hotelsCount = hotels.length;
+
+  const handleDeleteHotel = async (id, name) => {
+    if(!window.confirm(`Delete ${name}? This cannot be undone.`)) return;
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/hotels/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        const {error} = await response.json().catch(() => ({}));
+        throw new Error(error || "Failed to delete hotel");
+      }
+
+      await refetch();
+    } catch (err) {
+      console.error("Error deleting hotel: ", err.message);
+    }
+  }
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -50,11 +70,12 @@ export const AdminHotel = () => {
               </button>
             </div>
 
-            <AdminHotelsTable />
+            <AdminHotelsTable hotels={hotels} onDelete={handleDeleteHotel} />
 
             <AdminModalHotel
               isOpen={isMoadalOpen}
               isClose={() => setIsMoadalOpen(false)}
+              onCreated={refetch}
             />
           </div>
         </div>

@@ -561,8 +561,6 @@ const HOTEL_COLUMNS = `
   h.id,
   h.name,
   h.logo_url as "logoUrl",
-  h.country,
-  h.city,
   h.address,
   h.google_maps_url as "googleMapsUrl",
   h.map_embed_url as "mapEmbedUrl",
@@ -570,8 +568,7 @@ const HOTEL_COLUMNS = `
   h.features,
   h.price_per_night::float as "pricePerNight",
   h.rating::float as rating,
-  h.reviews_count as "reviewsCount",
-  to_char(h.part_due_date, 'YYYY-MM-DD') as "partDueDate"
+  h.reviews_count as "reviewsCount"
 `;
 
 app.get("/api/hotels", async (req, res) => {
@@ -656,6 +653,137 @@ app.get("/api/hotels/:id", async (req, res) => {
     });
   } catch (err) {
     console.error("Error fetching  hotels:", err);
+    res.status(500).json({error: "Server error"});
+  }
+})
+
+app.post("/api/hotels", async (req, res) => {
+  const {
+    name,
+    logoUrl,
+    address,
+    googleMapsUrl,
+    mapEmbedUrl,
+    description,
+    features,
+    pricePerNight,
+    rooms,
+    amenitiesIds,
+  } = req.body;
+
+  const price = Number(pricePerNight);
+
+  if (
+    !name?.trim() ||
+    !address?.trim() ||
+    !googleMapsUrl?.trim() ||
+    !mapEmbedUrl?.trim() ||
+    !description?.trim()
+  )
+    return res
+      .status(400)
+      .json({ error: "Not all fields have been filled in " });
+
+  if (!(price > 0)) return res
+    .status(400)
+    .json({ error: "Price per night must be greater than 0" });
+
+  if (!Array.isArray(rooms) || rooms.length === 0) return res.status(400).json({ error: "At least one room is required" });
+
+  if (rooms.some((r) => !r.title?.trim() || !(Number(r.price) > 0))) return res
+    .status(400)
+    .json({ error: "Each room needs a title and a price > 0" });
+
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN');
+
+    const hotelResult = await client.query(`
+      insert into hotels (
+                          name,
+                          logo_url,
+                          address,
+                          google_maps_url,
+                          map_embed_url,
+                          description,
+                          features,
+                          price_per_night         
+      )
+      values ($1, $2, $3, $4, $5, $6, $7, $8)
+      returning id`,
+      [
+        name.trim(),
+        logoUrl || null,
+        address.trim(),
+        googleMapsUrl || null,
+        mapEmbedUrl || null,
+        description,
+        Array.isArray(features) ? features : [],
+        price,
+      ]
+    );
+
+    const newHotelId = hotelResult.rows[0].id;
+
+
+    for (let i = 0; i < rooms.length; i++) {
+      await client.query(
+        `
+        insert into hotel_rooms (
+                                 hotel_id, sort_order, title, price, image_url
+        )
+        values ($1, $2, $3, $4, $5)`,
+        [
+          newHotelId,
+          i,
+          rooms[i].title.trim(),
+          Number(rooms[i].price),
+          rooms[i].imageUrl || null,
+        ],
+      );
+    }
+
+    if (Array.isArray(amenitiesIds) && amenitiesIds.length > 0) {
+      await client.query(
+        `
+        insert into hotel_amenities (hotel_id, amenity_id)
+        select $1, unnest($2::int[])
+        on conflict do nothing`,
+        [newHotelId, amenitiesIds],
+      );
+    }
+
+    await client.query('COMMIT');
+    res.status(201).json({ message: "Hotel created successfully", hotelId: newHotelId });
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error("Error adding  hotels:", err);
+    res.status(500).json({error: "Server error"});
+  } finally {
+    client.release();
+  }
+})
+
+app.delete("/api/hotels/:id", async (req, res) => {
+  const {id} = req.params;
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(400).json({ error: "Invalid hotel id" });
+  }
+
+  try {
+    const result = await pool.query(`
+      delete from hotels where id = $1 returning id 
+    `, [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({error: "Hotel not found"});
+    }
+
+    res.json({message: "Hotel deleted successfully", id: result.rows[0].id});
+  } catch (err) {
+    console.error("Error deleting hotels:", err);
     res.status(500).json({error: "Server error"});
   }
 })

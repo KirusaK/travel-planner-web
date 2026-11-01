@@ -49,6 +49,10 @@ $table-columns: 4.5fr 3.3fr 1.4fr 1fr 1.4fr 80px;
     font-weight: 400;
   }
 
+  &__rating {
+    @include t.ratingCard;
+  }
+
   &__price {
     @include t.price(16px, 700);
   }
