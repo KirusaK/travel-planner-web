@@ -1,7 +1,7 @@
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./FlightGeneralTab.module.scss";
 
-export const FlightGeneralTab = () => {
+export const FlightGeneralTab = ({formData, onChange}) => {
   return (
     <div className={styles.generalTab}>
       <section className={styles.generalTab__sectionHead}>
@@ -21,6 +21,8 @@ export const FlightGeneralTab = () => {
             type="text"
             id="airlineName"
             name="airlineName"
+            value={formData.airlineName}
+            onChange={onChange}
           />
         </div>
         <div className={styles.generalTab__field}>
@@ -31,6 +33,8 @@ export const FlightGeneralTab = () => {
             className={styles.generalTab__input}
             id="flightClass"
             name="flightClass"
+            value={formData.flightClass}
+            onChange={onChange}
           >
             <option value="Economy">Economy</option>
             <option value="Business">Business</option>
@@ -56,8 +60,10 @@ export const FlightGeneralTab = () => {
           <input
             className={styles.generalTab__input}
             type="text"
-            name="image"
+            name="airlineLogo"
             placeholder="or paste image URL"
+            value={formData.airlineLogo}
+            onChange={onChange}
           />
         </div>
       </section>
@@ -70,38 +76,49 @@ export const FlightGeneralTab = () => {
           </p>
         </div>
 
-        <div className={`${styles.generalTab__row} ${styles.generalTab__row__three}`}>
+        <div
+          className={`${styles.generalTab__row} ${styles.generalTab__row__three}`}
+        >
           <div className={styles.generalTab__field}>
-            <label className={styles.generalTab__label} htmlFor="location">
+            <label
+              className={styles.generalTab__label}
+              htmlFor="airportLocation"
+            >
               Airport / Location
             </label>
             <input
               className={styles.generalTab__input}
               type="text"
-              id="location"
-              name="location"
+              id="airportLocation"
+              name="airportLocation"
+              value={formData.airportLocation}
+              onChange={onChange}
             />
           </div>
           <div className={styles.generalTab__field}>
-            <label className={styles.generalTab__label} htmlFor="from">
+            <label className={styles.generalTab__label} htmlFor="fromAirport">
               From (airport code)
             </label>
             <input
               className={styles.generalTab__input}
               type="text"
-              id="from"
-              name="from"
+              id="fromAirport"
+              name="fromAirport"
+              value={formData.fromAirport}
+              onChange={onChange}
             />
           </div>
           <div className={styles.generalTab__field}>
-            <label className={styles.generalTab__label} htmlFor="to">
+            <label className={styles.generalTab__label} htmlFor="toAirport">
               To (airport code)
             </label>
             <input
               className={styles.generalTab__input}
               type="text"
-              id="to"
-              name="to"
+              id="toAirport"
+              name="toAirport"
+              value={formData.toAirport}
+              onChange={onChange}
             />
           </div>
         </div>

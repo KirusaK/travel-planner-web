@@ -4,15 +4,9 @@ import styles from "./AdminHotelsTable.module.scss";
 import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
 import { ButtonEdit } from "../../shared/ui/ButtonEdit/ButtonEdit.jsx";
 import { ButtonDelete } from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
-import { useFetchData } from "../../shared/hooks/useFetchData.js";
-import {getHotels} from "../../shared/api/hotels.js";
 import { getStars } from "../../shared/lib/format.js";
 
-export const AdminHotelsTable = () => {
-  const { data: hotels, loading, error } = useFetchData(getHotels);
-
-  if (loading) return <p>Loading hotels...</p>;
-  if (error) return <p>{error}</p>;
+export const AdminHotelsTable = ({hotels, onDelete}) => {
 
   return (
     <section className={styles.hotelsTable}>
@@ -34,7 +28,7 @@ export const AdminHotelsTable = () => {
               <div className={styles.hotelsTable__textGroup}>
                 <h3 className={styles.hotelsTable__hotelName}>{item.name}</h3>
                 <span className={styles.hotelsTable__meta}>
-                  {item.roomsCount} rooms{" "}
+                  {item.roomsCount} { item.roomsCount === 1 ? "room" : "rooms" }
                   <span className={styles.hotelsTable__dot}>.</span>{" "}
                   {item.amenitiesCount} amenities
                 </span>
@@ -59,7 +53,11 @@ export const AdminHotelsTable = () => {
               ))}
             </div>
 
-            <RatingCard value={item.rating} />
+            {item.rating !== null ? (
+              <RatingCard value={item.rating} />
+            ) : (
+              <span className={styles.hotelsTable__rating}>New</span>
+            )}
 
             <p className={styles.hotelsTable__price}>
               ${item.pricePerNight}
@@ -68,7 +66,7 @@ export const AdminHotelsTable = () => {
 
             <div className={styles.hotelsTable__actions}>
               <ButtonEdit />
-              <ButtonDelete />
+              <ButtonDelete onClick={() => onDelete(item.id, item.name)}/>
             </div>
           </div>
         ))}

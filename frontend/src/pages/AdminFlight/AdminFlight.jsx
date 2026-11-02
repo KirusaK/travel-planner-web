@@ -72,7 +72,7 @@ export const AdminFlight = () => {
               </button>
             </div>
 
-            <AdminFlightsTable />
+            <AdminFlightsTable flights={flights} onDelete={handleDeleteFlight} />
 
             <AdminModalFlight
               isOpen={isMoadalOpen}

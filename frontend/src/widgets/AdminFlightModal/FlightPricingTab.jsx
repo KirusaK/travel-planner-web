@@ -1,6 +1,6 @@
 import styles from "./FlightPricingTab.module.scss";
 
-export const FlightPricingTab = () => {
+export const FlightPricingTab = ({formData, onChange}) => {
   return (
     <div className={styles.pricingTab}>
       {/* Base price */}
@@ -22,6 +22,8 @@ export const FlightPricingTab = () => {
             name="basePrice"
             min="0"
             step="0.5"
+            value={formData.basePrice}
+            onChange={onChange}
           />
         </div>
       </section>
@@ -47,6 +49,8 @@ export const FlightPricingTab = () => {
               type="number"
               id="initialAmount"
               name="initialAmount"
+              value={formData.initialAmount}
+              onChange={onChange}
             />
           </div>
           <div className={styles.pricingTab__field}>
@@ -61,6 +65,8 @@ export const FlightPricingTab = () => {
               type="number"
               id="remainingAmount"
               name="remainingAmount"
+              value={formData.remainingAmount}
+              onChange={onChange}
             />
           </div>
           <div className={styles.pricingTab__field}>
@@ -72,6 +78,8 @@ export const FlightPricingTab = () => {
               type="date"
               id="dueDate"
               name="dueDate"
+              value={formData.dueDate}
+              onChange={onChange}
             />
           </div>
         </div>

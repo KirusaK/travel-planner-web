@@ -93,6 +93,7 @@ export const AdminModalFlight = ({isOpen, isClose, onCreated}) => {
         isOpen={isOpen}
 <<<<<<< Updated upstream
         isClose={isClose}
+        onSave={handleSubmit}
       >
         <Tabs tabs={tabs} active={activeTab} onChange={setActiveTab}/>
         {activeTab === "general" && <FlightGeneralTab />}
