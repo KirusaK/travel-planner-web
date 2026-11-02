@@ -12,6 +12,14 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+
+
+//                                                           //
+///// Здесь все запросы которые связанные с Пользователем /////
+//                                                           //
+
+
+
 app.post("/api/auth/register", async (req, res) => {
   try {
     const { firstName, lastName, email, phone, password } = req.body;
@@ -79,30 +87,13 @@ app.post("/api/auth/login", async (req, res) => {
   }
 });
 
-app.post("/api/cards", async (req, res) => {
-  try {
-    const { userId, cardNumber, expDate, nameOnCard, country, isSaved } =
-      req.body;
-
-    if (!userId || !cardNumber || !expDate || !nameOnCard) {
-      return res
-        .status(400)
-        .json({ message: "Заполните все обязательные поля" });
-    }
-
-    const newCard = await pool.query(
-      `INSERT INTO cards (user_id, card_number, exp_date, name_on_card, country, is_saved)
-       VALUES ($1, $2, $3, $4, $5, $6)
-       RETURNING *`,
-      [userId, cardNumber, expDate, nameOnCard, country, isSaved ?? true],
-    );
-
-    res.status(201).json(newCard.rows[0]);
-  } catch (err) {
-    console.error("Error adding card:", err);
-    res.status(500).json({ message: "Ошибка сервера при добавлении карты" });
-  }
-});
+const PROFILE_SELECT = `
+  SELECT id,
+         TRIM(first_name || ' ' || last_name) AS name,
+         email,
+         phone_number AS "phoneNumber",
+         to_char(date_of_birth, 'YYYY-MM-DD') AS "dateOfBirth"
+  FROM users`;
 
 app.get("/api/users", async (req, res) => {
   try {
@@ -125,15 +116,7 @@ app.get("/api/users", async (req, res) => {
     console.error("Error fetching users for admin:", err);
     res.status(500).json({ message: "Server error" });
   }
-})
-
-const PROFILE_SELECT = `
-  SELECT id,
-         TRIM(first_name || ' ' || last_name) AS name,
-         email,
-         phone_number AS "phoneNumber",
-         to_char(date_of_birth, 'YYYY-MM-DD') AS "dateOfBirth"
-  FROM users`;
+});
 
 app.get("/api/users/:id", async (req, res) => {
   try {
@@ -223,6 +206,39 @@ app.patch("/api/users/:id/password", async (req, res) => {
   }
 });
 
+
+
+//                                                     // 
+///// Здесь все запросы которые связанные с Картами /////
+//                                                     //
+
+
+
+app.post("/api/cards", async (req, res) => {
+  try {
+    const { userId, cardNumber, expDate, nameOnCard, country, isSaved } =
+      req.body;
+
+    if (!userId || !cardNumber || !expDate || !nameOnCard) {
+      return res
+        .status(400)
+        .json({ message: "Заполните все обязательные поля" });
+    }
+
+    const newCard = await pool.query(
+      `INSERT INTO cards (user_id, card_number, exp_date, name_on_card, country, is_saved)
+       VALUES ($1, $2, $3, $4, $5, $6)
+       RETURNING *`,
+      [userId, cardNumber, expDate, nameOnCard, country, isSaved ?? true],
+    );
+
+    res.status(201).json(newCard.rows[0]);
+  } catch (err) {
+    console.error("Error adding card:", err);
+    res.status(500).json({ message: "Ошибка сервера при добавлении карты" });
+  }
+});
+
 app.get("/api/cards", async (req, res) => {
   const { userId } = req.query;
 
@@ -244,7 +260,6 @@ app.get("/api/cards", async (req, res) => {
   }
 });
 
-// Удаление карты
 app.delete("/api/cards/:id", async (req, res) => {
   try {
     const result = await pool.query("DELETE FROM cards WHERE id = $1", [
@@ -267,6 +282,14 @@ app.delete("/api/cards/:id", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
+
+
+//                                                         //
+///// Здесь все запросы которые связанные с Резервацией /////
+//                                                         //
+
+
 
 app.get("/api/bookings", async (req, res) => {
   try {
@@ -345,6 +368,14 @@ app.get("/api/bookings/:id", async (req, res) => {
   }
 });
 
+
+
+//                                                      //
+///// Здесь все запросы которые связанные с полетами /////
+//                                                      //
+
+
+
 const FLIGHT_COLUMNS = `
   f.id, 
   f.airline_name as "airlineName", 
@@ -355,9 +386,8 @@ const FLIGHT_COLUMNS = `
   f.airport, 
   f.from_code as"from", 
   f.to_code as "to", 
-  f.base_price::float as price, 
-  to_char(f.part_due_date, 'YYYY-MM-DD') AS "partDueDate"`;
-
+  f.base_price::float as price
+  `;
 
 // Короче тут выводятся все поля таблици и заодно подсчитывается количество полетов (segments) для админки и достаем информацию для страници листига
 app.get("/api/flights", async (req, res) => {
@@ -421,15 +451,147 @@ app.get("/api/flights/:id", async (req, res) => {
     from flight_trips t
     where flight_id = $1
     order by sort_order`,
-      [id],
+      [id]
     );
 
     res.json({...flight.rows[0], trips: trips.rows});
   } catch (err) {
     console.error("Error fetching  flights:", err);
+<<<<<<< Updated upstream
     res.status(500).json({error: "Server error"});
+=======
+    res.status(500).json({ error: "Server error" });
   }
 })
+
+app.post("/api/flights", async (req, res) => {
+  const {
+    airlineName,
+    airlineLogo,
+    flightClass,
+    airportLocation,
+    fromAirport,
+    toAirport,
+    basePrice,
+    segments = [],
+  } = req.body;
+
+  const price = Number(basePrice);
+
+  if (!airlineName?.trim() || !flightClass?.trim() || !airportLocation?.trim() || !fromAirport?.trim() || !toAirport?.trim()) return res.status(400).json({ error: "Not all fields have been filled in" });
+
+  if (!(price > 0)) return res.status(400).json({ error: "Invalid price" });
+
+  const client = await pool.connect();
+
+  try {
+    await client.query("BEGIN");
+
+    const flightResult = await client.query(
+      `
+      insert into flights (
+                           airline_name, 
+                           logo, 
+                           flight_class,  
+                           airport, 
+                           from_code, 
+                           to_code, 
+                           base_price
+      )
+      values ($1, $2, $3, $4, $5, $6, $7)
+      returning id`,
+      [
+        airlineName,
+        airlineLogo,
+        flightClass || "Economy",
+        airportLocation,
+        fromAirport,
+        toAirport,
+        price,
+      ],
+    );
+
+    const newFlightId = flightResult.rows[0].id;
+
+    for (let i = 0; i < segments.length; i++) {
+      const seg = segments[i];
+
+      await client.query(
+        `
+        insert into flight_trips (
+          flight_id,
+          sort_order,
+          direction,
+          trip_date,
+          departure_time,
+          arrival_time,
+          duration_minutes,
+          departure_airport,
+          departure_code,
+          arrival_airport,
+          arrival_code,
+          stops,
+          status,
+          aircraft
+        )
+        values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)`,
+        [
+          newFlightId,
+          i,
+          seg.segmentLabel,
+          seg.date,
+          seg.departureTime,
+          seg.arrivalTime,
+          120,
+          seg.departureAirport,
+          "EZE",
+          seg.arrivalAirport,
+          "IST",
+          seg.flightType,
+          seg.status,
+          seg.aircraftType,
+        ],
+      );
+    }
+
+    await client.query("COMMIT");
+    res
+      .status(201)
+      .json({ message: "Flight created successfully", flightId: newFlightId });
+  } catch (err) {
+    await client.query("ROLLBACK");
+    console.error("Error adding flights", err);
+    res.status(500).json({ error: "Server error" });
+  } finally {
+    client.release();
+  }
+})
+
+app.delete("/api/flights/:id", async (req, res) => {
+  const {id} = req.params;
+
+  try {
+    const result = await  pool.query("delete from flights where id = $1", [id]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Flight not found" });
+    }
+
+    res.json({ message: "Flight deleted successfully", id });
+  } catch (err) {
+    console.error("Error deleting flight", err);
+    res.status(500).json({ error: "Server error" });
+>>>>>>> Stashed changes
+  }
+})
+
+
+
+//                                                     //
+///// Здесь все запросы которые связанные с отелями /////
+//                                                     //
+
+
 
 const HOTEL_COLUMNS = `
   h.id,

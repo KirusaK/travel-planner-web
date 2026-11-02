@@ -10,10 +10,36 @@ import { getFlights } from "../../shared/api/flights.js";
 
 export const AdminFlight = () => {
   const [isMoadalOpen, setIsMoadalOpen] = useState(false);
+<<<<<<< Updated upstream
   const { data: flights = [], loading, error } = useFetchData(getFlights);
 
   const flightsCount = flights.length;
 
+=======
+  const { data: flights = [], loading, error, refetch } = useFetchData(getFlights);
+
+  const flightsCount = flights.length;
+
+  const handleDeleteFlight = async (id) => {
+    if (!window.confirm("Are you sure you want to delete flight?")) return;
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/flights/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        const { error } = await response.json().catch(() => ({}));
+        throw new Error(error || "Failed to delete hotel");
+      }
+
+      await refetch();
+    } catch (err) {
+      console.error("Error deleting flight:", err.message);
+    }
+  }
+
+>>>>>>> Stashed changes
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
@@ -51,6 +77,7 @@ export const AdminFlight = () => {
             <AdminModalFlight
               isOpen={isMoadalOpen}
               isClose={() => setIsMoadalOpen(false)}
+              onCreated={refetch}
             />
           </div>
         </div>

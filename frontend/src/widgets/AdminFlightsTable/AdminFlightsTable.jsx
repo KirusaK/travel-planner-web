@@ -1,13 +1,12 @@
 import image from "../../shared/assets/image/Ellipse 1.jpg";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
-import styles from "./AdminFlightsTable.module.scss";
 import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
 import { ButtonEdit } from "../../shared/ui/ButtonEdit/ButtonEdit.jsx";
 import { ButtonDelete } from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
 import { Badge } from "../../shared/ui/Badge/Badge.jsx";
-import { getFlights } from "../../shared/api/flights.js";
-import {getRatingStatus} from "../../shared/lib/format.js";
-import {useFetchData} from "../../shared/hooks/useFetchData.js";
+import { getRatingStatus } from "../../shared/lib/format.js";
+import styles from "./AdminFlightsTable.module.scss";
+
 
 export const AdminFlightsTable = () => {
   const {data: flights, loading, error} = useFetchData(getFlights);
@@ -43,7 +42,7 @@ export const AdminFlightsTable = () => {
           <div key={item.id} className={styles.flightsTable__row}>
             {/* 1. Airline */}
             <div className={styles.flightsTable__airline}>
-              <img src={image} alt="" className={styles.flightsTable__logo} />
+              <img src={item.logo || image} alt="" className={styles.flightsTable__logo} />
               <div className={styles.flightsTable__airlineInfo}>
                 <h3 className={styles.flightsTable__airlineName}>
                   {item.airlineName}
@@ -56,7 +55,11 @@ export const AdminFlightsTable = () => {
 
             {/* 2. Rating */}
             <div className={styles.flightsTable__ratingGroup}>
-              <RatingCard value={item.rating} />
+              {item.rating !== null ? (
+                <RatingCard value={item.rating} />
+              ) : (
+                <span className={styles.flightsTable__rating}>New</span>
+              )}
               <span className={styles.flightsTable__ratingStatus}>
                 {getRatingStatus(item.rating)}
               </span>
@@ -102,7 +105,11 @@ export const AdminFlightsTable = () => {
             {/* 7. Actions */}
             <div className={styles.flightsTable__btnGroup}>
               <ButtonEdit />
+<<<<<<< Updated upstream
               <ButtonDelete />
+=======
+              <ButtonDelete onClick={() => onDelete(item.id)} />
+>>>>>>> Stashed changes
             </div>
           </div>
         ))}

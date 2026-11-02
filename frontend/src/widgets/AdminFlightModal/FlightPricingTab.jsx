@@ -26,6 +26,7 @@ export const FlightPricingTab = () => {
         </div>
       </section>
 
+<<<<<<< Updated upstream
       {/* Part payment */}
       <section className={styles.pricingTab__section}>
         <div className={styles.pricingTab__sectionHead}>
@@ -76,6 +77,8 @@ export const FlightPricingTab = () => {
         </div>
       </section>
 
+=======
+>>>>>>> Stashed changes
       {/*Summaty*/}
       <section className={styles.pricingTab__summary}>
         <h3 className={styles.pricingTab__summaryLabel}>Customer pays today</h3>

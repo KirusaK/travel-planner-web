@@ -2,7 +2,11 @@ import sprite from "../../assets/icons/symbol-defs.svg";
 import styles from "./AdminModal.module.scss";
 import { useEffect } from "react";
 
+<<<<<<< Updated upstream
 export const AdminModal = ({isOpen, isClose, children, title, subtitle}) => {
+=======
+export const AdminModal = ({isOpen, isClose, children, title, subtitle, onSave, error}) => {
+>>>>>>> Stashed changes
   useEffect(() => {
     if (!isOpen) {
       return;
@@ -29,9 +33,7 @@ export const AdminModal = ({isOpen, isClose, children, title, subtitle}) => {
           <div className={styles.modal__header}>
             <div>
               <h2 className={styles.modal__title}>{title}</h2>
-              <p className={styles.modal__subtitle}>
-                {subtitle}
-              </p>
+              <p className={styles.modal__subtitle}>{subtitle}</p>
             </div>
 
             <button
@@ -47,6 +49,12 @@ export const AdminModal = ({isOpen, isClose, children, title, subtitle}) => {
 
           <div className={styles.modal__body}>{children}</div>
 
+          {error && (
+            <p role="alert">
+              {error}
+            </p>
+          )}
+
           <div className={styles.modal__footer}>
             <button
               type="button"
@@ -55,8 +63,17 @@ export const AdminModal = ({isOpen, isClose, children, title, subtitle}) => {
             >
               Cancel
             </button>
+<<<<<<< Updated upstream
             <button type="button" className={styles.modal__footer__add}>
               Add Flight
+=======
+            <button
+              type="button"
+              className={styles.modal__footer__add}
+              onClick={onSave}
+            >
+              {title}
+>>>>>>> Stashed changes
             </button>
           </div>
         </div>

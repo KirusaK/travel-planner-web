@@ -1,7 +1,7 @@
-const API_URL = "http://localhost:5000/api";
+import { postJson, API_URL } from "./http.js";
 
 export const getFlights = async () => {
-  const response = await fetch(`${API_URL}/flights`);
+  const response = await fetch(`${API_URL}/api/flights`);
 
   if (!response.ok) {
     throw new Error("Failed to load flights");
@@ -11,7 +11,7 @@ export const getFlights = async () => {
 }
 
 export const getFlightById = async (id) => {
-  const response = await fetch(`${API_URL}/flights/${id}`);
+  const response = await fetch(`${API_URL}/api/flights/${id}`);
 
   if (!response.ok) {
     throw new Error("Failed to load flight");
@@ -19,3 +19,5 @@ export const getFlightById = async (id) => {
 
   return response.json();
 }
+
+export const createFlight = async (flight) => postJson("/api/flights", flight);

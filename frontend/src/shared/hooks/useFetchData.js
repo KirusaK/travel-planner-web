@@ -9,6 +9,7 @@ export const useFetchData = (fetchFunction) => {
     setLoading(true);
     setError(null);
 
+<<<<<<< Updated upstream
     fetchFunction()
       .then((res) => setData(res))
       .catch((err) => setError(err.message))
@@ -16,4 +17,7 @@ export const useFetchData = (fetchFunction) => {
   }, []);
 
   return { data, loading, error, setLoading };
+=======
+  return { data, setData, loading, error, setLoading, refetch: load };
+>>>>>>> Stashed changes
 };
