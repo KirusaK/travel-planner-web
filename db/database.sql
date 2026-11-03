@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	first_name VARCHAR(50) NOT NULL,
@@ -11,8 +7,6 @@ CREATE TABLE users (
 	password VARCHAR(255) NOT NULL,
 	date_of_birth DATE,
 	created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-<<<<<<< Updated upstream
-=======
 );
 
 CREATE TABLE cards (
@@ -95,7 +89,6 @@ CREATE TABLE hotels (
   rating          NUMERIC(2, 1) CHECK (rating BETWEEN 0 AND 5),
   reviews_count   INT NOT NULL DEFAULT 0 CHECK (reviews_count >= 0),
   created_at      TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
->>>>>>> Stashed changes
 );
 
 CREATE TABLE cards (

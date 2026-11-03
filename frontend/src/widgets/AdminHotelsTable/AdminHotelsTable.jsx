@@ -6,7 +6,7 @@ import { ButtonEdit } from "../../shared/ui/ButtonEdit/ButtonEdit.jsx";
 import { ButtonDelete } from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
 import { getStars } from "../../shared/lib/format.js";
 
-export const AdminHotelsTable = ({hotels, onDelete}) => {
+export const AdminHotelsTable = ({hotels, onDelete, onUpdate}) => {
 
   return (
     <section className={styles.hotelsTable}>
@@ -65,7 +65,7 @@ export const AdminHotelsTable = ({hotels, onDelete}) => {
             </p>
 
             <div className={styles.hotelsTable__actions}>
-              <ButtonEdit />
+              <ButtonEdit onClick={() => onUpdate(item.id)}/>
               <ButtonDelete onClick={() => onDelete(item.id)}/>
             </div>
           </div>

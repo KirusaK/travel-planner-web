@@ -10,6 +10,7 @@ export const AdminModal = ({
                              subtitle,
                              onSave,
                              isSaving,
+                               saveLabel,
                              error,
                            }) => {
   useEffect(() => {
@@ -77,7 +78,7 @@ export const AdminModal = ({
                   onClick={onSave}
                   disabled={isSaving}
               >
-                {isSaving ? "Saving..." : title}
+                {isSaving ? "Saving..." : (saveLabel ?? title)}
               </button>
             </div>
           </div>
