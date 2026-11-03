@@ -6,40 +6,24 @@ import {AdminFlightsTable} from "../../widgets/AdminFlightsTable/AdminFlightsTab
 import { useState } from "react";
 import { AdminModalFlight } from "../../widgets/AdminFlightModal/AdminModalFlight.jsx";
 import { useFetchData } from "../../shared/hooks/useFetchData.js";
-import { getFlights } from "../../shared/api/flights.js";
+import {deleteFlight, getFlights} from "../../shared/api/flights.js";
 
 export const AdminFlight = () => {
   const [isMoadalOpen, setIsMoadalOpen] = useState(false);
-<<<<<<< Updated upstream
-  const { data: flights = [], loading, error } = useFetchData(getFlights);
-
-  const flightsCount = flights.length;
-
-=======
   const { data: flights = [], loading, error, refetch } = useFetchData(getFlights);
-
   const flightsCount = flights.length;
 
   const handleDeleteFlight = async (id) => {
     if (!window.confirm("Are you sure you want to delete flight?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/flights/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) {
-        const { error } = await response.json().catch(() => ({}));
-        throw new Error(error || "Failed to delete hotel");
-      }
-
+      await deleteFlight(id);
       await refetch();
     } catch (err) {
       console.error("Error deleting flight:", err.message);
     }
   }
 
->>>>>>> Stashed changes
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
@@ -72,7 +56,7 @@ export const AdminFlight = () => {
               </button>
             </div>
 
-            <AdminFlightsTable />
+            <AdminFlightsTable flights={flights} onDelete={handleDeleteFlight}/>
 
             <AdminModalFlight
               isOpen={isMoadalOpen}

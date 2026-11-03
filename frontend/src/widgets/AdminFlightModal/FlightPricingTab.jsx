@@ -1,6 +1,6 @@
 import styles from "./FlightPricingTab.module.scss";
 
-export const FlightPricingTab = () => {
+export const FlightPricingTab = ({formData, onChange}) => {
   return (
     <div className={styles.pricingTab}>
       {/* Base price */}
@@ -20,65 +20,14 @@ export const FlightPricingTab = () => {
             type="number"
             id="basePrice"
             name="basePrice"
+            value={formData.basePrice}
+            onChange={onChange}
             min="0"
             step="0.5"
           />
         </div>
       </section>
 
-<<<<<<< Updated upstream
-      {/* Part payment */}
-      <section className={styles.pricingTab__section}>
-        <div className={styles.pricingTab__sectionHead}>
-          <h3 className={styles.pricingTab__sectionTitle}>Part payment</h3>
-          <p className={styles.pricingTab__sectionHint}>
-            Let customers pay part now and the rest later. Remaining amount
-            auto-fills.
-          </p>
-        </div>
-
-        <div className={styles.pricingTab__row}>
-          <div className={styles.pricingTab__field}>
-            <label className={styles.pricingTab__label} htmlFor="initialAmount">
-              Initial Amount
-            </label>
-            <input
-              className={styles.pricingTab__input}
-              type="number"
-              id="initialAmount"
-              name="initialAmount"
-            />
-          </div>
-          <div className={styles.pricingTab__field}>
-            <label
-              className={styles.pricingTab__label}
-              htmlFor="remainingAmount"
-            >
-              Remaining Amount
-            </label>
-            <input
-              className={styles.pricingTab__input}
-              type="number"
-              id="remainingAmount"
-              name="remainingAmount"
-            />
-          </div>
-          <div className={styles.pricingTab__field}>
-            <label className={styles.pricingTab__label} htmlFor="dueDate">
-              Due Date
-            </label>
-            <input
-              className={styles.pricingTab__input}
-              type="date"
-              id="dueDate"
-              name="dueDate"
-            />
-          </div>
-        </div>
-      </section>
-
-=======
->>>>>>> Stashed changes
       {/*Summaty*/}
       <section className={styles.pricingTab__summary}>
         <h3 className={styles.pricingTab__summaryLabel}>Customer pays today</h3>

@@ -1,7 +1,7 @@
-const API_URL = "http://localhost:5000/api";
+import {API_URL} from "./http.js";
 
 export const getUsers = async () => {
-  const response = await fetch(`${API_URL}/users`);
+  const response = await fetch(`${API_URL}/api/users`);
 
   if (!response.ok) throw new Error("Failed to load users");
 
@@ -9,7 +9,7 @@ export const getUsers = async () => {
 }
 
 export const getBookings = async (limit) => {
-  const url = limit ? `${API_URL}/bookings?limit=${limit}` : `${API_URL}/bookings`;
+  const url = limit ? `${API_URL}/api/bookings?limit=${limit}` : `${API_URL}/api/bookings`;
   const response = await fetch(url);
 
   if (!response.ok) throw new Error("Failed to load bookings");

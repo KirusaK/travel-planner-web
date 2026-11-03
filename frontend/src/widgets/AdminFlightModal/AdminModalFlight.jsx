@@ -12,10 +12,6 @@ const tabs = [
   { id: "trips", title: "Trips / Segments" },
 ];
 
-<<<<<<< Updated upstream
-export const AdminModalFlight = ({isOpen, isClose}) => {
-  const [activeTab, setActiveTab] = useState("general");
-=======
 const initialFlights = {
   airlineName: "",
   airlineLogo: "",
@@ -24,9 +20,6 @@ const initialFlights = {
   fromAirport: "",
   toAirport: "",
   basePrice: "",
-  initialAmount: "",
-  remainingAmount: "",
-  dueDate: "",
   segments: [
     {
       segmentLabel: "Depart",
@@ -60,7 +53,18 @@ export const AdminModalFlight = ({isOpen, isClose, onCreated}) => {
     setFormData((prev) => ({
       ...prev,
       segments: prev.segments.map((seg, i) =>
-      i === index ? {...seg, [field]: value } : seg),
+          i === index ? {...seg, [field]: value } : seg),
+    }))
+  }
+
+  const handleField = (index) => (e) => {
+    handleSegmentChange(index, e.target.name, e.target.value);
+  }
+
+  const handleRemoveSegment = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      segments: prev.segments.filter((_, i) => i !== index),
     }))
   }
 
@@ -83,43 +87,34 @@ export const AdminModalFlight = ({isOpen, isClose, onCreated}) => {
       ],
     }));
   };
->>>>>>> Stashed changes
 
   return (
-    <section>
-      <AdminModal
-        title="Add New Flight"
-        subtitle="Airline details, pricing, part payment and trip segments."
-        isOpen={isOpen}
-<<<<<<< Updated upstream
-        isClose={isClose}
-      >
-        <Tabs tabs={tabs} active={activeTab} onChange={setActiveTab}/>
-        {activeTab === "general" && <FlightGeneralTab />}
-        {activeTab === "pricing" && <FlightPricingTab />}
-          {activeTab === "trips" && <FlightTripsTab />}
-=======
-        isClose={handleClose}
-        onSave={handleSubmit}
-        isSaving={isSubmitting}
-        error={error}
-      >
-        <Tabs tabs={tabs} active={activeTab} onChange={setActiveTab} />
-        {activeTab === "general" && (
-          <FlightGeneralTab formData={formData} onChange={handleChange} />
-        )}
-        {activeTab === "pricing" && (
-          <FlightPricingTab formData={formData} onChange={handleChange} />
-        )}
-        {activeTab === "trips" && (
-          <FlightTripsTab
-            segments={formData.segments}
-            onSegmentChange={handleSegmentChange}
-            onAddSegment={handleAddSegment}
-          />
-        )}
->>>>>>> Stashed changes
-      </AdminModal>
-    </section>
+      <section>
+        <AdminModal
+            title="Add New Flight"
+            subtitle="Airline details, pricing, part payment and trip segments."
+            isOpen={isOpen}
+            isClose={handleClose}
+            onSave={handleSubmit}
+            isSaving={isSubmitting}
+            error={error}
+        >
+          <Tabs tabs={tabs} active={activeTab} onChange={setActiveTab} />
+          {activeTab === "general" && (
+              <FlightGeneralTab formData={formData} onChange={handleChange} />
+          )}
+          {activeTab === "pricing" && (
+              <FlightPricingTab formData={formData} onChange={handleChange} />
+          )}
+          {activeTab === "trips" && (
+              <FlightTripsTab
+                  segments={formData.segments}
+                  onSegmentChange={handleField}
+                  onAddSegment={handleAddSegment}
+                  onSegmentRemove={handleRemoveSegment}
+              />
+          )}
+        </AdminModal>
+      </section>
   );
 }

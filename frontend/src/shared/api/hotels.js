@@ -1,4 +1,4 @@
-import { postJson, API_URL } from "./http.js";
+import {postJson, API_URL, deleteRequest} from "./http.js";
 
 export const getHotels = async () => {
   const response = await fetch(`${API_URL}/api/hotels`)
@@ -21,3 +21,4 @@ export const getHotelById = async (id) => {
 }
 
 export const createHotel = async (hotel) => postJson("/api/hotels", hotel);
+export const deleteHotel = async (id) => deleteRequest(`/api/hotels/${id}`);

@@ -1,4 +1,3 @@
-import styles from "./AdminModalHotel.module.scss";
 import { AdminModal } from "../../shared/ui/AdminModal/AdminModal.jsx";
 import { Tabs } from "../../shared/ui/Tabs/Tabs.jsx";
 import { HotelGeneralTab } from "./HotelGeneralTab.jsx";
@@ -13,11 +12,6 @@ const tabs = [
   { id: "amenities", title: "Amenities" },
 ];
 
-<<<<<<< Updated upstream
-export const AdminModalHotel = ({isOpen, isClose}) => {
-  const [activeTab, setActiveTab] = useState("general");
-
-=======
 const initialFormData = {
   name: "",
   logoUrl: "",
@@ -69,6 +63,13 @@ export const AdminModalHotel = ({isOpen, isClose, onCreated}) => {
     })
   }
 
+  const handleRemoveRoom = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+          rooms: prev.rooms.filter((_, i) => i !== index),
+    }))
+  }
+
   const handleAddRooms = () => {
     setFormData((prev) => ({
       ...prev,
@@ -89,34 +90,53 @@ export const AdminModalHotel = ({isOpen, isClose, onCreated}) => {
       return {
         ...prev,
         amenitiesIds: exist
-          ? prev.amenitiesIds.filter((id) => id !== amenityId)
-          : [...prev.amenitiesIds, amenityId],
+            ? prev.amenitiesIds.filter((id) => id !== amenityId)
+            : [...prev.amenitiesIds, amenityId],
       };
     });
   };
->>>>>>> Stashed changes
-  
-  return (
-    <section>
-      <AdminModal
-        title="Add New Hotel"
-        subtitle="Property details, rooms, amenities and guest reviews."
-        isOpen={isOpen}
-<<<<<<< Updated upstream
-        isClose={isClose}
-=======
-        isClose={handleClose}
-        onSave={handleSubmit}
-        isSaving={isSubmitting}
-        error={error}
->>>>>>> Stashed changes
-      >
-        <Tabs tabs={tabs} active={activeTab} onChange={setActiveTab} />
 
-        {activeTab === "general" && <HotelGeneralTab />}
-        {activeTab === "rooms" && <HotelRoomsTab />}
-        {activeTab === "amenities" && <HotelAmenitiesTab />}
-      </AdminModal>
-    </section>
+  const handleSelectAllAmenities = (id) => {
+    setFormData((prev) => ({...prev, amenitiesIds: id}));
+  }
+
+  const handleClearAllAmenities = () => {
+    setFormData((prev) => ({...prev, amenitiesIds: []}));
+  }
+
+  return (
+      <section>
+        <AdminModal
+            title="Add New Hotel"
+            subtitle="Property details, rooms, amenities and guest reviews."
+            isOpen={isOpen}
+            isClose={handleClose}
+            onSave={handleSubmit}
+            isSaving={isSubmitting}
+            error={error}
+        >
+          <Tabs tabs={tabs} active={activeTab} onChange={setActiveTab} />
+
+          {activeTab === "general" && (
+              <HotelGeneralTab formData={formData} onChange={handleChange} />
+          )}
+          {activeTab === "rooms" && (
+              <HotelRoomsTab
+                  rooms={formData.rooms}
+                  onRoomsChange={handleRoomsChange}
+                  onAddRooms={handleAddRooms}
+                  onRemoveRoom={handleRemoveRoom}
+              />
+          )}
+          {activeTab === "amenities" && (
+              <HotelAmenitiesTab
+                  amenitiesIds={formData.amenitiesIds}
+                  onAmenityToggle={handleAmenityToggle}
+                  onSelectAll={handleSelectAllAmenities}
+                  onClear={handleClearAllAmenities}
+              />
+          )}
+        </AdminModal>
+      </section>
   );
 }
