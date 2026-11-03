@@ -27,3 +27,20 @@ export const deleteRequest = async (path) => {
     throw new Error(error || "Request failed");
   }
 }
+
+export const updateRequest = async (path, body) => {
+  const response = await fetch(`${API_URL}${path}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+
+  if (!response.ok) {
+    const { error } = await response.json().catch(() => ({}));
+    throw new Error(error || "Request failed");
+  }
+
+  return response.json();
+}

@@ -4,7 +4,8 @@ import { FlightGeneralTab } from "./FlightGeneralTab.jsx";
 import { FlightPricingTab } from "./FlightPricingTab.jsx";
 import {FlightTripsTab} from "./FlightTripsTab.jsx";
 import { useAdminForm } from "../../shared/hooks/useAdminForm.js";
-import { createFlight } from "../../shared/api/flights.js";
+import {createFlight, updateFlight} from "../../shared/api/flights.js";
+import {useEffect} from "react";
 
 const tabs = [
   { id: "general", title: "General info" },
@@ -35,7 +36,9 @@ const initialFlights = {
   ],
 };
 
-export const AdminModalFlight = ({isOpen, isClose, onCreated}) => {
+export const AdminModalFlight = ({isOpen, isClose, onCreated, editingId, initialData}) => {
+  const submitFn = editingId ? (data) => updateFlight(editingId, data) : createFlight;
+  const isEditing = Boolean(editingId);
   const {
     formData,
     setFormData,
@@ -46,7 +49,17 @@ export const AdminModalFlight = ({isOpen, isClose, onCreated}) => {
     handleChange,
     handleSubmit,
     handleClose,
-  } = useAdminForm({initialData: initialFlights, submit: createFlight, onCreated, onClose: isClose});
+  } = useAdminForm({initialData: initialFlights, submit: submitFn, onCreated, onClose: isClose});
+
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+      setActiveTab("general");
+    } else {
+      setFormData(initialFlights);
+      setActiveTab("general");
+    }
+  }, [initialData, setFormData, setActiveTab]);
 
 
   const handleSegmentChange = (index, field, value) => {
@@ -91,7 +104,8 @@ export const AdminModalFlight = ({isOpen, isClose, onCreated}) => {
   return (
       <section>
         <AdminModal
-            title="Add New Flight"
+            title={isEditing ? "Edit Flight" : "Add New Flight"}
+            isSaving={isEditing ? "Save changes" : "Add flight"}
             subtitle="Airline details, pricing, part payment and trip segments."
             isOpen={isOpen}
             isClose={handleClose}

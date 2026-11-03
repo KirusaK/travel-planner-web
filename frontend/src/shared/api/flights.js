@@ -1,4 +1,4 @@
-import {postJson, API_URL, deleteRequest} from "./http.js";
+import {postJson, API_URL, deleteRequest, updateRequest} from "./http.js";
 
 export const getFlights = async () => {
   const response = await fetch(`${API_URL}/api/flights`);
@@ -22,3 +22,4 @@ export const getFlightById = async (id) => {
 
 export const createFlight = async (flight) => postJson("/api/flights", flight);
 export const deleteFlight = async (id) => deleteRequest(`/api/flights/${id}`);
+export const updateFlight = async (id, flight) => updateRequest(`/api/flights/${id}`, flight);
