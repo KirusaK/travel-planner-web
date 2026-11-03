@@ -8,7 +8,7 @@ import { getRatingStatus } from "../../shared/lib/format.js";
 import styles from "./AdminFlightsTable.module.scss";
 
 
-export const AdminFlightsTable = ({flights, onDelete}) => {
+export const AdminFlightsTable = ({flights, onDelete, onUpdate}) => {
 
   const classVariant  = {
     Economy: "neutral",
@@ -100,7 +100,7 @@ export const AdminFlightsTable = ({flights, onDelete}) => {
 
             {/* 7. Actions */}
             <div className={styles.flightsTable__btnGroup}>
-              <ButtonEdit />
+              <ButtonEdit onClick={() => onUpdate(item.id, item)}/>
               <ButtonDelete onClick={() => onDelete(item.id)} />
             </div>
           </div>
