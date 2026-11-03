@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getFlightById } from "../api/flights.js";
 
 export const useFetch = (fetchFn, id) => {
   const [data, setData] = useState(null);

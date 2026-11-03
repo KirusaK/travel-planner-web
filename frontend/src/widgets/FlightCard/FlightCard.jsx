@@ -31,7 +31,11 @@ export const FlightCard = ({ item }) => {
       <div className={styles.flightCard_content}>
         <div className={styles.flightCard_header}>
           <div className={styles.flightCard_ratingBlock}>
-            <RatingCard value={item.rating} />
+            {item.rating ? (
+                <RatingCard value={item.rating} />
+            ) : (
+                <span>New</span>
+            )}
             <span className={styles.flightCard_ratingText}>
               <strong>{getRatingStatus(item.rating)}</strong>{" "}
               {item.reviewsCount} reviews

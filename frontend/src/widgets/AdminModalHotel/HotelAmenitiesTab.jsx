@@ -1,61 +1,62 @@
 import styles from "./HotelAmenitiesTab.module.scss";
 
 const hotelAmenities = [
-  { id: "outdoor-pool", name: "Outdoor pool" },
-  { id: "indoor-pool", name: "Indoor pool" },
-  { id: "spa-wellness", name: "Spa and wellness center" },
-  { id: "restaurant", name: "Restaurant" },
-  { id: "room-service", name: "Room service" },
-  { id: "fitness-center", name: "Fitness center" },
-  { id: "bar-lounge", name: "Bar/Lounge" },
-  { id: "free-wifi", name: "Free Wi-Fi" },
-  { id: "free-parking", name: "Free parking" },
-  { id: "airport-shuttle", name: "Airport shuttle" },
-  { id: "beachfront-access", name: "Beachfront access" },
-  { id: "tea-coffee-machine", name: "Tea/coffee machine" },
-  { id: "air-conditioning", name: "Air conditioning" },
-  { id: "24-hour-front-desk", name: "24-hour front desk" },
-  { id: "concierge-service", name: "Concierge service" },
-  { id: "laundry-service", name: "Laundry service" },
-  { id: "business-center", name: "Business center" },
-  { id: "meeting-rooms", name: "Meeting rooms" },
-  { id: "kids-club", name: "Kids club" },
-  { id: "pet-friendly", name: "Pet friendly" },
-  { id: "non-smoking-rooms", name: "Non-smoking rooms" },
-  { id: "family-rooms", name: "Family rooms" },
-  { id: "wheelchair-accessible", name: "Wheelchair accessible" },
-  { id: "ev-charging", name: "Electric vehicle charging" },
-  { id: "sauna", name: "Sauna" },
-  { id: "hot-tub", name: "Hot tub/Jacuzzi" },
-  { id: "garden", name: "Garden" },
-  { id: "terrace", name: "Terrace" },
-  { id: "rooftop-bar", name: "Rooftop bar" },
-  { id: "private-beach", name: "Private beach" },
-  { id: "breakfast-included", name: "Breakfast included" },
-  { id: "minibar", name: "Minibar" },
-  { id: "safe-deposit-box", name: "Safe deposit box" },
-  { id: "valet-parking", name: "Valet parking" },
-  { id: "tennis-court", name: "Tennis court" },
-  { id: "golf-course", name: "Golf course" },
+  { id: 1, name: "Outdoor pool" },
+  { id: 2, name: "Indoor pool" },
+  { id: 3, name: "Spa and wellness center" },
+  { id: 4, name: "Restaurant" },
+  { id: 5, name: "Room service" },
+  { id: 6, name: "Fitness center" },
+  { id: 7, name: "Bar/Lounge" },
+  { id: 8, name: "Free Wi-Fi" },
+  { id: 9, name: "Free parking" },
+  { id: 10, name: "Airport shuttle" },
+  { id: 11, name: "Beachfront access" },
+  { id: 12, name: "Tea/coffee machine" },
+  { id: 13, name: "Air conditioning" },
+  { id: 14, name: "24-hour front desk" },
+  { id: 15, name: "Concierge service" },
+  { id: 16, name: "Laundry service" },
+  { id: 17, name: "Business center" },
+  { id: 18, name: "Meeting rooms" },
+  { id: 19, name: "Kids club" },
+  { id: 20, name: "Pet friendly" },
+  { id: 21, name: "Non-smoking rooms" },
+  { id: 22, name: "Family rooms" },
+  { id: 23, name: "Wheelchair accessible" },
+  { id: 24, name: "Electric vehicle charging" },
+  { id: 25, name: "Sauna" },
+  { id: 26, name: "Hot tub/Jacuzzi" },
+  { id: 27, name: "Garden" },
+  { id: 28, name: "Terrace" },
+  { id: 29, name: "Rooftop bar" },
+  { id: 30, name: "Private beach" },
+  { id: 31, name: "Breakfast included" },
+  { id: 32, name: "Minibar" },
+  { id: 33, name: "Safe deposit box" },
+  { id: 34, name: "Valet parking" },
+  { id: 35, name: "Tennis court" },
+  { id: 36, name: "Golf course" },
 ];
 
-export const HotelAmenitiesTab = () => {
+export const HotelAmenitiesTab = ({amenitiesIds, onAmenityToggle, onSelectAll, onClear}) => {
 
   return (
     <div className={styles.amenitiesTab}>
       <section className={styles.amenitiesTab__toolbar}>
         <span className={styles.amenitiesTab__counter}>
-          <strong className={styles.amenitiesTab__counter__strong}>0</strong> of{" "}
+          <strong className={styles.amenitiesTab__counter__strong}>{amenitiesIds.length}</strong> of{" "}
           {hotelAmenities.length} selected
         </span>
 
         <div className={styles.amenitiesTab__actions}>
-          <button type="button" className={styles.amenitiesTab__btn}>
+          <button type="button" className={styles.amenitiesTab__btn} onClick={() => onSelectAll(hotelAmenities.map((a) => a.id))}>
             Select all
           </button>
           <button
             type="button"
             className={`${styles.amenitiesTab__btn} ${styles.amenitiesTab__btn__red}`}
+            onClick={onClear}
           >
             Clear
           </button>
@@ -67,11 +68,12 @@ export const HotelAmenitiesTab = () => {
           <div key={item.id} className={styles.amenitiesTab__item}>
             <input
               type="checkbox"
-              id={item.id}
-              name="name"
+              id={`amenity-${item.id}`}
+              checked={amenitiesIds.includes(item.id)}
+              onChange={() => onAmenityToggle(item.id)}
               className={styles.amenitiesTab__checkbox}
             />
-            <label htmlFor={item.id} className={styles.amenitiesTab__label}>
+            <label htmlFor={`amenity-${item.id}`} className={styles.amenitiesTab__label}>
               {item.name}
             </label>
           </div>

@@ -8,11 +8,7 @@ import { getRatingStatus } from "../../shared/lib/format.js";
 import styles from "./AdminFlightsTable.module.scss";
 
 
-export const AdminFlightsTable = () => {
-  const {data: flights, loading, error} = useFetchData(getFlights);
-
-  if (loading) return <p>Loading flights...</p>;
-  if (error) return <p>{error}</p>;
+export const AdminFlightsTable = ({flights, onDelete}) => {
 
   const classVariant  = {
     Economy: "neutral",
@@ -105,11 +101,7 @@ export const AdminFlightsTable = () => {
             {/* 7. Actions */}
             <div className={styles.flightsTable__btnGroup}>
               <ButtonEdit />
-<<<<<<< Updated upstream
-              <ButtonDelete />
-=======
               <ButtonDelete onClick={() => onDelete(item.id)} />
->>>>>>> Stashed changes
             </div>
           </div>
         ))}

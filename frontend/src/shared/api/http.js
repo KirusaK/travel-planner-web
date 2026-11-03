@@ -16,3 +16,14 @@ export const postJson = async (path, body) => {
 
   return response.json();
 }
+
+export const deleteRequest = async (path) => {
+  const response = await fetch(`${API_URL}${path}`, {
+    method: "DELETE",
+  })
+
+  if (!response.ok) {
+    const {error} = await response.json().catch(() => ({}));
+    throw new Error(error || "Request failed");
+  }
+}

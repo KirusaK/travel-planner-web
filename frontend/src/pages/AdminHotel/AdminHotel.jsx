@@ -6,17 +6,28 @@ import { AdminHotelsTable } from "../../widgets/AdminHotelsTable/AdminHotelsTabl
 import {AdminModalHotel} from "../../widgets/AdminModalHotel/AdminModalHotel.jsx";
 import { useState } from "react";
 import { useFetchData } from "../../shared/hooks/useFetchData.js";
-import { getHotels } from "../../shared/api/hotels.js";
+import {deleteHotel, getHotels} from "../../shared/api/hotels.js";
 
 export const AdminHotel = () => {
   const [isMoadalOpen, setIsMoadalOpen] = useState(false);
   const {
     data: hotels = [],
     loading,
-    error
+    error,
+    refetch,
   } = useFetchData(getHotels);
-
   const hotelsCount = hotels.length;
+
+  const handleDeleteHotels = async (id) => {
+    if (!window.confirm("Are you sure you want to delete hotel?")) return;
+
+    try {
+      await deleteHotel(id);
+      await refetch();
+    } catch (err) {
+      console.error("Error deleting hotel:", err.message);
+    }
+  }
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -50,11 +61,12 @@ export const AdminHotel = () => {
               </button>
             </div>
 
-            <AdminHotelsTable />
+            <AdminHotelsTable hotels={hotels} onDelete={handleDeleteHotels} />
 
             <AdminModalHotel
               isOpen={isMoadalOpen}
               isClose={() => setIsMoadalOpen(false)}
+              onCreated={refetch}
             />
           </div>
         </div>
