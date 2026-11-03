@@ -3,7 +3,7 @@ import image from "../../shared/assets/image/Ellipse 1.jpg";
 import { ButtonDelete } from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
 import { Badge } from "../../shared/ui/Badge/Badge.jsx";
 
-export const AdminUsersTable = ({users, loading, error}) => {
+export const AdminUsersTable = ({users, loading, error, onDelete}) => {
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>{error}</p>;
@@ -55,7 +55,7 @@ export const AdminUsersTable = ({users, loading, error}) => {
 
             <Badge variant={status[item.status]}>{item.status}</Badge>
 
-            <ButtonDelete />
+            <ButtonDelete onClick={() => onDelete(item.id)}/>
           </div>
         ))}
       </div>
