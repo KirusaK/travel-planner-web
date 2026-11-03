@@ -1,4 +1,4 @@
-import {API_URL} from "./http.js";
+import {API_URL, deleteRequest} from "./http.js";
 
 export const getUsers = async () => {
   const response = await fetch(`${API_URL}/api/users`);
@@ -16,3 +16,5 @@ export const getBookings = async (limit) => {
 
   return response.json();
 }
+
+export const deleteUser = (id) => deleteRequest(`/api/users/${id}`);
