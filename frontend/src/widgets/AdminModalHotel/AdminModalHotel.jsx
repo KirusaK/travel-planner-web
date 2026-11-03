@@ -4,7 +4,9 @@ import { HotelGeneralTab } from "./HotelGeneralTab.jsx";
 import {HotelRoomsTab} from "./HotelRoomsTab.jsx";
 import { HotelAmenitiesTab } from "./HotelAmenitiesTab.jsx";
 import { useAdminForm } from "../../shared/hooks/useAdminForm.js";
-import { createHotel } from "../../shared/api/hotels.js";
+import {createHotel, updateHotel} from "../../shared/api/hotels.js";
+import {createFlight, updateFlight} from "../../shared/api/flights.js";
+import {useEffect} from "react";
 
 const tabs = [
   { id: "general", title: "General info" },
@@ -31,7 +33,9 @@ const initialFormData = {
   amenitiesIds: [],
 };
 
-export const AdminModalHotel = ({isOpen, isClose, onCreated}) => {
+export const AdminModalHotel = ({isOpen, isClose, onCreated, editingId, initialData}) => {
+  const submitFn = editingId ? (data) => updateHotel(editingId, data) : createHotel;
+  const isEditing = Boolean(editingId);
   const {
     formData,
     setFormData,
@@ -44,12 +48,20 @@ export const AdminModalHotel = ({isOpen, isClose, onCreated}) => {
     handleClose,
   } = useAdminForm({
     initialData: initialFormData,
-    submit: createHotel,
+    submit: submitFn,
     onCreated,
     onClose: isClose,
   });
 
-
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+      setActiveTab("general");
+    } else {
+      setFormData(initialFormData);
+      setActiveTab("general");
+    }
+  }, [initialData, setFormData, setActiveTab]);
 
   const handleRoomsChange = (index, e) => {
     const { name, value } = e.target;
@@ -107,7 +119,8 @@ export const AdminModalHotel = ({isOpen, isClose, onCreated}) => {
   return (
       <section>
         <AdminModal
-            title="Add New Hotel"
+            title={isEditing ? "Edit hotel" : "Add New Hotel"}
+            saveLabel={isEditing ? "Save changes" : "Add hotel"}
             subtitle="Property details, rooms, amenities and guest reviews."
             isOpen={isOpen}
             isClose={handleClose}

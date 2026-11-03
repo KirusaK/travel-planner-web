@@ -389,6 +389,42 @@ const FLIGHT_COLUMNS = `
   f.base_price::float as price
   `;
 
+async function insertSegments (client, flightId, segments, fromAirport, toAirport) {
+  for (let i = 0; i < segments.length; i++) {
+    const seg = segments[i];
+    const isReturn = seg.segmentLabel === "Return";
+
+    await client.query(`
+      insert into flight_trips (
+        flight_id, sort_order, direction, trip_date, departure_time, arrival_time, duration_minutes, departure_airport, departure_code, arrival_airport, arrival_code, stops, status, aircraft
+      ) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)`,
+        [
+          flightId,
+          i,
+          seg.segmentLabel,
+          seg.date,
+          seg.departureTime,
+          seg.arrivalTime,
+          Number(seg.durationMinutes) || 120,
+          seg.departureAirport,
+          isReturn ? toAirport : fromAirport,
+          seg.arrivalAirport,
+          isReturn ? fromAirport : toAirport,
+          seg.flightType,
+          seg.status,
+          seg.aircraftType,
+        ],
+    );
+  }
+}
+
+function validateFlight ({airlineName, flightClass, airportLocation, fromAirport, toAirport, basePrice}) {
+  if (!airlineName?.trim() || !flightClass?.trim() || !airportLocation?.trim() || !fromAirport?.trim() || !toAirport?.trim()) return "Not all fields have been filled in" ;
+  if (!(Number(basePrice) > 0)) return "Invalid price";
+
+  return null;
+}
+
 // Короче тут выводятся все поля таблици и заодно подсчитывается количество полетов (segments) для админки и достаем информацию для страници листига
 app.get("/api/flights", async (req, res) => {
   try {
@@ -475,9 +511,13 @@ app.post("/api/flights", async (req, res) => {
 
   const price = Number(basePrice);
 
-  if (!airlineName?.trim() || !flightClass?.trim() || !airportLocation?.trim() || !fromAirport?.trim() || !toAirport?.trim()) return res.status(400).json({ error: "Not all fields have been filled in" });
+  if (segments.some((s) => !s.date || !s.departureTime || !s.arrivalTime)) {
+    return res.status(400).json({error: "Each segment needs a date, departure and arrival time"});
+  };
 
-  if (!(price > 0)) return res.status(400).json({ error: "Invalid price" });
+  const validationError = validateFlight({airlineName, flightClass, airportLocation, fromAirport, toAirport, basePrice});
+  if (validationError) return res.status(400).json({error: validationError});
+
 
   const client = await pool.connect();
 
@@ -510,46 +550,7 @@ app.post("/api/flights", async (req, res) => {
 
     const newFlightId = flightResult.rows[0].id;
 
-    for (let i = 0; i < segments.length; i++) {
-      const seg = segments[i];
-
-      await client.query(
-        `
-        insert into flight_trips (
-          flight_id,
-          sort_order,
-          direction,
-          trip_date,
-          departure_time,
-          arrival_time,
-          duration_minutes,
-          departure_airport,
-          departure_code,
-          arrival_airport,
-          arrival_code,
-          stops,
-          status,
-          aircraft
-        )
-        values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)`,
-        [
-          newFlightId,
-          i,
-          seg.segmentLabel,
-          seg.date,
-          seg.departureTime,
-          seg.arrivalTime,
-          120,
-          seg.departureAirport,
-          "EZE",
-          seg.arrivalAirport,
-          "IST",
-          seg.flightType,
-          seg.status,
-          seg.aircraftType,
-        ],
-      );
-    }
+    await insertSegments(client, newFlightId, segments, fromAirport, toAirport);
 
     await client.query("COMMIT");
     res
@@ -558,6 +559,61 @@ app.post("/api/flights", async (req, res) => {
   } catch (err) {
     await client.query("ROLLBACK");
     console.error("Error adding flights", err);
+    res.status(500).json({ error: "Server error" });
+  } finally {
+    client.release();
+  }
+})
+
+app.put("/api/flights/:id", async (req, res) => {
+  const {id} = req.params;
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(400).json({ error: "Invalid id" });
+  }
+
+  const {
+    airlineName,
+    airlineLogo,
+    flightClass,
+    airportLocation,
+    fromAirport,
+    toAirport,
+    basePrice,
+    segments = [],
+  } = req.body;
+
+  const price = Number(basePrice);
+
+  const validationError = validateFlight({airlineName, flightClass, airportLocation, fromAirport, toAirport, basePrice});
+  if (validationError) return res.status(400).json({error: validationError});
+
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN');
+
+    const result = await client.query(`
+      update flights 
+        set airline_name = $1, logo = $2,flight_class = $3,
+            airport = $4, from_code = $5, to_code = $6,  base_price = $7
+            where id = $8`,
+        [airlineName, airlineLogo, flightClass, airportLocation, fromAirport, toAirport, price, id]
+    );
+
+    if (result.rowCount === 0) {
+      await client.query("ROLLBACK");
+      return res.status(404).json({ error: "Flight not found" });
+    }
+
+    await client.query(`delete from flight_trips where flight_id = $1 `, [id]);
+    await insertSegments(client, id, segments, fromAirport, toAirport);
+
+    await client.query("COMMIT");
+    res.json({message: "Flight updated successfully", flightId: Number(id)});
+  } catch (err) {
+    await client.query("ROLLBACK");
+    console.error("Error updating  flight", err.message);
     res.status(500).json({ error: "Server error" });
   } finally {
     client.release();
@@ -602,6 +658,53 @@ const HOTEL_COLUMNS = `
   h.rating::float as rating,
   h.reviews_count as "reviewsCount"
 `;
+
+async function insertRooms (client, hotelId, rooms) {
+  for (let i = 0; i < rooms.length; i++) {
+    const room = rooms[i];
+
+    await client.query(`
+      insert into hotel_rooms (
+        hotel_id, sort_order, title, price, image_url
+      ) values ($1, $2, $3, $4, $5)`,
+        [
+          hotelId,
+          i,
+          room.title.trim(),
+          Number(room.price),
+          room.imageUrl || null,
+        ],
+    );
+  }
+}
+
+async function insertAmenities (client, hotelId, amenitiesIds) {
+  if (!Array.isArray(amenitiesIds) || amenitiesIds.length === 0) return;
+
+  await client.query(`
+    insert into hotel_amenities (hotel_id, amenity_id)
+    select $1, unnest($2::int[])
+    on conflict do nothing`,
+      [hotelId, amenitiesIds]
+  )
+}
+
+function validateHotel ({name, address, googleMapsUrl, mapEmbedUrl, description, pricePerNight, rooms}) {
+  if (
+      !name?.trim() ||
+      !address?.trim() ||
+      !googleMapsUrl?.trim() ||
+      !mapEmbedUrl?.trim() ||
+      !description?.trim()
+  )
+    return "Not all fields have been filled in ";
+
+  if (!(Number(pricePerNight) > 0)) return "Price per night must be greater than 0";
+  if (!Array.isArray(rooms) || rooms.length === 0) return "At least one room is required";
+  if (rooms.some((r) => !r.title?.trim() || !(Number(r.price) > 0))) return "Each room needs a title and a price > 0";
+
+  return null;
+}
 
 app.get("/api/hotels", async (req, res) => {
   try {
@@ -705,26 +808,8 @@ app.post("/api/hotels", async (req, res) => {
 
   const price = Number(pricePerNight);
 
-  if (
-      !name?.trim() ||
-      !address?.trim() ||
-      !googleMapsUrl?.trim() ||
-      !mapEmbedUrl?.trim() ||
-      !description?.trim()
-  )
-    return res
-        .status(400)
-        .json({ error: "Not all fields have been filled in " });
-
-  if (!(price > 0)) return res
-      .status(400)
-      .json({ error: "Price per night must be greater than 0" });
-
-  if (!Array.isArray(rooms) || rooms.length === 0) return res.status(400).json({ error: "At least one room is required" });
-
-  if (rooms.some((r) => !r.title?.trim() || !(Number(r.price) > 0))) return res
-      .status(400)
-      .json({ error: "Each room needs a title and a price > 0" });
+  const validationError = validateHotel(req.body);
+  if (validationError) return res.status(400).json({error: validationError});
 
   const client = await pool.connect();
 
@@ -757,40 +842,81 @@ app.post("/api/hotels", async (req, res) => {
     );
 
     const newHotelId = hotelResult.rows[0].id;
-
-
-    for (let i = 0; i < rooms.length; i++) {
-      await client.query(
-          `
-        insert into hotel_rooms (
-                                 hotel_id, sort_order, title, price, image_url
-        )
-        values ($1, $2, $3, $4, $5)`,
-          [
-            newHotelId,
-            i,
-            rooms[i].title.trim(),
-            Number(rooms[i].price),
-            rooms[i].imageUrl || null,
-          ],
-      );
-    }
-
-    if (Array.isArray(amenitiesIds) && amenitiesIds.length > 0) {
-      await client.query(
-          `
-        insert into hotel_amenities (hotel_id, amenity_id)
-        select $1, unnest($2::int[])
-        on conflict do nothing`,
-          [newHotelId, amenitiesIds],
-      );
-    }
+    await insertRooms(client, newHotelId, rooms);
+    await insertAmenities(client, newHotelId, amenitiesIds);
 
     await client.query('COMMIT');
     res.status(201).json({ message: "Hotel created successfully", hotelId: newHotelId });
   } catch (err) {
     await client.query('ROLLBACK');
     console.error("Error adding  hotels:", err);
+    res.status(500).json({error: "Server error"});
+  } finally {
+    client.release();
+  }
+})
+
+app.put("/api/hotels/:id", async (req, res) => {
+  const {id} = req.params;
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(400).json({ error: "Invalid id" });
+  }
+
+  const {
+    name,
+    logoUrl,
+    address,
+    googleMapsUrl,
+    mapEmbedUrl,
+    description,
+    features,
+    pricePerNight,
+    rooms,
+    amenitiesIds,
+  } = req.body;
+
+  const validationError = validateHotel(req.body);
+  if (validationError) return res.status(400).json({error: validationError});
+
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN');
+
+    const result = await client.query(`
+      update hotels 
+        set name = $1, logo_url = $2, address = $3, google_maps_url = $4,
+            map_embed_url = $5, description = $6, features = $7, price_per_night = $8
+            where id = $9`,
+        [
+          name.trim(),
+          logoUrl || null,
+          address.trim(),
+          googleMapsUrl || null,
+          mapEmbedUrl || null,
+          description,
+          Array.isArray(features) ? features : [],
+          Number(pricePerNight),
+          id,
+        ],
+    );
+
+    if (result.rowCount === 0) {
+      await client.query('ROLLBACK');
+      return res.status(404).json({error: "Hotel not found"});
+    }
+
+    await client.query(`delete from hotel_rooms where hotel_id  = $1`, [id])
+    await client.query(`delete from hotel_amenities where hotel_id  = $1`, [id])
+    await insertRooms(client, id, rooms);
+    await insertAmenities(client, id, amenitiesIds);
+
+    await client.query('COMMIT');
+    res.json({message: "Hotel updated successfully", hotelId: Number(id)})
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error("Error updating  hotels:", err.message);
     res.status(500).json({error: "Server error"});
   } finally {
     client.release();
