@@ -44,5 +44,14 @@
       border: 1px solid $color-dekoration-grey;
       background-color: $color-base;
     }
+
+    &_btnActive {
+      background-color: $color-blackish-green;
+      color: $color-base;
+
+      &__span {
+        color: $color-mint-green;
+      }
+    }
   }
 }
