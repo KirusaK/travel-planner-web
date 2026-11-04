@@ -6,18 +6,19 @@ import { FlightDetailTicket } from "../../widgets/FlightDetailTicket/FlightDetai
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
 import { useParams } from "react-router-dom";
-import { tickets } from "../../entities/flight/index.js";
 import styles from "./FlightDetailPage.module.scss";
+import { getFlightById } from "../../shared/api/flights.js";
+import { getRatingStatus } from "../../shared/lib/format.js";
+import { useFetch } from "../../shared/hooks/useFetch.js";
 
 export const FlightDetailPage = () => {
   const { id } = useParams();
 
-  const ticket = tickets.find((item) => item.id === id);
+  const { data: flight, loading, error } = useFetch(getFlightById, id);
 
-  if (!ticket) {
-    console.log("No ticket found");
-    return null;
-  }
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+  if (!flight) return null;
 
   return (
     <div>
@@ -25,22 +26,21 @@ export const FlightDetailPage = () => {
         <Header hasShadow={true} />
         <div className={styles.main}>
           <FlightDetailInfo
-            id={ticket.id}
-            airlineName={ticket.airlineName}
-            price={ticket.price}
-            ratingStatus={ticket.ratingStatus}
-            reviewsCount={ticket.reviewsCount}
-            airport={ticket.airport}
-            rating={ticket.rating}
+            id={flight.id}
+            airlineName={flight.airlineName}
+            price={flight.price}
+            ratingStatus={getRatingStatus(flight.rating)}
+            reviewsCount={flight.reviewsCount}
+            airport={flight.airport}
+            rating={flight.rating}
           />
           <div className={styles.block_img}></div>
           <FlightDetailFeatures />
-          <FlightPolicies />
+          <FlightPolicies airlineName={flight.airlineName} />
           <FlightDetailTicket
-            flightTime={ticket.flightTime}
-            airlineName={ticket.airlineName}
-            logo={ticket.logo}
-            trips={ticket.trips}
+            airlineName={flight.airlineName}
+            logo={flight.logo}
+            trips={flight.trips}
           />
         </div>
         <Subscribe />

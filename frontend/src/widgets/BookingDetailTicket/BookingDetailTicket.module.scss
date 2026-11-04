@@ -2,6 +2,8 @@
 @use "../../shared/styles/table" as t;
 
 .bookingDetailTicket {
+  margin-bottom: 40px;
+
   &_card {
     width: 790px;
     height: auto;
@@ -74,6 +76,14 @@
       font-size: 14px;
       font-weight: 500;
     }
+  }
+
+  &__logo {
+    @include t.logoStyle;
+  }
+
+  &__logoPlaceholder {
+    @include t.logoPlaceholder;
   }
 
   &_amenities {

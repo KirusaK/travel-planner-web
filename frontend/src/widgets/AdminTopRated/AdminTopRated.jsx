@@ -1,19 +1,36 @@
 import styles from "./AdminTopRated.module.scss";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import {RatingCard} from "../../shared/ui/RatingCard/RatingCard.jsx";
+import { useFetchData } from "../../shared/hooks/useFetchData.js";
+import { getFlights } from "../../shared/api/flights.js";
+import { getHotels } from "../../shared/api/hotels.js";
+import { getStars } from "../../shared/lib/format.js";
 
 export const AdminTopRated = () => {
-  const hotelData = [
-    { id: 1, title: "Atlantis The Palm", stars: 5, price: "520" },
-    { id: 1, title: "Eresin Sultanahmet", stars: 5, price: "520" },
-    { id: 1, title: "Artemide", stars: 5, price: "520" },
-  ];
+  const {
+    data: flights = [],
+    loading: flightsLoadnig,
+    error: flightsError,
+  } = useFetchData(getFlights);
+  const {
+    data: hotels = [],
+    loading: hotelsLoadnig,
+    error: hotelsError,
+  } = useFetchData(getHotels);
 
-  const flightData = [
-    { id: 1, title: "Qatar Airways", info: "DOH → JFK", rating: 4.8 },
-    { id: 1, title: "Flydubai", info: "DXB → LHR", rating: 4.6 },
-    { id: 1, title: "Turkish Airlines", info: "IST → FCO", rating: 4.3 },
-  ];
+  const topFlight = [...flights]
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 3);
+
+  const topHotels = [...hotels]
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 3);
+
+  const loading = hotelsLoadnig || flightsLoadnig ;
+  const error = hotelsError || flightsError;
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <section className={styles.topRated}>
@@ -23,7 +40,7 @@ export const AdminTopRated = () => {
       </div>
 
       <div className={styles.topRated_group}>
-        {hotelData.map((item) => (
+        {topHotels.map((item) => (
           <div key={item.id} className={styles.topRated_item}>
             <div className={styles.topRated_left}>
               <div className={styles.topRated_iconWrapper}>
@@ -33,12 +50,18 @@ export const AdminTopRated = () => {
               </div>
 
               <div className={styles.topRated_details}>
-                <h3 className={styles.topRated_itemName}>{item.title}</h3>
-                <span>{item.stars}</span>
+                <h3 className={styles.topRated_itemName}>{item.name}</h3>
+                {Array.from({ length: getStars(item.rating) }).map(
+                  (_, index) => (
+                    <svg key={index} width={16} height={16}>
+                      <use href={sprite + "#icon-Star"} />
+                    </svg>
+                  ),
+                )}
               </div>
             </div>
 
-            <span className={styles.topRated_price}>${item.price}</span>
+            <span className={styles.topRated_price}>${item.pricePerNight}</span>
           </div>
         ))}
       </div>
@@ -46,7 +69,7 @@ export const AdminTopRated = () => {
       <hr className={styles.topRated_divider} />
 
       <div className={styles.topRated_group}>
-        {flightData.map((item) => (
+        {topFlight.map((item) => (
           <div key={item.id} className={styles.topRated_item}>
             <div className={styles.topRated_left}>
               <div className={styles.topRated_iconWrapper}>
@@ -56,8 +79,8 @@ export const AdminTopRated = () => {
               </div>
 
               <div className={styles.topRated_details}>
-                <h3 className={styles.topRated_itemName}>{item.title}</h3>
-                <span className={styles.topRated_route}>{item.info}</span>
+                <h3 className={styles.topRated_itemName}>{item.airlineName}</h3>
+                <span className={styles.topRated_route}>{item.from} - {item.to}</span>
               </div>
             </div>
 

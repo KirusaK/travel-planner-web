@@ -1,32 +1,38 @@
-import { hotels } from "../../entities/hotel/index.js";
 import { HotelCard } from "../HotelCard/HotelCard.jsx";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./HotelList.module.scss";
+import { useEffect, useState } from "react";
+import { getHotels } from "../../shared/api/hotels.js";
 
-// прибирає регістр і діакритику: "Gümüssuyu" -> "gumussuyu"
-const normalize = (str = "") =>
-  str
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
+export const HotelList = () => {
+  const [allHotels, setAllHotels] = useState([]);
+  const [filteredTickets, setFilteredTickets] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-export const HotelList = ({ destination = "" }) => {
-  const query = normalize(destination.trim());
+  useEffect(() => {
+    getHotels()
+      .then((data) => {
+        setAllHotels(data);
+        setFilteredTickets(data);
+      })
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
 
-  const filteredHotels = query
-    ? hotels.filter(
-        (hotel) =>
-          normalize(hotel.hotelName).includes(query) ||
-          normalize(hotel.location).includes(query),
-      )
-    : hotels;
+  useEffect(() => {
+
+  })
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div>
       <div className={styles.sorting_results}>
         <p>
-          <strong>Showing {filteredHotels.length} of</strong>{" "}
-          <span>{hotels.length} places</span>
+          <strong>Showing {filteredTickets.length} of</strong>{" "}
+          <span>{allHotels.length} places</span>
         </p>
         <div className={styles.sorting_selectWrapper}>
           <p>
@@ -39,13 +45,9 @@ export const HotelList = ({ destination = "" }) => {
       </div>
 
       <section className={styles.hotelCard_container}>
-        {filteredHotels.length > 0 ? (
-          filteredHotels.map((hotel) => (
-            <HotelCard key={hotel.id} item={hotel} />
-          ))
-        ) : (
-          <p>No places found for "{destination}"</p>
-        )}
+        {filteredTickets.map((hotel) => (
+          <HotelCard key={hotel.id} item={hotel} />
+        ))}
       </section>
     </div>
   );

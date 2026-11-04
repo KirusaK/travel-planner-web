@@ -1,6 +1,7 @@
 import imgLogo from "../../shared/assets/image/airplane.jpg";
 import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
 import styles from "./BookingDetailTotal.module.scss";
+import { getRatingStatus } from "../../shared/lib/format.js";
 
 export const BookingDetailTotal = ({ ticket }) => {
   const {
@@ -43,7 +44,7 @@ export const BookingDetailTotal = ({ ticket }) => {
             <div className={styles.bookingDetailTotal_flight__rating}>
               <RatingCard value={rating} />
               <p className={styles.bookingDetailTotal_flight__ratingText}>
-                <b>{ratingStatus}</b> {reviewsCount}
+                <b>{getRatingStatus(rating)}</b> {reviewsCount} reviews
               </p>
             </div>
           </div>
@@ -67,21 +68,21 @@ export const BookingDetailTotal = ({ ticket }) => {
               <p className={styles.bookingDetailTotal_price__label}>
                 Base Fare
               </p>
-              <p className={styles.bookingDetailTotal_price__value}>{price}</p>
+              <p className={styles.bookingDetailTotal_price__value}>${price}</p>
             </div>
             <div className={styles.bookingDetailTotal_price__row}>
               <p className={styles.bookingDetailTotal_price__label}>Discount</p>
-              <p className={styles.bookingDetailTotal_price__value}>{price}</p>
+              <p className={styles.bookingDetailTotal_price__value}>$0</p>
             </div>
             <div className={styles.bookingDetailTotal_price__row}>
               <p className={styles.bookingDetailTotal_price__label}>Taxes</p>
-              <p className={styles.bookingDetailTotal_price__value}>{price}</p>
+              <p className={styles.bookingDetailTotal_price__value}>$0</p>
             </div>
             <div className={styles.bookingDetailTotal_price__row}>
               <p className={styles.bookingDetailTotal_price__label}>
                 Service Fee
               </p>
-              <p className={styles.bookingDetailTotal_price__value}>{price}</p>
+              <p className={styles.bookingDetailTotal_price__value}>$0</p>
             </div>
           </div>
 
@@ -90,7 +91,7 @@ export const BookingDetailTotal = ({ ticket }) => {
 
         <div className={styles.bookingDetailTotal_total}>
           <p className={styles.bookingDetailTotal_total__label}>Total</p>
-          <p className={styles.bookingDetailTotal_total__value}>{price}</p>
+          <p className={styles.bookingDetailTotal_total__value}>${price}</p>
         </div>
       </div>
     </section>

@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { BookingDetailModal } from "../../shared/ui/BookingDetailModal/index.js";
 import styles from "./BookingDetailPayment.module.scss";
+import { formatDate, formatFullDate } from "../../shared/lib/format.js";
 
 export const BookingDetailPayment = ({ ticket }) => {
   const { partPayment = {} } = ticket;
   const [paymentType, setPaymentType] = useState("full");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const initial = Math.round((ticket.price / 2) * 100) / 100;
+  const remaining = Math.round((ticket.price - initial) * 100) / 100;
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -48,9 +52,9 @@ export const BookingDetailPayment = ({ ticket }) => {
               Pay part now, part later
             </h3>
             <p className={styles.bookingDetailPayment_option__description}>
-              Pay {partPayment.initialAmount} now, and the rest (
-              {partPayment.remainingAmount}) will be automatically charged to
-              the same payment method on {partPayment.dueDate}. No extra fees.
+              Pay {initial} now, and the rest ({remaining}) will be
+              automatically charged to the same payment method on{" "}
+              {formatFullDate(ticket.partDueDate)}. No extra fees.
             </p>
           </div>
 

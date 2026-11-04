@@ -29,9 +29,11 @@ export const HotelDetailAmenities = (props) => {
               key={item.id}
               className={styles.hotelDetailAmenities_block__info__amenities}
             >
-              <svg width={24} height={24}>
-                <use href={`${sprite}#${item.icon}`} />
-              </svg>
+              {item.icon && (
+                <svg width={24} height={24}>
+                  <use href={`${sprite}#${item.icon}`} />
+                </svg>
+              )}
               <p
                 className={
                   styles.hotelDetailAmenities_block__info__amenities__p

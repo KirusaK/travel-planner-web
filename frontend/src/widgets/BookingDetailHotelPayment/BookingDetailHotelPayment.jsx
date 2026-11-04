@@ -3,9 +3,11 @@ import { BookingDetailModal } from "../../shared/ui/BookingDetailModal/index.js"
 import styles from "./BookingDetailHotelPayment.module.scss";
 
 export const BookingDetailHotelPayment = ({ hotel }) => {
-  const { partPayment = {} } = hotel;
   const [paymentType, setPaymentType] = useState("full");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const initial = Math.round(hotel.pricePerNight / 2) * 100 / 100;
+  const remaining = Math.round((hotel.pricePerNight - initial) * 100) / 100;
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -48,9 +50,9 @@ export const BookingDetailHotelPayment = ({ hotel }) => {
               Pay part now, part later
             </h3>
             <p className={styles.bookingDetailPayment_option__description}>
-              Pay ${partPayment.initialAmount} now, and the rest ($
-              {partPayment.remainingAmount}) will be automatically charged to
-              the same payment method on ${partPayment.dueDate} No extra fees.
+              Pay ${initial} now, and the rest ($
+              {remaining}) will be automatically charged to
+              the same payment method on {hotel.partDueDate} No extra fees.
             </p>
           </div>
 

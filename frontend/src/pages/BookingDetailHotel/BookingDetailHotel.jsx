@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { Header } from "../../widgets/Header/Header.jsx";
-import { hotels } from "../../entities/hotel/index.js";
 import { BookingDetailReservations } from "../../widgets/BookingDetailHotel/BookingDetailReservations.jsx";
 import { BookingDetailHotelTotal } from "../../widgets/BookingDetailHotelTotal/BookingDetailHotelTotal.jsx";
 import { BookingDetailHotelPayment } from "../../widgets/BookingDetailHotelPayment/BookingDetailHotelPayment.jsx";
@@ -10,16 +9,18 @@ import { Footer } from "../../widgets/Footer/Footer.jsx";
 import { ButtonBuy } from "../../shared/ui/ButtonBuy/ButtonBuy.jsx";
 import { useState } from "react";
 import styles from "./BookingDetailHotel.module.scss";
+import { getHotelById } from "../../shared/api/hotels.js";
+import { useFetch } from "../../shared/hooks/useFetch.js";
 
 export const BookingDetailHotel = () => {
   const { id } = useParams();
   const [selectedCardId, setSelectedCardId] = useState(null);
 
-  const hotel = hotels.find((item) => String(item.id) === String(id));
-  if (!hotel) {
-    console.log("No hotel found");
-    return null;
-  }
+  const { data: hotel, loading, error } = useFetch(getHotelById, id);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+  if (!hotel) return null;
 
   return (
     <section>
@@ -36,8 +37,8 @@ export const BookingDetailHotel = () => {
           <ButtonBuy
             itemType="hotel"
             itemId={hotel.id}
-            title={hotel.hotelName || hotel.title}
-            price={hotel.price}
+            title={hotel.name}
+            price={hotel.pricePerNight}
             selectedCardId={selectedCardId}
           />
         </div>

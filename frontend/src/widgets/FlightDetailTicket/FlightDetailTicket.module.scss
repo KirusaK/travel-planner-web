@@ -1,4 +1,5 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .flightDetailTicket {
   margin: 40px 0;
@@ -21,6 +22,10 @@
       font-weight: 500;
       color: $color-blackish-green;
     }
+  }
+
+  &_logoPlaceholder {
+    @include t.logoPlaceholder;
   }
 
   &_main {
@@ -67,6 +72,10 @@
         }
       }
 
+    }
+
+    &__logo {
+      @include t.logoStyle;
     }
   }
 

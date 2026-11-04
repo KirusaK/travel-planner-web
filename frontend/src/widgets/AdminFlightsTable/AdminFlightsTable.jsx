@@ -1,79 +1,14 @@
 import image from "../../shared/assets/image/Ellipse 1.jpg";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
-import styles from "./AdminFlightsTable.module.scss";
 import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
 import { ButtonEdit } from "../../shared/ui/ButtonEdit/ButtonEdit.jsx";
 import { ButtonDelete } from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
 import { Badge } from "../../shared/ui/Badge/Badge.jsx";
+import { getRatingStatus } from "../../shared/lib/format.js";
+import styles from "./AdminFlightsTable.module.scss";
 
-export const AdminFlightsTable = () => {
-  const flights = [
-    {
-      id: 1,
-      airlineName: "Emirates",
-      reviewsCount: 54,
-      rating: 4.2,
-      ratingStatus: "Very Good",
-      price: 104,
-      from: "EZE",
-      to: "IST",
-      airport: "Istanbul Airport, Turkey",
-      flightClass: "Economy",
-      tripsCount: 2,
-    },
-    {
-      id: 2,
-      airlineName: "Flydubai",
-      reviewsCount: 128,
-      rating: 4.6,
-      ratingStatus: "Excellent",
-      price: 186,
-      from: "DXB",
-      to: "LHR",
-      airport: "Dubai International, UAE",
-      flightClass: "Business",
-      tripsCount: 1,
-    },
-    {
-      id: 3,
-      airlineName: "Qatar Airways",
-      reviewsCount: 312,
-      rating: 4.8,
-      ratingStatus: "Excellent",
-      price: 240,
-      from: "DOH",
-      to: "JFK",
-      airport: "Hamad International, Qatar",
-      flightClass: "First",
-      tripsCount: 1,
-    },
-    {
-      id: 4,
-      airlineName: "Etihad",
-      reviewsCount: 87,
-      rating: 3.9,
-      ratingStatus: "Good",
-      price: 132,
-      from: "AUH",
-      to: "CDG",
-      airport: "Abu Dhabi International, UAE",
-      flightClass: "Economy",
-      tripsCount: 1,
-    },
-    {
-      id: 5,
-      airlineName: "Turkish Airlines",
-      reviewsCount: 201,
-      rating: 4.3,
-      ratingStatus: "Very Good",
-      price: 98,
-      from: "IST",
-      to: "FCO",
-      airport: "Istanbul Airport, Turkey",
-      flightClass: "Premium",
-      tripsCount: 1,
-    },
-  ];
+
+export const AdminFlightsTable = ({flights, onDelete, onUpdate}) => {
 
   const classVariant  = {
     Economy: "neutral",
@@ -103,7 +38,7 @@ export const AdminFlightsTable = () => {
           <div key={item.id} className={styles.flightsTable__row}>
             {/* 1. Airline */}
             <div className={styles.flightsTable__airline}>
-              <img src={image} alt="" className={styles.flightsTable__logo} />
+              <img src={item.logo || image} alt="" className={styles.flightsTable__logo} />
               <div className={styles.flightsTable__airlineInfo}>
                 <h3 className={styles.flightsTable__airlineName}>
                   {item.airlineName}
@@ -116,9 +51,13 @@ export const AdminFlightsTable = () => {
 
             {/* 2. Rating */}
             <div className={styles.flightsTable__ratingGroup}>
-              <RatingCard value={item.rating} />
+              {item.rating !== null ? (
+                <RatingCard value={item.rating} />
+              ) : (
+                <span className={styles.flightsTable__rating}>New</span>
+              )}
               <span className={styles.flightsTable__ratingStatus}>
-                {item.ratingStatus}
+                {getRatingStatus(item.rating)}
               </span>
             </div>
 
@@ -149,7 +88,9 @@ export const AdminFlightsTable = () => {
 
             {/* 5. Class */}
             <div>
-              <Badge variant={classVariant[item.flightClass]}>{item.flightClass}</Badge>
+              <Badge variant={classVariant[item.flightClass]}>
+                {item.flightClass}
+              </Badge>
             </div>
 
             {/* 6. Trips */}
@@ -159,8 +100,8 @@ export const AdminFlightsTable = () => {
 
             {/* 7. Actions */}
             <div className={styles.flightsTable__btnGroup}>
-              <ButtonEdit />
-              <ButtonDelete />
+              <ButtonEdit onClick={() => onUpdate(item.id, item)}/>
+              <ButtonDelete onClick={() => onDelete(item.id)} />
             </div>
           </div>
         ))}

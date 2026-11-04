@@ -1,0 +1,88 @@
+import sprite from "../../assets/icons/symbol-defs.svg";
+import styles from "./AdminModal.module.scss";
+import { useEffect } from "react";
+
+export const AdminModal = ({
+                             isOpen,
+                             isClose,
+                             children,
+                             title,
+                             subtitle,
+                             onSave,
+                             isSaving,
+                               saveLabel,
+                             error,
+                           }) => {
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") {
+        isClose();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isOpen, isClose]);
+
+  if (!isOpen) {
+    return null;
+  }
+
+  return (
+      <section>
+        <div className={styles.overlay} onClick={isClose}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modal__header}>
+              <div>
+                <h2 className={styles.modal__title}>{title}</h2>
+                <p className={styles.modal__subtitle}>{subtitle}</p>
+              </div>
+
+              <button
+                  type="button"
+                  onClick={isClose}
+                  aria-label="Close"
+                  className={styles.modal__close}
+              >
+                <svg width={20} height={20}>
+                  <use href={sprite + "#icon-close"} />
+                </svg>
+              </button>
+            </div>
+
+            <div className={styles.modal__body}>{children}</div>
+
+            {error && (
+                <p role="alert" className={styles.modal__error}>
+                  {error}
+                </p>
+            )}
+
+            <div className={styles.modal__footer}>
+              <button
+                  type="button"
+                  onClick={isClose}
+                  className={styles.modal__footer__close}
+              >
+                Cancel
+              </button>
+              <button
+                  type="button"
+                  className={styles.modal__footer__add}
+                  onClick={onSave}
+                  disabled={isSaving}
+              >
+                {isSaving ? "Saving..." : (saveLabel ?? title)}
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+  );
+};
