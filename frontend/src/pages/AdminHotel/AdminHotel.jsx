@@ -7,6 +7,7 @@ import {AdminModalHotel} from "../../widgets/AdminModalHotel/AdminModalHotel.jsx
 import { useState } from "react";
 import { useFetchData } from "../../shared/hooks/useFetchData.js";
 import {deleteHotel, getHotelById, getHotels} from "../../shared/api/hotels.js";
+import {ButtonNewAdd} from "../../shared/ui/ButtonNewAdd/ButtonNewAdd.jsx";
 
 export const AdminHotel = () => {
   const [isMoadalOpen, setIsMoadalOpen] = useState(false);
@@ -92,15 +93,7 @@ export const AdminHotel = () => {
                 </p>
               </div>
 
-              <button
-                className={styles.body_headerBlock_btn}
-                onClick={handleOpenCreateModal}
-              >
-                <svg width={16} height={16}>
-                  <use href={sprite + "#icon-Frame7"} />
-                </svg>
-                Add New Hotel
-              </button>
+              <ButtonNewAdd onClick={handleOpenCreateModal} title="Add New Hotel" />
             </div>
 
             <AdminHotelsTable hotels={hotels} onDelete={handleDeleteHotels} onUpdate={handleOpenEditModal} />

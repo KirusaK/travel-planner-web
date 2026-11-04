@@ -1,0 +1,14 @@
+@use "../../../app/styles/variables" as *;
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  background-color: $color-mint-green;
+  width: 177px;
+  height: 44px;
+}

@@ -1,37 +1,24 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
-.main {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
+@include t.globalAdmin;
 
 .body {
-  flex: 1;
-  padding: 32px;
-  background-color: $color-dekoration-body;
+  @include t.bodyAdmin;
 
   &_headerBlock {
     margin-bottom: 24px;
 
     &_title {
-      font-size: 24px;
-      font-weight: 700;
+      @include t.sizeText(24px, 700);
     }
 
     &_subtitle {
-      font-size: 14px;
-      font-weight: 400;
-      color: $color-dekoration-text;
+      @include t.sizeText(14px, 400, $color-dekoration-text);
     }
 
     &_btnBlock {
+      @include t.positionFull(flex, center);
       display: flex;
       align-items: center;
       gap: 8px;

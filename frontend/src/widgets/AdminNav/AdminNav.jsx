@@ -19,6 +19,7 @@ export const AdminNav = () => {
     },
     { id: 4, image: "icon-Frame3", title: "Users", to: "/AdminUsers"  },
     { id: 5, image: "icon-Frame4", title: "Bookings", to: "/AdminBookings" },
+    {id: 6, image: "icon-shield", title: "Admins", to: "/AdminAdmins"},
   ];
 
   return (
