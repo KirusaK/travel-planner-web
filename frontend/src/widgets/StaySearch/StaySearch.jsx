@@ -5,12 +5,18 @@ import styles from "./StaySearch.module.scss";
 
 export const StaySearch = () => {
   const [destination, setDestination] = useState("");
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
   const navigate = useNavigate();
 
+  const params = new URLSearchParams();
   const q = destination.trim();
-  const searchUrl = q
-    ? `/HotelPage?destination=${encodeURIComponent(q)}`
-    : "/HotelPage";
+  if (q) params.set("destination", q);
+  if (checkIn) params.set("checkIn", checkIn);
+  if (checkOut) params.set("checkOut", checkOut);
+
+  const queryString = params.toString();
+  const searchUrl = queryString ? `/HotelPage?${queryString}` : "/HotelPage";
 
   return (
     <section className={styles.wrapper}>
@@ -40,7 +46,17 @@ export const StaySearch = () => {
         <div className={styles.wrapper_trip}>
           <div className={styles.wrapper_trip}>
             <label className={styles.wrapper_trip_label}>Check In</label>
-            <input type="date" className={styles.wrapper_depart_input_field} />
+            <input
+              type="date"
+              className={styles.wrapper_depart_input_field}
+              value={checkIn}
+              onChange={(e) => {
+                const value = e.target.value;
+                setCheckIn(value);
+                // якщо виїзд раніше нового заїзду - скидаємо його
+                if (checkOut && value && checkOut < value) setCheckOut("");
+              }}
+            />
           </div>
         </div>
 
@@ -48,7 +64,13 @@ export const StaySearch = () => {
         <div className={styles.wrapper_depart}>
           <div className={styles.wrapper_depart_input}>
             <label className={styles.wrapper_depart_label}>Check Out</label>
-            <input type="date" className={styles.wrapper_depart_input_field} />
+            <input
+              type="date"
+              className={styles.wrapper_depart_input_field}
+              value={checkOut}
+              min={checkIn || undefined}
+              onChange={(e) => setCheckOut(e.target.value)}
+            />
           </div>
         </div>
 

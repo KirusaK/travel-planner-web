@@ -8,7 +8,7 @@ import { BookingDetailAuth } from "../../shared/ui/BookingDetailAuth/BookingDeta
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
 import { ButtonBuy } from "../../shared/ui/ButtonBuy/ButtonBuy.jsx";
-import {useState} from "react";
+import { useState } from "react";
 import styles from "./BookingDetailHotel.module.scss";
 
 export const BookingDetailHotel = () => {
@@ -29,7 +29,7 @@ export const BookingDetailHotel = () => {
         <div>
           <BookingDetailReservations hotel={hotel} />
           <BookingDetailHotelPayment hotel={hotel} />
-          <BookingDetailAuth onSelectCard={(cardId) => setSelectedCardId(cardId)} />
+          <BookingDetailAuth onSelectCard={setSelectedCardId} />
         </div>
         <div className={styles.main_block}>
           <BookingDetailHotelTotal hotel={hotel} />
