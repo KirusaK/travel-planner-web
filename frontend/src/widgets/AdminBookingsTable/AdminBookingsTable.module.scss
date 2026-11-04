@@ -34,11 +34,8 @@ minmax(0, 1.3fr) minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.6fr);
   }
 
   &__iconWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(32px, 32px);
     border-radius: 12px;
     background-color: $color-light-green;
   }

@@ -1,0 +1,85 @@
+@use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
+
+$table-columns: minmax(0, 2fr) minmax(0, 2.2fr) minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 0.6fr);
+
+.tableHeaderSection {
+  @include t.positionFull(flex, center);
+  @include t.sizeText(16px, 700);
+  @include t.widthHeight(100%, 78px);
+  padding-left: 24px;
+  border-radius: 12px 12px 0 0;
+  background-color: $color-base;
+  border: 1px solid $color-dekoration-grey;
+}
+
+.tableHeaderRow {
+  @include t.positionFull(flex, center);
+  @include t.sizeText(12px, 600, $color-dekoration-text);
+  @include t.widthHeight(null, 48px);
+  border: 1px solid $color-dekoration-grey;
+  background-color: $color-dekoration-header;
+}
+
+.tableRow {
+  @include t.sizeText(12px, 400);
+  @include t.widthHeight(null, 65px);
+  border: 1px solid $color-dekoration-grey;
+  background-color: $color-base;
+
+  &:last-child {
+    border-radius: 0 0 12px 12px;
+  }
+}
+
+.tableHeaderRow,
+.tableRow {
+  @include t.grid($table-columns);
+}
+
+.userCell {
+  @include t.positionFull(flex, center);
+  gap: 7px;
+}
+
+.avatar_circle {
+  @include t.positionFull(flex, center, center);
+  @include t.widthHeight(32px, 32px);
+  border-radius: 50%;
+  background-color: $color-light-green;
+}
+
+.avatar {
+  @include t.sizeText(16px, 700, $color-green-text)
+}
+
+.userName {
+  @include t.sizeText(12px, 600)
+}
+
+.emailCell {
+  @include t.sizeText(12px, 400, $color-dekoration-text)
+}
+
+.roleCell {
+  @include t.positionFull(flex, center, center);
+  @include t.sizeText(12px, 700, $color-decoration-role-admin-text);
+  @include t.widthHeight(103px, 24px);
+  padding: 4px 10px;
+  border-radius: 268px;
+  background-color: $color-decoration-role-admin;
+}
+
+.statusCell {
+  @include t.positionFull(flex, center, center);
+  @include t.sizeText(12px, 600, $color-green-text);
+  @include t.widthHeight(59px, 24px);
+  padding: 4px 10px;
+  border-radius: 268px;
+  background-color: $color-light-green;
+}
+
+.actionsCell {
+  @include t.positionFull(flex, center, center);
+  gap: 8px;
+}

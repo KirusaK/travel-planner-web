@@ -19,6 +19,7 @@ import { AdminFlight } from "../pages/AdminFlight/AdminFlight.jsx";
 import { AdminHotel } from "../pages/AdminHotel/AdminHotel.jsx";
 import { AdminUsers } from "../pages/AdminUsers/AdminUsers.jsx";
 import { AdminBookings } from "../pages/AdminBookings/AdminBookings.jsx";
+import {AdminAdmins} from "../pages/AdminAdmins/AdminAdmins.jsx";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -50,6 +51,7 @@ const App = () => {
       <Route path="/AdminHotel" element={<AdminHotel />} />
       <Route path="/AdminUsers" element={<AdminUsers />} />
       <Route path="/AdminBookings" element={<AdminBookings />} />
+        <Route path="/AdminAdmins" element={<AdminAdmins />} />
     </Routes>
   );
 };

@@ -1,0 +1,48 @@
+@use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
+
+@include t.globalAdmin;
+
+.topSection {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  @include t.bodyAdmin;
+}
+
+.headerBlock {
+  @include t.positionFull(flex, center, space-between);
+  @include t.widthHeight(100%, 106px);
+  border-radius: 12px;
+  padding: 24px;
+  background-color: $color-base;
+}
+
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pageTitle {
+  @include t.sizeText(24px, 700);
+}
+
+.activeBadge {
+  @include t.sizeText(12px, 400);
+  @include t.positionFull(flex, center, center);
+  @include t.widthHeight(127px, 25px);
+  border-radius: 9999px;
+  border: 1px solid $color-mint-green;
+  background-color: transparentize($color-mint-green, 0.8);
+}
+
+.pageSubtitle {
+  @include t.sizeText(14px, 400, $color-dekoration-text);
+}

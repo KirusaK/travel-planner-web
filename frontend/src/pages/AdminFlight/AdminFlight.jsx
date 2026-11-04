@@ -7,6 +7,7 @@ import { useState } from "react";
 import { AdminModalFlight } from "../../widgets/AdminFlightModal/AdminModalFlight.jsx";
 import { useFetchData } from "../../shared/hooks/useFetchData.js";
 import {deleteFlight, getFlightById, getFlights} from "../../shared/api/flights.js";
+import {ButtonNewAdd} from "../../shared/ui/ButtonNewAdd/ButtonNewAdd.jsx";
 
 export const AdminFlight = () => {
   const [isMoadalOpen, setIsMoadalOpen] = useState(false);
@@ -93,15 +94,7 @@ export const AdminFlight = () => {
                 </p>
               </div>
 
-              <button
-                className={styles.body_headerBlock_btn}
-                onClick={handleOpenCreateModal}
-              >
-                <svg width={16} height={16}>
-                  <use href={sprite + "#icon-Frame7"} />
-                </svg>
-                Add New Flight
-              </button>
+              <ButtonNewAdd onClick={handleOpenCreateModal} title="Add New Flight" />
             </div>
 
             <AdminFlightsTable flights={flights} onDelete={handleDeleteFlight} onUpdate={handleOpenEditModal} />

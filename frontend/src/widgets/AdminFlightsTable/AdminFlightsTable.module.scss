@@ -72,8 +72,7 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
     gap: 2px;
 
     &__block {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
       gap: 8px;
     }
   }
@@ -91,8 +90,7 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
   }
 
   &__btnGroup {
-    display: flex;
-    justify-content: flex-end;
+    @include t.positionFull(flex, null, flex-end);
     gap: 8px;
   }
 }

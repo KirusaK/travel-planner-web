@@ -53,6 +53,12 @@
   font-weight: 600;
 }
 
+@mixin sizeText($size, $weight, $color: null) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+
 @mixin price($size, $weight) {
   font-size: $size;
   font-weight: $weight;
@@ -121,9 +127,9 @@
 @mixin logoStyle {
   width: 64px;
   height: 44px;
-  backgroundSize: "cover";
-  backgroundRepeat: "no-repeat";
-  backgroundPosition: "center";
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 @mixin ratingCard {
@@ -136,4 +142,35 @@
   font-weight: 500;
   border: 1px solid $color-mint-green;
   border-radius: 4px;
+}
+
+@mixin globalAdmin {
+  .main {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+}
+
+@mixin bodyAdmin {
+  flex: 1;
+  padding: 32px;
+  background-color: $color-dekoration-body;
+}
+
+@mixin positionFull($display: null, $align: null, $justify: null) {
+  display: $display;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin widthHeight($width, $height) {
+  width: $width;
+  height: $height;
 }
