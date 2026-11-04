@@ -1,4 +1,3 @@
-import { SocialAuthGroup } from "../SocialAuthGroup/index.js";
 import { useAuth } from "../../context/AuthContext.jsx";
 import sprite from "../../assets/icons/symbol-defs.svg";
 import styles from "./BookingDetailAuth.module.scss";
@@ -25,10 +24,7 @@ export const BookingDetailAuth = ({ onSelectCard }) => {
   };
 
   useEffect(() => {
-    console.log("Current user in BookingDetailAuth:", user);
-
     if (!user?.id) {
-      console.warn("User ID is missing!");
       return;
     }
 
@@ -70,7 +66,7 @@ export const BookingDetailAuth = ({ onSelectCard }) => {
                         ? styles.bookingDetailAuth_cardItem__active
                         : ""
                     }`}
-                    onClick={() => handleCardSelect(card.id)} //
+                    onClick={() => handleCardSelect(card.id)}
                   >
                     <div className={styles.bookingDetailAuth_cardLeft}>
                       <svg width={32} height={32}>
@@ -89,7 +85,7 @@ export const BookingDetailAuth = ({ onSelectCard }) => {
                       type="radio"
                       name="selectedCard"
                       checked={isSelected}
-                      onChange={() => handleCardSelect(card.id)} //
+                      onChange={() => handleCardSelect(card.id)}
                       className={styles.bookingDetailAuth_checkbox}
                     />
                   </div>
@@ -111,7 +107,7 @@ export const BookingDetailAuth = ({ onSelectCard }) => {
           </button>
         </div>
       ) : (
-        <LoginForm />
+        <LoginForm compact />
       )}
 
       <AddCardModal

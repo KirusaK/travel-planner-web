@@ -30,9 +30,7 @@ export const BookingDetailHotel = () => {
         <div>
           <BookingDetailReservations hotel={hotel} />
           <BookingDetailHotelPayment hotel={hotel} />
-          <BookingDetailAuth
-            onSelectCard={(cardId) => setSelectedCardId(cardId)}
-          />
+          <BookingDetailAuth onSelectCard={setSelectedCardId} />
         </div>
         <div className={styles.main_block}>
           <BookingDetailHotelTotal hotel={hotel} />

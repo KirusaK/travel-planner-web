@@ -5,17 +5,23 @@ import sprite from "../../shared/assets/icons/symbol-defs.svg";
 
 export const CompactStaySearch = () => {
   const [params] = useSearchParams();
-  // у полі одразу стоїть те, що шукали (з адреси)
+  // у полях одразу стоїть те, що шукали (з адреси)
   const [destination, setDestination] = useState(
     params.get("destination") ?? "",
   );
+  const [checkIn, setCheckIn] = useState(params.get("checkIn") ?? "");
+  const [checkOut, setCheckOut] = useState(params.get("checkOut") ?? "");
   const navigate = useNavigate();
 
   const handleSearch = () => {
+    const search = new URLSearchParams();
     const q = destination.trim();
-    navigate(
-      q ? `/HotelPage?destination=${encodeURIComponent(q)}` : "/HotelPage",
-    );
+    if (q) search.set("destination", q);
+    if (checkIn) search.set("checkIn", checkIn);
+    if (checkOut) search.set("checkOut", checkOut);
+
+    const queryString = search.toString();
+    navigate(queryString ? `/HotelPage?${queryString}` : "/HotelPage");
   };
 
   return (
@@ -48,6 +54,13 @@ export const CompactStaySearch = () => {
               <input
                 type="date"
                 className={styles.wrapper_depart_input_field}
+                value={checkIn}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setCheckIn(value);
+                  // якщо виїзд раніше нового заїзду - скидаємо його
+                  if (checkOut && value && checkOut < value) setCheckOut("");
+                }}
               />
             </div>
           </div>
@@ -59,6 +72,9 @@ export const CompactStaySearch = () => {
               <input
                 type="date"
                 className={styles.wrapper_depart_input_field}
+                value={checkOut}
+                min={checkIn || undefined}
+                onChange={(e) => setCheckOut(e.target.value)}
               />
             </div>
           </div>
