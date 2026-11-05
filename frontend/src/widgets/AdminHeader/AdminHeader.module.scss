@@ -1,22 +1,20 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .header {
-  display: flex;
-  justify-content: flex-end;
+  @include t.positionFull(flex, null, flex-end);
   height: 80px;
   padding: 15px 32px;
   border-bottom: 1px solid $color-dekoration-grey;
 
   &__profile {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 12px;
     background-color: transparent;
   }
 
   &__info {
-    display: flex;
+    @include t.positionFull(flex, start);
     flex-direction: column;
-    align-items: start;
   }
 }

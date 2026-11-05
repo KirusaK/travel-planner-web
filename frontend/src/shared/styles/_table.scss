@@ -31,43 +31,16 @@
   border-radius: 50%;
 }
 
-@mixin title {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-@mixin subtitle {
-  font-size: 12px;
-  font-weight: 400;
-  color: $color-dekoration-text;
-}
-
 @mixin item {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-@mixin status {
-  font-size: 12px;
-  font-weight: 600;
-}
-
-@mixin sizeText($size, $weight, $color: null) {
+@mixin sizeText($size: null, $weight: null, $color: null) {
   font-size: $size;
   font-weight: $weight;
   color: $color;
-}
-
-@mixin price($size, $weight) {
-  font-size: $size;
-  font-weight: $weight;
-  color: $color-pink;
-}
-
-@mixin itemTitle {
-  font-size: 14px;
-  font-weight: 400;
 }
 
 @mixin badge {
@@ -81,11 +54,6 @@
   display: grid;
   width: 100%;
   gap: 20px;
-}
-
-@mixin modalInput {
-  font-size: 14px;
-  font-weight: 700;
 }
 
 @mixin stylesInput {
@@ -173,4 +141,70 @@
 @mixin widthHeight($width, $height) {
   width: $width;
   height: $height;
+}
+
+@mixin bookingDetailStyles {
+  .main {
+    display: flex;
+    width: 1280px;
+    gap: 40px;
+    margin: 94px auto;
+
+    &_block {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+  }
+}
+
+@mixin globalStyles {
+  display: flex;
+  flex-direction: column;
+  width: 1280px;
+  gap: 40px;
+  margin: 94px auto;
+}
+
+@mixin success {
+  color: $color-green-text;
+  background-color: $color-light-green;
+}
+
+@mixin warning {
+  color: $color-yellow-text;
+  background-color: $color-yellow;
+}
+
+@mixin danger {
+  color: $color-red-text;
+  background-color: $color-red;
+}
+
+@mixin neutral {
+  color: $color-dekoration-text;
+  background-color: $color-dekoration_btn__grey;
+}
+
+@mixin dark {
+  color: $color-text-light;
+  background-color: $color-text-dark;
+}
+
+@mixin btnDeleteEdit($borderColor) {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background-color: transparent;
+  border: 1px solid $borderColor;
+}
+
+@mixin photo($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 8px;
+  width: 90px;
+  height: 90px;
+  transition: transform 0.3s ease;
 }

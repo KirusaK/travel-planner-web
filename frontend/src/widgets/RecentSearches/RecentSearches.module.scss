@@ -1,18 +1,16 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .RecentSearches {
-  display: flex;
-  justify-content: center;
+  @include t.positionFull(flex, null, center);
 
   &__container {
-    width: 1232px;
-    height: 162px;
+    @include t.widthHeight(1232px, 162px);
   }
 
   &__title {
+    @include t.sizeText(32px, 700);
     font-family: "Roboto Condensed", sans-serif;
-    font-weight: 700;
-    font-size: 32px;
     margin-bottom: 32px;
   }
 
@@ -22,49 +20,24 @@
   }
 
   &__cards {
-    display: flex;
-    align-items: center;
-    width: auto;
+    @include t.positionFull(flex, center);
+    @include t.widthHeight(auto, null);
     gap: 16px;
   }
 
   &__photo1 {
-    background-image: url("../../shared/assets/image/istanbul2.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 8px;
-    width: 90px;
-    height: 90px;
-    transition: transform 0.3s ease;
+    @include t.photo("../../shared/assets/image/istanbul2.svg");
   }
 
   &__photo2 {
-    background-image: url("../../shared/assets/image/Sydney2.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 8px;
-    width: 90px;
-    height: 90px;
-    transition: transform 0.3s ease;
+    @include t.photo("../../shared/assets/image/Sydney2.svg");
   }
 
   &__photo3 {
-    background-image: url("../../shared/assets/image/Baku2.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 8px;
-    width: 90px;
-    height: 90px;
-    transition: transform 0.3s ease;
+    @include t.photo("../../shared/assets/image/Baku2.svg");
   }
   &__photo4 {
-    background-image: url("../../shared/assets/image/Malé2.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 8px;
-    width: 90px;
-    height: 90px;
-    transition: transform 0.3s ease;
+    @include t.photo("../../shared/assets/image/Malé2.svg");
   }
 
   &__photo1:hover,
@@ -81,14 +54,10 @@
   }
 
   &__text {
-    font-weight: 600;
-    font-size: 16px;
-    color: $color-blackish-green;
+    @include t.sizeText(16px, 600, $color-blackish-green);
   }
 
   &__par {
-    font-weight: 400;
-    font-size: 12px;
-    color: $color-blackish-green;
+    @include t.sizeText(12px, 400, $color-blackish-green);
   }
 }

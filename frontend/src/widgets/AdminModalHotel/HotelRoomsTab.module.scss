@@ -5,8 +5,7 @@
   padding: 24px 0;
 
   &__room {
-    display: flex;
-    align-items: flex-end;
+    @include t.positionFull(flex, flex-end);
     gap: 12px;
     padding: 20px;
     margin-bottom: 16px;
@@ -22,7 +21,7 @@
   }
 
   &__label {
-    @include t.status;
+    @include t.sizeText(12px, 600);
   }
 
   &__input {
@@ -34,8 +33,7 @@
   }
 
   &__preview {
-    width: 128px;
-    height: 80px;
+    @include t.widthHeight(128px, 80px);
     border-radius: 17px;
   }
 
@@ -46,8 +44,7 @@
   }
 
   &__uploadBtn {
-    width: 112px;
-    height: 36px;
+    @include t.widthHeight(112px, 36px);
     padding: 9px;
     border-radius: 12px;
     border: 1px solid $color-mint-green;

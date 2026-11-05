@@ -16,12 +16,12 @@
 
   &__sectionTitle,
   &__sectionTitle{
-    @include t.modalInput;
+    @include t.sizeText(14px, 700);
   }
 
   &__sectionHint,
   &__sectionHint{
-    @include t.subtitle;
+    @include t.sizeText(12px, 400, $color-dekoration-text);
   }
 
   &__field {
@@ -31,50 +31,41 @@
   }
 
   &__label {
-    @include t.status;
+    @include t.sizeText(12px, 600);
   }
 
   &__input {
-    width: 268px;
-    height: 44px;
-    padding: 14px;
+    @include t.widthHeight(268px, 44px);
     @include t.stylesInput;
+    padding: 14px;
   }
 
   &__row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
     gap: 20px;
   }
 
   &__summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
     padding: 16px 20px;
     border-radius: 17px;
     background-color: transparentize($color-mint-green, 0.7);
   }
 
   &__summaryLabel {
-    @include t.title;
+    @include t.sizeText(14px, 600);
   }
 
   &__summaryValue {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 3px;
   }
 
   &__summaryPrice {
-    font-size: 18px;
-    font-weight: 700;
-    color: $color-pink;
+    @include t.sizeText(18px, 700, $color-pink);
   }
 
   &__summaryLater {
-    @include t.itemTitle;
-    color: $color-dekoration-text;
+    @include t.sizeText(14px, 400, $color-dekoration-text);
   }
 }

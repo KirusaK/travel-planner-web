@@ -28,8 +28,7 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
   }
 
   &__airline {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 12px;
     min-width: 0;
   }
@@ -40,12 +39,12 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
 
   &__airlineName,
   &__routePoint {
-    @include t.title;
+    @include t.sizeText(14px, 600);
   }
 
   &__airlineReviews,
   &__routeAirport {
-    @include t.subtitle;
+    @include t.sizeText(12px, 400, $color-dekoration-text);
   }
 
   &__ratingGroup {
@@ -59,11 +58,11 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
   &__ratingStatus,
   &__headerCol,
   &__classCell {
-    @include t.status;
+    @include t.sizeText(12px, 600);
   }
 
   &__price {
-    @include t.price(16px, 700);
+    @include t.sizeText(16px, 700, $color-pink);
   }
 
   &__routeCodes {
@@ -86,7 +85,7 @@ $table-columns: 2.2fr 1.7fr 0.8fr 2.2fr 1.3fr 1.2fr 90px;
   }
 
   &__trips {
-    @include t.itemTitle;
+    @include t.sizeText(14px, 400);
   }
 
   &__btnGroup {

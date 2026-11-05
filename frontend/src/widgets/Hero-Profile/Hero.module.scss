@@ -1,57 +1,37 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .hero {
-  display: flex;
+  @include t.positionFull(flex, center);
   flex-direction: column;
-  align-items: center;
-
   margin-top: 48px;
 
   &_cover {
+    @include t.widthHeight(1232px, 350px);
     position: relative;
     z-index: 1;
-
-    width: 1232px;
-    height: 350px;
-
     border-radius: 12px;
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
     overflow: hidden;
   }
 
   &_coverButton {
+    @include t.positionFull(flex, center, center);
+    @include t.sizeText(12px, 600, $color-text-dark);
     position: absolute;
-
     right: 16px;
     bottom: 16px;
-
     z-index: 10;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 6px;
-
     padding: 10px 16px;
-
     border: none;
     border-radius: 4px;
-
     background: $color-mint-green;
-    color: $color-text-dark;
-
-    font-size: 12px;
-    font-weight: 600;
     font-family: inherit;
-
     cursor: pointer;
-
     pointer-events: auto;
-
     transition: background 0.2s ease;
   }
 
@@ -64,11 +44,8 @@
   }
 
   &_coverButton img {
+    @include t.widthHeight(16px, 16px);
     display: block;
-
-    width: 16px;
-    height: 16px;
-
     pointer-events: none;
   }
 
@@ -81,13 +58,10 @@
   }
 
   &_user {
+    @include t.positionFull(flex, center);
     position: relative;
     z-index: 2;
-
-    display: flex;
     flex-direction: column;
-    align-items: center;
-
     margin-top: -60px;
   }
 
@@ -97,40 +71,24 @@
   }
 
   &_avatar {
+    @include t.widthHeight(160px, 160px);
     display: block;
-
-    width: 160px;
-    height: 160px;
-
     object-fit: cover;
   }
 
   &_editButton {
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(44px, 44px);
+    @include t.sizeText(14px);
     position: absolute;
-
     right: 12px;
     bottom: 12px;
-
     z-index: 10;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 44px;
-    height: 44px;
-
     padding: 0;
-
     border-radius: 50%;
-
     background: $color-pink;
-
-    font-size: 14px;
     line-height: 1;
-
     cursor: pointer;
-
     transition: background 0.2s ease;
   }
 
@@ -139,19 +97,15 @@
   }
 
   &_user h1 {
+    @include t.widthHeight(24px, 600);
     margin: 12px 0 4px;
-
-    font-size: 24px;
-    font-weight: 600;
     line-height: 1.2;
   }
 
   &_user p {
+    @include t.sizeText(16px, null, $color-border);
     margin: 0;
-
     font-size: 16px;
     line-height: 1.4;
-
-    color: $color-border;
   }
 }

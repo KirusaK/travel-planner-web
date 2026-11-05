@@ -8,9 +8,7 @@
   padding: 24px 0;
 
   &__toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
   }
 
   &__counter {
@@ -27,7 +25,7 @@
   }
 
   &__btn {
-    @include t.status;
+    @include t.sizeText(12px, 600);
     padding: 6px 12px;
     background-color: transparent;
 
@@ -53,11 +51,9 @@
   }
 
   &__item {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
+    @include t.widthHeight(272px, 46px);
     gap: 12px;
-    width: 272px;
-    height: 46px;
     padding: 12px 14px;
     border-radius: 17px;
     border: 1px solid $color-dekoration-grey;

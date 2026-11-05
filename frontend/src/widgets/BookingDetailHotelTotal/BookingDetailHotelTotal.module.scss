@@ -1,4 +1,5 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .bookingDetailHotelTotal {
   &_card {
@@ -8,8 +9,7 @@
   }
 
   &_hotel {
-    display: flex;
-    justify-content: space-between;
+    @include t.positionFull(flex, null, space-between);
     gap: 24px;
     margin-bottom: 16px;
 
@@ -18,42 +18,35 @@
     }
 
     &__class {
-      font-size: 16px;
-      font-weight: 500;
+      @include t.sizeText(16px, 500);
     }
 
     &__title {
-      font-size: 20px;
-      font-weight: 600;
+      @include t.sizeText(20px, 600);
       margin-bottom: 20px;
     }
 
     &__rating {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
       gap: 8px;
     }
 
     &__ratingText {
-      font-size: 12px;
-      font-weight: 500;
+      @include t.sizeText(12px, 500);
 
       b {
-        font-size: 12px;
-        font-weight: 700;
+        @include t.sizeText(12px, 700);
       }
     }
   }
 
   &_protection {
     &__hr {
-      width: 100%;
-      height: 1px;
+      @include t.widthHeight(100%, 1px);
     }
 
     &__text {
-      font-size: 16px;
-      font-weight: 600;
+      @include t.sizeText(16px, 600);
       margin: 16px 0;
     }
   }
@@ -62,8 +55,7 @@
     margin-top: 16px;
 
     &__title {
-      font-size: 16px;
-      font-weight: 700;
+      @include t.sizeText(16px, 700);
     }
 
     &__list {
@@ -74,36 +66,28 @@
     }
 
     &__row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      @include t.positionFull(flex, center, space-between);
     }
 
     &__label {
-      font-size: 16px;
-      font-weight: 500;
+      @include t.sizeText(16px, 500);
     }
 
     &__value {
-      font-size: 16px;
-      font-weight: 600;
+      @include t.sizeText(16px, 600);
     }
   }
 
   &_total {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
     margin-top: 16px;
 
     &__label {
-      font-size: 16px;
-      font-weight: 500;
+      @include t.sizeText(16px, 500);
     }
 
     &__value {
-      font-size: 16px;
-      font-weight: 600;
+      @include t.sizeText(16px, 600);
     }
   }
 }

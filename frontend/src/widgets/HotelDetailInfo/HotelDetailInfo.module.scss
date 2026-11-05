@@ -4,36 +4,30 @@
 .hotelDetailInfo {
   &_header {
     &__block {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      @include t.positionFull(flex, center, space-between);
       margin-bottom: 16px;
     }
 
     &__blocks {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
       gap: 16px;
 
       &__title {
-        font-size: 24px;
-        font-weight: 700;
+        @include t.sizeText(24px, 700);
       }
 
       &__stars {
-        display: flex;
-        align-items: center;
+        @include t.positionFull(flex, center);
         gap: 4px;
 
         span {
-          font-size: 12px;
-          font-weight: 500;
+          @include t.sizeText(12px, 500);
         }
       }
     }
 
     &__price {
-      @include t.price(32px,700);
+      @include t.sizeText(32px, 700, $color-pink);
 
       span {
         font-size: 14px;
@@ -42,47 +36,38 @@
   }
 
   &_location {
-    display: flex;
+    @include t.positionFull(flex, center);
     gap: 2px;
-    align-items: center;
     margin-bottom: 9px;
 
     span {
-      font-size: 14px;
-      font-weight: 500;
+      @include t.sizeText(14px, 500);
     }
   }
 
   &_footer {
-    display: flex;
-    justify-content: space-between;
+    @include t.positionFull(flex, null, space-between);
 
     &__rating {
-      display: flex;
+      @include t.positionFull(flex, center);
       gap: 4px;
-      align-items: center;
     }
 
     &__btn {
-      display: flex;
+      @include t.positionFull(flex, center);
       gap: 15px;
-      align-items: center;
       margin-bottom: 32px;
 
       &__btnShare {
-        width: 48px;
-        height: 48px;
+        @include t.widthHeight(48px, 48px);
         background-color: transparent;
         border: 1px solid $color-mint-green;
         border-radius: 4px;
       }
 
       &__btnBook {
-        width: 150px;
-        height: 48px;
-        color: $color-text-dark;
-        font-size: 14px;
-        font-weight: 600;
+        @include t.widthHeight(150px, 48px);
+        @include t.sizeText(14px, 600, $color-text-dark);
         background-color: $color-mint-green;
         border-radius: 4px;
       }

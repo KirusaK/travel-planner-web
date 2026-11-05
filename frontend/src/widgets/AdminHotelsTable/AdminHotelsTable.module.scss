@@ -20,8 +20,7 @@ $table-columns: 4.5fr 3.3fr 1.4fr 1fr 1.4fr 80px;
   }
 
   &__hotelInfo {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 12px;
   }
 
@@ -30,12 +29,12 @@ $table-columns: 4.5fr 3.3fr 1.4fr 1fr 1.4fr 80px;
   }
 
   &__hotelName {
-    @include t.title;
+    @include t.sizeText(14px, 600);
   }
 
   &__meta,
   &__pricePeriod {
-    @include t.subtitle;
+    @include t.sizeText(12px, 400, $color-dekoration-text);
   }
 
   &__location {
@@ -44,13 +43,12 @@ $table-columns: 4.5fr 3.3fr 1.4fr 1fr 1.4fr 80px;
   }
 
   &__locationText {
+    @include t.sizeText(12px, 400);
     max-width: 224px;
-    font-size: 12px;
-    font-weight: 400;
   }
 
   &__price {
-    @include t.price(16px, 700);
+    @include t.sizeText(16px, 700, $color-pink);
   }
 
   &__actions {

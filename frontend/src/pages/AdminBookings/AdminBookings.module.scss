@@ -19,8 +19,6 @@
 
     &_btnBlock {
       @include t.positionFull(flex, center);
-      display: flex;
-      align-items: center;
       gap: 8px;
       margin-bottom: 23px;
     }

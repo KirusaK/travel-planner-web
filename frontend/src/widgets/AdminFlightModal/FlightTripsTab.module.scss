@@ -18,23 +18,17 @@
   }
 
   &__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
   }
 
   &__title {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 12px;
   }
 
   &__block__number {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(32px, 32px);
     border-radius: 50%;
     background-color: $color-blackish-green;
   }
@@ -44,12 +38,11 @@
   }
 
   &__name {
-    @include t.modalInput;
+    @include t.sizeText(14px, 700);
   }
 
   &__actions {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 4px;
   }
 
@@ -62,8 +55,7 @@
   }
 
   &__row {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 16px;
     width: 100%;
   }
@@ -76,14 +68,13 @@
   }
 
   &__label {
-    @include t.status;
+    @include t.sizeText(12pxm 600);
   }
 
   &__input {
-    width: 100%;
-    height: 44px;
-    padding: 12px 14px;
+    @include t.widthHeight(100%, 44px);
     @include t.stylesInput;
+    padding: 12px 14px;
   }
 
   &__addBtn {

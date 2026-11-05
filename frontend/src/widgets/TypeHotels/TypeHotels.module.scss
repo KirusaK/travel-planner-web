@@ -1,4 +1,5 @@
 @use "../../app/styles/_variables" as *;
+@use "../../shared/styles/table" as t;
 
 .typehotels {
   display: flex;
@@ -7,12 +8,9 @@
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
 
   &_btn {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    @include t.positionFull(flex, center, flex-start);
+    @include t.widthHeight(280px, 80px);
     text-align: left;
-    width: 280px;
-    height: 80px;
     background-color: $color-base;
     position: relative;
     padding-left: 24px;
@@ -22,13 +20,12 @@
     }
 
     &::after {
+      @include t.widthHeight(1px, 48px);
       content: "";
       position: absolute;
       right: 0;
       top: 50%;
       transform: translateY(-50%);
-      width: 1px;
-      height: 48px;
       background-color: $color-grey-light;
     }
 
@@ -43,9 +40,7 @@
   }
 
   &_block {
-    display: flex;
+    @include t.positionFull(flex, flex-start, center);
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
   }
 }

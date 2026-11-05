@@ -1,8 +1,8 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .wrapper {
-  width: 1232px;
-  height: 272px;
+  @include t.widthHeight(1232px, 272px);
   margin: -45px auto 101px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 16px;
@@ -11,15 +11,13 @@
   z-index: 100;
 
   &_title {
+    @include t.sizeText(20px, 600);
     padding: 32px 24px;
     font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    font-size: 20px;
   }
 
   &_container {
-    display: flex;
-    justify-content: center;
+    @include t.positionFull(flex, null, center);
     gap: 16px;
   }
 
@@ -28,8 +26,8 @@
   }
 
   &_from_label {
+    @include t.widthHeight(auto, null);
     position: absolute;
-    width: auto;
     top: -10px;
     left: 16px;
     background-color: $color-base;
@@ -37,12 +35,11 @@
   }
 
   &_from_input_field {
-    width: 416px;
-    height: 56px;
+    @include t.widthHeight(416px, 56px);
+    @include t.sizeText(16px, null);
     padding-left: 48px;
     border: 1px solid $color-border;
     border-radius: 4px;
-    font-size: 16px;
 
     &:focus {
       border-color: $color-mint-green;
@@ -61,18 +58,16 @@
   }
 
   &_trip_label {
+    @include t.widthHeight(auto, null);
     position: absolute;
     top: -10px;
     left: 12px;
-    width: auto;
     background-color: $color-base;
   }
 
   &_trip_content {
-    display: flex;
-    align-items: center;
-    width: 140px;
-    height: 56px;
+    @include t.positionFull(flex, center);
+    @include t.widthHeight(140px, 56px);
     border: 1px solid $color-border;
     border-radius: 4px;
     padding-left: 16px;
@@ -95,8 +90,7 @@
   }
 
   &_depart_input_field {
-    width: 240px;
-    height: 56px;
+    @include t.widthHeight(240px, 56px);
     border: 1px solid $color-border;
     border-radius: 4px;
     padding: 0 16px;
@@ -114,14 +108,11 @@
   }
 
   &_passengers_content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(240px, 56px);
     padding-left: 16px;
     border: 1px solid $color-border;
     border-radius: 4px;
-    width: 240px;
-    height: 56px;
   }
 
   &_passengers_icon_left {
@@ -135,29 +126,21 @@
   }
 
   &_submit_container {
-    display: flex;
-    justify-content: flex-end;
+    @include t.positionFull(flex, null, flex-end);
   }
 
   &_submit {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include t.positionFull(flex, center, center);
     margin: 32px 24px 0 0;
   }
 
   &_submit_link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(144px, 48px);
+    @include t.sizeText(14px, 500, $color-text-dark);
     background-color: $color-mint-green;
     border-radius: 4px;
-    width: 144px;
-    height: 48px;
     gap: 0.5px;
-    color: $color-text-dark;
-    font-size: 14px;
-    font-weight: 500;
     cursor: pointer;
   }
 }

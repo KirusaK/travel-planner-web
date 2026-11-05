@@ -10,7 +10,7 @@
 .tab {
   padding: 12px;
   background-color: transparent;
-  @include t.title;
+  @include t.sizeText(14px, 600);
 }
 
 .active {

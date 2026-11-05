@@ -1,9 +1,9 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .Services {
+  @include t.widthHeight(1232px, 559px);
   margin: 0 auto 70px;
-  width: 1232px;
-  height: 559px;
 
   &__container {
     display: flex;
@@ -11,12 +11,9 @@
   }
 
   &__card {
-    display: flex;
+    @include t.positionFull(flex, center, flex-end);
+    @include t.widthHeight(604px, 559px);
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    width: 604px;
-    height: 559px;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 20px;
@@ -45,19 +42,14 @@
   margin-bottom: 24px;
 
   &__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 144px;
-    height: 48px;
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(144px, 48px);
     background-color: $color-mint-green;
     border-radius: 4px;
     gap: 0.5px;
   }
 
   &__par {
-    color: $color-text-dark;
-    font-weight: 500;
-    font-size: 14px;
+    @include t.sizeText(14px, 500, $color-text-dark);
   }
 }
