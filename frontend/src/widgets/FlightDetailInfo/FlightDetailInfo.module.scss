@@ -3,14 +3,12 @@
 
 .FlightDetailInfo {
   &_container {
-    display: flex;
-    justify-content: space-between;
+    @include t.positionFull(flex, null, space-between);
   }
 
   &_block {
-    display: flex;
+    @include t.positionFull(flex, start);
     flex-direction: column;
-    align-items: start;
   }
 
   &_info {
@@ -20,53 +18,44 @@
     }
 
     &_location {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
+      @include t.sizeText(14px, 500);
       margin-bottom: 8px;
       gap: 4px;
-      font-size: 14px;
-      font-weight: 500  ;
     }
 
     &_rating {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
       gap: 8px;
     }
   }
 
   &_block__price {
-    display: flex;
+    @include t.positionFull(flex, end);
     flex-direction: column;
-    align-items: end;
   }
 
   &_price {
     &_title {
-      @include t.price(32px, 700);
+      @include t.sizeText(32px, 700, $color-pink);
       margin-bottom: 16px;
     }
 
     &_blockBtn {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
       gap: 15px;
     }
 
     &_btnShare {
-      width: 48px;
-      height: 48px;
+      @include t.widthHeight(48px, 48px);
       background-color: transparent;
       border: 1px solid $color-mint-green;
       border-radius: 4px;
     }
 
     &_btnBook {
-      width: 150px;
-      height: 48px;
-      color: $color-text-dark;
-      font-size: 14px;
-      font-weight: 600;
+      @include t.widthHeight(150px, 48px);
+      @include t.sizeText(14px, 600, $color-text-dark);
       background-color: $color-mint-green;
       border-radius: 4px;
     }

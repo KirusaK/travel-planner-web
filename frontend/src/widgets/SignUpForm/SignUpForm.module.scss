@@ -1,4 +1,5 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .SignUpForm {
   padding: 104px;
@@ -15,41 +16,37 @@
   }
 
   &_title {
+    @include t.sizeText(40px, 700);
     font-family: "Roboto Condensed", sans-serif;
-    font-weight: 700;
-    font-size: 40px;
     margin-bottom: 16px;
   }
 
   &_par {
-    font-weight: 400;
-    font-size: 16px;
-    color: $color-blackish-green;
+    @include t.sizeText(16px, 400, $color-blackish-green);
     margin-bottom: 48px;
   }
 
   &_form {
+    @include t.widthHeight(100%, null);
     display: flex;
     flex-direction: column;
     gap: 24px;
-    width: 100%;
   }
 
   &_row {
+    @include t.widthHeight(100%, null);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
-    width: 100%;
   }
 
   &_form_group {
+    @include t.widthHeight(100%, null);
     position: relative;
-    width: 100%;
   }
 
   &_form_input {
-    width: 308px;
-    height: 56px;
+    @include t.widthHeight(308px, 56px);
     border-radius: 4px;
     padding: 16px 18px;
     border: 1px solid $color-grey;
@@ -62,24 +59,21 @@
   }
 
   &_form_label {
-    width: auto;
+    @include t.widthHeight(auto, null);
+    @include t.sizeText(14px, null);
     position: absolute;
     top: -10px;
     left: 16px;
     background-color: $color-base;
     padding: 0 4px;
-    font-size: 14px;
   }
 
   &_checkbox {
-
-    display: flex;
-    justify-content: space-between;
+    @include t.positionFull(flex, null, space-between);
   }
 
   &_checkbox_input {
-    width: 16px;
-    height: 18px;
+    @include t.widthHeight(16px, 18px);
     border: 2px solid $color-blackish-green;
     border-radius: 4px;
   }
@@ -90,8 +84,7 @@
   }
 
   &_checkbox_text {
-    font-weight: 500;
-    font-size: 14px;
+    @include t.sizeText(14px, 500);
   }
 
   &_checkbox_text_pink {
@@ -99,62 +92,48 @@
   }
 
   &_button {
-    width: 640px;
-    height: 48px;
+    @include t.widthHeight(640px, 48px);
+    @include t.sizeText(14px, 600);
     background-color: $color-mint-green;
     margin: 0 0 16px 0;
     border-radius: 4px;
-    font-size: 14px;
-    font-weight: 600;
   }
 
   &_login {
-    display: flex;
+    @include t.positionFull(flex, null, center);
     gap: 6px;
-    justify-content: center;
     margin-bottom: 40px;
   }
 
   &_signup_text {
-    font-weight: 500;
-    font-size: 14px;
+    @include t.sizeText(14px, 500);
   }
 
   &_login_link {
-    font-weight: 500;
-    font-size: 14px;
-    color: $color-pink;
+    @include t.sizeText(14px, 500, $color-pink);
   }
 
   &_other {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 16px;
     margin-bottom: 40px;
   }
 
   &_other_hr {
-    height: 0.5px;
-    width: 249px;
+    @include t.widthHeight(249px, 0.5px);
   }
 
   &_other_text {
-    font-size: 14px;
-    font-weight: 400;
-    color: $color-blackish-green;
+    @include t.sizeText(14px, 400, $color-blackish-green);
   }
 
   &_other_social {
-    display: flex;
-    justify-content: space-between;
+    @include t.positionFull(flex, nullm space-between);
   }
 
   &_other_social_media {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 202px;
-    height: 56px;
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(202px, 56px);
     border-radius: 4px;
     border: 1px solid $color-mint-green;
     transition: transform 0.3s ease;
@@ -174,9 +153,8 @@
 
   &_error_text,
   &_server_error {
+    @include t.sizeText(13px, null, $color-error);
     display: block;
-    color: $color_error;
-    font-size: 13px;
     margin-top: 5px;
   }
 }

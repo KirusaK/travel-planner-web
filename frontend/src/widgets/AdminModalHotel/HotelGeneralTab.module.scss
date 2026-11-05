@@ -18,13 +18,11 @@
   }
 
   &__mainTitle {
-    font-size: 14px;
-    font-weight: 700;
+    @include t.sizeText(14px, 700);
   }
 
   &__section {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 20px;
   }
 
@@ -36,15 +34,14 @@
   }
 
   &__label {
-    @include t.status;
+    @include t.sizeText(12px, 600);
   }
 
   &__input {
-    width: 100%;
-    height: 44px;
+    @include t.widthHeight(100%, 44px);
+    @include t.stylesInput;
     border-radius: 12px;
     padding: 13px;
-    @include t.stylesInput;
 
     &__price {
       max-width: 264px;
@@ -59,12 +56,11 @@
   }
 
   &__subTitle {
-    font-size: 14px;
-    font-weight: 700;
+    @include t.sizeText(14px, 700);
   }
 
   &__subDescription {
-    @include t.subtitle;
+    @include t.sizeText(12px, 400, $color-dekoration-text);
   }
 
   &__row {
@@ -73,11 +69,10 @@
   }
 
   &__textarea {
-    width: 100%;
-    height: 140px;
+    @include t.widthHeight(100%, 140px);
+    @include t.stylesInput;
     border-radius: 12px;
     padding: 13px;
     outline: none;
-    @include t.stylesInput;
   }
 }

@@ -1,19 +1,16 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .Reviews {
-  display: flex;
-  justify-content: center;
+  @include t.positionFull(flex, null, center);
   margin-bottom: 92px;
 
   &__container {
-    width: 1232px;
-    height: 722px;
+    @include t.widthHeight(1232px, 722px);
   }
 
   &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include t.positionFull(flex, center, space-between);
     margin-bottom: 40px;
   }
 
@@ -24,12 +21,10 @@
   }
 
   &__title {
-    font-weight: 600;
-    font-size: 32px;
+    @include t.sizeText(32px, 600);
   }
 
   &__par {
-    font-weight: 400;
-    font-size: 16px;
+    @include t.sizeText(16px, 400);
   }
 }

@@ -1,22 +1,19 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .bookingDetailPayment {
   margin: 40px 0;
 
   &_container {
-    width: 790px;
-    height: auto;
+    @include t.widthHeight(790px, auto);
     padding: 16px;
     border-radius: 12px;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
   }
 
   &_option {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 758px;
-    height: 80px;
+    @include t.positionFull(flex, center, space-between);
+    @include t.widthHeight(758px, 80px);
     margin-bottom: 16px;
 
     &___active {
@@ -32,14 +29,12 @@
     }
 
     &__title {
-      font-size: 16px;
-      font-weight: 700;
+      @include t.sizeText(16px, 700);
     }
 
     &__description {
+      @include t.sizeText(14px, 400);
       max-width: 632px;
-      font-size: 14px;
-      font-weight: 400;
     }
   }
 

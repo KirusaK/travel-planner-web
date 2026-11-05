@@ -1,15 +1,13 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .flightDetailFeatures {
   &_header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
     margin: 40px 0 24px 0;
 
     &__title {
-      font-size: 24px;
-      font-weight: 700;
+      @include t.sizeText(24px, 700);
     }
 
     &__type {
@@ -18,26 +16,21 @@
     }
 
     &__checkbox {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
       gap: 8px;
 
       label {
-        font-size: 14px;
-        font-weight: 500;
+        @include t.sizeText(14px, 500);
       }
 
       input {
-        width: 18px;
-        height: 18px;
+        @include t.widthHeight(18px, 18px);
       }
     }
   }
 
   &_photo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include t.positionFull(flex, center, center);
     gap: 19px;
     margin-bottom: 40px;
 

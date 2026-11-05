@@ -1,9 +1,9 @@
 @use "../../app/styles/variables" as * ;
+@use "../../shared/styles/table" as t;
 
 .favourites {
   &_title {
-    font-size: 32px;
-    font-weight: 700;
+    @include t.sizeText(32px, 700);
     margin-bottom: 24px;
   }
 
@@ -13,36 +13,30 @@
   }
 
   &_tab {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    @include t.positionFull(flex, center, flex-start);
+    @include t.widthHeight(628px, 77px);
+    @include t.sizeText(16px, 600);
     position: relative;
-    width: 628px;
-    height: 77px;
     padding: 16px 24px;
-    font-size: 16px;
-    font-weight: 600;
     background-color: $color-base;
     box-shadow: 0px 4px 16px rgba(17, 34, 17, 0.05);
 
     &:first-child::before {
+      @include t.widthHeight(1px, 48px);
       content: "";
       position: absolute;
       right: 0;
       top: 50%;
       transform: translateY(-50%);
-      width: 1px;
-      height: 48px;
       background-color: $color-grey-light;
     }
 
     &::after {
+      @include t.widthHeight(586px, 5px);
       content: "";
       position: absolute;
       bottom: 0;
       left: 14px;
-      width: 586px;
-      height: 5px;
       background-color: $color-mint-green;
       transform: scaleX(0);
     }

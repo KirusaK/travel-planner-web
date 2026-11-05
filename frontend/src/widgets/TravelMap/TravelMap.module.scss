@@ -1,10 +1,9 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .travelMap {
   &__content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
     margin: 0 104px;
   }
 
@@ -15,19 +14,16 @@
   }
 
   &__title {
-    font-weight: 600;
-    font-size: 32px;
+    @include t.sizeText(32px, 600);
   }
 
   &__description {
-    font-weight: 400;
-    font-size: 16px;
+    @include t.sizeText(16px, 400);
   }
 
   &__image {
+    @include t.widthHeight(100%, 486px);
     background-image: url("../../shared/assets/image/place.svg");
-    width: 100%;
-    height: 486px;
     margin-top: 24px;
   }
 }

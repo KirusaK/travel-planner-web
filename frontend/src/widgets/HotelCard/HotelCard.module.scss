@@ -10,27 +10,20 @@
   background-color: $color-base;
 
   &_imageWrapper {
-    width: 300px;
-    height: auto;
+    @include t.widthHeight(300px, auto);
     flex-shrink: 0;
   }
 
   &_image {
-    width: 100%;
-    height: 100%;
+    @include t.widthHeight(100%, 100%);
     object-fit: cover;
   }
 
   &_notLogo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(100%, 100%);
+    @include t.sizeText(24px, 700, $color-green-text);
     background-color: $color-light-green;
-    color: $color-green-text;
-    font-size: 24px;
-    font-weight: 700;
   }
 
   &_content {
@@ -42,18 +35,14 @@
 
 
   &_mainRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    @include t.positionFull(flex, flex-start, space-between);
     margin-bottom: 8px;
   }
 
   &_title {
-    font-size: 20px;
-    font-weight: 700;
+    @include t.sizeText(20px, 700, #121212);
     margin: 0;
     max-width: 65%;
-    color: #121212;
   }
 
   &_priceBlock {
@@ -61,30 +50,26 @@
   }
 
   &_priceLabel {
-    display: flex;
-    align-items: start;
-    font-size: 12px;
-    font-weight: 500;
+    @include t.positionFull(flex, start);
+    @include t.sizeText(12px, 500);
     margin: 0;
     opacity: 0.6;
   }
 
   &_priceValue {
-    @include t.price(24px, 700);
+    @include t.sizeText(24px, 700, $color-pink);
     display: block;
     margin: 4px 0;
   }
 
   &_priceTax {
-    font-size: 12px;
-    font-weight: 500;
+    @include t.sizeText(12px, 500);
     margin: 0;
     opacity: 0.6;
   }
 
   &_locationRow {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 4px;
     margin-bottom: 12px;
   }
@@ -94,93 +79,72 @@
   }
 
   &_locationText {
-    font-size: 12px;
-    font-weight: 500;
-    color: $color-blackish-green;
+    @include t.sizeText(12px, 500, $color-blackish-green);
   }
 
   &_infoRow {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 32px;
     margin-bottom: 12px;
 
     &__stars {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
     }
 
     &__span {
+      @include t.sizeText(12px, 500);
       padding-left: 4px;
-      font-size: 12px;
-      font-weight: 500;
     }
 
     &__aminities {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
       gap: 4px;
     }
   }
 
   &_ratingRow {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 4px;
 
     &__span__castom {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 40px;
-      height: 32px;
+      @include t.positionFull(flex, center, center);
+      @include t.widthHeight(40px, 32px);
+      @include t.sizeText(12px, 500);
       border: 1px solid $color-mint-green;
       border-radius: 4px;
-      font-size: 12px;
-      font-weight: 500;
     }
 
     &__span {
-      font-size: 15px;
-      font-weight: 500;
+      @include t.sizeText(15px, 500);
     }
   }
 
   &_hr {
+    @include t.widthHeight(100%, 0.5px);
     margin: 24px 0;
     border: none;
-    width: 100%;
-    height: 0.5px;
     background-color: $color-blackish-green;
   }
 
   &_buttonRow {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 16px;
     width: 100%;
 
     &__heart {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
+      @include t.positionFull(flex, center, center);
+      @include t.widthHeight(48px, 48px);
       border: 1px solid $color-mint-green;
       border-radius: 4px;
       background-color: transparent;
     }
 
     &__btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 48px;
+      @include t.positionFull(flex, center, center);
+      @include t.widthHeight(100%, 48px);
+      @include t.sizeText(14px, 600);
       background-color: $color-mint-green;
       border-radius: 4px;
-      font-size: 14px;
-      font-weight: 600;
     }
   }
 }

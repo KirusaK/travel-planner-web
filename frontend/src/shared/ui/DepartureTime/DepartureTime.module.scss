@@ -1,17 +1,14 @@
 @use "../../../app/styles/variables" as *;
+@use "../../../shared/styles/table" as t;
 
 .DepartureTime {
   &_block {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include t.positionFull(flex, center, space-between);
     margin-bottom: 16px;
   }
 
   &_title {
-    color: $color-blackish-green;
-    font-size: 16px;
-    font-weight: 600;
+    @include t.sizeText(16px, 600, $color-blackish-green);
   }
 
   &_button {
@@ -23,27 +20,22 @@
   }
 
   &_input {
-    width: 100%;
-    height: 2px;
+    @include t.widthHeight(100%, 2px);
     margin-bottom: 8px;
   }
 
   &_range {
-    display: flex;
-    justify-content: space-between;
+    @include t.positionFull(flex, null, space-between);
   }
 
   &_time {
-    font-size: 12px;
-    font-weight: 500;
-    color: $color-blackish-green;
+    @include t.sizeText(12px, 500, $color-blackish-green);
   }
 
   &_hr {
+    @include t.widthHeight(100%, 1px);
     border: none;
     background-color: $color-blackish-green;
-    width: 100%;
-    height: 1px;
     margin: 32px 0;
   }
 }

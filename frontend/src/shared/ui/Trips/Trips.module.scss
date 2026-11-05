@@ -1,17 +1,14 @@
 @use "../../../app/styles/variables" as *;
+@use "../../../shared/styles/table" as t;
 
 .Trips {
   &_block {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include t.positionFull(flex, center, space-between);
     margin-bottom: 16px;
   }
 
   &_title {
-    color: $color-blackish-green;
-    font-size: 16px;
-    font-weight: 600;
+    @include t.sizeText(16px, 600, $color-blackish-green);
   }
 
   &_group_button {
@@ -29,8 +26,7 @@
   }
 
   &_checkbox_block {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 8px;
   }
 }

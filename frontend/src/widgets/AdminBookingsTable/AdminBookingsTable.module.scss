@@ -22,11 +22,11 @@ minmax(0, 1.3fr) minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.6fr);
 
   &__id,
   &__customerName {
-    @include t.title;
+    @include t.sizeText(14px, 600);
   }
 
   &__customerEmail {
-    @include t.subtitle;
+    @include t.sizeText(12px, 400, $color-dekoration-text);
   }
 
   &__item {
@@ -46,7 +46,7 @@ minmax(0, 1.3fr) minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.6fr);
 
   &__itemTitle,
   &__date {
-    @include t.itemTitle;
+    @include t.sizeText(14px, 400);
   }
 
   &__date {
@@ -59,6 +59,6 @@ minmax(0, 1.3fr) minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.6fr);
   }
 
   &__amount {
-    @include t.price(14px, 700);
+    @include t.sizeText(14px, 700, $color-pink);
   }
 }

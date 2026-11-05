@@ -1,4 +1,5 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .tabs {
   display: grid;
@@ -14,19 +15,13 @@
   overflow: hidden;
 
   &__item {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    @include t.positionFull(flex, center, flex-start);
+    @include t.sizeText(16px, 500, $color-grey);
     padding: 0 24px;
     border: none;
     background: transparent;
     cursor: pointer;
-
-    font-size: 16px;
-    font-weight: 500;
-    color: $color-grey;
     text-align: left;
-
     position: relative;
     transform: none;
     -webkit-font-smoothing: antialiased;
@@ -46,6 +41,7 @@
   }
 
   &__itemActive {
+    @include t.widthHeight(null, 500);
     font-weight: 500;
     transform: none;
 

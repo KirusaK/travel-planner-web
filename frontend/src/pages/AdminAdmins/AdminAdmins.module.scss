@@ -25,8 +25,7 @@
 }
 
 .titleRow {
-  display: flex;
-  align-items: center;
+  @include t.positionFull(flex, center);
   gap: 12px;
 }
 

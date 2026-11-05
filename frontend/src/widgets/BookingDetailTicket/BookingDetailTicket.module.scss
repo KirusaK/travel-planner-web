@@ -5,57 +5,46 @@
   margin-bottom: 40px;
 
   &_card {
-    width: 790px;
-    height: auto;
+    @include t.widthHeight(790px, auto);
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     padding: 32px 24px;
   }
 
   &_header {
-    display: flex;
-    justify-content: space-between;
+    @include t.positionFull(flex, null, space-between);
 
     &__title {
-      font-size: 24px;
-      font-weight: 700;
+      @include t.sizeText(24px, 700);
     }
 
     &__price {
-      @include t.price(32px, 700);
+      @include t.sizeText(32px, 700, $color-pink);
     }
   }
 
   &_subheader {
-    display: flex;
-    justify-content: space-between;
+    @include t.positionFull(flex, null, space-between);
     margin: 24px 0;
 
     &__title {
-      font-size: 16px;
-      font-weight: 700;
+      @include t.sizeText(16px, 700);
     }
 
     &__duration {
-      font-size: 20px;
-      font-weight: 500;
-      color: $color-blackish-green;
+      @include t.sizeText(20px, 500, $color-blackish-green);
     }
   }
 
   &_block {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
     gap: 121px;
     margin-bottom: 40px;
   }
 
   &_airline {
-    display: flex;
-    align-items: center;
-    width: auto;
-    height: 86px;
+    @include t.positionFull(flex, center);
+    @include t.widthHeight(auto, 86px);
     gap: 24px;
     padding: 16px 32px;
     border: 1px solid $color-mint-green;
@@ -68,13 +57,11 @@
     }
 
     &__name {
-      font-size: 24px;
-      font-weight: 600;
+      @include t.sizeText(24px, 600);
     }
 
     &__aircraft {
-      font-size: 14px;
-      font-weight: 500;
+      @include t.sizeText(14px, 500);
     }
   }
 
@@ -87,15 +74,11 @@
   }
 
   &_amenities {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
 
     &__item {
-      width: 72px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include t.positionFull(flex, center, center);
+      @include t.widthHeight(72px, 48px);
       border-right: 1px solid $color-grey-light;
 
       &:last-child {
@@ -105,29 +88,23 @@
   }
 
   &_timeline {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
 
     &__departure {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
       gap: 16px;
     }
 
     &__time {
-      font-size: 24px;
-      font-weight: 600;
+      @include t.sizeText(24px, 600);
     }
 
     &__airport {
-      font-size: 16px;
-      font-weight: 500;
+      @include t.sizeText(16px, 500);
     }
 
     &__line {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
     }
 
     svg {
@@ -135,21 +112,18 @@
     }
 
     &__dot {
-      width: 6px;
-      height: 6px;
+      @include t.widthHeight(6px, 6px);
       background-color: $color-text-dark;
       border-radius: 50%;
     }
 
     &__dash {
-      width: 36px;
-      height: 1px;
+      @include t.widthHeight(36px, 1px);
       background-color: $color-text-dark;
     }
 
     &__arrival {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
       gap: 16px;
     }
   }

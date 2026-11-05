@@ -1,17 +1,12 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .main {
-  display: flex;
-  flex-direction: column;
-  width: 1280px;
-  gap: 40px;
-  margin: 94px auto;
+  @include t.globalStyles;
 }
 
 .headerInfo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include t.positionFull(flex, center, space-between);
   margin-bottom: 79px;
 
   &_block {
@@ -20,26 +15,21 @@
     gap: 16px;
 
     &__title {
-      font-size: 24px;
-      font-weight: 700;
+      @include t.sizeText(24px, 700);
     }
 
     &_location {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
       gap: 4px;
 
       p {
-        font-size: 14px;
-        font-weight:500 ;
+        @include t.sizeText(14px, 500);
       }
     }
   }
 
   &_price {
-    font-size: 32px;
-    font-weight: 700;
-    color: $color-pink;
+    @include t.sizeText(32px, 700, $color-pink);
   }
 }
 
@@ -51,13 +41,11 @@
   color: $color-blackish-green;
 
   &_mainTitle {
-    font-size: 24px;
-    font-weight: 700;
+    @include t.sizeText(24px, 700);
   }
 
   &_subTitle {
-    font-size: 20px;
-    font-weight: 600;
+    @include t.sizeText(20px, 600);
     margin-bottom: 16px;
   }
 
@@ -69,14 +57,12 @@
     padding-left: 20px;
 
     li {
-      font-size: 14px;
-      font-weight: 400;
+      @include t.sizeText(14px, 400);
       line-height: 1.6;
       color: rgba($color-blackish-green, 0.75);
 
       &::marker {
-        font-size: 12px;
-        color: $color-blackish-green;
+        @include t.sizeText(12px, null, $color-blackish-green);
       }
     }
   }
@@ -90,11 +76,10 @@
   &_contactText,
   &_address,
   &_further {
-    font-size: 14px;
+    @include t.sizeText(14px, 400, rgba($color-blackish-green, 0.75));
     font-style: normal;
-    font-weight: 400;
     line-height: 1.6;
-    color: rgba($color-blackish-green, 0.75);
+    //color: rgba($color-blackish-green, 0.75);
   }
 
   &_address {
@@ -103,8 +88,7 @@
 
   &_further {
     a {
-      color: $color-blackish-green;
-      font-weight: 600;
+      @include t.sizeText(null, 600, $color-blackish-green);
       text-decoration: underline;
 
       &:hover {

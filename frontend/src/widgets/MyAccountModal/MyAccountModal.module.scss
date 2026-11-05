@@ -1,24 +1,22 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .myAccountModal {
   position: absolute;
   z-index: 1000;
 
   &_overlay {
+    @include t.positionFull(flex, null, flex-end);
+    @include t.widthHeight(100vw, 100vh);
     position: fixed;
-    display: flex;
-    justify-content: flex-end;
     top: 77px;
     right: 44px;
-    width: 100vw;
-    height: 100vh;
     z-index: 999;
   }
 
   &_content {
+    @include t.widthHeight(329px, 261px);
     position: relative;
-    width: 329px;
-    height: 261px;
     background-color: $color-base;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
@@ -26,11 +24,9 @@
   }
 
   &_user {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
+    @include t.sizeText(16px, 600);
     gap: 16px;
-    font-size: 16px;
-    font-weight: 600;
   }
 
   &_divider {
@@ -38,9 +34,7 @@
   }
 
   &_item__account {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
 
     &__user {
       display: flex;
@@ -49,9 +43,7 @@
   }
 
   &_text {
-    color: $color-text-dark;
-    font-size: 14px;
-    font-weight: 500;
+    @include t.sizeText(14px, 500, $color-text-dark);
   }
 
   &_chevron {
@@ -59,6 +51,7 @@
   }
 
   &_item__logout {
+    @include t.positionFull(flex, center);
     display: flex;
     align-items: center;
     gap: 8px;
