@@ -9,6 +9,15 @@ CREATE TABLE users (
 	created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+alter table users
+	add column role text not null default 'user'
+		check (role in ('user', 'admin', 'super_admin')),
+	add column is_active boolean not null default true;
+
+update users set role = 'super_admin' where email = 'john.d@golobe.com'; 
+
+select * from users;
+
 CREATE TABLE cards (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -207,6 +216,6 @@ create table hotel_reviews (
 );
 
 CREATE INDEX idx_hotel_rooms_hotel_id    ON hotel_rooms(hotel_id);
-CREATE INDEX idx_hotel_reviews_hotel_id  ON hotel_reviews(hotel_id);
+CREATE INDEX idx_hotel_reviews_hotel_id  ON hotel_reviews(hotel_id); 
 
 select * from hotel_rooms;
