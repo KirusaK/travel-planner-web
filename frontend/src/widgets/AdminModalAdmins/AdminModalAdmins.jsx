@@ -2,6 +2,8 @@ import styles from "./AdminModalAdmins.module.scss";
 import {AdminModal} from "../../shared/ui/AdminModal/AdminModal.jsx";
 
 export const AdminModalAdmins = ({isOpen, isClose}) => {
+
+
     return (
         <div className={styles.modalWrapper}>
             <AdminModal title={"Add new Admin"}

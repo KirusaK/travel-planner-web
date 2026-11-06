@@ -5,9 +5,12 @@ import {ButtonNewAdd} from "../../shared/ui/ButtonNewAdd/ButtonNewAdd.jsx";
 import {AdminAdminsTable} from "../../widgets/AdminAdminsTable/AdminAdminsTable.jsx";
 import {AdminModalAdmins} from "../../widgets/AdminModalAdmins/AdminModalAdmins.jsx";
 import {useState} from "react";
+import {useFetchData} from "../../shared/hooks/useFetchData.js";
+import {getAdmins} from "../../shared/api/admins.js";
 
 export const AdminAdmins = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const {data: admins = [], loading, error, refetch} = useFetchData(getAdmins);
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -16,6 +19,9 @@ export const AdminAdmins = () => {
     const handleCloseModal = () => {
         setIsModalOpen(false);
     }
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>{error}</p>;
 
     return (
         <div>
@@ -39,9 +45,9 @@ export const AdminAdmins = () => {
                             </div>
                         </div>
 
-                        <AdminAdminsTable />
+                        <AdminAdminsTable admins={admins}/>
 
-                        <AdminModalAdmins isOpen={isModalOpen} isClose={handleCloseModal} />
+                        <AdminModalAdmins isOpen={isModalOpen} isClose={handleCloseModal} onCreated={refetch}/>
                     </section>
                 </div>
             </div>
