@@ -3,8 +3,20 @@ import {AdminNav} from "../../widgets/AdminNav/AdminNav.jsx";
 import {AdminHeader} from "../../widgets/AdminHeader/AdminHeader.jsx";
 import {ButtonNewAdd} from "../../shared/ui/ButtonNewAdd/ButtonNewAdd.jsx";
 import {AdminAdminsTable} from "../../widgets/AdminAdminsTable/AdminAdminsTable.jsx";
+import {AdminModalAdmins} from "../../widgets/AdminModalAdmins/AdminModalAdmins.jsx";
+import {useState} from "react";
 
 export const AdminAdmins = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    }
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    }
+
     return (
         <div>
             <div className={styles.main}>
@@ -23,11 +35,13 @@ export const AdminAdmins = () => {
                                 <p className={styles.pageSubtitle}>Manage administrator accounts, security credentials, and access permissions.</p>
                             </div>
                             <div className={styles.actionWrapper}>
-                                <ButtonNewAdd title="Add new Admin" />
+                                <ButtonNewAdd onClick={handleOpenModal} title="Add new Admin" />
                             </div>
                         </div>
 
                         <AdminAdminsTable />
+
+                        <AdminModalAdmins isOpen={isModalOpen} isClose={handleCloseModal} />
                     </section>
                 </div>
             </div>
