@@ -2,18 +2,9 @@ import styles from "./AdminAdminsTable.module.scss";
 import {ButtonEdit} from "../../shared/ui/ButtonEdit/ButtonEdit.jsx";
 import {ButtonDelete} from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
 
-const data = [
-    {
-        id: 1,
-        firstName: "John",
-        lastName: "Doe",
-        email: "john.d@golobe.com",
-        role: "Super Admin",
-        status: "Active",
-    }
-]
+export const AdminAdminsTable = ({admins}) => {
+    const adminList = admins?.rows || [];
 
-export const AdminAdminsTable = () => {
     return (
         <div className={styles.tableCard}>
             <section className={styles.tableHeaderSection}>
@@ -29,7 +20,7 @@ export const AdminAdminsTable = () => {
             </section>
 
             <section className={styles.tableBody}>
-                {data.map((item) => (
+                {adminList.map((item) => (
                     <div key={item.id} className={styles.tableRow}>
                         <div className={styles.userCell}>
                             <div className={styles.avatar_circle}>
@@ -42,12 +33,12 @@ export const AdminAdminsTable = () => {
                             {item.email}
                         </div>
 
-                        <div className={styles.roleCell}>
+                        <div className={item.role === "super_admin" ? styles.roleCell : styles.roleCellGreen}>
                             <span>{item.role}</span>
                         </div>
 
                         <div className={styles.statusCell}>
-                            <span> {item.status}</span>
+                            <span> {item.isActive ? "Active" : "Inactive"}</span>
                         </div>
 
                         <div className={styles.actionsCell}>

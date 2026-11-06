@@ -138,7 +138,7 @@
   justify-content: $justify;
 }
 
-@mixin widthHeight($width, $height) {
+@mixin widthHeight($width: null, $height: null) {
   width: $width;
   height: $height;
 }

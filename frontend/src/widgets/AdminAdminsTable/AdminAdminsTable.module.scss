@@ -70,6 +70,15 @@ $table-columns: minmax(0, 2fr) minmax(0, 2.2fr) minmax(0, 1.2fr) minmax(0, 1fr) 
   background-color: $color-decoration-role-admin;
 }
 
+.roleCellGreen {
+  @include t.positionFull(flex, center, center);
+  @include t.widthHeight(max-content);
+  @include t.sizeText(12px, 700);
+  @include t.success;
+  padding: 4px 10px;
+  border-radius: 268px;
+}
+
 .statusCell {
   @include t.positionFull(flex, center, center);
   @include t.sizeText(12px, 600, $color-green-text);
