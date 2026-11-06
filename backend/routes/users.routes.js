@@ -30,6 +30,7 @@ router.get("/", async (req, res) => {
       (select count(*) from bookings b where b.user_id = u.id)::int as "bookingsCount",
       'Active' as status
     from users u
+    where u.role = 'user'
     order by u.id desc`);
 
         res.json(rows);

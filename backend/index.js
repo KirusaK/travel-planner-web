@@ -8,6 +8,7 @@ import cardsRoutes from "./routes/cards.routes.js";
 import bookingsRoutes from "./routes/bookings.routes.js";
 import flightsRoutes from "./routes/flights.routes.js";
 import hotelsRoutes from "./routes/hotels.routes.js";
+import adminsRoutes from "./routes/admins.routes.js";
 
 
 dotenv.config();
@@ -18,6 +19,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+app.use("/api/admins", adminsRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/cards", cardsRoutes);
