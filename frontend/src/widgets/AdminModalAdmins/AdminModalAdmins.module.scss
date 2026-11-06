@@ -1,0 +1,36 @@
+@use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
+
+
+.formSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rowFields {
+  @include t.positionFull(flex, center);
+  gap: 20px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  @include t.sizeText(12px, 600);
+}
+
+.input {
+  @include t.widthHeight(100%, 44px);
+  @include t.stylesInput;
+  padding: 13px 14px;
+}
+
+.select {
+  @include t.widthHeight(100%, 44px);
+  @include t.stylesInput;
+  padding: 13px 14px;
+}

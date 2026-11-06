@@ -1,4 +1,3 @@
-import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./AdminFlight.module.scss";
 import { AdminNav } from "../../widgets/AdminNav/AdminNav.jsx";
 import { AdminHeader } from "../../widgets/AdminHeader/AdminHeader.jsx";
