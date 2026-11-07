@@ -105,7 +105,7 @@ export const AdminModalFlight = ({isOpen, isClose, onCreated, editingId, initial
       <section>
         <AdminModal
             title={isEditing ? "Edit Flight" : "Add New Flight"}
-            isSaving={isEditing ? "Save changes" : "Add flight"}
+            saveLabel={isEditing ? "Save changes" : "Add flight"}
             subtitle="Airline details, pricing, part payment and trip segments."
             isOpen={isOpen}
             isClose={handleClose}

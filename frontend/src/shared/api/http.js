@@ -26,6 +26,8 @@ export const deleteRequest = async (path) => {
     const {error} = await response.json().catch(() => ({}));
     throw new Error(error || "Request failed");
   }
+
+  return response.json();
 }
 
 export const updateRequest = async (path, body) => {

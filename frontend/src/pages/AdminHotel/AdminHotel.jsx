@@ -1,7 +1,6 @@
 import styles from "./AdminHotel.module.scss";
 import { AdminNav } from "../../widgets/AdminNav/AdminNav.jsx";
 import { AdminHeader } from "../../widgets/AdminHeader/AdminHeader.jsx";
-import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import { AdminHotelsTable } from "../../widgets/AdminHotelsTable/AdminHotelsTable.jsx";
 import {AdminModalHotel} from "../../widgets/AdminModalHotel/AdminModalHotel.jsx";
 import { useState } from "react";
