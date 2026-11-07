@@ -6,18 +6,54 @@ import {AdminAdminsTable} from "../../widgets/AdminAdminsTable/AdminAdminsTable.
 import {AdminModalAdmins} from "../../widgets/AdminModalAdmins/AdminModalAdmins.jsx";
 import {useState} from "react";
 import {useFetchData} from "../../shared/hooks/useFetchData.js";
-import {getAdmins} from "../../shared/api/admins.js";
+import {deleteAdmin, getAdmins} from "../../shared/api/admins.js";
 
 export const AdminAdmins = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editingAdminId, setEditingAdminId] = useState(null);
+    const [initialModalData, setInitialModalData] = useState(null);
     const {data: admins = [], loading, error, refetch} = useFetchData(getAdmins);
 
-    const handleOpenModal = () => {
+    const adminActive = admins.filter((a) => a.isActive).length
+
+    const handleDeleteAdmin = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this admin?")) return;
+
+        try {
+            await deleteAdmin(id);
+            await refetch();
+        } catch (err) {
+            console.error("Error deleting admin", err.message);
+        }
+    }
+
+    const handleOpenEditModal = async (id, adminData) => {
+        try {
+            setEditingAdminId(id);
+            setInitialModalData({
+                firstName: adminData.firstName,
+                lastName: adminData.lastName,
+                email: adminData.email,
+                role: adminData.role,
+                password: "",
+            });
+
+            setIsModalOpen(true)
+        } catch (err) {
+            console.error("Error loading admin for edit:", err.message);
+        }
+    }
+
+    const handleOpenCreateModal = () => {
+        setEditingAdminId(null);
+        setInitialModalData(null);
         setIsModalOpen(true);
     }
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
+        setEditingAdminId(null);
+        setInitialModalData(null);
     }
 
     if (loading) return <p>Loading...</p>;
@@ -35,19 +71,19 @@ export const AdminAdmins = () => {
                             <div className={styles.titleWrapper}>
                                 <div className={styles.titleRow}>
                                     <h2 className={styles.pageTitle}>Admin Management</h2>
-                                    <p className={styles.activeBadge}>3 Active Admins</p>
+                                    <p className={styles.activeBadge}>{adminActive} Active Admins</p>
                                 </div>
 
                                 <p className={styles.pageSubtitle}>Manage administrator accounts, security credentials, and access permissions.</p>
                             </div>
                             <div className={styles.actionWrapper}>
-                                <ButtonNewAdd onClick={handleOpenModal} title="Add new Admin" />
+                                <ButtonNewAdd onClick={handleOpenCreateModal} title="Add new Admin" />
                             </div>
                         </div>
 
-                        <AdminAdminsTable admins={admins}/>
+                        <AdminAdminsTable admins={admins} onDelete={handleDeleteAdmin} onUpdate={handleOpenEditModal} />
 
-                        <AdminModalAdmins isOpen={isModalOpen} isClose={handleCloseModal} onCreated={refetch}/>
+                        <AdminModalAdmins isOpen={isModalOpen} isClose={handleCloseModal} onCreated={refetch} editingId={editingAdminId} initialData={initialModalData}/>
                     </section>
                 </div>
             </div>

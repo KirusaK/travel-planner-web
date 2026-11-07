@@ -2,8 +2,7 @@ import styles from "./AdminAdminsTable.module.scss";
 import {ButtonEdit} from "../../shared/ui/ButtonEdit/ButtonEdit.jsx";
 import {ButtonDelete} from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
 
-export const AdminAdminsTable = ({admins}) => {
-    const adminList = admins?.rows || [];
+export const AdminAdminsTable = ({admins, onDelete, onUpdate}) => {
 
     return (
         <div className={styles.tableCard}>
@@ -20,7 +19,7 @@ export const AdminAdminsTable = ({admins}) => {
             </section>
 
             <section className={styles.tableBody}>
-                {adminList.map((item) => (
+                {admins.map((item) => (
                     <div key={item.id} className={styles.tableRow}>
                         <div className={styles.userCell}>
                             <div className={styles.avatar_circle}>
@@ -42,8 +41,8 @@ export const AdminAdminsTable = ({admins}) => {
                         </div>
 
                         <div className={styles.actionsCell}>
-                            <ButtonEdit />
-                            <ButtonDelete />
+                            <ButtonEdit onClick={() => onUpdate(item.id, item)}/>
+                            <ButtonDelete onClick={() => onDelete(item.id)}/>
                         </div>
                     </div>
                 ))}

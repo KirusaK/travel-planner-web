@@ -49,7 +49,7 @@ async function insertSegments (client, flightId, segments, fromAirport, toAirpor
     }
 }
 
-function validateFlight ({airlineName, flightClass, airportLocation, fromAirport, toAirport, basePrice}) {
+    function validateFlight ({airlineName, flightClass, airportLocation, fromAirport, toAirport, basePrice}) {
     if (!airlineName?.trim() || !flightClass?.trim() || !airportLocation?.trim() || !fromAirport?.trim() || !toAirport?.trim()) return "Not all fields have been filled in" ;
     if (!(Number(basePrice) > 0)) return "Invalid price";
 
