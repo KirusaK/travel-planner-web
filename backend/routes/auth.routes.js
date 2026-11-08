@@ -46,6 +46,10 @@ router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
 
+        if (!email || !password) {
+            return res.status(400).json({message: "Email and password are required."})
+        }
+
         const userCheck = await pool.query("SELECT * FROM users WHERE email = $1", [
             email,
         ]);
@@ -60,6 +64,10 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({ message: "Invalid email or password." });
         }
 
+        if (!user.is_active) {
+            return res.status(403).json({message: "This account is disabled."})
+        }
+
         res.status(200).json({
             message: "Login successful.",
             user: {
@@ -68,6 +76,7 @@ router.post("/login", async (req, res) => {
                 lastName: user.last_name,
                 email: user.email,
                 phone: user.phone_number,
+                role: user.role,
             },
         });
     } catch (err) {

@@ -8,8 +8,10 @@ import { useFetchData } from "../../shared/hooks/useFetchData.js";
 import { getBookings, getUsers } from "../../shared/api/users.js";
 import { getHotels } from "../../shared/api/hotels.js";
 import { getFlights } from "../../shared/api/flights.js";
+import {useAuth} from "../../shared/context/AuthContext.jsx";
 
 export const AdminHome = () => {
+  const {user} = useAuth();
   const { data: users = [], loading: usersLoadnig, error: usersError } = useFetchData(getUsers);
   const { data: hotels = [], loading: hotelsLoadnig, error: hotelsError } = useFetchData(getHotels);
   const {
@@ -35,7 +37,7 @@ export const AdminHome = () => {
           <AdminHeader />
 
           <div className={styles.body}>
-            <h1 className={styles.body_title}>Welcome back, John</h1>
+            <h1 className={styles.body_title}>Welcome back, {user?.firstName}</h1>
             <p className={styles.body_par}>
               Here's what's happening with Golobe bookings today.
             </p>

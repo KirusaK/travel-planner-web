@@ -25,6 +25,7 @@ router.get("/", async (req, res) => {
       u.last_name as "lastName",
       u.email,
       u.phone_number as "phoneNumber",
+      u.role,
       'Not specified' as country,
       to_char(u.created_at, 'DD.MM.YYYY') as joined,
       (select count(*) from bookings b where b.user_id = u.id)::int as "bookingsCount",
