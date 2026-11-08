@@ -5,6 +5,7 @@
 import {Router} from 'express';
 import {pool} from '../db/db.js'
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const router = Router();
 
@@ -68,8 +69,15 @@ router.post("/login", async (req, res) => {
             return res.status(403).json({message: "This account is disabled."})
         }
 
+        const token = jwt.sign(
+            {id: user.id, email: user.email, role: user.role},
+            process.env.JWT_SECRET,
+            {expiresIn: "7d"}
+        );
+
         res.status(200).json({
             message: "Login successful.",
+            token,
             user: {
                 id: user.id,
                 firstName: user.first_name,

@@ -56,6 +56,7 @@ export const LoginForm = ({ compact = false, onSuccess }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+
         },
         body: JSON.stringify(formData),
       });
@@ -65,6 +66,10 @@ export const LoginForm = ({ compact = false, onSuccess }) => {
       if (!respons.ok) {
         setError({ server: data.message });
         return;
+      }
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
       }
 
       login(data.user);

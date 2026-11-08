@@ -1,23 +1,11 @@
-import {postJson, API_URL, deleteRequest, updateRequest} from "./http.js";
+import {postJson, API_URL, deleteRequest, updateRequest, getRequest} from "./http.js";
 
 export const getFlights = async () => {
-  const response = await fetch(`${API_URL}/api/flights`);
-
-  if (!response.ok) {
-    throw new Error("Failed to load flights");
-  }
-
-  return response.json();
+  return await getRequest("/api/flights");
 }
 
 export const getFlightById = async (id) => {
-  const response = await fetch(`${API_URL}/api/flights/${id}`);
-
-  if (!response.ok) {
-    throw new Error("Failed to load flight");
-  }
-
-  return response.json();
+  return await getRequest(`/api/flights/${id}`);
 }
 
 export const createFlight = async (flight) => postJson("/api/flights", flight);

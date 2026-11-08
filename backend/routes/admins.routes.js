@@ -18,6 +18,13 @@ const admin_Field = `
     is_active as "isActive"
 `;
 
+function requireSuperAdmin(req, res, next) {
+    if (req.user?.role !== "super_admin") {
+        return res.status(403).json({error: "Access denied. Only Super Admin can update admins."});
+    }
+    next();
+}
+
 function validateAdmin(
     {firstName, lastName, email, role, password},
     {passwordRequired = true} = {},
@@ -46,7 +53,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", requireSuperAdmin, async (req, res) => {
     const {
         firstName,
         lastName,
@@ -79,7 +86,7 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", requireSuperAdmin, async (req, res) => {
     const {id} = req.params;
 
     if (!/^\d+$/.test(id)) {
@@ -142,12 +149,14 @@ router.put("/:id", async (req, res) => {
     }
 })
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", requireSuperAdmin, async (req, res) => {
     const {id} = req.params;
 
     if (!/^\d+$/.test(id)) {
         return res.status(400).json({error: "Invalid id"});
     }
+
+
 
     try {
         const result = await pool.query(

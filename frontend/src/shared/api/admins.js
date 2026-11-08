@@ -1,23 +1,11 @@
-import {API_URL, deleteRequest, postJson, updateRequest} from "./http.js";
+import {API_URL, deleteRequest, getRequest, postJson, updateRequest} from "./http.js";
 
 export const getAdmins = async () => {
-    const response = await fetch(`${API_URL}/api/admins`);
-
-    if (!response.ok) {
-        throw new Error("Failed to fetch admins");
-    }
-
-    return response.json();
+    return await getRequest("/api/admins");
 }
 
 export const getAdminById = async (id) => {
-    const response = await fetch(`${API_URL}/api/admins/${id}`);
-
-    if (!response.ok) {
-        throw new Error("Failed to load admin");
-    }
-
-    return response.json();
+    return await getRequest(`/api/admins/${id}`);
 }
 
 export const createAdmin = async (adminData) => postJson("/api/admins", adminData);
