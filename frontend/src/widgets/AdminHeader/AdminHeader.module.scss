@@ -13,6 +13,26 @@
     background-color: transparent;
   }
 
+  &__avatar {
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(40px, 40px);
+    @include t.sizeText(14px, 700, $color-mint-green);
+    position: relative;
+    border-radius: 50%;
+    background-color: $color-blackish-green;
+  }
+
+  &__circle {
+    @include t.widthHeight(12px, 12px);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    border: 1px solid $color-base;
+    background-color: $color-mint-green;
+    z-index: 10;
+  }
+
   &__info {
     @include t.positionFull(flex, start);
     flex-direction: column;

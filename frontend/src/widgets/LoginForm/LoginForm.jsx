@@ -5,6 +5,8 @@ import styles from "./LoginForm.module.scss";
 import { useState } from "react";
 import { useAuth } from "../../shared/context/AuthContext.jsx";
 
+const adminRoles = ["admin", "super_admin"];
+
 export const LoginForm = ({ compact = false, onSuccess }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -69,6 +71,8 @@ export const LoginForm = ({ compact = false, onSuccess }) => {
 
       if (compact) {
         onSuccess?.();
+      } else if (adminRoles.includes(data.user.role)) {
+        navigate("/AdminHome")
       } else {
         alert("Successfully logged in!");
         navigate("/Profile");

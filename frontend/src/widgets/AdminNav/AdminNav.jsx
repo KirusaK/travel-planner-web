@@ -1,26 +1,35 @@
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./AdminNav.module.scss";
-import { NavLink } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
+import {useAuth} from "../../shared/context/AuthContext.jsx";
+
+const adminLinks = [
+  { id: 1, image: "icon-Frame", title: "Dashboard", to: "/AdminHome" },
+  {
+    id: 2,
+    image: "icon-Frame1",
+    title: "Flight Management",
+    to: "/AdminFlight",
+  },
+  {
+    id: 3,
+    image: "icon-Frame2",
+    title: "Hotel Management",
+    to: "/AdminHotel",
+  },
+  { id: 4, image: "icon-Frame3", title: "Users", to: "/AdminUsers"  },
+  { id: 5, image: "icon-Frame4", title: "Bookings", to: "/AdminBookings" },
+  {id: 6, image: "icon-shield", title: "Admins", to: "/AdminAdmins"},
+];
 
 export const AdminNav = () => {
-  const adminLinks = [
-    { id: 1, image: "icon-Frame", title: "Dashboard", to: "/AdminHome" },
-    {
-      id: 2,
-      image: "icon-Frame1",
-      title: "Flight Management",
-      to: "/AdminFlight",
-    },
-    {
-      id: 3,
-      image: "icon-Frame2",
-      title: "Hotel Management",
-      to: "/AdminHotel",
-    },
-    { id: 4, image: "icon-Frame3", title: "Users", to: "/AdminUsers"  },
-    { id: 5, image: "icon-Frame4", title: "Bookings", to: "/AdminBookings" },
-    {id: 6, image: "icon-shield", title: "Admins", to: "/AdminAdmins"},
-  ];
+  const {logout} = useAuth();
+  const navigate = useNavigate();
+
+  const handleSingOut = () => {
+    logout();
+    navigate("/");
+  }
 
   return (
     <div className={styles.nav}>
@@ -55,7 +64,7 @@ export const AdminNav = () => {
       </div>
 
       <div className={styles.bottom}>
-        <button className={styles.signOut}>
+        <button type="button" className={styles.signOut} onClick={handleSingOut}>
           <svg width={16} height={16}>
             <use href={sprite + "#icon-Frame5"} />
           </svg>
