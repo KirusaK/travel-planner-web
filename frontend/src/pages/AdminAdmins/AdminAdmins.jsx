@@ -7,16 +7,24 @@ import {AdminModalAdmins} from "../../widgets/AdminModalAdmins/AdminModalAdmins.
 import {useState} from "react";
 import {useFetchData} from "../../shared/hooks/useFetchData.js";
 import {deleteAdmin, getAdmins} from "../../shared/api/admins.js";
+import {useAuth} from "../../shared/context/AuthContext.jsx";
 
 export const AdminAdmins = () => {
+    const {user} = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingAdminId, setEditingAdminId] = useState(null);
     const [initialModalData, setInitialModalData] = useState(null);
     const {data: admins = [], loading, error, refetch} = useFetchData(getAdmins);
 
     const adminActive = admins.filter((a) => a.isActive).length
+    const isSuperAdmin =user?.role === "super_admin";
 
     const handleDeleteAdmin = async (id) => {
+        if (!isSuperAdmin) {
+            alert("Only Super Admin can delete administrators.");
+            return;
+        }
+
         if (!window.confirm("Are you sure you want to delete this admin?")) return;
 
         try {
@@ -28,6 +36,11 @@ export const AdminAdmins = () => {
     }
 
     const handleOpenEditModal = async (id, adminData) => {
+        if (!isSuperAdmin) {
+            alert("Only Super Admin can edit administrators.");
+            return;
+        }
+
         try {
             setEditingAdminId(id);
             setInitialModalData({
@@ -45,6 +58,7 @@ export const AdminAdmins = () => {
     }
 
     const handleOpenCreateModal = () => {
+        if (!isSuperAdmin) return;
         setEditingAdminId(null);
         setInitialModalData(null);
         setIsModalOpen(true);
@@ -76,12 +90,14 @@ export const AdminAdmins = () => {
 
                                 <p className={styles.pageSubtitle}>Manage administrator accounts, security credentials, and access permissions.</p>
                             </div>
-                            <div className={styles.actionWrapper}>
-                                <ButtonNewAdd onClick={handleOpenCreateModal} title="Add new Admin" />
-                            </div>
+                            {isSuperAdmin && (
+                                <div className={styles.actionWrapper}>
+                                    <ButtonNewAdd onClick={handleOpenCreateModal} title="Add new Admin" />
+                                </div>
+                            )}
                         </div>
 
-                        <AdminAdminsTable admins={admins} onDelete={handleDeleteAdmin} onUpdate={handleOpenEditModal} />
+                        <AdminAdminsTable admins={admins} onDelete={handleDeleteAdmin} onUpdate={handleOpenEditModal} isSuperAdmin={isSuperAdmin} />
 
                         <AdminModalAdmins isOpen={isModalOpen} isClose={handleCloseModal} onCreated={refetch} editingId={editingAdminId} initialData={initialModalData}/>
                     </section>

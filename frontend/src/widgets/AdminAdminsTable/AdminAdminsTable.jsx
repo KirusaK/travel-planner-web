@@ -2,7 +2,7 @@ import styles from "./AdminAdminsTable.module.scss";
 import {ButtonEdit} from "../../shared/ui/ButtonEdit/ButtonEdit.jsx";
 import {ButtonDelete} from "../../shared/ui/ButtonDelete/ButtonDelete.jsx";
 
-export const AdminAdminsTable = ({admins, onDelete, onUpdate}) => {
+export const AdminAdminsTable = ({admins, onDelete, onUpdate, isSuperAdmin}) => {
 
     return (
         <div className={styles.tableCard}>
@@ -40,10 +40,12 @@ export const AdminAdminsTable = ({admins, onDelete, onUpdate}) => {
                             <span> {item.isActive ? "Active" : "Inactive"}</span>
                         </div>
 
-                        <div className={styles.actionsCell}>
-                            <ButtonEdit onClick={() => onUpdate(item.id, item)}/>
-                            <ButtonDelete onClick={() => onDelete(item.id)}/>
-                        </div>
+                        {isSuperAdmin && (
+                            <div className={styles.actionsCell}>
+                                <ButtonEdit onClick={() => onUpdate(item.id, item)}/>
+                                <ButtonDelete onClick={() => onDelete(item.id)}/>
+                            </div>
+                        )}
                     </div>
                 ))}
             </section>
