@@ -35,12 +35,12 @@ export const FlightDetailInfo = (props) => {
           <div className={styles.FlightDetailInfo_info_rating}>
             <RatingCard value={rating} />
             <p>
-              <b>{ratingStatus}</b> {reviewsCount}
+              <b>{ratingStatus}</b> {reviewsCount} {" "} reviews
             </p>
           </div>
         </div>
         <div className={styles.FlightDetailInfo_block__price}>
-          <h2 className={styles.FlightDetailInfo_price_title}>{price}</h2>
+          <h2 className={styles.FlightDetailInfo_price_title}>${price}</h2>
           <div className={styles.FlightDetailInfo_price_blockBtn}>
             <FavouritesBtn />
             <button className={styles.FlightDetailInfo_price_btnShare}>

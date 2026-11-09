@@ -1,26 +1,13 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
-.main {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
+@include t.globalAdmin;
 
 .body {
-  flex: 1;
-  padding: 32px;
-  background-color: $color-dekoration-body;
+  @include t.bodyAdmin;
 
   &_headerBlock {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
     margin-bottom: 24px;
 
     &_info {
@@ -30,27 +17,11 @@
     }
 
     &_title {
-      font-size: 24px;
-      font-weight: 700;
+      @include t.sizeText(24px, 700);
     }
 
     &_subtitle {
-      font-size: 14px;
-      font-weight: 400;
-      color: $color-dekoration-text;
-    }
-
-    &_btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 12px;
-      background-color: $color-mint-green;
-      width: 177px;
-      height: 44px;
+      @include t.sizeText(14px, 400, $color-dekoration-text);
     }
   }
 }

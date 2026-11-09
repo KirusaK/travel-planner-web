@@ -1,12 +1,11 @@
 @use "../../../app/styles/variables" as *;
+@use "../../../shared/styles/table" as t;
 
 .buttonBuy {
   &_btn {
-    width: 100%;
-    height: 48px;
+    @include t.widthHeight(100%, 48px);
+    @include t.sizeText(16px, 500);
     border-radius: 4px;
     background-color: $color-mint-green;
-    font-size: 16px;
-    font-weight: 500;
   }
 }

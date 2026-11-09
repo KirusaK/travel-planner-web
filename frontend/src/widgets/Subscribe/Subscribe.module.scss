@@ -1,43 +1,36 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .Subscribe {
+  @include t.widthHeight(1232px, 305px);
   margin: 60px auto;
-  width: 1232px;
-  height: 305px;
   background-color: $color-subscribe;
   border-radius: 20px;
   position: relative;
   z-index: 10;
 
   &__container {
-    display: flex;
-    justify-content: space-between;
+    @include t.positionFull(flex, null, space-between);
     padding: 0 24px;
     gap: 191px;
   }
 
   &__title {
+    @include t.widthHeight(364px, 108px);
+    @include t.sizeText(44px, 700);
     margin: 24px 0;
-    width: 364px;
-    height: 108px;
     font-family: "Roboto Condensed" sans-serif;
-    font-weight: 700;
-    font-size: 44px;
   }
 
   &__text {
+    @include t.sizeText(20px, 700, $color-blackish-green);
     font-family: "Roboto Condensed" sans-serif;
-    font-weight: 700;
-    font-size: 20px;
     margin-bottom: 8px;
-    color: $color-blackish-green;
   }
 
   &__par {
-    font-weight: 500;
-    font-size: 16px;
+    @include t.sizeText(16px, 500, $color-blackish-green);
     margin-bottom: 16px;
-    color: $color-blackish-green;
   }
 
   &__gmail {
@@ -46,27 +39,22 @@
   }
 
   &__input {
-    width: 473px;
-    height: 56px;
+    @include t.widthHeight(473px, 56px);
     border-radius: 4px;
     border: none;
     padding: 16px 18px;
   }
 
   &__button {
-    width: 104px;
-    height: 56px;
+    @include t.widthHeight(104px, 56px);
+    @include t.sizeText(14px, 600, $color-text-light);
     background-color: $color-blackish-green;
     border-radius: 4px;
     border: none;
-    color: $color-text-light;
-    font-weight: 600;
-    font-size: 14px;
   }
 
   &__mailbox {
-    width: 400px;
-    height: 305px;
+    @include t.widthHeight(400px, 305px);
     background-image: url("../../shared/assets/image/mailbox.svg");
   }
 }

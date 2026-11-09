@@ -1,21 +1,17 @@
 @use "../../../app/styles/variables" as *;
+@use "../../../shared/styles/table" as t;
 
 .travelMap {
   &__buttonLink {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(auto, auto);
     border: 1px solid $color-mint-green;
     border-radius: 4px;
-    width: auto;
-    height: auto;
   }
 
   &__buttonText {
+    @include t.sizeText(14px, 500, $color-text-dark);
     font-family: "Inter", sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    color: $color-text-dark;
     padding: 11px 16px;
   }
 }

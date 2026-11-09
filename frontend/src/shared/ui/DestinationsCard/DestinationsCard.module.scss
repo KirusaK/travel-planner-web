@@ -1,10 +1,9 @@
 @use "../../../app/styles/variables" as *;
+@use "../../../shared/styles/table" as t;
 
 .DestinationsCard {
-  display: flex;
-  align-items: center;
-  width: 389px;
-  height: 122px;
+  @include t.positionFull(flex, center);
+  @include t.widthHeight(389px, 122px);
   margin-top: 40px;
   background-color: $color-base;
   border-radius: 16px;
@@ -16,27 +15,23 @@
   }
 
   &__container {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 32px;
     padding: 16px;
   }
 
   &__img {
-    width: 90px;
-    height: 90px;
+    @include t.widthHeight(90px, 90px);
     border-radius: 8px;
   }
 
   &__title {
-    font-weight: 600;
-    font-size: 16px;
+    @include t.sizeText(16px, 600);
     margin-bottom: 8px;
   }
 
   &__par {
-    font-weight: 500;
-    font-size: 14px;
+    @include t.sizeText(14px, 500);
   }
 
   &__span {

@@ -1,4 +1,5 @@
-$color-mint-green: #8dd3bb;
+@use "../../../../app/styles/variables" as *;
+@use "../../../../shared/styles/table" as t;
 
 .Slider {
   width: 618px;
@@ -12,8 +13,7 @@ $color-mint-green: #8dd3bb;
 }
 
 .Slider :global(.swiper) {
-  width: 618px;
-  height: 816px;
+  @include t.widthHeight(618px, 816px);
 }
 
 .Slider :global(.swiper-pagination) {
@@ -21,15 +21,13 @@ $color-mint-green: #8dd3bb;
 }
 
 .Slider :global(.swiper-pagination-bullet) {
-  width: 10px;
-  height: 10px;
+  @include t.widthHeight(10px, 10px);
   background: white;
   opacity: 1;
 }
 
 .Slider :global(.swiper-pagination-bullet-active) {
-  width: 32px;
-  height: 10px;
+  @include t.widthHeight(32px, 10px);
   border-radius: 5px;
   background: $color-mint-green;
 }

@@ -1,4 +1,5 @@
 @use "../../app/styles/_variables" as *;
+@use "../../shared/styles/table" as t;
 
 .hotelDetailGallery {
   &_block {
@@ -7,8 +8,7 @@
     gap: 8px;
 
     &__homePhoto {
-      width: 612px;
-      height: 550px;
+      @include t.widthHeight(612px, 550px);
       background-size: cover;
       background-repeat: no-repeat;
       border-radius: 12px 0 0 12px;
@@ -22,8 +22,7 @@
       flex-wrap: wrap;
 
       &__item {
-        width: 302px;
-        height: 271px;
+        @include t.widthHeight(302px, 271px);
 
         &:nth-child(2) {
           border-top-right-radius: 12px;
@@ -35,14 +34,12 @@
       }
 
       &__btn {
-        width: 143px;
-        height: 48px;
+        @include t.widthHeight(143px, 48px);
+        @include t.sizeText(14px, 600);
         right: 16px;
         bottom: 16px;
         position: absolute;
         border-radius: 4px;
-        font-size: 14px;
-        font-weight: 600;
         background-color: $color-mint-green;
         z-index: 2;
       }
@@ -50,7 +47,6 @@
   }
 
   &_hr {
-    width: 100%;
-    height: 1px;
+    @include t.widthHeight(100%, 1px);
   }
 }

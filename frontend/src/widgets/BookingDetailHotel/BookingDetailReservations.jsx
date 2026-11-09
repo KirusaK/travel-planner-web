@@ -1,19 +1,16 @@
-import photo from "../../shared/assets/image/download 1.jpg";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./BookingDetailReservations.module.scss";
 
 export const BookingDetailReservations = ({ hotel }) => {
-  const { roomType, price, hotelName, location } = hotel;
+  const room = hotel.rooms?.[0];
 
   return (
     <section className={styles.bookingDetailReservations}>
       <div className={styles.bookingDetailReservations_container}>
         <div className={styles.bookingDetailReservations_header}>
-          <h2 className={styles.bookingDetailReservations_roomType}>
-            {roomType}
-          </h2>
+          <h2 className={styles.bookingDetailReservations_roomType}>{room?.title}</h2>
           <div className={styles.bookingDetailReservations_price}>
-            ${price}
+            ${hotel.pricePerNight}
             <span className={styles.bookingDetailReservations_pricePeriod}>
               /night
             </span>
@@ -23,7 +20,7 @@ export const BookingDetailReservations = ({ hotel }) => {
         <div className={styles.bookingDetailReservations_hotel}>
           <div
             style={{
-              backgroundImage: `url(${photo})`,
+              backgroundImage: `url(${room?.imageUrl})`,
               width: "63px",
               height: "63px",
               backgroundRepeat: "no-repeat",
@@ -33,14 +30,14 @@ export const BookingDetailReservations = ({ hotel }) => {
           />
           <div className={styles.bookingDetailReservations_hotelInfo}>
             <h3 className={styles.bookingDetailReservations_hotelName}>
-              {hotelName}
+              {hotel.name}
             </h3>
             <div className={styles.bookingDetailReservations_location}>
               <svg width={18} height={18}>
                 <use href={sprite + "#icon-Location"} />
               </svg>
               <p className={styles.bookingDetailReservations_locationText}>
-                {location}
+                {hotel.address}
               </p>
             </div>
           </div>

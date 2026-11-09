@@ -1,15 +1,13 @@
 @use "../../../app/styles/variables" as *;
+@use "../../../shared/styles/table" as t;
 
 .socialAuthGroup {
-  display: flex;
-  justify-content: space-between;
+  @include t.positionFull(flex, null, space-between);
   gap: 16px;
   width: 100%;
 
   &_item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include t.positionFull(flex, center, center);
     flex: 1; // Равномерно растягивает 3 кнопки
     height: 56px;
     border-radius: 4px;

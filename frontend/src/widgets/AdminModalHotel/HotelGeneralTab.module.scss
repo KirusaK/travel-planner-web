@@ -1,0 +1,78 @@
+@use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
+
+.hotelGeneral {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 0;
+
+  &__hotekName {
+    @include t.positionInput;
+    grid-template-columns: 2fr 1fr;
+  }
+
+  &__maps {
+    @include t.positionInput;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  &__mainTitle {
+    @include t.sizeText(14px, 700);
+  }
+
+  &__section {
+    @include t.positionFull(flex, center);
+    gap: 20px;
+  }
+
+  &__fieldGroup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+  }
+
+  &__label {
+    @include t.sizeText(12px, 600);
+  }
+
+  &__input {
+    @include t.widthHeight(100%, 44px);
+    @include t.stylesInput;
+    border-radius: 12px;
+    padding: 13px;
+
+    &__price {
+      max-width: 264px;
+    }
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  &__subTitle {
+    @include t.sizeText(14px, 700);
+  }
+
+  &__subDescription {
+    @include t.sizeText(12px, 400, $color-dekoration-text);
+  }
+
+  &__row {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__textarea {
+    @include t.widthHeight(100%, 140px);
+    @include t.stylesInput;
+    border-radius: 12px;
+    padding: 13px;
+    outline: none;
+  }
+}

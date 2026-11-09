@@ -1,11 +1,9 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 1232px;
-  height: 120px;
+  @include t.positionFull(flex, center, center);
+  @include t.widthHeight(1232px, 120px);
   margin: 48px auto 32px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 16px;
@@ -21,8 +19,7 @@
   }
 
   &_container {
-    display: flex;
-    justify-content: center;
+    @include t.positionFull(flex, null, center);
     gap: 24px;
   }
 
@@ -39,8 +36,7 @@
   }
 
   &_from_input_field {
-    width: 297px;
-    height: 56px;
+    @include t.widthHeight(297px, 56px);
     padding-left: 16px;
     border: 1px solid $color-border;
     border-radius: 4px;
@@ -66,10 +62,8 @@
   }
 
   &_trip_content {
-    display: flex;
-    align-items: center;
-    width: 140px;
-    height: 56px;
+    @include t.positionFull(flex, center);
+    @include t.widthHeight(140px, 56px);
     border: 1px solid $color-border;
     border-radius: 4px;
     padding-left: 16px;
@@ -92,8 +86,7 @@
   }
 
   &_depart_input_field {
-    width: 297px;
-    height: 56px;
+    @include t.widthHeight(297px, 56px);
     border: 1px solid $color-border;
     border-radius: 4px;
     padding: 0 16px;
@@ -112,13 +105,11 @@
   }
 
   &_passengers_content {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
+    @include t.widthHeight(297px, 56px);
     padding-left: 16px;
     border: 1px solid $color-border;
     border-radius: 4px;
-    width: 297px;
-    height: 56px;
   }
 
   &_passengers_icon {
@@ -127,29 +118,21 @@
   }
 
   &_submit_container {
-    display: flex;
-    justify-content: flex-end;
+    @include t.positionFull(flex, null, flex-end);
   }
 
   &_submit {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include t.positionFull(flex, center, center);
     margin: 32px 24px 0 0;
   }
 
   &_submit_link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(144px, 48px);
+    @include t.sizeText(14px, 500, $color-text-dark);
     background-color: $color-mint-green;
     border-radius: 4px;
-    width: 144px;
-    height: 48px;
     gap: 0.5px;
-    color: $color-text-dark;
-    font-size: 14px;
-    font-weight: 500;
     transition: transform 0.5s ease;
     cursor: pointer;
   }
@@ -165,8 +148,7 @@
   }
 
   &_submit {
-    width: 56px;
-    height: 56px;
+    @include t.widthHeight(56px, 56px);
     background-color: $color-mint-green;
     border-radius: 4px;
     padding: 0;
@@ -202,11 +184,10 @@
 }
 
 .overlay {
+  @include t.widthHeight(100%, 100%);
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   z-index: 5;
   background-color: transparent;
 }

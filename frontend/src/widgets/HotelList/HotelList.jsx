@@ -1,14 +1,38 @@
-import { hotels } from "../../entities/hotel/index.js";
-import {HotelCard} from "../HotelCard/HotelCard.jsx";
+import { HotelCard } from "../HotelCard/HotelCard.jsx";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./HotelList.module.scss";
+import { useEffect, useState } from "react";
+import { getHotels } from "../../shared/api/hotels.js";
 
 export const HotelList = () => {
+  const [allHotels, setAllHotels] = useState([]);
+  const [filteredTickets, setFilteredTickets] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getHotels()
+      .then((data) => {
+        setAllHotels(data);
+        setFilteredTickets(data);
+      })
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+
+  })
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <div>
       <div className={styles.sorting_results}>
         <p>
-          <strong>Showing 4 of</strong> <span>257 places</span>
+          <strong>Showing {filteredTickets.length} of</strong>{" "}
+          <span>{allHotels.length} places</span>
         </p>
         <div className={styles.sorting_selectWrapper}>
           <p>
@@ -21,7 +45,7 @@ export const HotelList = () => {
       </div>
 
       <section className={styles.hotelCard_container}>
-        {hotels.map((hotel) => (
+        {filteredTickets.map((hotel) => (
           <HotelCard key={hotel.id} item={hotel} />
         ))}
       </section>

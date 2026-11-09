@@ -1,13 +1,11 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .sorting {
   &_results {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include t.positionFull(flex, center, space-between);
+    @include t.sizeText(14px, 600);
     margin: 24px auto;
-    font-size: 14px;
-    font-weight: 600;
   }
 
   &_results span {
@@ -15,8 +13,7 @@
   }
 
   &_selectWrapper {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
   }
 }
 
@@ -27,12 +24,9 @@
 }
 
 .flightCard_last__btn{
-  width: 840px;
-  height: 48px;
+  @include t.widthHeight(840px, 48px);
+  @include t.sizeText(14px, 600, $color-base);
   margin-top: 24px;
   background-color: $color-blackish-green;
   border-radius: 4px;
-  color: $color-base;
-  font-size: 14px;
-  font-weight: 600;
 }

@@ -1,4 +1,5 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .Othersort {
   display: flex;
@@ -7,12 +8,9 @@
   border-radius: 12px;
 
   &_button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(208px, 80px);
     text-align: left;
-    width: 208px;
-    height: 80px;
     background-color: $color-base;
     position: relative;
 
@@ -21,13 +19,12 @@
     }
 
     &::after {
+      @include t.widthHeight(1px, 48px);
       content: "";
       position: absolute;
       right: 0;
       top: 50%;
       transform: translateY(-50%);
-      width: 1px;
-      height: 48px;
       background-color: $color-grey-light;
     }
 
@@ -37,45 +34,32 @@
     }
 
     &__block {
+      @include t.widthHeight(160px, 45px);
       display: flex;
-
       flex-direction: column;
       gap: 8px;
-      width: 160px;
-      height: 45px;
     }
 
     &__title {
-      font-size: 16px;
-      font-weight: 600;
-      color: $color-blackish-green;
+      @include t.sizeText(16px, 600, $color-blackish-green);
     }
 
     &__info {
-      font-size: 14px;
-      font-weight: 400;
-      color: $color-blackish-green;
+      @include t.sizeText(14px, 400, $color-blackish-green);
     }
   }
 
   &_buttons {
-    display: flex;
-    justify-content: start;
-    text-align: left;
-    width: 208px;
-    height: 80px;
+    @include t.positionFull(flex, left, start);
+    @include t.widthHeight(208px, 80px);
     background-color: $color-base;
 
     &__block {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include t.positionFull(flex, center, center);
+      @include t.sizeText(14px, 500, $color-blackish-green);
       text-align: left;
       gap: 8px;
       width: 160px;
-      font-size: 14px;
-      font-weight: 500;
-      color: $color-blackish-green;
     }
   }
 }

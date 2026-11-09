@@ -1,4 +1,5 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .flightPolicies {
   background-color: $color-mint-green;
@@ -6,8 +7,7 @@
   height: 102px;
   &_block {
     &__title {
-      font-size: 24px;
-      font-weight: 700;
+      @include t.sizeText(24px, 700);
       padding: 16px;
     }
 
@@ -16,15 +16,12 @@
       gap: 16px;
 
       &__teg {
-        display: flex;
-        align-items: center;
+        @include t.positionFull(flex, center);
         padding-left: 16px;
         gap: 16px;
 
         &__span {
-          font-size: 16px;
-          font-weight: 500;
-          color: $color-blackish-green;
+          @include t.sizeText(16px, 500, $color-blackish-green);
         }
       }
     }

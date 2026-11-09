@@ -1,30 +1,23 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .hotelDetailLocation {
   &_block {
     margin-top: 64px;
 
     &__header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      @include t.positionFull(flex, center, space-between);
 
       &__title {
-        font-size: 20px;
-        font-weight: 700;
+        @include t.sizeText(20px, 700);
       }
 
       &__btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 189px;
-        height: 48px;
+        @include t.positionFull(flex, center, center);
+        @include t.widthHeight(189px, 48px);
+        @include t.sizeText(14px, 600, $color-text-dark);
         border-radius: 4px;
         background-color: $color-mint-green;
-        font-size: 14px;
-        font-weight: 600;
-        color: $color-text-dark;
       }
     }
 
@@ -33,16 +26,13 @@
     }
 
     &__footer {
-      display: flex;
-      align-items: center;
+      @include t.positionFull(flex, center);
+      @include t.sizeText(14px, 500);
       gap: 2px;
-      font-size: 14px;
-      font-weight: 500;
     }
 
     &__hr {
-      width: 100%;
-      height: 1px;
+      @include t.widthHeight(100%, 1px);
       margin: 64px 0 64px 0;
     }
   }

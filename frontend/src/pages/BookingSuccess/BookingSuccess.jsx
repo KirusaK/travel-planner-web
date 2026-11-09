@@ -2,43 +2,55 @@ import {useParams} from 'react-router-dom';
 import { Header } from "../../widgets/Header/Header.jsx";
 import { useAuth } from "../../shared/context/AuthContext.jsx";
 import { useEffect, useState } from "react";
-import { tickets } from "../../entities/flight/index.js";
-import { hotels } from "../../entities/hotel/index.js";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./BookingSuccess.module.scss";
 import { BookingTicketCard } from "../../widgets/BookingTicketCard/BookingTicketCard.jsx";
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
+import { getFlightById } from "../../shared/api/flights.js";
+import { getHotelById } from "../../shared/api/hotels.js";
 
 
 export const BookingSuccess = () => {
   const {id} = useParams()
   const { user } = useAuth()
+
   const [booking, setBooking] = useState(null);
+  const [itemData, setItemData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/bookings/${id}`).then((res) => {
-      if (!res.ok) throw new Error("Booking not found!");
-      return res.json();
-    }).then((data) => {
-      setBooking(data);
-      setLoading(false);
-    }).catch((err) => {
-      console.error("Failed to load booking details: ", err);
-      setLoading(false);
-    })
+    setLoading(true);
+    setError(null);
+
+    const load = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/bookings/${id}`);
+        if (!res.ok) throw new Error("Booking not found");
+        const bookingData = await res.json();
+        setBooking(bookingData);
+
+        const item =
+          bookingData.item_type.toLowerCase() === "flight"
+            ? await getFlightById(bookingData.item_id)
+            : await getHotelById(bookingData.item_id);
+        setItemData(item);
+
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
   }, [id]);
 
   if (loading) return <div>Loading your booking...</div>
-  if (!booking) return <div>Booking not found.</div>;
+  if (error) return <div>{error}</div>
+  if (!booking || !itemData) return <div>Booking not found.</div>;
 
   const isFlight = booking.item_type.toLowerCase() === "flight";
-  const itemId = booking.item_id || booking.itemId;
-
-  const itemData = isFlight
-    ? tickets.find((t) => String(t.id) === String(itemId))
-    : hotels.find((h) => String(h.id) === String(itemId));
 
   return (
     <section>
@@ -59,13 +71,14 @@ export const BookingSuccess = () => {
                 <p>
                   {isFlight
                     ? itemData.airport || "Newark (EWR)"
-                    : itemData.location ||
-                      "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"}
+                    : itemData.address}
                 </p>
               </div>
             </div>
 
-            <h2 className={styles.headerInfo_price}>${booking.total_price}</h2>
+            <h2 className={styles.headerInfo_price}>
+              ${Number(booking.total_price)}
+            </h2>
           </div>
 
           <BookingTicketCard

@@ -1,0 +1,83 @@
+@use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
+
+.generalTab {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 0;
+
+  &__sectionTitle {
+    @include t.sizeText(14px, 700);
+  }
+
+  &__sectionHint {
+    @include t.sizeText(12px, 400, $color-dekoration-text);
+  }
+
+  &__row {
+    @include t.positionFull(grid, center);
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+
+    &__three {
+      @include t.positionFull(grid, end);
+      grid-template-columns: repeat(3, 1fr); // Ровно три одинаковые колонки
+      gap: 20px;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__label {
+    @include t.sizeText(12px, 600);
+  }
+
+  &__input {
+    @include t.widthHeight(100%, 44px);
+    @include t.stylesInput;
+    padding: 13px;
+  }
+
+  &__logo {
+    @include t.positionFull(flex, flex-end);
+    gap: 12px;
+  }
+
+  &__logoPreview {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    &__title {
+      @include t.sizeText(12px, 600);
+    }
+
+    &__btn {
+      @include t.widthHeight(80px, 80px);
+      border-radius: 17px;
+    }
+  }
+
+  &__logoControls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  &__uploadBtn {
+    @include t.widthHeight(112px, 36px);
+    border-radius: 12px;
+    border: 1px solid $color-mint-green;
+    background-color: transparent;
+  }
+
+  &__sectionHead {
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,83 @@
+@use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
+
+.tripsTab {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 0;
+
+  &__trip {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 21px;
+    border: 1px solid $color-dekoration-grey;
+    background-color: $color-decoration-background;
+  }
+
+  &__head {
+    @include t.positionFull(flex, center, space-between);
+  }
+
+  &__title {
+    @include t.positionFull(flex, center);
+    gap: 12px;
+  }
+
+  &__block__number {
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(32px, 32px);
+    border-radius: 50%;
+    background-color: $color-blackish-green;
+  }
+
+  &__number {
+    color: $color-mint-green;
+  }
+
+  &__name {
+    @include t.sizeText(14px, 700);
+  }
+
+  &__actions {
+    @include t.positionFull(flex, center);
+    gap: 4px;
+  }
+
+  &__iconBtn {
+    background-color: transparent;
+  }
+
+  &__icon__arrow {
+    rotate: 180deg;
+  }
+
+  &__row {
+    @include t.positionFull(flex, center);
+    gap: 16px;
+    width: 100%;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+
+  &__label {
+    @include t.sizeText(12pxm 600);
+  }
+
+  &__input {
+    @include t.widthHeight(100%, 44px);
+    @include t.stylesInput;
+    padding: 12px 14px;
+  }
+
+  &__addBtn {
+    @include t.stylesAddBtn;
+  }
+}

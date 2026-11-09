@@ -1,0 +1,65 @@
+@use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
+
+.amenitiesTab {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 0;
+
+  &__toolbar {
+    @include t.positionFull(flex, center, space-between);
+  }
+
+  &__counter {
+    color: $color-dekoration-text;
+
+    &__strong {
+      color: $color-text-dark;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__btn {
+    @include t.sizeText(12px, 600);
+    padding: 6px 12px;
+    background-color: transparent;
+
+    &:hover {
+      border-radius: 12px;
+      background-color: $color-dekoration-grey;
+    }
+
+    &__red {
+      color: $color-red-text;
+
+      &:hover {
+        border-radius: 12px;
+        background-color: $color-pink;
+      }
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  &__item {
+    @include t.positionFull(flex, center);
+    @include t.widthHeight(272px, 46px);
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 17px;
+    border: 1px solid $color-dekoration-grey;
+  }
+
+  &__label {
+    width: 100%;
+  }
+}

@@ -31,37 +31,16 @@
   border-radius: 50%;
 }
 
-@mixin title {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-@mixin subtitle {
-  font-size: 12px;
-  font-weight: 400;
-  color: $color-dekoration-text;
-}
-
 @mixin item {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-@mixin status {
-  font-size: 12px;
-  font-weight: 600;
-}
-
-@mixin price($size, $weight) {
+@mixin sizeText($size: null, $weight: null, $color: null) {
   font-size: $size;
   font-weight: $weight;
-  color: $color-pink;
-}
-
-@mixin itemTitle {
-  font-size: 14px;
-  font-weight: 400;
+  color: $color;
 }
 
 @mixin badge {
@@ -69,4 +48,163 @@
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
+}
+
+@mixin positionInput {
+  display: grid;
+  width: 100%;
+  gap: 20px;
+}
+
+@mixin stylesInput {
+  border-radius: 12px;
+  background-color: transparent;
+  border: 1px solid $color-dekoration-grey;
+
+
+  &:focus {
+    box-shadow: 0 0 0 2px $color-mint-green;
+  }
+}
+
+@mixin stylesAddBtn {
+  width: 100%;
+  height: 48px;
+  border-radius: 21px;
+  border: 1px dashed $color-mint-green;
+  background-color: transparent;
+
+  &:hover {
+    background-color: transparentize($color-mint-green, 0.85);
+  }
+}
+
+@mixin logoPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: $color-light-green;
+  color: $color-green-text;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+@mixin logoStyle {
+  width: 64px;
+  height: 44px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@mixin ratingCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 32px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid $color-mint-green;
+  border-radius: 4px;
+}
+
+@mixin globalAdmin {
+  .main {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+}
+
+@mixin bodyAdmin {
+  flex: 1;
+  padding: 32px;
+  background-color: $color-dekoration-body;
+}
+
+@mixin positionFull($display: null, $align: null, $justify: null) {
+  display: $display;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin widthHeight($width: null, $height: null) {
+  width: $width;
+  height: $height;
+}
+
+@mixin bookingDetailStyles {
+  .main {
+    display: flex;
+    width: 1280px;
+    gap: 40px;
+    margin: 94px auto;
+
+    &_block {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+  }
+}
+
+@mixin globalStyles {
+  display: flex;
+  flex-direction: column;
+  width: 1280px;
+  gap: 40px;
+  margin: 94px auto;
+}
+
+@mixin success {
+  color: $color-green-text;
+  background-color: $color-light-green;
+}
+
+@mixin warning {
+  color: $color-yellow-text;
+  background-color: $color-yellow;
+}
+
+@mixin danger {
+  color: $color-red-text;
+  background-color: $color-red;
+}
+
+@mixin neutral {
+  color: $color-dekoration-text;
+  background-color: $color-dekoration_btn__grey;
+}
+
+@mixin dark {
+  color: $color-text-light;
+  background-color: $color-text-dark;
+}
+
+@mixin btnDeleteEdit($borderColor) {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background-color: transparent;
+  border: 1px solid $borderColor;
+}
+
+@mixin photo($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 8px;
+  width: 90px;
+  height: 90px;
+  transition: transform 0.3s ease;
 }

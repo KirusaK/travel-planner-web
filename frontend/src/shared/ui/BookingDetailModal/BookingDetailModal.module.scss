@@ -1,16 +1,14 @@
 @use "../../../app/styles/variables" as *;
+@use "../../../shared/styles/table" as t;
 
 .bookingDetailModal {
+  @include t.positionFull(flex, center, center);
+  @include t.widthHeight(100%, 100%);
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   background-color: rgba(17, 34, 17, 0.1);
   backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 1000;
 
   &_content {
@@ -20,13 +18,10 @@
   }
 
   &_header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
 
     &__title {
-      font-size: 16px;
-      font-weight: 600;
+      @include t.sizeText(16px, 600);
     }
 
     &__closeBtn {
@@ -35,15 +30,13 @@
   }
 
   &_hr {
-    width: 100%;
-    height: 1px;
+    @include t.widthHeight(100%, 1px);
     margin: 16px 0;
   }
 
   &_body {
     &__subtitle {
-      font-size: 16px;
-      font-weight: 600;
+      @include t.sizeText(16px, 600);
       margin-bottom: 16px;
     }
 
@@ -54,8 +47,7 @@
     }
 
     &__item {
-      font-size: 16px;
-      font-weight: 600;
+      @include t.sizeText(16px, 600);
 
       b {
         display: block;
@@ -64,18 +56,14 @@
   }
 
   &_button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include t.positionFull(flex, center, space-between);
     width: 100%;
 
     &__submitBtn {
-      width: 91%;
-      height: 35px;
+      @include t.widthHeight(91%, 35px);
+      @include t.sizeText(14px, 500);
       background-color: $color-mint-green;
       border-radius: 8px;
-      font-weight: 500;
-      font-size: 14px;
     }
   }
 }

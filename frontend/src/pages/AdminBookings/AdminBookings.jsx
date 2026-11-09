@@ -2,15 +2,36 @@ import styles from "./AdminBookings.module.scss";
 import { AdminNav } from "../../widgets/AdminNav/AdminNav.jsx";
 import { AdminHeader } from "../../widgets/AdminHeader/AdminHeader.jsx";
 import AdminBookingsTable from "../../widgets/AdminBookingsTable/AdminBookingsTable.jsx";
+import { useFetchData } from "../../shared/hooks/useFetchData.js";
+import { getBookings } from "../../shared/api/users.js";
+import {useMemo, useState} from "react";
+
+const filters = [
+  { key: "all", name: "All" },
+  { key: "confirmed", name: "Confirmed", count: 3 },
+  { key: "pending", name: "Pending", count: 2 },
+  { key: "completed", name: "Completed", count: 2 },
+  { key: "cancelled", name: "Cancelled", count: 1 },
+];
 
 export const AdminBookings = () => {
-  const btn = [
-    { id: 1, name: "All", count: 8 },
-    { id: 2, name: "Confirmed", count: 3 },
-    { id: 3, name: "Pending", count: 2 },
-    { id: 4, name: "Completed", count: 2 },
-    { id: 5, name: "Cancelled", count: 1 },
-  ];
+  const {
+    data: bookings,
+    loading,
+    error,
+  } = useFetchData(getBookings);
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const counts = useMemo(() => {
+    const result = {all: bookings.length};
+    for (const booking of bookings) {
+      result[booking.status] = (result[booking.status] ?? 0) + 1;
+    }
+
+    return result;
+  }, [bookings]);
+
+  const filteredBookings = activeFilter === "all" ? bookings : bookings.filter((b) => b.status === activeFilter);
 
   return (
     <section>
@@ -23,21 +44,19 @@ export const AdminBookings = () => {
             <div className={styles.body_headerBlock}>
               <h1 className={styles.body_headerBlock_title}>Bookings</h1>
               <p className={styles.body_headerBlock_subtitle}>
-                8 bookings across flights and hotels
+                {bookings.length} bookings across flights and hotels
               </p>
             </div>
 
             <div className={styles.body_headerBlock_btnBlock}>
-              {btn.map((item) => (
-                <div key={item.id}>
-                  <button className={styles.body_headerBlock_btn}>
-                    {item.name} {item.count}
+              {filters.map(({key, name}) => (
+                  <button key={key} onClick={() => setActiveFilter(key)} className={`${styles.body_headerBlock_btn} ${activeFilter === key ? styles.body_headerBlock_btnActive : ""}`}>
+                    {name} <span className={activeFilter === key ? styles.body_headerBlock_btnActive__span : ""}>{counts[key] ?? 0}</span>
                   </button>
-                </div>
               ))}
             </div>
 
-            <AdminBookingsTable />
+            <AdminBookingsTable bookings={filteredBookings} loading={loading} error={error} />
           </div>
         </div>
       </div>

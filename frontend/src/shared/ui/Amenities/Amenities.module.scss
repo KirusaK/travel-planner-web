@@ -1,21 +1,18 @@
 @use "../../../app/styles/_variables" as *;
+@use "../../../shared/styles/table" as t;
 
 .amenities {
   &_header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
     margin-bottom: 16px;
   }
 
   &_header__title {
-    font-size: 16px;
-    font-weight: 600;
+    @include t.sizeText(16px, 600);
   }
 
   &_header__btn {
-    width: 24px;
-    height: 24px;
+    @include t.widthHeight(24px, 24px);
     background-color: transparent;
   }
 
@@ -25,21 +22,17 @@
   }
 
 &_info__block {
-  display: flex;
-  align-items: center;
+  @include t.positionFull(flex, center);
   gap: 11px;
   margin-bottom: 8px;
 }
 
 &_info__span {
-  font-size: 14px;
-  font-weight: 500;
+  @include t.sizeText(14px, 500);
 }
 
   &_btn {
+    @include t.sizeText(14px, 500, $color-pink);
     background-color: transparent;
-    color: $color-pink;
-    font-size: 14px;
-    font-weight: 700;
   }
 }

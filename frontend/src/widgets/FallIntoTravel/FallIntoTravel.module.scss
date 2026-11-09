@@ -1,20 +1,17 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .FallIntoTravel {
+  @include t.widthHeight(1232px, 552px);
   margin-top: 80px;
-  width: 1232px;
-  height: 552px;
   margin-bottom: 40px;
 
   &__container {
-    display: flex;
-    justify-content: center;
+    @include t.positionFull(flex, null, center);
   }
 
   &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include t.positionFull(flex, center, space-between);
     margin-bottom: 20px;
   }
 
@@ -25,20 +22,16 @@
   }
 
   &__title {
-    font-weight: 600;
-    font-size: 32px;
+    @include t.sizeText(32px, 600);
   }
 
   &__p {
-    font-weight: 400;
-    font-size: 16;
+    @include t.sizeText(16px, 400);
     max-width: 851px;
   }
 
   &__grid {
-    display: flex;
-    justify-content: space-between;
-    width: 1232px;
-    height: 552px;
+    @include t.positionFull(flex, null, space-between);
+    @include t.widthHeight(1232px, 552px);
   }
 }

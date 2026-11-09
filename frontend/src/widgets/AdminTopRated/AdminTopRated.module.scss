@@ -1,8 +1,8 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .topRated {
-  width: auto;
-  height: auto;
+  @include t.widthHeight(auto, auto);
   padding: 24px;
   background-color: $color-base;
   border-radius: 21px;
@@ -13,14 +13,11 @@
   }
 
   &_title {
-    font-size: 16px;
-    font-weight: 700;
+    @include t.sizeText(16px, 700);
   }
 
   &_subtitle {
-    font-size: 14px;
-    font-weight: 400;
-    color: $color-dekoration-text;
+    @include t.sizeText(14px, 400, $color-dekoration-text);
   }
 
   &_group {
@@ -30,36 +27,27 @@
   }
 
   &_item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include t.positionFull(flex, center, space-between);
   }
 
   &_left {
-    display: flex;
-    align-items: center;
+    @include t.positionFull(flex, center);
     gap: 12px;
   }
 
   &_iconWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(48px, 48px);
     border-radius: 16px;
     background-color: $color-light-green;
   }
 
   &_itemName {
-    font-size: 14px;
-    font-weight: 600;
+    @include t.sizeText(14px, 600);
   }
 
   &_price {
-    font-size: 14px;
-    font-weight: 700;
-    color: $color-pink;
+    @include t.sizeText(14px, 700, $color-pink);
   }
 
   &_divider {
@@ -67,8 +55,6 @@
   }
 
   &_route {
-    font-size: 12px;
-    font-weight: 400;
-    color: $color-dekoration-text;
+    @include t.sizeText(12px, 400, $color-dekoration-text);
   }
 }

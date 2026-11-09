@@ -1,19 +1,16 @@
 @use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
 
 .Destinations {
-  display: flex;
-  justify-content: center;
+  @include t.positionFull(flex, null, center);
   margin-bottom: 80px;
 
   &__container {
-    width: 1232px;
-    height: 542px;
+    @include t.widthHeight(1232px, 542px);
   }
 
   &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include t.positionFull(flex, center, space-between);
     margin-bottom: 20px;
   }
 
@@ -24,28 +21,23 @@
   }
 
   &__title {
-    font-weight: 600;
-    font-size: 32px;
+    @include t.sizeText(32px, 600);
   }
 
   &__p {
-    font-weight: 400;
-    font-size: 16;
+    @include t.sizeText(16px, 400);
     max-width: 851px;
   }
 
   &__link {
-    width: auto;
-    height: auto;
+    @include t.widthHeight(auto, auto);
     border: 1px solid $color-mint-green;
     border-radius: 4px;
   }
 
   &__button {
+    @include t.sizeText(14px, 500, $color-text-dark);
     padding: 11px 16px;
-    color: $color-text-dark;
-    font-weight: 500;
-    font-size: 14px;
   }
 
   &__info {
