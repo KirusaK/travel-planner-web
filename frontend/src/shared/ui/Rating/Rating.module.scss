@@ -33,8 +33,12 @@
     background-color: $color-base;
     border: 1px solid $color-mint-green;
     border-radius: 4px;
+    cursor: pointer;
   }
 
+  &_button_active {
+    background-color: $color-mint-green;
+  }
   &_hr {
     border: none;
     background-color: $color-blackish-green;

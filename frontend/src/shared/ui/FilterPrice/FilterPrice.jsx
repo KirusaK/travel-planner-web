@@ -1,7 +1,16 @@
+import { useState } from "react";
 import sprite from "../../../shared/assets/icons/symbol-defs.svg";
 import styles from "./FilterPrice.module.scss";
 
-export const FilterPrice = () => {
+export const FilterPrice = ({ value, onChange, min = 50, max = 1200 }) => {
+  const [inner, setInner] = useState(max);
+  const current = value ?? inner;
+
+  const handleChange = (e) => {
+    const v = Number(e.target.value);
+    setInner(v);
+    onChange?.(v);
+  };
   return (
     <div>
       <h1 className={styles.filter_price_title}>Filters</h1>
@@ -22,13 +31,15 @@ export const FilterPrice = () => {
           </div>
           <input
             type="range"
-            min="50"
-            max="1200"
+            min={min}
+            max={max}
+            value={current}
+            onChange={handleChange}
             className={styles.filter_price_input}
           />
           <div className={styles.filter_price_block_range}>
-            <p className={styles.filter_price_block_range_min}>$50</p>
-            <p className={styles.filter_price_block_range_max}>$1200</p>
+            <p className={styles.filter_price_block_range_min}>${min}</p>
+            <p className={styles.filter_price_block_range_max}>${current}</p>
           </div>
         </div>
 

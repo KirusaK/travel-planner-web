@@ -1,7 +1,18 @@
+import { useState } from "react";
 import sprite from "../../../shared/assets/icons/symbol-defs.svg";
 import styles from "./Rating.module.scss";
 
-export const Rating = () => {
+const OPTIONS = [0, 1, 2, 3, 4];
+
+export const Rating = ({ value, onChange }) => {
+  const [inner, setInner] = useState(value ?? 0);
+  const current = value ?? inner;
+
+  const select = (n) => {
+    setInner(n);
+    onChange?.(n);
+  };
+
   return (
     <div>
       <section className={styles.Rating}>
@@ -14,11 +25,15 @@ export const Rating = () => {
           </button>
         </div>
         <div className={styles.Rating_buttons}>
-          <button className={styles.Rating_button}>0+</button>
-          <button className={styles.Rating_button}>1+</button>
-          <button className={styles.Rating_button}>2+</button>
-          <button className={styles.Rating_button}>3+</button>
-          <button className={styles.Rating_button}>4+</button>
+          {OPTIONS.map((n) => (
+            <button
+              key={n}
+              onClick={() => select(n)}
+              className={`&{styles.Rating_button} ${current === n ? styles.Rating_button_active : ""}`}
+            >
+              {n}+
+            </button>
+          ))}
         </div>
 
         <hr className={styles.Rating_hr} />
