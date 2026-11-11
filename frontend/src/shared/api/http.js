@@ -35,6 +35,8 @@ export const deleteRequest = async (path) => {
     throw new Error(error || "Request failed");
   }
 
+  if (response.status === 204) return null;
+
   return response.json();
 }
 
@@ -68,6 +70,26 @@ export const getRequest = async (path) => {
       "Content-Type": "application/json",
     },
   });
+
+  if (!response.ok) {
+    const { error } = await response.json().catch(() => ({}));
+    throw new Error(error || "Request failed");
+  }
+
+  return response.json();
+}
+
+export const pathRequest = async (path, body) => {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${API_URL}${path}`, {
+    method: "PATCH",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body),
+  })
 
   if (!response.ok) {
     const { error } = await response.json().catch(() => ({}));
