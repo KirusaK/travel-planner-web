@@ -3,10 +3,10 @@ import uploadIcon from "../../shared/assets/image/Upload.svg";
 import avatar from "../../shared/assets/image/avatar.png";
 import uploadIcon2 from "../../shared/assets/image/Pen.svg";
 import Cover from "../../shared/assets/image/cover.svg";
-import { useUser } from "../../shared/context/UserContext";
+import {useAuth} from "../../shared/context/AuthContext.jsx";
 
 export const Hero = () => {
-  const { user } = useUser();
+  const { user } = useAuth();
 
   return (
     <section className={styles.hero}>
