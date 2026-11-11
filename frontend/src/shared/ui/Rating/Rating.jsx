@@ -29,7 +29,7 @@ export const Rating = ({ value, onChange }) => {
             <button
               key={n}
               onClick={() => select(n)}
-              className={`&{styles.Rating_button} ${current === n ? styles.Rating_button_active : ""}`}
+              className={`${styles.Rating_button} ${current === n ? styles.Rating_button_active : ""}`}
             >
               {n}+
             </button>

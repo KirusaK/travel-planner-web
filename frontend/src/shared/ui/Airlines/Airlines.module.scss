@@ -30,6 +30,44 @@
     gap: 8px;
   }
 
+  &_label {
+    cursor: pointer;
+  }
+
+  &_checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    border: 1px solid $color-blackish-green;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+
+    &:checked {
+      background-color: $color-mint-green;
+      border-color: $color-mint-green;
+    }
+
+    &:checked::after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 2px;
+      width: 6px;
+      height: 10px;
+      border: solid $color-blackish-green;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  &_span {
+    @include t.sizeText(16px, 500, $color-blackish-green);
+  }
+
   &_hr {
     border: none;
     background-color: $color-blackish-green;

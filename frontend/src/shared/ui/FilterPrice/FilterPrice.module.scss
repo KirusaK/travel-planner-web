@@ -25,10 +25,9 @@
   }
 
   &_input {
+    @include t.widthHeight(100%, 24px);
     -webkit-appearance: none;
     appearance: none;
-    width: 100%;
-    height: 24px;
     margin: 0 0 8px;
     background: transparent;
     cursor: pointer;
