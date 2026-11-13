@@ -1,0 +1,97 @@
+@use "../../app/styles/variables" as *;
+@use "../../shared/styles/table" as t;
+
+.bookingHistory {
+  @include t.positionFull(flex, center, space-between);
+  padding: 32px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+
+  &__main {
+    @include t.positionFull(flex, center, space-between);
+    gap: 48px;
+  }
+
+  &__logoBox {
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(80px, 80px);
+    border-radius: 8px;
+    border: 1px solid $color-mint-green;
+  }
+
+  &__route {
+    @include t.positionFull(flex, center, space-between);
+    gap: 16px;
+  }
+
+  &__city {
+    @include t.sizeText(16px, 400, $color-blackish-green);
+  }
+
+  &__time {
+    @include t.sizeText(20px, 600);
+  }
+
+  &__decoration {
+    @include t.widthHeight(1px, 48px);
+    border: 1px solid $color-grey-light;
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    grid-auto-flow: column;
+    column-gap: 40px;
+    row-gap: 12px;
+    min-width: 248px;
+  }
+
+  &__detail {
+    @include t.positionFull(flex, center);
+    gap: 8px;
+  }
+
+  &__detailIcon {
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(32px, 32px);
+    border-radius: 4px;
+    background-color: transparentize($color-mint-green, 0.8);
+  }
+
+  &__par {
+    @include t.sizeText(12px, 600);
+  }
+
+  &__span {
+    @include t.sizeText(16px, 500);
+  }
+
+  &__routeItem {
+    @include t.positionFull(flex, center);
+    gap: 16px;
+  }
+
+  &__actions {
+    @include t.positionFull(flex, center);
+    gap: 16px;
+  }
+
+  &__download {
+    @include t.widthHeight(152px, 48px);
+    @include t.sizeText(14px, 500);
+    background-color: $color-mint-green;
+    border-radius: 4px;
+  }
+
+  &__more {
+    @include t.widthHeight(48px, 48px);
+    background-color: transparent;
+    border: 1px solid $color-mint-green;
+    border-radius: 4px;
+  }
+
+  &__arrow {
+    rotate: 270deg;
+  }
+}

@@ -41,6 +41,29 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/my", async (req, res) => {
+    try {
+        const {rows} = await pool.query(`
+            select 
+                b.id,
+                b.item_type as "itemType",
+                b.title as "title",
+                to_char(b.created_at, 'DD.MM.YYYY') as date,
+                b.total_price::float as amount,
+                b.status
+            from bookings b
+            where b.user_id = $1
+            order by b.id desc`,
+            [req.user.id]
+        );
+
+        res.json(rows);
+    } catch (err) {
+        console.error("Error fetching my bookings list:", err);
+        res.status(500).json({ error: "Server error" });
+    }
+})
+
 // Создание бронирования
 router.post("/", async (req, res) => {
     const { userId, cardId, itemType, itemId, title, totalPrice } = req.body;
