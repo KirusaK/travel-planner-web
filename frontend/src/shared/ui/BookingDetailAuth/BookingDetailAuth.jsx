@@ -4,6 +4,7 @@ import styles from "./BookingDetailAuth.module.scss";
 import { useEffect, useState } from "react";
 import { AddCardModal } from "../../../widgets/AddCardModal/AddCardModal.jsx";
 import { LoginForm } from "../../../widgets/LoginForm/LoginForm.jsx";
+import {getCard} from "../../api/cards.js";
 
 export const BookingDetailAuth = ({ onSelectCard }) => {
   const { user } = useAuth();
@@ -28,14 +29,11 @@ export const BookingDetailAuth = ({ onSelectCard }) => {
       return;
     }
 
-    fetch(`http://localhost:5000/api/cards?userId=${user.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
+    getCard(user.id)
+        .then((data) => {
           setCards(data);
-          handleCardSelect(data[0].id); // Автоматически выбираем первую карту и передаем наверх
-        }
-      })
+          if (data.length > 0) {handleCardSelect(data[0].id)}
+        })
       .catch((err) => console.error("Failed to fetch cards", err));
   }, [user?.id]);
 
