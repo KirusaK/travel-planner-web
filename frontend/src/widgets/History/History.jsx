@@ -10,8 +10,10 @@ export const History = () => {
     <section className={styles.history}>
       <h2 className={styles.history__title}>History</h2>
 
-        <FavouritesFilter activeTab={activeTab} setActiveTab={setActiveTab} />
-        <BookingList activeTab={activeTab}/>
+        <div className={styles.history__main}>
+            <FavouritesFilter activeTab={activeTab} setActiveTab={setActiveTab} />
+            <BookingList activeTab={activeTab}/>
+        </div>
     </section>
   );
 };

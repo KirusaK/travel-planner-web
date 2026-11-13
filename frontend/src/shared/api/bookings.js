@@ -7,3 +7,4 @@ export const getBookings = async (limit) => {
 
 export const createBookings = (body) => postJson("/api/bookings", body);
 export const getBookingById = (id) => getRequest(`/api/bookings/${id}`);
+export const getMyBookings = async () => getRequest(`/api/bookings/my`);
