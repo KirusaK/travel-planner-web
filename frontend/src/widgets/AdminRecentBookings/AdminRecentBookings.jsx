@@ -1,8 +1,7 @@
-import image from "../../shared/assets/image/Ellipse 1.jpg";
 import styles from "./AdminRecentBookings.module.scss";
 import { Link } from "react-router-dom";
 import {useFetchData} from "../../shared/hooks/useFetchData.js";
-import {getBookings} from "../../shared/api/users.js";
+import {getBookings} from "../../shared/api/bookings.js";
 
 export const AdminRecentBookings = () => {
   const {

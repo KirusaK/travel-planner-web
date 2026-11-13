@@ -15,7 +15,7 @@ export const Favourites = () => {
         <Header hasShadow={true} />
         <div className={styles.main}>
           <FavouritesFilter activeTab={activeTab} setActiveTab={setActiveTab} />
-          <FavouritesList activeTab={activeTab} />
+          <FavouritesList key={activeTab} activeTab={activeTab} />
         </div>
         <Subscribe />
         <Footer />

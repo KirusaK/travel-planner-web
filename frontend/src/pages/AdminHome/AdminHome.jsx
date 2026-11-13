@@ -5,7 +5,8 @@ import { AdminStatsGroup } from "../../widgets/AdminStatsGroup/AdminStatsGroup.j
 import { AdminTopRated } from "../../widgets/AdminTopRated/AdminTopRated.jsx";
 import {AdminRecentBookings} from "../../widgets/AdminRecentBookings/AdminRecentBookings.jsx";
 import { useFetchData } from "../../shared/hooks/useFetchData.js";
-import { getBookings, getUsers } from "../../shared/api/users.js";
+import { getUsers } from "../../shared/api/users.js";
+import {getBookings} from "../../shared/api/bookings.js";
 import { getHotels } from "../../shared/api/hotels.js";
 import { getFlights } from "../../shared/api/flights.js";
 import {useAuth} from "../../shared/context/AuthContext.jsx";

@@ -2,6 +2,7 @@ import styles from "./ButtonBuy.module.scss";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import {createBookings} from "../../api/bookings.js";
 
 export const ButtonBuy = ({itemType, itemId, title, price, selectedCardId}) => {
 const {user } = useAuth();
@@ -32,19 +33,7 @@ const handleBuy = async () => {
 
   try {
     setLoading(true);
-    const res = await fetch("http://localhost:5000/api/bookings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(bookingPayload),
-    })
-
-    if (!res.ok) {
-      throw new Error("Failed to create booking");
-    }
-
-    const newBooking = await res.json();
+    const newBooking = await createBookings(bookingPayload);
     navigate(`/booking-success/${newBooking.id}`)
   } catch (err) {
     console.error("Booking error:", err);

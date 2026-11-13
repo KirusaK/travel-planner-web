@@ -9,6 +9,7 @@ import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
 import { getFlightById } from "../../shared/api/flights.js";
 import { getHotelById } from "../../shared/api/hotels.js";
+import {getBookingById} from "../../shared/api/bookings.js";
 
 
 export const BookingSuccess = () => {
@@ -26,9 +27,7 @@ export const BookingSuccess = () => {
 
     const load = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/bookings/${id}`);
-        if (!res.ok) throw new Error("Booking not found");
-        const bookingData = await res.json();
+        const bookingData = await getBookingById(id);
         setBooking(bookingData);
 
         const item =

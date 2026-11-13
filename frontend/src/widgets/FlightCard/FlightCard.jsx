@@ -84,7 +84,7 @@ export const FlightCard = ({ item }) => {
         <hr className={styles.flightCard_hr} />
 
         <div className={styles.flightCard_footer}>
-          <FavouritesBtn item={item} />
+          <FavouritesBtn type="flight" itemId={item.id} />
           <button
             type="button"
             className={styles.flightCard_dealsBtn}

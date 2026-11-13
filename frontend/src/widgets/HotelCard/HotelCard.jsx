@@ -85,7 +85,7 @@ export const HotelCard = ({item}) => {
         <hr className={styles.hotelCard_hr} />
 
         <div className={styles.hotelCard_buttonRow}>
-          <FavouritesBtn item={item} />
+          <FavouritesBtn type="hotel" itemId={item.id} />
           <button
             type="button"
             className={styles.hotelCard_buttonRow__btn}
