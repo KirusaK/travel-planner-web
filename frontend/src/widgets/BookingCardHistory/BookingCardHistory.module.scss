@@ -19,6 +19,19 @@
     border: 1px solid $color-mint-green;
   }
 
+  &__logo {
+    @include t.widthHeight(70px, 70px);
+    border-radius: 8px;
+  }
+
+  &__logoTitel {
+    @include t.positionFull(flex, center, center);
+    @include t.widthHeight(70px, 70px);
+    @include t.sizeText(24px, 700, $color-green-text);
+    border-radius: 8px;
+    background-color: transparentize($color-mint-green, 0.7);
+  }
+
   &__route {
     @include t.positionFull(flex, center, space-between);
     gap: 16px;
@@ -68,11 +81,6 @@
   }
 
   &__routeItem {
-    @include t.positionFull(flex, center);
-    gap: 16px;
-  }
-
-  &__actions {
     @include t.positionFull(flex, center);
     gap: 16px;
   }
