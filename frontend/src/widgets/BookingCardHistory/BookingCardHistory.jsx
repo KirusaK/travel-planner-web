@@ -1,38 +1,47 @@
 import styles from "./BookingCardHistory.module.scss"
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
+import {formatDuration, formatTime} from "../../shared/lib/format.js";
 
 const config = {
-    flight: (item) => ({
-        points: [
-            {id: "from", top: "Newark(EWR)", bottom: "12:00 pm"},
-            {id: "to", top: "Newark(EWR)", bottom: "6:00 pm"},
-        ],
-        details: [
-            {
-                id: "date",
-                icon: "#icon-calendar",
-                label: "Date",
-                value: item.date,
-            },
-            {
-                id: "time",
-                icon: "#icon-timmer",
-                label: "Flight time",
-                value: "Newark(EWR)",
-            },
-            // Gate и Seat пока заглушки: в базе их нет
-            {
-                id: "gate",
-                icon: "#icon-bi_door-closed-fill",
-                label: "Gate",
-                value: "A12",
-            },
-            { id: "seat", icon: "#icon-down", label: "Seat", value: 128 },
-        ]
-    }),
+    flight: (item) => {
+      const trip = item.trips?.[0]
+
+        return {
+            logo: item.logo,
+            alt: item.airlineName,
+            points: [
+                {id: "from", top: trip?.departureCode ?? "-", bottom: trip ? formatTime(trip.departureTime) : "-"},
+                {id: "to", top: trip?.arrivalCode ?? "-", bottom: trip ? formatTime(trip.arrivalTime) : "-"},
+            ],
+            details: [
+                {
+                    id: "date",
+                    icon: "#icon-calendar",
+                    label: "Date",
+                    value: trip?.date ?? item.date,
+                },
+                {
+                    id: "time",
+                    icon: "#icon-timmer",
+                    label: "Flight time",
+                    value: trip ? formatDuration(trip.durationMinutes) : "-",
+                },
+                // Gate и Seat пока заглушки: в базе их нет
+                {
+                    id: "gate",
+                    icon: "#icon-bi_door-closed-fill",
+                    label: "Gate",
+                    value: "On arival",
+                },
+                { id: "seat", icon: "#icon-down", label: "Seat", value: "On arival" },
+            ]
+        }
+    },
 
 
     hotel: (item) => ({
+        logo: item.cover,
+        alt: item.hotelName,
         points: [
             { id: "in", top: "Check-In", bottom: "Thur, Dec 8" },
             { id: "out", top: "Check Out", bottom: "Fri, Dec 9" },
@@ -62,13 +71,17 @@ const config = {
 
 export const BookingCardHistory = ({item}) => {
     if (!item) return null;
-    const {points, details} = (config[item.itemType] ?? config.flight)(item);
+    const { logo, alt, points, details} = (config[item.itemType] ?? config.flight)(item);
 
     return (
         <div className={styles.bookingHistory}>
             <section className={styles.bookingHistory__main}>
                 <section className={styles.bookingHistory__logoBox}>
-                    <span>{item.title?.[0]}</span>
+                    {logo ? (
+                        <img src={logo} alt={alt} className={styles.bookingHistory__logo} />
+                    ) : (
+                        <span className={styles.bookingHistory__logoTitel}>{item.title?.[0]}</span>
+                    )}
                 </section>
 
                 <section className={styles.bookingHistory__route}>
@@ -107,12 +120,6 @@ export const BookingCardHistory = ({item}) => {
             <section className={styles.bookingHistory__actions}>
                 <button type="button" className={styles.bookingHistory__download}>
                     Download Ticket
-                </button>
-
-                <button type="button" className={styles.bookingHistory__more}>
-                    <svg width={16} height={16} className={styles.bookingHistory__arrow}>
-                        <use href={sprite + "#icon-chevron_down"} />
-                    </svg>
                 </button>
             </section>
         </div>

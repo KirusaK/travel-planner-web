@@ -46,14 +46,36 @@ router.get("/my", async (req, res) => {
         const {rows} = await pool.query(`
             select 
                 b.id,
+                b.item_id as "itemId",
                 b.item_type as "itemType",
                 b.title as "title",
                 to_char(b.created_at, 'DD.MM.YYYY') as date,
                 b.total_price::float as amount,
-                b.status
+                b.status,
+                f.airline_name as "airlineName",
+                f.logo,
+                case when f.id is not null then coalesce((
+                    select json_agg(json_build_object(
+                        'date', to_char(t.trip_date, 'DD-MM-YY'),
+                        'departureTime', to_char(t.departure_time, 'HH24:MI'),
+                        'arrivalTime', to_char(t.arrival_time, 'HH24:MI'),
+                        'durationMinutes', t.duration_minutes,
+                        'departureCode', t.departure_code,
+                        'arrivalCode', t.arrival_code
+                    ) order by t.sort_order)
+                    from flight_trips t
+                    where t.flight_id = f.id
+                ), '[]'::json) end as trips,
+                h.name as "hotelName",
+                h.address,
+                (select r.image_url from hotel_rooms r
+                    where r.hotel_id = h.id
+                    order by r.sort_order limit 1) as cover
             from bookings b
+            left join flights f on b.item_type = 'flight' and f.id::text = b.item_id
+            left join hotels h on b.item_type = 'hotel' and h.id::text = b.item_id
             where b.user_id = $1
-            order by b.id desc`,
+            order by b.id desc;`,
             [req.user.id]
         );
 
