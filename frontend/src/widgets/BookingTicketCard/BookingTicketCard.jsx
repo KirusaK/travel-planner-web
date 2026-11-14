@@ -42,9 +42,9 @@ export const BookingTicketCard = ({booking, user, itemData, isFlight}) => {
           id: "gate",
           icon: "#icon-bi_door-closed-fill",
           label: "Gate",
-          value: 12,
+          value: "On arrival",
         },
-        { id: "seat", icon: "#icon-down", label: "Seat", value: 128 },
+        { id: "seat", icon: "#icon-down", label: "Seat", value: "On arrival" },
       ]
     : [
         // Время заезда и выезда мы в базу не клали, поэтому заглушки
