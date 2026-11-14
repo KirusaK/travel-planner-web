@@ -1,6 +1,7 @@
 import styles from "./BookingCardHistory.module.scss"
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import {formatDuration, formatTime} from "../../shared/lib/format.js";
+import {useNavigate} from "react-router-dom";
 
 const config = {
     flight: (item) => {
@@ -71,6 +72,7 @@ const config = {
 
 export const BookingCardHistory = ({item}) => {
     if (!item) return null;
+    const navigate = useNavigate();
     const { logo, alt, points, details} = (config[item.itemType] ?? config.flight)(item);
 
     return (
@@ -118,7 +120,7 @@ export const BookingCardHistory = ({item}) => {
             </section>
 
             <section className={styles.bookingHistory__actions}>
-                <button type="button" className={styles.bookingHistory__download}>
+                <button type="button" className={styles.bookingHistory__download} onClick={() => navigate(`/booking-success/${item.id}?download=1`)}>
                     Download Ticket
                 </button>
             </section>
