@@ -12,13 +12,16 @@ const AdminBookingsTable = ({bookings, loading, error}) => {
   };
 
   const variants  = {
-    Full: "success",
-    Partial: "warning",
-    Confirmed: "success",
-    Pending: "warning",
-    Completed: "dark",
-    Cancelled: "danger",
+    full: "success",
+    partial: "warning",
+    confirmed: "success",
+    pending: "warning",
+    completed: "dark",
+    cancelled: "danger",
   };
+
+  const getVariant = (value) => variants[value?.toLowerCase()];
+  const capitalize = (value) => value ? value.charAt(0).toUpperCase() + value.slice(1) : "";
 
   return (
     <section className={styles.bookingsTable}>
@@ -66,11 +69,11 @@ const AdminBookingsTable = ({bookings, loading, error}) => {
               {item.date}
             </span>
 
-            <Badge variant={variants[item.payment]}>{item.payment}</Badge>
+            <Badge variant={getVariant(item.payment)}>{capitalize(item.payment)}</Badge>
 
             <span className={styles.bookingsTable__amount}>${item.amount}</span>
 
-            <Badge variant={variants[item.status]}>{item.status}</Badge>
+            <Badge variant={getVariant(item.status)}>{capitalize(item.status)}</Badge>
           </div>
         ))}
       </div>
