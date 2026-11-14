@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
         b.item_type as "itemType",
         b.title as "title",
         to_char(b.created_at, 'DD.MM.YYYY') as date,
-        'Full' AS payment,
+        initcap(b.payment_type) as payment,
         b.total_price::float as amount,
         b.status
       from bookings b
@@ -88,24 +88,27 @@ router.get("/my", async (req, res) => {
 
 // Создание бронирования
 router.post("/", async (req, res) => {
-    const { userId, cardId, itemType, itemId, title, totalPrice } = req.body;
+    const { userId, cardId, itemType, itemId, title, totalPrice, paymentType = "full" } = req.body;
+    const status = paymentType === "full" ? "confirmed" : "pending";
 
-    if (!userId || !cardId || !itemId || !totalPrice) {
+    if (!cardId || !itemId || !totalPrice) {
         return res.status(400).json({ error: "Missing required field" });
     }
 
+    if (!["full", "partial"].includes(paymentType)) return res.status(400).json({ error: "Invalid payment type" });
+
     try {
         const result = await pool.query(
-            `INSERT INTO bookings (user_id, card_id, item_type, item_id, title, total_price)
-       VALUES ($1, $2, $3, $4, $5, $6)
+            `INSERT INTO bookings (user_id, card_id, item_type, item_id, title, total_price, payment_type, status)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
        RETURNING *`,
-            [userId, cardId, itemType, itemId, title, totalPrice],
+            [req.user.id, cardId, itemType, itemId, title, totalPrice, paymentType, status],
         );
 
         res.status(201).json(result.rows[0]);
     } catch (err) {
         console.error("Error creating bookings:", err);
-        res.status(500).json({ message: "Failed to create booking" });
+        res.status(500).json({ error: "Failed to create booking" });
     }
 });
 

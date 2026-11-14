@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {createBookings} from "../../api/bookings.js";
 
-export const ButtonBuy = ({itemType, itemId, title, price, selectedCardId}) => {
+export const ButtonBuy = ({itemType, itemId, title, price, selectedCardId, paymentType}) => {
 const {user } = useAuth();
 const navigate = useNavigate();
 const [loading, setLoading] = useState(false);
@@ -23,12 +23,13 @@ const handleBuy = async () => {
   const rawPrice = typeof price === "string" ? parseFloat(price.replace("$", "")) : price;
 
   const bookingPayload = {
-    userId: user.id,
     cardId: selectedCardId,
     itemType: itemType, // 'flight' или 'hotel'
     itemId: String(itemId),
     title: title,
     totalPrice: rawPrice,
+    paymentType: paymentType,
+
   };
 
   try {
@@ -37,7 +38,7 @@ const handleBuy = async () => {
     navigate(`/booking-success/${newBooking.id}`)
   } catch (err) {
     console.error("Booking error:", err);
-    alert("Error processing booking. Please try again.");
+    alert(err.message || "Error processing booking. Please try again.");
   } finally {
     setLoading(false);
   }
