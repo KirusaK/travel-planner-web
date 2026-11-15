@@ -1,6 +1,6 @@
 import { Header } from "../../widgets/Header/Header.jsx";
 import { HotelDetailInfo } from "../../widgets/HotelDetailInfo/HotelDetailInfo.jsx";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { HotelDetailGallery } from "../../widgets/HotelDetailGallery/HotelDetailGallery.jsx";
 import { HotelDetailOverview } from "../../widgets/HotelDetailOverview/HotelDetailOverview.jsx";
 import { HotelAvailableRooms } from "../../widgets/HotelAvailableRooms/HotelAvailableRooms.jsx";
@@ -11,13 +11,25 @@ import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
 import styles from "./HotelDetailPage.module.scss";
 import { getHotelById } from "../../shared/api/hotels.js";
-import { getRatingStatus, getStars } from "../../shared/lib/format.js";
 import { useFetch } from "../../shared/hooks/useFetch.js";
+import {useRef} from "react";
 
 export const HotelDetailPage = () => {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const { data: hotel, loading, error } = useFetch(getHotelById, id);
+  const roomsSectionRef = useRef(null);
+
+    const handleBookDetailHotel = (roomId) => {
+        navigate(`/booking-detail-hotel/${id}?room=${roomId}`);
+    };
+
+    const handleScrollToRomms = () => {
+      roomsSectionRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+      });
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -28,39 +40,15 @@ export const HotelDetailPage = () => {
       <Header hasShadow={true} />
 
       <div className={styles.main}>
-        <HotelDetailInfo
-          id={hotel.id}
-          name={hotel.name}
-          stars={getStars(hotel.rating)}
-          price={hotel.pricePerNight}
-          location={hotel.address}
-          rating={hotel.rating}
-          ratingStatus={getRatingStatus(hotel.rating)}
-          countReviews={hotel.reviewsCount}
-        />
+        <HotelDetailInfo hotel={hotel} onBookClick={handleScrollToRomms}/>
         <HotelDetailGallery
           photos={hotel.rooms.map((room) => room.imageUrl).filter(Boolean)}
         />
-        <HotelDetailOverview
-          description={hotel.description}
-          rating={hotel.rating}
-          ratingStatus={getRatingStatus(hotel.rating)}
-          countReviews={hotel.reviewsCount}
-          features={hotel.features}
-        />
-        <HotelAvailableRooms rooms={hotel.rooms} />
-        <HotelDetailLocation
-          location={hotel.address}
-          googleMapsUrl={hotel.googleMapsUrl}
-          mapEmbedUrl={hotel.mapEmbedUrl}
-        />
-        <HotelDetailAmenities amenitiesList={hotel.amenities} />
-        <HotelDetailReviews
-          rating={hotel.rating}
-          ratingStatus={getRatingStatus(hotel.rating)}
-          countReviews={hotel.reviewsCount}
-          reviews={hotel.reviews}
-        />
+        <HotelDetailOverview hotel={hotel}/>
+        <HotelAvailableRooms hotel={hotel} sectionRef={roomsSectionRef} detailHotel={handleBookDetailHotel}/>
+        <HotelDetailLocation hotel={hotel}/>
+        <HotelDetailAmenities hotel={hotel}/>
+        <HotelDetailReviews hotel={hotel}/>
       </div>
 
       <Subscribe />

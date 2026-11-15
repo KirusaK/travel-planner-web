@@ -1,28 +1,11 @@
 import { RatingCard } from "../../shared/ui/RatingCard/RatingCard.jsx";
 import { FavouritesBtn } from "../../shared/ui/FavouritesBtn/FavouritesBtn.jsx";
-import { useNavigate } from "react-router-dom";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./HotelDetailInfo.module.scss";
-import { getStars } from "../../shared/lib/format.js";
+import {getRatingStatus, getStars} from "../../shared/lib/format.js";
 
-export const HotelDetailInfo = (props) => {
-  const {
-    id,
-    name,
-    price,
-    location,
-    rating,
-    ratingStatus,
-    countReviews,
-  } = props;
-
-  const navigate = useNavigate();
-
-  const stars = getStars(props.rating)
-
-  const handleBookDetailHotel = (hotelId) => {
-    navigate(`/booking-detail-hotel/${hotelId}`);
-  };
+export const HotelDetailInfo = ({hotel, onBookClick}) => {
+  const stars = getStars(hotel.rating);
 
   return (
     <section className={styles.hotelDetailInfo}>
@@ -30,7 +13,7 @@ export const HotelDetailInfo = (props) => {
         <div className={styles.hotelDetailInfo_header__block}>
           <div className={styles.hotelDetailInfo_header__blocks}>
             <h2 className={styles.hotelDetailInfo_header__blocks__title}>
-              {name}
+              {hotel.name}
             </h2>
             <div className={styles.hotelDetailInfo_header__blocks__stars}>
               {Array.from({ length: stars || 0 }).map((_, index) => (
@@ -42,7 +25,7 @@ export const HotelDetailInfo = (props) => {
             </div>
           </div>
           <h2 className={styles.hotelDetailInfo_header__price}>
-            ${price}
+            ${hotel.pricePerNight}
             <span>/night</span>
           </h2>
         </div>
@@ -52,17 +35,17 @@ export const HotelDetailInfo = (props) => {
             <use href={sprite + "#icon-Location"} />
           </svg>
           <span className={styles.hotelDetailInfo_location__span}>
-            {location}
+            {hotel.address}
           </span>
         </div>
 
         <div className={styles.hotelDetailInfo_footer}>
           <div className={styles.hotelDetailInfo_footer__rating}>
-            <RatingCard value={rating} />
+            <RatingCard value={hotel.rating} />
             <span>
-              <b>{ratingStatus}</b>
+              <b>{getRatingStatus(hotel.rating)}</b>
             </span>
-            <span>{countReviews} reviews</span>
+            <span>{hotel.reviewsCount} reviews</span>
           </div>
           <div className={styles.hotelDetailInfo_footer__btn}>
             <FavouritesBtn />
@@ -73,7 +56,7 @@ export const HotelDetailInfo = (props) => {
             </button>
             <button
               className={styles.hotelDetailInfo_footer__btn__btnBook}
-              onClick={() => handleBookDetailHotel(id)}
+              onClick={onBookClick}
             >
               Book now
             </button>
