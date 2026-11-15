@@ -2,12 +2,10 @@ import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./FlightDetailTicket.module.scss";
 import { formatDate, formatDuration, formatTime } from "../../shared/lib/format.js";
 
-export const FlightDetailTicket = (props) => {
-  const { airlineName, logo, trips = [] } = props;
-
+export const FlightDetailTicket = ({flight}) => {
   return (
     <>
-      {trips.map((trip) => (
+      {flight.trips.map((trip) => (
         <section key={trip.id} className={styles.flightDetailTicket}>
           <div className={styles.flightDetailTicket_header}>
             <h2 className={styles.flightDetailTicket_header__title}>
@@ -19,23 +17,23 @@ export const FlightDetailTicket = (props) => {
           </div>
           <div className={styles.flightDetailTicket_main}>
             <div className={styles.flightDetailTicket_main__place}>
-              {logo ? (
+              {flight.logo ? (
                 <div
                   className={styles.flightDetailTicket_main__logo}
                   style={{
-                    backgroundImage: `url(${logo})`,
+                    backgroundImage: `url(${flight.logo})`,
                   }}
                 ></div>
               ) : (
                 <div className={styles.flightDetailTicket_logoPlaceholder}>
-                  {airlineName[0]}
+                  {flight.airlineName[0]}
                 </div>
               )}
               <div className={styles.flightDetailTicket_main__place__info}>
                 <h2
                   className={styles.flightDetailTicket_main__place__info__title}
                 >
-                  {airlineName}
+                  {flight.airlineName}
                 </h2>
                 <p
                   className={styles.flightDetailTicket_main__place__info__text}

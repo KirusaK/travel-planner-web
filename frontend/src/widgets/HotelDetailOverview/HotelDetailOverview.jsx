@@ -1,32 +1,30 @@
 import styles from "./HotelDetailOverview.module.scss";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 
-export const HotelDetailOverview = (props) => {
-  const { description, rating, ratingStatus, countReviews, features } = props;
-
+export const HotelDetailOverview = ({hotel}) => {
   return (
     <section className={styles.hotelDetailOverview}>
       <div className={styles.hotelDetailOverview_info}>
         <h2 className={styles.hotelDetailOverview_info__title}>Overview</h2>
-        <p className={styles.hotelDetailOverview_info__text}>{description}</p>
+        <p className={styles.hotelDetailOverview_info__text}>{hotel.description}</p>
       </div>
 
       <div className={styles.hotelDetailOverview_highlights}>
         <div className={styles.hotelDetailOverview_highlights__block}>
           <h2 className={styles.hotelDetailOverview_highlights__fix__title}>
-            {rating}
+            {hotel.rating}
           </h2>
           <div className={styles.hotelDetailOverview_highlights__fix__info}>
             <p className={styles.hotelDetailOverview_highlights__fix__status}>
-              <b>{ratingStatus}</b>
+              <b>{hotel.ratingStatus}</b>
             </p>
             <p className={styles.hotelDetailOverview_highlights__fix__reviews}>
-              {countReviews} reviews
+              {hotel.countReviews} reviews
             </p>
           </div>
         </div>
 
-        {features.map((item, index) => (
+        {hotel.features.map((item, index) => (
           <div
             key={index}
             className={styles.hotelDetailOverview_highlights__other}

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import { Header } from "../../widgets/Header/Header.jsx";
 import { BookingDetailReservations } from "../../widgets/BookingDetailHotel/BookingDetailReservations.jsx";
 import { BookingDetailHotelTotal } from "../../widgets/BookingDetailHotelTotal/BookingDetailHotelTotal.jsx";
@@ -14,13 +14,17 @@ import { useFetch } from "../../shared/hooks/useFetch.js";
 
 export const BookingDetailHotel = () => {
   const { id } = useParams();
+  const [params] = useSearchParams();
+  const roomId = params.get("room");
   const [selectedCardId, setSelectedCardId] = useState(null);
-
   const { data: hotel, loading, error } = useFetch(getHotelById, id);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
   if (!hotel) return null;
+
+    const room = hotel.rooms.find((r) => String(r.id) === roomId) ?? hotel.rooms[0];
+    const bookedHotel = {...hotel, pricePerNight: room.price, rooms: [room]};
 
   return (
     <section>
@@ -28,12 +32,12 @@ export const BookingDetailHotel = () => {
 
       <div className={styles.main}>
         <div>
-          <BookingDetailReservations hotel={hotel} />
-          <BookingDetailHotelPayment hotel={hotel} />
+          <BookingDetailReservations hotel={bookedHotel} />
+          <BookingDetailHotelPayment hotel={bookedHotel} />
           <BookingDetailAuth onSelectCard={setSelectedCardId} />
         </div>
         <div className={styles.main_block}>
-          <BookingDetailHotelTotal hotel={hotel} />
+          <BookingDetailHotelTotal hotel={bookedHotel} />
           <ButtonBuy
             itemType="hotel"
             itemId={hotel.id}

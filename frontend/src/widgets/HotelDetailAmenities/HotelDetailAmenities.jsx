@@ -2,8 +2,8 @@ import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./HotelDetailAmenities.module.scss";
 import { useState } from "react";
 
-export const HotelDetailAmenities = (props) => {
-  const { amenitiesList } = props;
+export const HotelDetailAmenities = ({hotel}) => {
+  const amenitiesList = hotel.amenities;
 
   const limited = 9;
   const [isExpanded, setIsExpanded] = useState(false);

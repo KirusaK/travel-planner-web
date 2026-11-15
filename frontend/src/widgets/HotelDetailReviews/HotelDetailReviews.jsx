@@ -2,9 +2,7 @@ import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import logo from "../../shared/assets/image/Ellipse 1.jpg";
 import styles from "./HotelDetailReviews.module.scss";
 
-export const HotelDetailReviews = (props) => {
-  const { rating, ratingStatus, countReviews, reviews } = props;
-
+export const HotelDetailReviews = ({hotel}) => {
   return (
     <section className={styles.hotelDetailReviews}>
       <div className={styles.hotelDetailReviews_block}>
@@ -19,7 +17,7 @@ export const HotelDetailReviews = (props) => {
 
         <div className={styles.hotelDetailReviews_block__assessment}>
           <h1 className={styles.hotelDetailReviews_block__assessment__title}>
-            {rating}
+            {hotel.rating}
           </h1>
           <div className={styles.hotelDetailReviews_block__assessment__block}>
             <h2
@@ -27,12 +25,12 @@ export const HotelDetailReviews = (props) => {
                 styles.hotelDetailReviews_block__assessment__block__title
               }
             >
-              {ratingStatus}
+              {hotel.ratingStatus}
             </h2>
             <p
               className={styles.hotelDetailReviews_block__assessment__block__p}
             >
-              {countReviews} verified reviews
+              {hotel.countReviews} verified reviews
             </p>
           </div>
         </div>
@@ -40,7 +38,7 @@ export const HotelDetailReviews = (props) => {
         <hr className={styles.hotelDetailReviews_block__hr} />
 
         <div className={styles.hotelDetailReviews_block__info}>
-          {reviews.map((item) => (
+          {hotel.reviews.map((item) => (
             <div
               key={item.id}
               className={styles.hotelDetailReviews_block__info__full}

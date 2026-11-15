@@ -9,7 +9,7 @@ import photo8 from "../../shared/assets/image/photo8.svg";
 import photo9 from "../../shared/assets/image/photo9.svg";
 import styles from "./FlightDetailFeatures.module.scss";
 
-export const FlightDetailFeatures = () => {
+export const FlightDetailFeatures = ({flight}) => {
   const image = [
     photo1,
     photo2,
@@ -29,18 +29,7 @@ export const FlightDetailFeatures = () => {
           Basic Economy Features
         </h2>
         <div className={styles.flightDetailFeatures_header__type}>
-          <div className={styles.flightDetailFeatures_header__checkbox}>
-            <input type={"checkbox"} id="economy" />
-            <label htmlFor={"economy"}>Economy</label>
-          </div>
-          <div className={styles.flightDetailFeatures_header__checkbox}>
-            <input type={"checkbox"} id="firstClass" />
-            <label htmlFor={"firstClass"}>First Class</label>
-          </div>
-          <div className={styles.flightDetailFeatures_header__checkbox}>
-            <input type={"checkbox"} id="businesClass" />
-            <label htmlFor={"businesClass"}>Busines Class</label>
-          </div>
+          {flight.flightClass}
         </div>
       </div>
       <div className={styles.flightDetailFeatures_photo}>

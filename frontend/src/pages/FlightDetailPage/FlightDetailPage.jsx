@@ -6,10 +6,9 @@ import { FlightDetailTicket } from "../../widgets/FlightDetailTicket/FlightDetai
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
 import { useParams } from "react-router-dom";
-import styles from "./FlightDetailPage.module.scss";
 import { getFlightById } from "../../shared/api/flights.js";
-import { getRatingStatus } from "../../shared/lib/format.js";
 import { useFetch } from "../../shared/hooks/useFetch.js";
+import styles from "./FlightDetailPage.module.scss";
 
 export const FlightDetailPage = () => {
   const { id } = useParams();
@@ -25,23 +24,11 @@ export const FlightDetailPage = () => {
       <div>
         <Header hasShadow={true} />
         <div className={styles.main}>
-          <FlightDetailInfo
-            id={flight.id}
-            airlineName={flight.airlineName}
-            price={flight.price}
-            ratingStatus={getRatingStatus(flight.rating)}
-            reviewsCount={flight.reviewsCount}
-            airport={flight.airport}
-            rating={flight.rating}
-          />
+          <FlightDetailInfo flight={flight}/>
           <div className={styles.block_img}></div>
-          <FlightDetailFeatures />
-          <FlightPolicies airlineName={flight.airlineName} />
-          <FlightDetailTicket
-            airlineName={flight.airlineName}
-            logo={flight.logo}
-            trips={flight.trips}
-          />
+          <FlightDetailFeatures flight={flight} />
+          <FlightPolicies flight={flight} />
+          <FlightDetailTicket flight={flight}/>
         </div>
         <Subscribe />
         <Footer />
