@@ -2,14 +2,7 @@
 @use "../../../shared/styles/table" as t;
 
 .bookingDetailModal {
-  @include t.positionFull(flex, center, center);
-  @include t.widthHeight(100%, 100%);
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(17, 34, 17, 0.1);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
+  @include t.modalStyles;
 
   &_content {
     background-color: $color-base;

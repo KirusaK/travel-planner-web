@@ -208,3 +208,25 @@
   height: 90px;
   transition: transform 0.3s ease;
 }
+
+@mixin modalStyles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(17, 34, 17, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+@mixin textarea {
+  width: 100%;
+  height: 140px;
+  border-radius: 12px;
+  padding: 13px;
+  outline: none;
+}

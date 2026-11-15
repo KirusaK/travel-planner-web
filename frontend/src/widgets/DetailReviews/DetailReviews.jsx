@@ -1,8 +1,9 @@
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import logo from "../../shared/assets/image/Ellipse 1.jpg";
-import styles from "./HotelDetailReviews.module.scss";
+import styles from "./DetailReviews.module.scss";
+import {getRatingStatus} from "../../shared/lib/format.js";
 
-export const HotelDetailReviews = ({hotel}) => {
+export const DetailReviews = ({data, isOpen}) => {
   return (
     <section className={styles.hotelDetailReviews}>
       <div className={styles.hotelDetailReviews_block}>
@@ -10,14 +11,14 @@ export const HotelDetailReviews = ({hotel}) => {
           <h2 className={styles.hotelDetailReviews_block__header__title}>
             Reviews
           </h2>
-          <button className={styles.hotelDetailReviews_block__header__btn}>
+          <button className={styles.hotelDetailReviews_block__header__btn} onClick={isOpen}>
             Give your review
           </button>
         </div>
 
         <div className={styles.hotelDetailReviews_block__assessment}>
           <h1 className={styles.hotelDetailReviews_block__assessment__title}>
-            {hotel.rating}
+            {data.rating}
           </h1>
           <div className={styles.hotelDetailReviews_block__assessment__block}>
             <h2
@@ -25,12 +26,12 @@ export const HotelDetailReviews = ({hotel}) => {
                 styles.hotelDetailReviews_block__assessment__block__title
               }
             >
-              {hotel.ratingStatus}
+              {getRatingStatus(data.ratingStatus)}
             </h2>
             <p
               className={styles.hotelDetailReviews_block__assessment__block__p}
             >
-              {hotel.countReviews} verified reviews
+              {data.reviewsCount} verified reviews
             </p>
           </div>
         </div>
@@ -38,7 +39,7 @@ export const HotelDetailReviews = ({hotel}) => {
         <hr className={styles.hotelDetailReviews_block__hr} />
 
         <div className={styles.hotelDetailReviews_block__info}>
-          {hotel.reviews.map((item) => (
+          {data.reviews?.map((item) => (
             <div
               key={item.id}
               className={styles.hotelDetailReviews_block__info__full}

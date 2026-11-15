@@ -37,7 +37,7 @@ export const HotelDetailLocation = ({hotel}) => {
             <use href={sprite + "#icon-Location"} />
           </svg>
           <p className={styles.hotelDetailLocation_block__footer__par}>
-            {hotel.location}
+            {hotel.address}
           </p>
         </div>
 
