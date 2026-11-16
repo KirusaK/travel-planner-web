@@ -136,8 +136,8 @@ router.get("/:id", async (req, res) => {
              avatar_url as "avatarUrl" ,
              rating::float as rating,
              text
-      from hotel_reviews 
-      where hotel_id = $1
+      from reviews 
+      where item_type = 'hotel' and item_id = $1
       ORDER BY created_at DESC, id DESC`,
             [id],
         );
@@ -300,6 +300,8 @@ router.delete("/:id", async (req, res) => {
         if (result.rows.length === 0) {
             return res.status(404).json({error: "Hotel not found"});
         }
+
+        await pool.query("delete from reviews where item_type = 'hotel' and item_id = $1", [id]);
 
         res.json({message: "Hotel deleted successfully", id: result.rows[0].id});
     } catch (err) {

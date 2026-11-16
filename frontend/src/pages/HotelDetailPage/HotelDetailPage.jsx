@@ -18,7 +18,12 @@ import { ModalReviews } from "../../shared/ui/ModalReviews/ModalReviews.jsx";
 export const HotelDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data: hotel, loading, error } = useFetch(getHotelById, id);
+  const {
+    data: hotel,
+    setData: setHotel,
+    loading,
+    error,
+  } = useFetch(getHotelById, id);
   const roomsSectionRef = useRef(null);
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -39,6 +44,14 @@ export const HotelDetailPage = () => {
 
   const handleModalClose = () => {
     setModalOpen(false);
+  };
+
+  const handleReviewAdded = ({ review, stats }) => {
+    setHotel((prev) => ({
+      ...prev,
+      ...stats,
+      reviews: [review, ...(prev.reviews ?? [])],
+    }));
   };
 
   if (loading) return <p>Loading...</p>;
@@ -72,6 +85,9 @@ export const HotelDetailPage = () => {
         modal={isModalOpen}
         onClose={handleModalClose}
         title={hotel.name}
+        itemType="hotel"
+        itemId={hotel.id}
+        onSubmitted={handleReviewAdded}
       />
     </>
   );

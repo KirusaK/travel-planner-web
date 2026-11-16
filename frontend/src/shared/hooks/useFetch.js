@@ -15,5 +15,5 @@ export const useFetch = (fetchFn, id) => {
       .finally(() => setLoading(false));
   }, [id]);
 
-  return {data, error, loading};
-}
+  return { data, error, loading, setData };
+};

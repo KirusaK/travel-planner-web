@@ -11,6 +11,7 @@ import hotelsRoutes from "./routes/hotels.routes.js";
 import adminsRoutes from "./routes/admins.routes.js";
 import {verifyToken} from "./middleware/auth.middleware.js";
 import favouritesRoutes from "./routes/favourites.routes.js";
+import reviewsRoutes from "./routes/reviews.routes.js";
 
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.use("/api/bookings", verifyToken, bookingsRoutes);
 app.use("/api/favorites", verifyToken, favouritesRoutes);
 app.use("/api/flights", verifyToken, flightsRoutes);
 app.use("/api/hotels", verifyToken, hotelsRoutes);
+app.use("/api/reviews", verifyToken, reviewsRoutes);
 
 app.get("/", (req, res) => {
   res.send("API сервера работает!");

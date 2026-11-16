@@ -15,7 +15,12 @@ import { ModalReviews } from "../../shared/ui/ModalReviews/ModalReviews.jsx";
 
 export const FlightDetailPage = () => {
   const { id } = useParams();
-  const { data: flight, loading, error } = useFetch(getFlightById, id);
+  const {
+    data: flight,
+    setData: setFlight,
+    loading,
+    error,
+  } = useFetch(getFlightById, id);
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleModalOpen = () => {
@@ -24,6 +29,14 @@ export const FlightDetailPage = () => {
 
   const handleModalClose = () => {
     setModalOpen(false);
+  };
+
+  const handleReviewAdded = ({ review, stats }) => {
+    setFlight((prev) => ({
+      ...prev,
+      ...stats,
+      reviews: [review, ...(prev.reviews ?? [])],
+    }));
   };
 
   if (loading) return <p>Loading...</p>;
@@ -49,6 +62,9 @@ export const FlightDetailPage = () => {
           modal={isModalOpen}
           onClose={handleModalClose}
           title={flight.airlineName}
+          itemType="flight"
+          itemId={flight.id}
+          onSubmitted={handleReviewAdded}
         />
       </div>
     </div>
