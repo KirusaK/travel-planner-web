@@ -19,9 +19,57 @@
     rotate: 180deg;
   }
 
-  &_input {
-    @include t.widthHeight(100%, 2px);
+  &_slider {
+    position: relative;
+    height: 24px;
     margin-bottom: 8px;
+  }
+
+  &_track {
+    position: absolute;
+    top: 11px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: $color-blackish-green;
+  }
+
+  &_thumb {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 24px;
+    margin: 0;
+    background: transparent;
+    pointer-events: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+    &::-webkit-slider-runnable-track {
+      background: transparent;
+    }
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      pointer-events: auto;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: $color-mint-green;
+      border: none;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      pointer-events: auto;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: $color-mint-green;
+      border: none;
+      cursor: pointer;
+    }
   }
 
   &_range {

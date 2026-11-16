@@ -1,13 +1,20 @@
 import sprite from "../../../shared/assets/icons/symbol-defs.svg";
 import styles from "./Trips.module.scss";
 
-export const Trips = () => {
-  const tripsData = [
-    { id: "roundtrip", name: "Round Trip" },
-    { id: "onway", name: "On Way" },
-    { id: "multiCity", name: "Multi-City" },
-    { id: "mydatesareflexible", name: "My Dates Are Flexible" },
-  ];
+const tripsData = [
+  { id: "roundtrip", name: "Round Trip" },
+  { id: "onway", name: "On Way" },
+  { id: "multiCity", name: "Multi-City" },
+  { id: "mydatesareflexible", name: "My Dates Are Flexible" },
+];
+
+export const Trips = ({ value = [], onChange }) => {
+  const toggle = (id) => {
+    const next = value.includes(id)
+      ? value.filter((item) => item !== id)
+      : [...value, id];
+    onChange?.(next);
+  };
 
   return (
     <div>
@@ -27,6 +34,8 @@ export const Trips = () => {
                 <input
                   type="checkbox"
                   id={item.id}
+                  checked={value.includes(item.id)} // ЗМІНА
+                  onChange={() => toggle(item.id)} // ЗМІНА
                   className={styles.Trips_checkbox}
                 />
                 <span className={styles.Trips_checkbox_span}>{item.name}</span>

@@ -1,7 +1,24 @@
+import { useState } from "react";
 import sprite from "../../../shared/assets/icons/symbol-defs.svg";
 import styles from "./DepartureTime.module.scss";
 
-export const DepartureTime = () => {
+const MIN = 1;
+const MAX = 1436;
+
+const formatTime = (minutes) => {
+  const h = Math.floor(minutes / 60);
+  const m = String(minutes % 60).padStart(2, "0");
+  return `${h % 12 || 12}:${m}${h >= 12 ? "Pm" : "Am"}`;
+};
+
+export const DepartureTime = ({ value, onChange }) => {
+  const [inner, setInner] = useState([MIN, MAX]);
+  const [from, to] = value ?? inner;
+
+  const update = (next) => {
+    setInner(next);
+    onChange?.(next);
+  };
   return (
     <div>
       <section>
@@ -13,15 +30,31 @@ export const DepartureTime = () => {
             </svg>
           </button>
         </div>
-        <input
-          type="range"
-          min="0"
-          max="24"
-          className={styles.DepartureTime_input}
-        />
+
+        <div className={styles.DepartureTime_slider}>
+          <div className={styles.DepartureTime_track} />
+          <input
+            type="range"
+            min={MIN}
+            max={MAX}
+            value={from}
+            onChange={(e) => update([Math.min(Number(e.target.value), to), to])}
+            className={styles.DepartureTime_thumb}
+          />
+          <input
+            type="range"
+            min={MIN}
+            max={MAX}
+            value={to}
+            onChange={(e) =>
+              update([from, Math.max(Number(e.target.value), from)])
+            }
+            className={styles.DepartureTime_thumb}
+          />
+        </div>
         <div className={styles.DepartureTime_range}>
-          <p className={styles.DepartureTime_time}>12:01Am</p>
-          <p className={styles.DepartureTime_time}>11:56Pm</p>
+          <p className={styles.DepartureTime_time}>{formatTime(from)}</p>
+          <p className={styles.DepartureTime_time}>{formatTime(to)}</p>
         </div>
 
         <hr className={styles.DepartureTime_hr} />

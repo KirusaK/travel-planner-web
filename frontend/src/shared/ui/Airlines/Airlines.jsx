@@ -1,13 +1,26 @@
+import { useState } from "react";
 import sprite from "../../../shared/assets/icons/symbol-defs.svg";
 import styles from "./Airlines.module.scss";
 
-export const Airlines = () => {
-  const airlinesData = [
-    { id: "emiratd", name: "Emirated" },
-    { id: "flydubai", name: "Fly Dubai" },
-    { id: "qatar", name: "Qatar" },
-    { id: "etihad", name: "Etihad" },
-  ];
+const AIRLINES_LIST = [
+  "Emirates",
+  "Fly Dubai",
+  "Qatar",
+  "Etihad",
+  "LOT Polish Airlines",
+];
+
+export const Airlines = ({ options = AIRLINES_LIST, value, onChange }) => {
+  const [inner, setInner] = useState(value ?? []);
+  const current = value ?? inner;
+
+  const toggle = (name) => {
+    const newSelection = current.includes(name)
+      ? current.filter((item) => item !== name)
+      : [...current, name];
+    setInner(newSelection);
+    onChange?.(newSelection);
+  };
 
   return (
     <div>
@@ -21,15 +34,16 @@ export const Airlines = () => {
           </button>
         </div>
         <div className={styles.Airlines_buttons}>
-          {airlinesData.map((item) => (
-            <label key={item.id} className={styles.Airlines_label}>
+          {options.map((name) => (
+            <label key={name} className={styles.Airlines_label}>
               <div className={styles.Airlines_checkbox_block}>
                 <input
                   type="checkbox"
-                  id={item.id}
+                  checked={current.includes(name)}
+                  onChange={() => toggle(name)}
                   className={styles.Airlines_checkbox}
                 />
-                <span className={styles.Airlines_span}>{item.name}</span>
+                <span className={styles.Airlines_span}>{name}</span>
               </div>
             </label>
           ))}

@@ -25,8 +25,41 @@
   }
 
   &_input {
-    @include t.widthHeight(100%, 2px);
-    margin-bottom: 8px;
+    @include t.widthHeight(100%, 24px);
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0 0 8px;
+    background: transparent;
+    cursor: pointer;
+
+    &::-webkit-slider-runnable-track {
+      height: 2px;
+      background: $color-blackish-green;
+    }
+
+    &::-moz-range-track {
+      height: 2px;
+      background: $color-blackish-green;
+    }
+
+    &::webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      margin-top: -11px;
+      border-radius: 50%;
+      background: $color-blackish-green;
+      border: none;
+    }
+
+    &::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: $color-mint-green;
+      border: none;
+    }
   }
 
   &_block_range {
