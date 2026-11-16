@@ -1,19 +1,52 @@
 import sprite from "../../../shared/assets/icons/symbol-defs.svg";
 import styles from "./ModalReviews.module.scss";
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext.jsx";
+import { addReview } from "../../api/reviews.js";
 
 const stars = [1, 2, 3, 4, 5];
 
-export const ModalReviews = ({ modal, onClose, title }) => {
+export const ModalReviews = ({
+  modal,
+  onClose,
+  title,
+  itemType,
+  itemId,
+  onSubmitted,
+}) => {
+  const { user } = useAuth();
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
+  const [text, setText] = useState("");
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   if (!modal) return null;
 
   const handleClose = () => {
     setRating(0);
     setHoverRating(0);
+    setText("");
+    setError("");
     onClose();
+  };
+
+  const handleSubmit = async () => {
+    if (!user) return setError("Please log in to leave a review");
+    if (!rating) return setError("Please choose a rating");
+    if (!text.trim()) return setError("Please write your review");
+
+    try {
+      setSubmitting(true);
+      setError("");
+      const result = await addReview({ itemType, itemId, rating, text });
+      onSubmitted?.(result);
+      handleClose();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const shownRating = hoverRating || rating;
@@ -35,6 +68,7 @@ export const ModalReviews = ({ modal, onClose, title }) => {
           <button
             onClick={handleClose}
             className={styles.modalReviews_header__btnClose}
+            type="button"
           >
             <svg width={18} height={18}>
               <use href={sprite + "#icon-cross"} />
@@ -81,26 +115,39 @@ export const ModalReviews = ({ modal, onClose, title }) => {
         </section>
 
         <section className={styles.modalReviews_review}>
-          <label form="reviews" className={styles.modalReviews_review__label}>
+          <label
+            htmlFor="reviews"
+            className={styles.modalReviews_review__label}
+          >
             Your review
           </label>
           <textarea
             id="reviews"
             name="reviews"
+            value={text}
             placeholder="Tell other what you liked about your stay"
             className={styles.modalReviews_review__textarea}
+            maxLength={1000}
+            onChange={(e) => setText(e.target.value)}
           ></textarea>
         </section>
+
+        {error && <p className={styles.modalReviews_error}>{error}</p>}
 
         <section className={styles.modalReviews_btn}>
           <button
             className={styles.modalReviews_btn__cancel}
             onClick={handleClose}
+            type="button"
           >
             Cancel
           </button>
-          <button className={styles.modalReviews_btn__review}>
-            Submit review
+          <button
+            className={styles.modalReviews_btn__review}
+            onClick={handleSubmit}
+            disabled={submitting}
+          >
+            {submitting ? "Sending..." : "Submit review"}
           </button>
         </section>
       </div>

@@ -121,7 +121,19 @@ router.get("/:id", async (req, res) => {
             [id]
         );
 
-        res.json({...flight.rows[0], trips: trips.rows});
+        const reviews = await pool.query(`
+      select id,
+             author_name as "authorName",
+             avatar_url as "avatarUrl" ,
+             rating::float as rating,
+             text
+      from reviews 
+      where item_type = 'flight' and item_id = $1
+      ORDER BY created_at DESC, id DESC`,
+            [id],
+        );
+
+        res.json({...flight.rows[0], trips: trips.rows, reviews: reviews.rows});
     } catch (err) {
         console.error("Error fetching  flights:", err);
         res.status(500).json({ error: "Server error" });
@@ -260,6 +272,8 @@ router.delete("/:id", async (req, res) => {
         if (result.rowCount === 0) {
             return res.status(404).json({ error: "Flight not found" });
         }
+
+        await pool.query("delete from reviews where item_type = 'flight' and item_id = $1", [id]);
 
         res.json({ message: "Flight deleted successfully", id });
     } catch (err) {

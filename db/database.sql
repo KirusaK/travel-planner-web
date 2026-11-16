@@ -40,6 +40,7 @@ CREATE TABLE favorites (
 
 ALTER TABLE favorites DROP COLUMN id;
 ALTER TABLE favorites ADD PRIMARY KEY (user_id, item_type, item_id);
+SELECT conname, contype FROM pg_constraint WHERE conrelid = 'favorites'::regclass;
 
 CREATE TABLE bookings (
     id SERIAL PRIMARY KEY,
@@ -135,6 +136,10 @@ CREATE TABLE bookings (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 
+ALTER TABLE bookings
+  ADD COLUMN payment_type VARCHAR(10) NOT NULL DEFAULT 'full'
+    CHECK (payment_type IN ('full', 'partial'));
+
 CREATE TABLE flights (
 	id SERIAL PRIMARY KEY,
 	airline_name VARCHAR(100) NOT NULL,
@@ -207,16 +212,20 @@ create table hotel_amenities (
 	primary key (hotel_id, amenities_id)
 );
 
-create table hotel_reviews (
+create table reviews (
 	id serial primary key,
-	hotel_id int not null references hotels(id) on delete cascade,
-	user_id int not null references users(id) on delete set null,
-	authot_name varchar(100) not null,
+	item_id int not null,
+	user_id int references users(id) on delete set null,
+	item_type varchar(20) not null check(item_type in ('flight', 'hotel')),
+	author_name varchar(100) not null,
 	avatar_url text,
 	rating numeric(2, 1) not null check(rating between 0 and 5),
 	text text not null,
-	created_at  TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+	created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE INDEX idx_reviews_item ON reviews (item_type, item_id);
+CREATE UNIQUE INDEX uniq_review_per_user ON reviews (item_type, item_id, user_id);
 
 CREATE INDEX idx_hotel_rooms_hotel_id    ON hotel_rooms(hotel_id);
 CREATE INDEX idx_hotel_reviews_hotel_id  ON hotel_reviews(hotel_id); 

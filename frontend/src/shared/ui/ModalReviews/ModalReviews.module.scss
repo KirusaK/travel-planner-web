@@ -107,4 +107,9 @@
       background-color: $color-mint-green;
     }
   }
+
+  &_error {
+    margin-bottom: 16px;
+    @include t.sizeText(14px, 500, $color-red-text);
+  }
 }
