@@ -2,7 +2,13 @@ import { useState } from "react";
 import sprite from "../../../shared/assets/icons/symbol-defs.svg";
 import styles from "./Airlines.module.scss";
 
-const AIRLINES_LIST = ["Emirated", "Fly Dubai", "Qatar", "Etihad"];
+const AIRLINES_LIST = [
+  "Emirates",
+  "Fly Dubai",
+  "Qatar",
+  "Etihad",
+  "LOT Polish Airlines",
+];
 
 export const Airlines = ({ options = AIRLINES_LIST, value, onChange }) => {
   const [inner, setInner] = useState(value ?? []);

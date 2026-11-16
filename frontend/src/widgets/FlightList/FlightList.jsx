@@ -1,38 +1,33 @@
-  import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FlightCard } from "../FlightCard/FlightCard.jsx";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./FlightList.module.scss";
-import {getFlights} from "../../shared/api/flights.js";
+import { getFlights } from "../../shared/api/flights.js";
 import { useFetchData } from "../../shared/hooks/useFetchData.js";
+import { filterFlights } from "../../shared/lib/flightFilters.js";
 
-export const FlightList = () => {
+export const FlightList = ({ filters }) => {
   const { from, to, flightClass } = useSelector(
     (state) => state.flight.searchParams,
   );
 
-  const {data: flights, loading, error} = useFetchData(getFlights);
-  const [filteredTickets, setFilteredTickets] = useState([]);
-
-  useEffect(() => {
-    if (!from && !to) {
-      setFilteredTickets(flights);
-      return;
-    }
-
-    const result = flights.filter((ticket) => {
-      return (
-        ticket.from.toLowerCase() === from.toLowerCase() &&
-        ticket.to.toLowerCase() === to.toLowerCase() &&
-        ticket.flightClass.toLowerCase() === flightClass.toLowerCase()
-      );
-    });
-
-    setFilteredTickets(result);
-  }, [from, to, flightClass, flights]);
+  const { data: flights, loading, error } = useFetchData(getFlights);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
+
+  let result = flights;
+
+  if (from || to) {
+    result = result.filter(
+      (ticket) =>
+        ticket.from.toLowerCase() === from.toLowerCase() &&
+        ticket.to.toLowerCase() === to.toLowerCase() &&
+        ticket.flightClass.toLowerCase() === flightClass.toLowerCase(),
+    );
+  }
+
+  const filteredTickets = filterFlights(result, filters);
 
   return (
     <div>
@@ -60,4 +55,4 @@ export const FlightList = () => {
       <button className={styles.flightCard_last__btn}>Show more results</button>
     </div>
   );
-}
+};
