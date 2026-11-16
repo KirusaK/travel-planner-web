@@ -3,7 +3,7 @@ import { AdminNav } from "../../widgets/AdminNav/AdminNav.jsx";
 import { AdminHeader } from "../../widgets/AdminHeader/AdminHeader.jsx";
 import AdminBookingsTable from "../../widgets/AdminBookingsTable/AdminBookingsTable.jsx";
 import { useFetchData } from "../../shared/hooks/useFetchData.js";
-import { getBookings } from "../../shared/api/users.js";
+import { getBookings } from "../../shared/api/bookings.js";
 import {useMemo, useState} from "react";
 
 const filters = [

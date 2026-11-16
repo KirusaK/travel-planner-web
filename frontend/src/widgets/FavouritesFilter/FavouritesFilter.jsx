@@ -1,6 +1,9 @@
 import styles from "./FavouritesFilter.module.scss";
+import {useLocation} from "react-router-dom";
 
 export const FavouritesFilter = ({activeTab, setActiveTab}) => {
+  const location = useLocation();
+  const isFavouritesPage = location.pathname === ("/Favourites")
 
 
   const setFlights = () => {
@@ -13,7 +16,9 @@ export const FavouritesFilter = ({activeTab, setActiveTab}) => {
 
   return (
     <section className={styles.favourites}>
-      <h1 className={styles.favourites_title}>Favourites</h1>
+      {isFavouritesPage && (
+          <h1 className={styles.favourites_title}>Favourites</h1>
+      )}
 
       <div className={styles.favourites_tabs}>
         <button

@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import {Link, NavLink, useLocation, useNavigate} from "react-router-dom";
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import { useAuth } from "../../shared/context/AuthContext.jsx";
 import defaultAvatar from "../../shared/assets/image/Ellipse 1.jpg";
@@ -8,6 +8,7 @@ import { MyAccountModal } from "../MyAccountModal/MyAccountModal.jsx";
 
 export const Header = ({ isTransparent, hasShadow }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -28,6 +29,11 @@ export const Header = ({ isTransparent, hasShadow }) => {
     location.pathname === "/Favourites";
 
   console.log("Current user in Header:", user);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/")
+  }
 
   return (
     <section>
@@ -116,7 +122,7 @@ export const Header = ({ isTransparent, hasShadow }) => {
         )}
       </div>
 
-      <MyAccountModal isOpen={isModalOpen} onClose={handleModalClose} onLogout={() => {logout(); handleModalClose();}}/>
+      <MyAccountModal isOpen={isModalOpen} onClose={handleModalClose} onLogout={handleLogout}/>
     </section>
   );
 };

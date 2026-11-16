@@ -2,8 +2,9 @@ import styles from "./ButtonBuy.module.scss";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import {createBookings} from "../../api/bookings.js";
 
-export const ButtonBuy = ({itemType, itemId, title, price, selectedCardId}) => {
+export const ButtonBuy = ({itemType, itemId, title, price, selectedCardId, paymentType}) => {
 const {user } = useAuth();
 const navigate = useNavigate();
 const [loading, setLoading] = useState(false);
@@ -22,33 +23,22 @@ const handleBuy = async () => {
   const rawPrice = typeof price === "string" ? parseFloat(price.replace("$", "")) : price;
 
   const bookingPayload = {
-    userId: user.id,
     cardId: selectedCardId,
     itemType: itemType, // 'flight' или 'hotel'
     itemId: String(itemId),
     title: title,
     totalPrice: rawPrice,
+    paymentType: paymentType,
+
   };
 
   try {
     setLoading(true);
-    const res = await fetch("http://localhost:5000/api/bookings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(bookingPayload),
-    })
-
-    if (!res.ok) {
-      throw new Error("Failed to create booking");
-    }
-
-    const newBooking = await res.json();
+    const newBooking = await createBookings(bookingPayload);
     navigate(`/booking-success/${newBooking.id}`)
   } catch (err) {
     console.error("Booking error:", err);
-    alert("Error processing booking. Please try again.");
+    alert(err.message || "Error processing booking. Please try again.");
   } finally {
     setLoading(false);
   }

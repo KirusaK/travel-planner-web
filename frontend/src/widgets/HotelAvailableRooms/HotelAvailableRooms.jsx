@@ -1,19 +1,17 @@
 import styles from "./HotelAvailableRooms.module.scss";
 
-export const HotelAvailableRooms = (props) => {
-  const { rooms } = props;
-
+export const HotelAvailableRooms = ({hotel, sectionRef, detailHotel}) => {
   return (
-    <section className={styles.hotelAvailableRooms}>
+    <section ref={sectionRef} className={styles.hotelAvailableRooms}>
       <div className={styles.hotelAvailableRooms_block}>
         <h2 className={styles.hotelAvailableRooms_block__title}>
           Available Rooms
         </h2>
 
         <div className={styles.hotelAvailableRooms_block__info}>
-          {rooms.map((item, index) => (
+          {hotel.rooms.map((item) => (
             <div
-              key={index}
+              key={item.id}
               className={styles.hotelAvailableRooms_block__info__other}
             >
               <div
@@ -61,14 +59,12 @@ export const HotelAvailableRooms = (props) => {
                     className={
                       styles.hotelAvailableRooms_block__info__other__btn
                     }
+                    onClick={() => detailHotel(item.id)}
                   >
                     Book now
                   </button>
                 </div>
               </div>
-              {/*<hr*/}
-              {/*  className={styles.hotelAvailableRooms_block__info__other__hr}*/}
-              {/*/>*/}
             </div>
           ))}
         </div>

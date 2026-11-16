@@ -1,12 +1,12 @@
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./FlightPolicies.module.scss";
 
-export const FlightPolicies = ({airlineName}) => {
+export const FlightPolicies = ({flight}) => {
   return (
     <section className={styles.flightPolicies}>
       <div className={styles.flightPolicies_block}>
         <h2 className={styles.flightPolicies_block__title}>
-          {airlineName} Airlines Policies
+          {flight.airlineName} Airlines Policies
         </h2>
         <div className={styles.flightPolicies_block__info}>
           <div className={styles.flightPolicies_block__info__teg}>

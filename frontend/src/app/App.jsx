@@ -20,39 +20,44 @@ import { AdminHotel } from "../pages/AdminHotel/AdminHotel.jsx";
 import { AdminUsers } from "../pages/AdminUsers/AdminUsers.jsx";
 import { AdminBookings } from "../pages/AdminBookings/AdminBookings.jsx";
 import {AdminAdmins} from "../pages/AdminAdmins/AdminAdmins.jsx";
+import {ScrollToTop} from "../shared/components/ScrollToTop.jsx";
 
 const App = () => {
   const [user, setUser] = useState(null);
 
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/FindFlight" element={<FindFlight />} />
-      <Route path="/Login" element={<Login />} />
-      <Route path="/SignUp" element={<SignUp />} />
-      <Route path="/Profile" element={<Profile />} />
-      <Route path="/FindStays" element={<FindStays />} />
-      <Route path="/FlightsPage" element={<FlightsPage />} />
-      <Route path="/HotelPage" element={<HotelPage />} />
-      <Route path="/flight-detail/:id" element={<FlightDetailPage />} />
-      <Route path="/hotel-detail/:id" element={<HotelDetailPage />} />
-      <Route
-        path="/booking-detail-flight/:id"
-        element={<BookingDetailFlight />}
-      />
-      <Route
-        path={"/booking-detail-hotel/:id"}
-        element={<BookingDetailHotel />}
-      />
-      <Route path="/Favourites" element={<Favourites />} />
-      <Route path="/booking-success/:id" element={<BookingSuccess />} />
-      <Route path="/AdminHome" element={<AdminHome />} />
-      <Route path="/AdminFlight" element={<AdminFlight />} />
-      <Route path="/AdminHotel" element={<AdminHotel />} />
-      <Route path="/AdminUsers" element={<AdminUsers />} />
-      <Route path="/AdminBookings" element={<AdminBookings />} />
-        <Route path="/AdminAdmins" element={<AdminAdmins />} />
-    </Routes>
+    <>
+        <ScrollToTop />
+
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/FindFlight" element={<FindFlight />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/SignUp" element={<SignUp />} />
+            <Route path="/Profile" element={<Profile />} />
+            <Route path="/FindStays" element={<FindStays />} />
+            <Route path="/FlightsPage" element={<FlightsPage />} />
+            <Route path="/HotelPage" element={<HotelPage />} />
+            <Route path="/flight-detail/:id" element={<FlightDetailPage />} />
+            <Route path="/hotel-detail/:id" element={<HotelDetailPage />} />
+            <Route
+                path="/booking-detail-flight/:id"
+                element={<BookingDetailFlight />}
+            />
+            <Route
+                path={"/booking-detail-hotel/:id"}
+                element={<BookingDetailHotel />}
+            />
+            <Route path="/Favourites" element={<Favourites />} />
+            <Route path="/booking-success/:id" element={<BookingSuccess />} />
+            <Route path="/AdminHome" element={<AdminHome />} />
+            <Route path="/AdminFlight" element={<AdminFlight />} />
+            <Route path="/AdminHotel" element={<AdminHotel />} />
+            <Route path="/AdminUsers" element={<AdminUsers />} />
+            <Route path="/AdminBookings" element={<AdminBookings />} />
+            <Route path="/AdminAdmins" element={<AdminAdmins />} />
+        </Routes>
+    </>
   );
 };
 

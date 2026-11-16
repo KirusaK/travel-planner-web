@@ -69,10 +69,7 @@
   }
 
   &__textarea {
-    @include t.widthHeight(100%, 140px);
+    @include t.textarea;
     @include t.stylesInput;
-    border-radius: 12px;
-    padding: 13px;
-    outline: none;
   }
 }

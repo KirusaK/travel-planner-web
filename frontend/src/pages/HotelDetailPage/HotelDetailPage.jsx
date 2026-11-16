@@ -1,23 +1,45 @@
 import { Header } from "../../widgets/Header/Header.jsx";
 import { HotelDetailInfo } from "../../widgets/HotelDetailInfo/HotelDetailInfo.jsx";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { HotelDetailGallery } from "../../widgets/HotelDetailGallery/HotelDetailGallery.jsx";
 import { HotelDetailOverview } from "../../widgets/HotelDetailOverview/HotelDetailOverview.jsx";
 import { HotelAvailableRooms } from "../../widgets/HotelAvailableRooms/HotelAvailableRooms.jsx";
 import { HotelDetailLocation } from "../../widgets/HotelDetailLocation/HotelDetailLocation.jsx";
 import { HotelDetailAmenities } from "../../widgets/HotelDetailAmenities/HotelDetailAmenities.jsx";
-import { HotelDetailReviews } from "../../widgets/HotelDetailReviews/HotelDetailReviews.jsx";
+import { DetailReviews } from "../../widgets/DetailReviews/DetailReviews.jsx";
 import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
 import styles from "./HotelDetailPage.module.scss";
 import { getHotelById } from "../../shared/api/hotels.js";
-import { getRatingStatus, getStars } from "../../shared/lib/format.js";
 import { useFetch } from "../../shared/hooks/useFetch.js";
+import { useRef, useState } from "react";
+import { ModalReviews } from "../../shared/ui/ModalReviews/ModalReviews.jsx";
 
 export const HotelDetailPage = () => {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const { data: hotel, loading, error } = useFetch(getHotelById, id);
+  const roomsSectionRef = useRef(null);
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleBookDetailHotel = (roomId) => {
+    navigate(`/booking-detail-hotel/${id}?room=${roomId}`);
+  };
+
+  const handleScrollToRomms = () => {
+    roomsSectionRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -28,43 +50,29 @@ export const HotelDetailPage = () => {
       <Header hasShadow={true} />
 
       <div className={styles.main}>
-        <HotelDetailInfo
-          id={hotel.id}
-          name={hotel.name}
-          stars={getStars(hotel.rating)}
-          price={hotel.pricePerNight}
-          location={hotel.address}
-          rating={hotel.rating}
-          ratingStatus={getRatingStatus(hotel.rating)}
-          countReviews={hotel.reviewsCount}
-        />
+        <HotelDetailInfo hotel={hotel} onBookClick={handleScrollToRomms} />
         <HotelDetailGallery
           photos={hotel.rooms.map((room) => room.imageUrl).filter(Boolean)}
         />
-        <HotelDetailOverview
-          description={hotel.description}
-          rating={hotel.rating}
-          ratingStatus={getRatingStatus(hotel.rating)}
-          countReviews={hotel.reviewsCount}
-          features={hotel.features}
+        <HotelDetailOverview hotel={hotel} />
+        <HotelAvailableRooms
+          hotel={hotel}
+          sectionRef={roomsSectionRef}
+          detailHotel={handleBookDetailHotel}
         />
-        <HotelAvailableRooms rooms={hotel.rooms} />
-        <HotelDetailLocation
-          location={hotel.address}
-          googleMapsUrl={hotel.googleMapsUrl}
-          mapEmbedUrl={hotel.mapEmbedUrl}
-        />
-        <HotelDetailAmenities amenitiesList={hotel.amenities} />
-        <HotelDetailReviews
-          rating={hotel.rating}
-          ratingStatus={getRatingStatus(hotel.rating)}
-          countReviews={hotel.reviewsCount}
-          reviews={hotel.reviews}
-        />
+        <HotelDetailLocation hotel={hotel} />
+        <HotelDetailAmenities hotel={hotel} />
+        <DetailReviews data={hotel} isOpen={handleModalOpen} />
       </div>
 
       <Subscribe />
       <Footer />
+
+      <ModalReviews
+        modal={isModalOpen}
+        onClose={handleModalClose}
+        title={hotel.name}
+      />
     </>
   );
 };

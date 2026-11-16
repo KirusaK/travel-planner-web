@@ -10,6 +10,7 @@ import flightsRoutes from "./routes/flights.routes.js";
 import hotelsRoutes from "./routes/hotels.routes.js";
 import adminsRoutes from "./routes/admins.routes.js";
 import {verifyToken} from "./middleware/auth.middleware.js";
+import favouritesRoutes from "./routes/favourites.routes.js";
 
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.use("/api/admins", verifyToken, adminsRoutes);
 app.use("/api/users", verifyToken, userRoutes);
 app.use("/api/cards", verifyToken, cardsRoutes);
 app.use("/api/bookings", verifyToken, bookingsRoutes);
+app.use("/api/favorites", verifyToken, favouritesRoutes);
 app.use("/api/flights", verifyToken, flightsRoutes);
 app.use("/api/hotels", verifyToken, hotelsRoutes);
 

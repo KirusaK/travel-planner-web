@@ -5,7 +5,6 @@ import {HotelRoomsTab} from "./HotelRoomsTab.jsx";
 import { HotelAmenitiesTab } from "./HotelAmenitiesTab.jsx";
 import { useAdminForm } from "../../shared/hooks/useAdminForm.js";
 import {createHotel, updateHotel} from "../../shared/api/hotels.js";
-import {createFlight, updateFlight} from "../../shared/api/flights.js";
 import {useEffect} from "react";
 
 const tabs = [

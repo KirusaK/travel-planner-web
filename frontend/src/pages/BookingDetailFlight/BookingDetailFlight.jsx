@@ -14,6 +14,7 @@ import { useFetch } from "../../shared/hooks/useFetch.js";
 
 export const BookingDetailFlight = () => {
   const { id } = useParams();
+  const [paymentType, setPaymentType] = useState("full");
   const [selectedCardId, setSelectedCardId] = useState(null);
 
   const { data: flight, loading, error } = useFetch(getFlightById, id);
@@ -29,7 +30,7 @@ export const BookingDetailFlight = () => {
       <div className={styles.main}>
         <div>
           <BookingDetailTicket ticket={flight} />
-          <BookingDetailPayment ticket={flight} />
+          <BookingDetailPayment ticket={flight} paymentType={paymentType} onPaymentTypeChange={setPaymentType} />
           <BookingDetailAuth
             onSelectCard={(cardId) => setSelectedCardId(cardId)}
           />
@@ -42,6 +43,7 @@ export const BookingDetailFlight = () => {
             title={flight.airlineName}
             price={flight.price}
             selectedCardId={selectedCardId}
+            paymentType={paymentType}
           />
         </div>
       </div>

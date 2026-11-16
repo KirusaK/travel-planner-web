@@ -1,0 +1,110 @@
+@use "../../../app/styles/variables" as *;
+@use "../../../shared/styles/table" as t;
+
+.modalReviews {
+  @include t.modalStyles;
+
+  &_block {
+    @include t.widthHeight(560px, auto);
+    background-color: $color-base;
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  &_header {
+    @include t.positionFull(flex, center, space-between);
+
+    &__title {
+      @include t.sizeText(24px, 700);
+    }
+
+    &_subtitle {
+      @include t.sizeText(14px, 400, $color-dekoration-text);
+    }
+
+    &__btnClose {
+      @include t.positionFull(flex, center, center);
+      @include t.widthHeight(44px, 44px);
+      border-radius: 8px;
+      border: 1px solid $color-dekoration-grey;
+      background-color: transparent;
+    }
+  }
+
+  &_hr {
+    margin: 24px 0;
+  }
+
+  &_rating {
+    &__title {
+      @include t.sizeText(14px, 600);
+      margin-bottom: 10px;
+    }
+
+    &__stars {
+      @include t.positionFull(flex, center);
+      gap: 6px;
+    }
+
+    &__star {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    &__icon {
+      --color1: transparent;
+      stroke: $color-dekoration-grey;
+      stroke-width: 1.5;
+      stroke-linejoin: round;
+
+      &___active {
+        --color1: #{
+          $color-mint-green
+        };
+        stroke: $color-text-dark;
+      }
+    }
+
+    &__value {
+      margin-left: 10px;
+      @include t.sizeText(16px, 600);
+    }
+  }
+
+  &_review {
+    margin-bottom: 48px;
+
+    &__label {
+      display: flex;
+      flex-direction: column;
+      @include t.sizeText(14px, 600);
+      margin-bottom: 10px;
+    }
+
+    &__textarea {
+      @include t.textarea;
+      @include t.stylesInput;
+    }
+  }
+
+  &_btn {
+    @include t.positionFull(flex, center, flex-end);
+    gap: 12px ;
+
+    &__cancel {
+      @include t.widthHeight(106px, 48px);
+      @include t.sizeText(14px, 600);
+      border-radius: 8px;
+      background-color: transparent;
+      border: 1px solid $color-mint-green;
+    }
+
+    &__review {
+      @include t.widthHeight(160px, 48px);
+      @include t.sizeText(14px, 600);
+      border-radius: 8px;
+      background-color: $color-mint-green;
+    }
+  }
+}

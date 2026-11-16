@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { BookingDetailModal } from "../../shared/ui/BookingDetailModal/index.js";
 import styles from "./BookingDetailPayment.module.scss";
-import { formatDate, formatFullDate } from "../../shared/lib/format.js";
+import { formatFullDate } from "../../shared/lib/format.js";
 
-export const BookingDetailPayment = ({ ticket }) => {
-  const { partPayment = {} } = ticket;
-  const [paymentType, setPaymentType] = useState("full");
+export const BookingDetailPayment = ({ ticket, paymentType, onPaymentTypeChange }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const initial = Math.round((ticket.price / 2) * 100) / 100;
@@ -39,20 +37,20 @@ export const BookingDetailPayment = ({ ticket }) => {
             name="paymentType"
             value="full"
             checked={paymentType === "full"}
-            onChange={(e) => setPaymentType(e.target.value)}
+            onChange={(e) => onPaymentTypeChange(e.target.value)}
             className={styles.bookingDetailPayment_option__radio}
           />
         </label>
 
         <label
-          className={`${styles.bookingDetailPayment_option} ${paymentType === "part" ? styles.bookingDetailPayment_option___active : ""}`}
+          className={`${styles.bookingDetailPayment_option} ${paymentType === "partial" ? styles.bookingDetailPayment_option___active : ""}`}
         >
           <div className={styles.bookingDetailPayment_option__content}>
             <h3 className={styles.bookingDetailPayment_option__title}>
               Pay part now, part later
             </h3>
             <p className={styles.bookingDetailPayment_option__description}>
-              Pay {initial} now, and the rest ({remaining}) will be
+              Pay ${initial} now, and the rest ({remaining}) will be
               automatically charged to the same payment method on{" "}
               {formatFullDate(ticket.partDueDate)}. No extra fees.
             </p>
@@ -61,9 +59,9 @@ export const BookingDetailPayment = ({ ticket }) => {
           <input
             type="radio"
             name="paymentType"
-            value="part"
-            checked={paymentType === "part"}
-            onChange={(e) => setPaymentType(e.target.value)}
+            value="partial"
+            checked={paymentType === "partial"}
+            onChange={(e) => onPaymentTypeChange(e.target.value)}
             className={styles.bookingDetailPayment_option__radio}
           />
         </label>

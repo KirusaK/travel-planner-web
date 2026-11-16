@@ -16,7 +16,7 @@ alter table users
 
 update users set role = 'super_admin' where email = 'john.d@golobe.com'; 
 
-select * from users;
+select * from favorites;
 
 CREATE TABLE cards (
     id SERIAL PRIMARY KEY,
@@ -37,6 +37,9 @@ CREATE TABLE favorites (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT unique_user_favorite UNIQUE (user_id, item_type, item_id)
 )
+
+ALTER TABLE favorites DROP COLUMN id;
+ALTER TABLE favorites ADD PRIMARY KEY (user_id, item_type, item_id);
 
 CREATE TABLE bookings (
     id SERIAL PRIMARY KEY,

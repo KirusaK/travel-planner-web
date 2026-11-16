@@ -1,18 +1,17 @@
 import styles from "./FavouritesBtn.module.scss";
 import sprite from "../../assets/icons/symbol-defs.svg";
-import {useDispatch, useSelector} from "react-redux";
-import { toggleFavourite, selectIsFavourite } from "../../../app/store/reducer/favouritesSlice.js";
+import {useFavorites} from "../../context/FavouritesContext.jsx";
 
-export const FavouritesBtn = ({item}) => {
-  const dispatch = useDispatch();
+export const FavouritesBtn = ({type, itemId}) => {
+  const {isFavorite, toggle} = useFavorites();
+  const isFav = isFavorite(type, itemId);
 
-  const isFav = useSelector(selectIsFavourite(item?.id));
-
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.stopPropagation();
-
-    if (item) {
-      dispatch(toggleFavourite(item))
+    try {
+      await toggle(type, itemId);
+    } catch (err) {
+      console.error("Favourite toggle failed:", err);
     }
   }
 

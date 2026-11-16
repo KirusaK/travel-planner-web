@@ -11,8 +11,10 @@ const router = Router();
 const PROFILE_SELECT = `
   SELECT id,
          TRIM(first_name || ' ' || last_name) AS name,
+         first_name as "firstName",
+         last_name as "lastName",
          email,
-         phone_number AS "phoneNumber",
+         phone_number AS "phone",
          to_char(date_of_birth, 'YYYY-MM-DD') AS "dateOfBirth"
   FROM users`;
 
@@ -61,11 +63,13 @@ router.patch("/:id", async (req, res) => {
     let sql, params;
 
     switch (field) {
-        case "name": {
-            const [first, ...rest] = String(value).trim().split(/\s+/);
-            if (!first) return res.status(400).json({ error: "Name is required" });
-            sql = "UPDATE users SET first_name = $1, last_name = $2 WHERE id = $3";
-            params = [first, rest.join(" "), id];
+        case "firstName":
+        case "lastName": {
+            const first = String(value ?? "").trim();
+            if (!first) return res.status(400).json({ error: `${field} is required`});
+            const column = field === "firstName" ? "first_name" : "last_name";
+            sql = `UPDATE users SET ${column} = $1 WHERE id = $2`;
+            params = [first, id];
             break;
         }
         case "email":

@@ -2,21 +2,19 @@ import { useEffect, useState } from "react";
 import styles from "./PaymentMethods.module.scss";
 import deleteIcon from "../../shared/assets/image/deleteIcon.svg";
 import visaIcon from "../../shared/assets/image/visaIcon.svg";
-import { useUser } from "../../shared/context/UserContext";
-import { AddCardModal } from "../AddCardModal/AddCardModal"; // перевір шлях
-
-const API_URL = "http://localhost:5000/api/cards";
+import { AddCardModal } from "../AddCardModal/AddCardModal";
+import {useAuth} from "../../shared/context/AuthContext.jsx";
+import {deleteCard, getCard} from "../../shared/api/cards.js"; // перевір шлях
 
 export const PaymentMethods = () => {
-  const { user, userId } = useUser();
+  const { user } = useAuth();
   const [cards, setCards] = useState([]);
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error();
+      await deleteCard(id);
       setCards((prev) => prev.filter((card) => card.id !== id));
     } catch {
       setError("Could not delete card");
@@ -24,16 +22,12 @@ export const PaymentMethods = () => {
   };
 
   useEffect(() => {
-    if (!userId) return;
+    if (!user?.id) return;
 
-    fetch(`${API_URL}?userId=${userId}`)
-      .then((res) => {
-        if (!res.ok) throw new Error();
-        return res.json();
-      })
-      .then(setCards)
-      .catch(() => setError("Could not load payment methods"));
-  }, [userId]);
+    getCard(user.id)
+        .then(setCards)
+        .catch((err) => setError(err.message))
+  }, [user?.id]);
 
   if (!user) return <p>Loading...</p>;
 
@@ -90,7 +84,7 @@ export const PaymentMethods = () => {
       <AddCardModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        userId={userId}
+        userId={user.id}
         onCardAdded={(newCard) => setCards((prev) => [...prev, newCard])}
       />
     </section>

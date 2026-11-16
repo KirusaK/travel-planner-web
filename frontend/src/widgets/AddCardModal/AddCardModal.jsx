@@ -1,6 +1,7 @@
 import sprite from "../../shared/assets/icons/symbol-defs.svg";
 import styles from "./AddCardModal.module.scss";
 import { useState } from "react";
+import {addCard} from "../../shared/api/cards.js";
 
 export const AddCardModal = ({ isOpen, onClose, userId, onCardAdded }) => {
   const [formData, setFormData] = useState({
@@ -28,41 +29,29 @@ export const AddCardModal = ({ isOpen, onClose, userId, onCardAdded }) => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/cards", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: userId,
-          cardNumber: formData.cardNumber,
-          expDate: formData.expDate,
-          nameOnCard: formData.nameOnCard,
-          country: formData.country,
-          isSaved: formData.isSaved,
-        }),
-      });
+      const newCard = await addCard({
+        userId: userId,
+        cardNumber: formData.cardNumber,
+        expDate: formData.expDate,
+        nameOnCard: formData.nameOnCard,
+        country: formData.country,
+        isSaved: formData.isSaved,
+      })
 
-      if (response.ok) {
-        const newCard = await response.json();
+      if (onCardAdded) onCardAdded(newCard);
+      onClose();
 
-        if (onCardAdded) onCardAdded(newCard);
+      setFormData({
+        cardNumber: "",
+        expDate: "",
+        cvc: "",
+        nameOnCard: "",
+        country: "",
+        isSaved: true,
+      })
 
-        onClose();
-
-        setFormData({
-          cardNumber: "",
-          expDate: "",
-          cvc: "",
-          nameOnCard: "",
-          country: "",
-          isSaved: true,
-        });
-      } else {
-        alert("Ошибка при добавлении карты");
-      }
     } catch (err) {
-      console.error("Failed to add card:", err);
+      console.error("Failed to add card:", err.message);
     } finally {
       setLoading(false);
     }

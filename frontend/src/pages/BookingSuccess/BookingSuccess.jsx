@@ -1,4 +1,4 @@
-import {useParams} from 'react-router-dom';
+import {useParams, useSearchParams} from 'react-router-dom';
 import { Header } from "../../widgets/Header/Header.jsx";
 import { useAuth } from "../../shared/context/AuthContext.jsx";
 import { useEffect, useState } from "react";
@@ -9,11 +9,14 @@ import { Subscribe } from "../../widgets/Subscribe/Subscribe.jsx";
 import { Footer } from "../../widgets/Footer/Footer.jsx";
 import { getFlightById } from "../../shared/api/flights.js";
 import { getHotelById } from "../../shared/api/hotels.js";
+import {getBookingById} from "../../shared/api/bookings.js";
 
 
 export const BookingSuccess = () => {
   const {id} = useParams()
   const { user } = useAuth()
+  const [params] = useSearchParams();
+  const shouldPrint = params.get("download") === "1";
 
   const [booking, setBooking] = useState(null);
   const [itemData, setItemData] = useState(null);
@@ -26,9 +29,7 @@ export const BookingSuccess = () => {
 
     const load = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/bookings/${id}`);
-        if (!res.ok) throw new Error("Booking not found");
-        const bookingData = await res.json();
+        const bookingData = await getBookingById(id);
         setBooking(bookingData);
 
         const item =
@@ -46,6 +47,13 @@ export const BookingSuccess = () => {
     load();
   }, [id]);
 
+  useEffect(() => {
+    if (!shouldPrint || loading || error || !booking || !itemData) return;
+
+    const timeout = setTimeout(() => window.print(), 600);
+    return () => clearTimeout(timeout);
+  }, [shouldPrint, loading, error, booking, itemData]);
+
   if (loading) return <div>Loading your booking...</div>
   if (error) return <div>{error}</div>
   if (!booking || !itemData) return <div>Booking not found.</div>;
@@ -55,7 +63,9 @@ export const BookingSuccess = () => {
   return (
     <section>
       <div>
-        <Header hasShadow={true} />
+        <div className="no-print">
+          <Header hasShadow={true} />
+        </div>
 
         <div className={styles.main}>
           <div className={styles.headerInfo}>
@@ -161,8 +171,10 @@ export const BookingSuccess = () => {
           </div>
         </div>
 
-        <Subscribe />
-        <Footer />
+        <div className="no-print">
+          <Subscribe />
+          <Footer />
+        </div>
       </div>
     </section>
   );

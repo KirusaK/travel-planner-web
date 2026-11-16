@@ -2,28 +2,33 @@ import { useState } from "react";
 import styles from "./Account.module.scss";
 import editIcon from "../../shared/assets/image/editIcon.svg";
 import addIcon from "../../shared/assets/image/addIcon.svg";
-import { useUser } from "../../shared/context/UserContext";
-
-const API = "http://localhost:5000/api";
+import {pathRequest} from "../../shared/api/http.js";
+import {useAuth} from "../../shared/context/AuthContext.jsx";
 
 const formatDate = (iso) => (iso ? iso.split("-").reverse().join("-") : "—");
 
 export const Account = () => {
-  const { user, setUser, userId, loadError } = useUser();
+  const { user, updateUser } = useAuth();
   const [editingId, setEditingId] = useState(null);
   const [draft, setDraft] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [error, setError] = useState("");
 
-  if (loadError) return <p>Помилка: {loadError}</p>;
   if (!user) return <p>Loading...</p>;
 
   const fields = [
     {
-      id: "name",
-      label: "Name",
-      value: user.name,
-      raw: user.name,
+      id: "firstName",
+      label: "firstName",
+      value: user.firstName,
+      raw: user.firstName,
+      type: "text",
+    },
+    {
+      id: "lastName",
+      label: "lastName",
+      value: user.lastName,
+      raw: user.lastName,
       type: "text",
     },
     {
@@ -44,8 +49,8 @@ export const Account = () => {
     {
       id: "phoneNumber",
       label: "Phone number",
-      value: user.phoneNumber || "—",
-      raw: user.phoneNumber || "",
+      value: user.phone || "—",
+      raw: user.phone || "",
       type: "tel",
     },
     {
@@ -72,24 +77,19 @@ export const Account = () => {
   const save = async (id) => {
     const isPassword = id === "password";
     const url = isPassword
-      ? `${API}/users/${userId}/password`
-      : `${API}/users/${userId}`;
+      ? `/api/users/${user.id}/password`
+      : `/api/users/${user.id}`;
     const body = isPassword
       ? { oldPassword, newPassword: draft }
       : { field: id, value: draft };
 
     try {
-      const r = await fetch(url, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      const data = await r.json();
-      if (!r.ok) return setError(data.error || "Error");
-      if (!isPassword) setUser(data);
+      const data = await pathRequest(url, body);
+
+      if (!isPassword) updateUser(data);
       cancel();
-    } catch {
-      setError("Network error");
+    } catch (err) {
+      setError(err.message);
     }
   };
 
