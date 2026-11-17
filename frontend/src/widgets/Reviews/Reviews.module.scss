@@ -6,7 +6,7 @@
   margin-bottom: 92px;
 
   &__container {
-    @include t.widthHeight(1232px, 722px);
+    @include t.widthHeight(1232px, auto);
   }
 
   &__header {

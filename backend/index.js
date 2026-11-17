@@ -31,7 +31,7 @@ app.use("/api/bookings", verifyToken, bookingsRoutes);
 app.use("/api/favorites", verifyToken, favouritesRoutes);
 app.use("/api/flights", verifyToken, flightsRoutes);
 app.use("/api/hotels", verifyToken, hotelsRoutes);
-app.use("/api/reviews", verifyToken, reviewsRoutes);
+app.use("/api/reviews", reviewsRoutes);
 
 app.get("/", (req, res) => {
   res.send("API сервера работает!");

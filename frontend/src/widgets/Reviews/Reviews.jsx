@@ -1,40 +1,25 @@
 import { SeeAll } from "../../shared/ui/ButtonSeeAll/SeeAll";
 import { ReviewSlider } from "./ui/ReviewSlider/ReviewSlider";
-import img1 from "../../shared/assets/image/fon1.svg";
-import img2 from "../../shared/assets/image/fon2.svg";
-import img3 from "../../shared/assets/image/fon3.svg";
+import { useFetchData } from "../../shared/hooks/useFetchData.js";
+import { getReviews } from "../../shared/api/reviews.js";
 import styles from "./Reviews.module.scss";
 
+// const type_labels = { flight: "flight", hotel: "hotel" };
+
+const toCard = (reviews) => ({
+  id: reviews.id,
+  title: reviews.itemTitle ?? "Golobe",
+  text: reviews.text,
+  rating: Math.round(reviews.rating),
+  authorName: reviews.authorName,
+});
+
 export const Reviews = () => {
-  const reviewsData = [
-    {
-      id: 1,
-      title: "A real sense of community, nurtured",
-      par: "Really appreciate the help and support from the staff during these tough times. Shoutout to Katie for... ",
-      rating: 5,
-      authorname: "Olga",
-      location: "Weave Studios – Kai Tak",
-      photo: img1,
-    },
-    {
-      id: 2,
-      title: "The facilities are superb. Clean, slick, bright.",
-      par: "“A real sense of community, nurtured”Really appreciate the help and support from the staff...  ",
-      rating: 5,
-      authorname: "Thomas",
-      location: "Weave Studios – Olympic",
-      photo: img2,
-    },
-    {
-      id: 3,
-      title: "A real sense of community, nurtured",
-      par: "Really appreciate the help and support from the staff during these tough times. Shoutout to Katie for... ",
-      rating: 5,
-      authorname: "Eliot",
-      location: "Weave Studios – Kai Tak",
-      photo: img3,
-    },
-  ];
+  const { data: review, loading, error } = useFetchData(getReviews);
+
+  console.log({ review, loading, error });
+  if (loading || error || !Array.isArray(review) || review.length === 0)
+    return null;
 
   return (
     <section className={styles.Reviews}>
@@ -46,9 +31,8 @@ export const Reviews = () => {
               What people says about Golobe facilities
             </p>
           </div>
-          <SeeAll />
         </div>
-        <ReviewSlider reviews={reviewsData} />
+        <ReviewSlider reviews={review.map(toCard)} />
       </div>
     </section>
   );
