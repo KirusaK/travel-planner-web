@@ -2,8 +2,7 @@ import { useRef } from "react";
 import { ReviewCard } from "../ReviewCard/ReviewCard";
 import styles from "./ReviewSlider.module.scss";
 
-export const ReviewSlider = (props) => {
-  const { reviews } = props;
+export const ReviewSlider = ({ reviews }) => {
   const sliderRef = useRef(null);
 
   const handleMouseDown = (e) => {
