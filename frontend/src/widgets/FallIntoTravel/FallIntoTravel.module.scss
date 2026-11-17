@@ -33,5 +33,6 @@
   &__grid {
     @include t.positionFull(flex, null, space-between);
     @include t.widthHeight(1232px, 552px);
+    gap: 16px;
   }
 }

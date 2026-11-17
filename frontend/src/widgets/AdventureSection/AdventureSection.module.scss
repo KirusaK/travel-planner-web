@@ -100,7 +100,8 @@
 
   &__backpacking__gallery_item {
     @include t.widthHeight(318px, 200px);
-
+    border-radius: 12px;
+    border: 1px solid $color-mint-green;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
