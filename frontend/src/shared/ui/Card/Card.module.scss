@@ -48,17 +48,14 @@
     @include t.sizeText(24px, 600);
   }
 
+  &__par {
+    @include t.positionFull(flex, center, start);
+    gap: 6px;
+  }
+
   &__title {
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  &__par {
-    @include t.sizeText(14px, 400);
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }

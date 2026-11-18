@@ -13,7 +13,6 @@ export const TravelMap = () => {
             trip with us.
           </p>
         </div>
-        <SeeAll />
       </div>
       <div className={styles.travelMap__image}></div>
     </div>
